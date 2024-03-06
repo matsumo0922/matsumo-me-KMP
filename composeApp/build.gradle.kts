@@ -1,8 +1,11 @@
 @file:Suppress("OPT_IN_USAGE")
 
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.kmp)
     alias(libs.plugins.kmpCompose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -24,6 +27,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings {
+                languageVersion = "2.0"
                 optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
             }
         }
@@ -42,13 +46,14 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(project.dependencies.platform(libs.kotlin.bom))
+            implementation(project.dependencies.platform(libs.kotlin.wrapper.bom))
             implementation(project.dependencies.platform(libs.koin.bom))
 
             implementation(libs.bundles.infra)
             implementation(libs.bundles.ui.common)
             implementation(libs.bundles.koin)
             implementation(libs.bundles.ktor)
-            implementation(libs.bundles.precompose)
+            implementation(libs.bundles.decompose)
         }
 
         jsMain.dependencies {
@@ -59,4 +64,11 @@ kotlin {
 
 compose.experimental {
     web.application {}
+}
+
+tasks.withType(KotlinCompile::class.java) {
+    compilerOptions.freeCompilerArgs.addAll(
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:experimentalStrongSkipping=true",
+    )
 }
