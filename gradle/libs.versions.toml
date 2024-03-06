@@ -3,17 +3,11 @@
 versionName = "2.0.2"
 versionCode = "16"
 
-# SDK
-minSdk = "26"
-targetSdk = "34"
-compileSdk = "34"
-
 # Gradle
 gradle = "8.2.0"
 
 # Kotlin
 kotlin = "1.9.22"
-kotlinCompiler = "1.5.3"
 
 # KotlinX
 kotlinxCoroutines = "1.7.3"
@@ -29,19 +23,19 @@ kmpComplete = "1.1.0"
 ksp = "1.9.22-1.0.17"
 
 # Navigation
-precompose = "1.6.0-beta01"
+precompose = "1.6.0-beta02"
 stately = "2.0.6"
 
 # Others
-koin = "3.5.1"
-ktor = "3.0.0-beta-1"
+koin = "3.6.0-alpha3"
+ktor = "3.0.0-wasm2"
 coil = "2.5.0"
-coil3 = "3.0.0-alpha01"
+coil3 = "3.0.0-alpha06"
 jsoup = "1.16.1"
 ksoup = "0.1.2"
 uuid = "0.8.2"
 composeWebView = "1.8.8"
-windowSize = "0.3.2"
+windowSize = "0.5.0"
 detekt = "1.23.4"
 libraries = "10.9.1"
 buildKonfig = "0.15.1"
@@ -61,7 +55,7 @@ kmpCompose = { id = "org.jetbrains.compose", version.ref = "kmpCompose" }
 kmpComplete = { id = "com.louiscad.complete-kotlin", version.ref = "kmpComplete" }
 
 [libraries]
-## Dependency of the include build-logic
+## Dependency of to include build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "gradle" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 build-konfig-gradlePlugin = { group = "com.codingfeline.buildkonfig", name = "buildkonfig-gradle-plugin", version.ref = "buildKonfig" }
@@ -74,6 +68,8 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 
 # KotlinX
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-core-wasm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-wasm-js", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-guava = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-guava", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
@@ -90,7 +86,6 @@ stately-common = { module = "co.touchlab:stately-common", version.ref = "stately
 # Koin
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core"  }
-koin-android = { module = "io.insert-koin:koin-android" }
 koin-compose = { module = "io.insert-koin:koin-compose" }
 koin-annotation = { module = "io.insert-koin:koin-annotation" }
 
@@ -126,27 +121,24 @@ twitter-compose-rule = { module = "com.twitter.compose.rules:detekt", version.re
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 
 [bundles]
-infra-api = [
+infra = [
     "kotlin-stdlib",
     "kotlin-reflect",
     "kotlinx-datetime",
     "kotlinx-serialization-json",
     "kotlinx-collections-immutable",
-    "uuid",
+    "kotlinx-coroutines-core",
     "napier",
 ]
 
-ui-common-api = [
+ui-common = [
     "coil3-compose",
-    "coil3-network",
-    "coil3-gif",
     "window-size",
     "stately-common",
 ]
 
 ktor = [
     "ktor-core",
-    "ktor-cio",
     "ktor-content-negotiation",
     "ktor-serialization-json",
     "ktot-logging",

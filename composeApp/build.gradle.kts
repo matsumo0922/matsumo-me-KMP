@@ -40,6 +40,14 @@ kotlin {
             implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+
+            implementation(project.dependencies.platform(libs.kotlin.bom))
+            implementation(project.dependencies.platform(libs.koin.bom))
+
+            implementation(libs.bundles.infra)
+            implementation(libs.bundles.ui.common)
+            implementation(libs.bundles.koin)
+            implementation(libs.bundles.ktor)
         }
 
         jsMain.dependencies {
