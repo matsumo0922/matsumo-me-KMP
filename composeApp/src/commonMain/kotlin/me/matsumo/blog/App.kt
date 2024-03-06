@@ -1,5 +1,6 @@
 package me.matsumo.blog
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,13 +35,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import me.matsumo.blog.theme.AppTheme
-import me.matsumo.blog.theme.LocalThemeIsDark
+import me.matsumo.blog.core.theme.MMTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-internal fun App() = AppTheme {
+internal fun App() = MMTheme {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
@@ -58,7 +58,9 @@ internal fun App() = AppTheme {
 
             Spacer(modifier = Modifier.weight(1.0f))
 
-            var isDark by LocalThemeIsDark.current
+            val isSystemDark = isSystemInDarkTheme()
+            var isDark by remember { mutableStateOf(isSystemDark) }
+
             IconButton(
                 onClick = { isDark = !isDark }
             ) {

@@ -48,6 +48,7 @@ kotlin {
             implementation(libs.bundles.ui.common)
             implementation(libs.bundles.koin)
             implementation(libs.bundles.ktor)
+            implementation(libs.bundles.precompose)
         }
 
         jsMain.dependencies {

@@ -1,4 +1,4 @@
-package me.matsumo.blog.core
+package me.matsumo.blog.core.utils
 
 import io.github.aakira.napier.Napier
 import kotlin.coroutines.cancellation.CancellationException
