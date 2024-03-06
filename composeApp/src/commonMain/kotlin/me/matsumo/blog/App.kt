@@ -36,7 +36,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import me.matsumo.blog.theme.AppTheme
 import me.matsumo.blog.theme.LocalThemeIsDark
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
+@Preview
 @Composable
 internal fun App() = AppTheme {
     var email by remember { mutableStateOf("") }
