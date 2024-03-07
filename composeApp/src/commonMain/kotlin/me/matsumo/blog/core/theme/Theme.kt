@@ -66,8 +66,6 @@ val DarkDefaultColorScheme = darkColorScheme(
     outline = PurpleGray60,
 )
 
-val LocalColorScheme = staticCompositionLocalOf { LightDefaultColorScheme }
-
 @Composable
 internal fun MMTheme(
     themeColor: ThemeColorConfig = ThemeColorConfig.Red,
@@ -96,7 +94,7 @@ internal fun MMTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = MMTypography,
+        typography = createCustomFontTypography(),
         shapes = MMShapes,
         content = content,
     )

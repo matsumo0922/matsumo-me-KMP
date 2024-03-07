@@ -18,7 +18,7 @@ fun AboutScreen(
     modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(Color.Blue.copy(alpha = 0.1f)),
         contentAlignment = Alignment.Center,
