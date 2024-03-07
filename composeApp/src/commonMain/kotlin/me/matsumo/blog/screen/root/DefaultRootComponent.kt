@@ -23,10 +23,21 @@ class DefaultRootComponent(
         source = navigation,
         serializer = Navigation.serializer(),
         initialStack = { getInitialStack(webHistoryController.historyPaths) },
-        childFactory = ::childFactory
+        childFactory = ::childFactory,
+        handleBackButton = true,
     )
 
     override val childStack: Value<ChildStack<*, RootComponent.Child>> = stack
+
+    init {
+        webHistoryController.attach(
+            navigator = navigation,
+            stack = stack,
+            serializer = Navigation.serializer(),
+            getPath = ::getPathForNavigation,
+            getConfiguration = ::getNavigationForPath,
+        )
+    }
 
     private fun childFactory(navigation: Navigation, componentContext: ComponentContext): RootComponent.Child {
         return when (navigation) {
@@ -42,7 +53,15 @@ class DefaultRootComponent(
     private fun getNavigationForPath(path: String): Navigation {
         return when (path.removePrefix("/")) {
             WebPath.HOME -> Navigation.Home
+            WebPath.ABOUT -> Navigation.About
             else -> throw IllegalArgumentException("Unknown path: $path")
+        }
+    }
+
+    private fun getPathForNavigation(navigation: Navigation): String {
+        return when (navigation) {
+            Navigation.Home -> "/${WebPath.HOME}"
+            Navigation.About -> "/${WebPath.ABOUT}"
         }
     }
 
@@ -72,5 +91,6 @@ class DefaultRootComponent(
 
     private object WebPath {
         const val HOME = "home"
+        const val ABOUT = "about"
     }
 }
