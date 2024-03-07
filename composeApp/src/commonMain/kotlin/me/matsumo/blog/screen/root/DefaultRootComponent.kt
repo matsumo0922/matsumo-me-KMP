@@ -5,7 +5,11 @@ import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.router.stack.webhistory.WebHistoryController
 import com.arkivanov.decompose.value.Value
+import io.github.aakira.napier.Napier
+import io.github.aakira.napier.log
 import kotlinx.serialization.Serializable
+import me.matsumo.blog.core.utils.currentUrl
+import me.matsumo.blog.core.utils.log
 import me.matsumo.blog.screen.about.AboutComponent
 import me.matsumo.blog.screen.about.DefaultAboutComponent
 import me.matsumo.blog.screen.home.DefaultHomeComponent
@@ -47,18 +51,28 @@ class DefaultRootComponent(
     }
 
     private fun getInitialStack(webHistoryPaths: List<String>?): List<Navigation> {
-        return webHistoryPaths?.takeUnless(List<*>::isEmpty)?.map(::getNavigationForPath) ?: listOf(Navigation.Home)
+        log("Root", "getInitialStack: $webHistoryPaths")
+
+        return if (webHistoryPaths.isNullOrEmpty()) {
+            listOf(getNavigationForPath(currentUrl))
+        } else {
+            webHistoryPaths.map { getNavigationForPath(it) }
+        }
     }
 
     private fun getNavigationForPath(path: String): Navigation {
-        return when (path.removePrefix("/")) {
+        log("Root", "getNavigationForPath: $path")
+
+        return when (path.substringAfterLast("/")) {
             WebPath.HOME -> Navigation.Home
             WebPath.ABOUT -> Navigation.About
-            else -> throw IllegalArgumentException("Unknown path: $path")
+            else -> Navigation.Home
         }
     }
 
     private fun getPathForNavigation(navigation: Navigation): String {
+        log("Root", "getPathForNavigation: $navigation")
+
         return when (navigation) {
             Navigation.Home -> "/${WebPath.HOME}"
             Navigation.About -> "/${WebPath.ABOUT}"

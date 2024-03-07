@@ -10,6 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import me.matsumo.blog.core.ui.component.AnimatedText
+import me.matsumo.blog.core.ui.component.buildTextAnimateItems
 
 @Composable
 fun HomeScreen(
@@ -27,8 +29,8 @@ fun HomeScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(
-                text = "This is the home screen",
+            AnimatedText(
+                animateItems = buildTextAnimateItems("./gradlew ", 200, "matsumo-me:", 400, "wasmJsBrowserRun"),
                 style = MaterialTheme.typography.titleMedium,
             )
 
