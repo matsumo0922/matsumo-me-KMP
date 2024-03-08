@@ -9,6 +9,8 @@ import io.github.aakira.napier.Napier
 import io.github.aakira.napier.log
 import kotlinx.serialization.Serializable
 import me.matsumo.blog.core.utils.currentUrl
+import me.matsumo.blog.core.utils.initKoin
+import me.matsumo.blog.core.utils.initKoinIfNeeded
 import me.matsumo.blog.core.utils.log
 import me.matsumo.blog.screen.about.AboutComponent
 import me.matsumo.blog.screen.about.DefaultAboutComponent
@@ -54,7 +56,7 @@ class DefaultRootComponent(
     }
 
     private fun getInitialStack(webHistoryPaths: List<String>?): List<Navigation> {
-        log("Root", "getInitialStack: $webHistoryPaths")
+        initKoinIfNeeded()
 
         return if (webHistoryPaths.isNullOrEmpty()) {
             listOf(getNavigationForPath(currentUrl))

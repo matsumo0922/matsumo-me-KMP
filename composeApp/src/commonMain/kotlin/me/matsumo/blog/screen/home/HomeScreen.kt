@@ -13,17 +13,45 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import me.matsumo.blog.core.model.ScreenState
+import me.matsumo.blog.core.ui.AsyncLoadContents
+import me.matsumo.blog.core.ui.AsyncLoadContentsWithHeader
 import me.matsumo.blog.core.ui.component.HeaderView
+import org.koin.compose.getKoin
+import org.koin.core.Koin
+import org.koin.core.KoinApplication
 
 @Composable
 fun HomeScreen(
     component: HomeComponent,
     modifier: Modifier = Modifier,
 ) {
+    val screenState by component.screenState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        if (screenState !is ScreenState.Idle) {
+            component.fetch()
+        }
+    }
+
+    AsyncLoadContentsWithHeader(
+        modifier = modifier.fillMaxSize(),
+        screenState = screenState,
+    ) {
+        HomeIdleScreen(
+            modifier = Modifier.fillMaxSize(),
+            navigateToAbout = component::onNavigateToAbout,
+        )
+    }
+}
+
+@Composable
+fun HomeIdleScreen(
+    navigateToAbout: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surface),
+        modifier = modifier.background(MaterialTheme.colorScheme.surface),
         contentAlignment = Alignment.Center,
     ) {
         Column(
@@ -37,16 +65,10 @@ fun HomeScreen(
             )
 
             Button(
-                onClick = component::onNavigateToAbout,
+                onClick = navigateToAbout,
             ) {
                 Text(text = "Navigate to About")
             }
         }
-
-        HeaderView(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.TopCenter)
-        )
     }
 }

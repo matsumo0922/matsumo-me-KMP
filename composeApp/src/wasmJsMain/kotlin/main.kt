@@ -7,10 +7,9 @@ import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.router.stack.webhistory.DefaultWebHistoryController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.arkivanov.essenty.lifecycle.resume
-import me.matsumo.blog.App
 import me.matsumo.blog.MMApp
+import me.matsumo.blog.core.utils.initKoin
 import me.matsumo.blog.screen.root.DefaultRootComponent
-import org.jetbrains.compose.resources.configureWebResources
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalDecomposeApi::class)
 fun main() {
