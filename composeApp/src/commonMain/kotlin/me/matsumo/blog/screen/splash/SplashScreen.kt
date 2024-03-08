@@ -17,6 +17,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
+import me.matsumo.blog.core.theme.MMTheme
+import me.matsumo.blog.core.theme.getCaskaydiaCoveNerdFontFamily
 import me.matsumo.blog.core.ui.component.TypingText
 import me.matsumo.blog.core.ui.component.buildTypeText
 
@@ -60,31 +62,35 @@ internal fun SplashScreen(
         listState.animateScrollToItem(2)
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surface)
+    MMTheme(
+        fonts = getCaskaydiaCoveNerdFontFamily(),
     ) {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            state = listState,
-            contentPadding = PaddingValues(48.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+        Box(
+            modifier = modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.surface)
         ) {
-            item {
-                TypingText(
-                    typeText = buildTypeText("$ ", 200, "./gradlew ", 150, "matsumo-me:", 300, "wasmJsBrowserRun", 800),
-                    style = consoleLogTextStyle,
-                    color = Color(0xffeaeaea),
-                    onCompleted = { isFinishTyping = true }
-                )
-            }
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                state = listState,
+                contentPadding = PaddingValues(48.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                item {
+                    TypingText(
+                        typeText = buildTypeText("$ ", 200, "./gradlew ", 150, "matsumo-me:", 300, "wasmJsBrowserRun", 800),
+                        style = consoleLogTextStyle,
+                        color = Color(0xffeaeaea),
+                        onCompleted = { isFinishTyping = true }
+                    )
+                }
 
-            item {
-                Text(
-                    text = consoleLog,
-                    style = consoleLogTextStyle,
-                )
+                item {
+                    Text(
+                        text = consoleLog,
+                        style = consoleLogTextStyle,
+                    )
+                }
             }
         }
     }

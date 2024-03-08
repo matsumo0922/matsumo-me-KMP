@@ -14,18 +14,7 @@ import matsumo_me.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.Font
 
 @Composable
-internal fun createCustomFontTypography(): Typography {
-    val font = FontFamily(
-        Font(Res.font.CaskaydiaCoveNerdFont_Bold, FontWeight.Bold),
-        Font(Res.font.CaskaydiaCoveNerdFont_BoldItalic, FontWeight.Bold, FontStyle.Italic),
-        Font(Res.font.CaskaydiaCoveNerdFont_Light, FontWeight.Light),
-        Font(Res.font.CaskaydiaCoveNerdFont_LightItalic, FontWeight.Light, FontStyle.Italic),
-        Font(Res.font.CaskaydiaCoveNerdFont_Regular, FontWeight.Normal),
-        Font(Res.font.CaskaydiaCoveNerdFont_Italic, FontWeight.Normal, FontStyle.Italic),
-        Font(Res.font.CaskaydiaCoveNerdFont_Regular, FontWeight.Medium),
-        Font(Res.font.CaskaydiaCoveNerdFont_Italic, FontWeight.Medium, FontStyle.Italic),
-    )
-
+internal fun createCustomFontTypography(font: FontFamily): Typography {
     return Typography(
         displayLarge = TextStyle(
             fontFamily = font,
@@ -134,6 +123,28 @@ internal fun createCustomFontTypography(): Typography {
         ),
     )
 }
+
+@Composable
+fun getNotoSansJPFontFamily() = FontFamily(
+    Font(Res.font.NotoSansJP_Bold, FontWeight.Bold),
+    Font(Res.font.NotoSansJP_ExtraBold, FontWeight.ExtraBold),
+    Font(Res.font.NotoSansJP_Light, FontWeight.Light),
+    Font(Res.font.NotoSansJP_ExtraLight, FontWeight.ExtraLight),
+    Font(Res.font.NotoSansJP_Regular, FontWeight.Normal),
+    Font(Res.font.NotoSansJP_Medium, FontWeight.Medium),
+)
+
+@Composable
+fun getCaskaydiaCoveNerdFontFamily() = FontFamily(
+    Font(Res.font.CaskaydiaCoveNerdFont_Bold, FontWeight.Bold),
+    Font(Res.font.CaskaydiaCoveNerdFont_BoldItalic, FontWeight.Bold, FontStyle.Italic),
+    Font(Res.font.CaskaydiaCoveNerdFont_Light, FontWeight.Light),
+    Font(Res.font.CaskaydiaCoveNerdFont_LightItalic, FontWeight.Light, FontStyle.Italic),
+    Font(Res.font.CaskaydiaCoveNerdFont_Regular, FontWeight.Normal),
+    Font(Res.font.CaskaydiaCoveNerdFont_Italic, FontWeight.Normal, FontStyle.Italic),
+    Font(Res.font.CaskaydiaCoveNerdFont_Regular, FontWeight.Medium),
+    Font(Res.font.CaskaydiaCoveNerdFont_Italic, FontWeight.Medium, FontStyle.Italic),
+)
 
 // Align
 fun TextStyle.start() = this.merge(TextStyle(textAlign = TextAlign.Start))

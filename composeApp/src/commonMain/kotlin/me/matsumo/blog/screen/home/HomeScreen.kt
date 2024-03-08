@@ -1,25 +1,24 @@
 package me.matsumo.blog.screen.home
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
+import me.matsumo.blog.core.model.Article
 import me.matsumo.blog.core.model.ScreenState
-import me.matsumo.blog.core.ui.AsyncLoadContents
+import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
+import me.matsumo.blog.core.theme.HEADER_HEIGHT
 import me.matsumo.blog.core.ui.AsyncLoadContentsWithHeader
-import me.matsumo.blog.core.ui.component.HeaderView
-import org.koin.compose.getKoin
-import org.koin.core.Koin
-import org.koin.core.KoinApplication
+import me.matsumo.blog.core.ui.component.ArticleCard
 
 @Composable
 fun HomeScreen(
@@ -39,36 +38,41 @@ fun HomeScreen(
         screenState = screenState,
     ) {
         HomeIdleScreen(
-            modifier = Modifier.fillMaxSize(),
-            navigateToAbout = component::onNavigateToAbout,
+            modifier = Modifier
+                .widthIn(max = CONTAINER_MAX_WIDTH)
+                .fillMaxHeight(),
+            articles = it.articles,
+            onClickArticle = {},
+            onClickTag = {},
+            onClickAbout = component::onNavigateToAbout,
         )
     }
 }
 
 @Composable
 fun HomeIdleScreen(
-    navigateToAbout: () -> Unit,
+    articles: List<Article>,
+    onClickArticle: (Article) -> Unit,
+    onClickTag: (String) -> Unit,
+    onClickAbout: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Box(
-        modifier = modifier.background(MaterialTheme.colorScheme.surface),
-        contentAlignment = Alignment.Center,
+    LazyVerticalGrid(
+        modifier = modifier,
+        columns = GridCells.Fixed(3),
+        verticalArrangement = Arrangement.spacedBy(24.dp),
+        horizontalArrangement = Arrangement.spacedBy(24.dp),
+        contentPadding = PaddingValues(top = HEADER_HEIGHT, bottom = 24.dp)
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
+        items(
+            items = articles,
+            key = { it.id },
         ) {
-            Text(
-                text = "This is the home screen",
-                style = MaterialTheme.typography.titleMedium,
+            ArticleCard(
+                article = it,
+                onClickArticle = onClickArticle,
+                onClickTag = onClickTag,
             )
-
-            Button(
-                onClick = navigateToAbout,
-            ) {
-                Text(text = "Navigate to About")
-            }
         }
     }
 }

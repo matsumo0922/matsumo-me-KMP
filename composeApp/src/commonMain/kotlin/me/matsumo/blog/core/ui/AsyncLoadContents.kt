@@ -5,17 +5,17 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import me.matsumo.blog.core.model.ScreenState
+import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
 import me.matsumo.blog.core.ui.component.ErrorView
 import me.matsumo.blog.core.ui.component.HeaderView
 import me.matsumo.blog.core.ui.component.LoadingView
@@ -45,9 +45,7 @@ fun <T> AsyncLoadContents(
             }
             is ScreenState.Loading -> {
                 LoadingView(
-                    modifier = otherModifier
-                        .fillMaxWidth()
-                        .background(Color.Black.copy(alpha = 0.2f)),
+                    modifier = otherModifier.fillMaxWidth(),
                 )
             }
             is ScreenState.Error -> {
@@ -71,9 +69,12 @@ fun <T> AsyncLoadContentsWithHeader(
     retryAction: () -> Unit = {},
     content: @Composable (T) -> Unit,
 ) {
-    Box(modifier) {
+    Box(modifier.background(containerColor)) {
         AsyncLoadContents(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .widthIn(max = CONTAINER_MAX_WIDTH)
+                .fillMaxHeight(),
             otherModifier = otherModifier,
             screenState = screenState,
             containerColor = containerColor,
