@@ -13,21 +13,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import me.matsumo.blog.core.ui.component.TypingText
-import me.matsumo.blog.core.ui.component.buildTypeText
-import me.matsumo.blog.screen.home.item.HomeSplashScreen
+import me.matsumo.blog.core.ui.component.HeaderView
 
 @Composable
 fun HomeScreen(
     component: HomeComponent,
     modifier: Modifier = Modifier,
 ) {
-    var isFinishSplash by remember { mutableStateOf(false) }
-
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Red.copy(alpha = 0.1f)),
+            .background(MaterialTheme.colorScheme.surface),
         contentAlignment = Alignment.Center,
     ) {
         Column(
@@ -47,17 +43,10 @@ fun HomeScreen(
             }
         }
 
-        AnimatedVisibility(
-            visible = !isFinishSplash,
-            enter = fadeIn(),
-            exit = fadeOut(),
-        ) {
-            HomeSplashScreen(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color(0xFF222222)),
-                onCompleted = { isFinishSplash = true }
-            )
-        }
+        HeaderView(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.TopCenter)
+        )
     }
 }

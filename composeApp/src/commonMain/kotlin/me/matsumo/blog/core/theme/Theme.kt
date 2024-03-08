@@ -7,6 +7,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import me.matsumo.blog.core.model.ThemeColorConfig
 import me.matsumo.blog.core.theme.color.*
 
@@ -68,7 +69,7 @@ val DarkDefaultColorScheme = darkColorScheme(
 
 @Composable
 internal fun MMTheme(
-    themeColor: ThemeColorConfig = ThemeColorConfig.Red,
+    themeColor: ThemeColorConfig = ThemeColorConfig.Blue,
     shouldUseDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
@@ -99,3 +100,5 @@ internal fun MMTheme(
         content = content,
     )
 }
+
+val CONTAINER_MAX_WIDTH = 1024.dp

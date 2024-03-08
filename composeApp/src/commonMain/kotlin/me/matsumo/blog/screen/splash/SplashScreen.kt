@@ -1,11 +1,11 @@
-package me.matsumo.blog.screen.home.item
+package me.matsumo.blog.screen.splash
 
-import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -15,17 +15,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
-import me.matsumo.blog.core.theme.bold
 import me.matsumo.blog.core.ui.component.TypingText
 import me.matsumo.blog.core.ui.component.buildTypeText
-import org.jetbrains.compose.resources.Font
 
 @Composable
-internal fun HomeSplashScreen(
-    onCompleted: () -> Unit,
+internal fun SplashScreen(
+    splashComponent: SplashComponent,
     modifier: Modifier = Modifier,
 ) {
     val listState = rememberLazyListState()
@@ -36,26 +33,26 @@ internal fun HomeSplashScreen(
 
     LaunchedEffect(isFinishTyping) {
         if (isFinishTyping) {
-            consoleLog = buildOutputStartUpStep.asBuildOutputText(consoleLogTextStyle)
+            consoleLog = buildOutputStartUpStep.asConsoleLog(consoleLogTextStyle)
 
             delay(500)
 
-            consoleLog = (consoleLog.text + "\n" + buildOutputConfigureStep).asBuildOutputText(consoleLogTextStyle)
+            consoleLog = (consoleLog.text + "\n" + buildOutputConfigureStep).asConsoleLog(consoleLogTextStyle)
 
             delay(200)
 
             for (taskStep in buildOutputTaskStep.split("\n")) {
-                consoleLog = (consoleLog.text + "\n" + taskStep).asBuildOutputText(consoleLogTextStyle)
+                consoleLog = (consoleLog.text + "\n" + taskStep).asConsoleLog(consoleLogTextStyle)
                 delay(25)
             }
 
             delay(25)
 
-            consoleLog = (consoleLog.text + "\n" + buildOutputSuccessStep).asBuildOutputText(consoleLogTextStyle)
+            consoleLog = (consoleLog.text + "\n" + buildOutputSuccessStep).asConsoleLog(consoleLogTextStyle)
 
             delay(100)
 
-            onCompleted.invoke()
+            splashComponent.onNavigateToHome()
         }
     }
 
@@ -63,38 +60,44 @@ internal fun HomeSplashScreen(
         listState.animateScrollToItem(2)
     }
 
-    LazyColumn(
-        modifier = modifier,
-        state = listState,
-        contentPadding = PaddingValues(48.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.surface)
     ) {
-        item {
-            TypingText(
-                typeText = buildTypeText("$ ", 200, "./gradlew ", 150, "matsumo-me:", 300, "wasmJsBrowserRun", 800),
-                style = consoleLogTextStyle,
-                color = Color(0xffeaeaea),
-                onCompleted = { isFinishTyping = true }
-            )
-        }
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            state = listState,
+            contentPadding = PaddingValues(48.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            item {
+                TypingText(
+                    typeText = buildTypeText("$ ", 200, "./gradlew ", 150, "matsumo-me:", 300, "wasmJsBrowserRun", 800),
+                    style = consoleLogTextStyle,
+                    color = Color(0xffeaeaea),
+                    onCompleted = { isFinishTyping = true }
+                )
+            }
 
-        item {
-            Text(
-                text = consoleLog,
-                style = consoleLogTextStyle,
-            )
+            item {
+                Text(
+                    text = consoleLog,
+                    style = consoleLogTextStyle,
+                )
+            }
         }
     }
 }
 
-private fun String.asBuildOutputText(textStyle: TextStyle) = buildAnnotatedString {
+private fun String.asConsoleLog(textStyle: TextStyle) = buildAnnotatedString {
     val green = Color(0xff00c135)
     val blue = Color(0xff1fc3c6)
     val pink = Color(0xffc03eb8)
 
-    append(this@asBuildOutputText)
+    append(this@asConsoleLog)
 
-    for (str in "Configure".toRegex().findAll(this@asBuildOutputText)) {
+    for (str in "Configure".toRegex().findAll(this@asConsoleLog)) {
         addStyle(
             style = textStyle.copy(pink).toSpanStyle(),
             start = str.range.first,
@@ -102,7 +105,7 @@ private fun String.asBuildOutputText(textStyle: TextStyle) = buildAnnotatedStrin
         )
     }
 
-    for (str in "Task|UP-TO-DATE".toRegex().findAll(this@asBuildOutputText)) {
+    for (str in "Task|UP-TO-DATE".toRegex().findAll(this@asConsoleLog)) {
         addStyle(
             style = textStyle.copy(blue).toSpanStyle(),
             start = str.range.first,
@@ -110,7 +113,7 @@ private fun String.asBuildOutputText(textStyle: TextStyle) = buildAnnotatedStrin
         )
     }
 
-    for (str in "BUILD SUCCESSFUL".toRegex().findAll(this@asBuildOutputText)) {
+    for (str in "BUILD SUCCESSFUL".toRegex().findAll(this@asConsoleLog)) {
         addStyle(
             style = textStyle.copy(green).toSpanStyle(),
             start = str.range.first,

@@ -14,6 +14,8 @@ import me.matsumo.blog.screen.about.AboutComponent
 import me.matsumo.blog.screen.about.DefaultAboutComponent
 import me.matsumo.blog.screen.home.DefaultHomeComponent
 import me.matsumo.blog.screen.home.HomeComponent
+import me.matsumo.blog.screen.splash.DefaultSplashComponent
+import me.matsumo.blog.screen.splash.SplashComponent
 
 @OptIn(ExperimentalDecomposeApi::class)
 class DefaultRootComponent(
@@ -45,6 +47,7 @@ class DefaultRootComponent(
 
     private fun childFactory(navigation: Navigation, componentContext: ComponentContext): RootComponent.Child {
         return when (navigation) {
+            Navigation.Splash -> RootComponent.Child.Splash(splashComponent(componentContext))
             Navigation.Home -> RootComponent.Child.Home(homeComponent(componentContext))
             Navigation.About -> RootComponent.Child.About(aboutComponent(componentContext))
         }
@@ -63,20 +66,23 @@ class DefaultRootComponent(
     private fun getNavigationForPath(path: String): Navigation {
         log("Root", "getNavigationForPath: $path")
 
-        return when (path.substringAfterLast("/")) {
-            WebPath.HOME -> Navigation.Home
-            WebPath.ABOUT -> Navigation.About
-            else -> Navigation.Home
-        }
+        val pathElement = path.substringAfterLast("/")
+        val navigation = WebPath.entries.find { it.path == pathElement }
+
+        return navigation?.navigation ?: Navigation.Splash
     }
 
     private fun getPathForNavigation(navigation: Navigation): String {
         log("Root", "getPathForNavigation: $navigation")
 
-        return when (navigation) {
-            Navigation.Home -> "/${WebPath.HOME}"
-            Navigation.About -> "/${WebPath.ABOUT}"
-        }
+        return "/" + (WebPath.entries.find { it.navigation == navigation }?.path ?: "")
+    }
+
+    private fun splashComponent(componentContext: ComponentContext): SplashComponent {
+        return DefaultSplashComponent(
+            componentContext = componentContext,
+            navigateToHome = { navigation.pushToFront(Navigation.Home) },
+        )
     }
 
     private fun homeComponent(componentContext: ComponentContext): HomeComponent {
@@ -97,14 +103,30 @@ class DefaultRootComponent(
     private sealed interface Navigation {
 
         @Serializable
+        data object Splash : Navigation
+
+        @Serializable
         data object Home : Navigation
 
         @Serializable
         data object About : Navigation
     }
 
-    private object WebPath {
-        const val HOME = "home"
-        const val ABOUT = "about"
+    private enum class WebPath(
+        val path: String,
+        val navigation: Navigation,
+    ) {
+        SPLASH(
+            path = "",
+            navigation = Navigation.Splash,
+        ),
+        HOME(
+            path = "home",
+            navigation = Navigation.Home,
+        ),
+        ABOUT(
+            path = "about",
+            navigation = Navigation.About,
+        ),
     }
 }

@@ -41,4 +41,10 @@
     <string name="unit_hour_before">%1$d時間前</string>
     <string name="unit_minute_before">%1$d分前</string>
     <string name="unit_second_before">%1$d秒前</string>
+
+    <!-- Navigation -->
+    <string name="navigation_home">Home</string>
+    <string name="navigation_articles">Articles</string>
+    <string name="navigation_about">About</string>
+    <string name="navigation_github">GitHub</string>
 </resources>
