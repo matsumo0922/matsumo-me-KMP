@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import me.matsumo.blog.core.model.ScreenState
+import me.matsumo.blog.core.model.ThemeConfig
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
 import me.matsumo.blog.core.ui.component.ErrorView
 import me.matsumo.blog.core.ui.component.HeaderView
@@ -62,6 +63,7 @@ fun <T> AsyncLoadContents(
 @Composable
 fun <T> AsyncLoadContentsWithHeader(
     screenState: ScreenState<T>,
+    onSetThemeConfig: (ThemeConfig) -> Unit,
     modifier: Modifier = Modifier,
     otherModifier: Modifier = modifier,
     containerColor: Color = MaterialTheme.colorScheme.surface,
@@ -73,8 +75,7 @@ fun <T> AsyncLoadContentsWithHeader(
         AsyncLoadContents(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .widthIn(max = CONTAINER_MAX_WIDTH)
-                .fillMaxHeight(),
+                .fillMaxSize(),
             otherModifier = otherModifier,
             screenState = screenState,
             containerColor = containerColor,
@@ -85,6 +86,7 @@ fun <T> AsyncLoadContentsWithHeader(
 
         HeaderView(
             modifier = Modifier.fillMaxWidth(),
+            onSetThemeConfig = onSetThemeConfig,
         )
     }
 }

@@ -35,6 +35,7 @@ coil3 = "3.0.0-alpha06"
 jsoup = "1.16.1"
 ksoup = "0.1.2"
 uuid = "0.8.2"
+haze = "0.6.0"
 composeWebView = "1.8.8"
 windowSize = "0.5.0"
 detekt = "1.23.4"
@@ -112,6 +113,7 @@ coil3-gif = { module = "io.coil-kt.coil3:coil-gif", version.ref = "coil3" }
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 ksoup = { module = "com.fleeksoft.ksoup:ksoup", version.ref = "ksoup" }
 uuid = { module = "com.benasher44:uuid", version.ref = "uuid" }
+haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
 window-size = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "windowSize" }
 placeholder = { module = "com.eygraber:compose-placeholder-material3", version = "1.0.7" }
 libraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "libraries" }

@@ -4,10 +4,12 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.router.stack.webhistory.WebHistoryController
+import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import io.github.aakira.napier.Napier
 import io.github.aakira.napier.log
 import kotlinx.serialization.Serializable
+import me.matsumo.blog.core.model.ThemeConfig
 import me.matsumo.blog.core.utils.currentUrl
 import me.matsumo.blog.core.utils.initKoin
 import me.matsumo.blog.core.utils.initKoinIfNeeded
@@ -35,7 +37,11 @@ class DefaultRootComponent(
         handleBackButton = true,
     )
 
+    private val _themeConfig = MutableValue(ThemeConfig.System)
+
     override val childStack: Value<ChildStack<*, RootComponent.Child>> = stack
+
+    override val themeConfig: Value<ThemeConfig> = _themeConfig
 
     init {
         webHistoryController.attach(
@@ -45,6 +51,10 @@ class DefaultRootComponent(
             getPath = ::getPathForNavigation,
             getConfiguration = ::getNavigationForPath,
         )
+    }
+
+    override fun setThemeConfig(themeConfig: ThemeConfig) {
+        _themeConfig.value = themeConfig
     }
 
     private fun childFactory(navigation: Navigation, componentContext: ComponentContext): RootComponent.Child {
@@ -90,6 +100,7 @@ class DefaultRootComponent(
     private fun homeComponent(componentContext: ComponentContext): HomeComponent {
         return DefaultHomeComponent(
             componentContext = componentContext,
+            setThemeConfig = ::setThemeConfig,
             navigateToAbout = { navigation.pushToFront(Navigation.About) },
         )
     }

@@ -17,6 +17,7 @@ import matsumo_me.composeapp.generated.resources.common_retry
 import matsumo_me.composeapp.generated.resources.error_executed
 import me.matsumo.blog.core.model.Article
 import me.matsumo.blog.core.model.ScreenState
+import me.matsumo.blog.core.model.ThemeConfig
 import me.matsumo.blog.core.repository.MMRepository
 import me.matsumo.blog.core.utils.suspendRunCatching
 import org.koin.compose.koinInject
@@ -27,12 +28,14 @@ interface HomeComponent {
     val screenState: StateFlow<ScreenState<HomeUiState>>
 
     fun fetch()
+    fun setThemeConfig(themeConfig: ThemeConfig)
 
     fun onNavigateToAbout()
 }
 
 class DefaultHomeComponent(
     componentContext: ComponentContext,
+    private val setThemeConfig: (ThemeConfig) -> Unit,
     private val navigateToAbout: () -> Unit,
 ) : HomeComponent, KoinComponent, ComponentContext by componentContext {
 
@@ -56,6 +59,10 @@ class DefaultHomeComponent(
                 onFailure = { ScreenState.Error(Res.string.error_executed) },
             )
         }
+    }
+
+    override fun setThemeConfig(themeConfig: ThemeConfig) {
+        setThemeConfig.invoke(themeConfig)
     }
 
     override fun onNavigateToAbout() {

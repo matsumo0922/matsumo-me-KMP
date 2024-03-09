@@ -86,7 +86,7 @@ private fun OGPImage(
     ) {
         Text(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(24.dp)
                 .fillMaxWidth(),
             text = title,
             style = MaterialTheme.typography.titleMedium,

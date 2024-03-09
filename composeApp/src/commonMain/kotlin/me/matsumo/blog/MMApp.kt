@@ -4,12 +4,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
+import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import me.matsumo.blog.core.model.WindowWidthSize
 import me.matsumo.blog.core.theme.MMTheme
 import me.matsumo.blog.screen.about.AboutComponent
 import me.matsumo.blog.screen.about.AboutScreen
@@ -21,9 +24,15 @@ import me.matsumo.blog.screen.splash.SplashScreen
 @Composable
 internal fun MMApp(
     component: RootComponent,
+    windowWidthSize: WindowWidthSize,
     modifier: Modifier = Modifier,
 ) {
-    MMTheme {
+    val themeConfig by component.themeConfig.subscribeAsState()
+
+    MMTheme(
+        themeConfig = themeConfig,
+        windowWidthSize = windowWidthSize,
+    ) {
         Children(
             modifier = modifier.background(MaterialTheme.colorScheme.surface),
             stack = component.childStack,
