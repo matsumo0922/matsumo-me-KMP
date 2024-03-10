@@ -1,5 +1,6 @@
 package me.matsumo.blog.screen.root
 
+import coil3.toUri
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.router.stack.*
@@ -8,6 +9,7 @@ import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import io.github.aakira.napier.Napier
 import io.github.aakira.napier.log
+import io.ktor.http.*
 import kotlinx.serialization.Serializable
 import me.matsumo.blog.core.model.ThemeConfig
 import me.matsumo.blog.core.utils.currentUrl
@@ -16,10 +18,13 @@ import me.matsumo.blog.core.utils.initKoinIfNeeded
 import me.matsumo.blog.core.utils.log
 import me.matsumo.blog.screen.about.AboutComponent
 import me.matsumo.blog.screen.about.DefaultAboutComponent
+import me.matsumo.blog.screen.article.ArticleComponent
+import me.matsumo.blog.screen.article.DefaultArticleComponent
 import me.matsumo.blog.screen.home.DefaultHomeComponent
 import me.matsumo.blog.screen.home.HomeComponent
 import me.matsumo.blog.screen.splash.DefaultSplashComponent
 import me.matsumo.blog.screen.splash.SplashComponent
+import kotlin.reflect.KClass
 
 @OptIn(ExperimentalDecomposeApi::class)
 class DefaultRootComponent(
@@ -28,6 +33,20 @@ class DefaultRootComponent(
 ) : RootComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Navigation>()
+
+    private val routing = ClientRouter.routing {
+        get("/home") {
+            Navigation.Home
+        }
+        get("/about") {
+            Navigation.About
+        }
+        get("/article/{id}") {
+            Navigation.Article(
+                id = it.pathParameters["id"]!!.toString()
+            )
+        }
+    }
 
     private val stack = childStack(
         source = navigation,
@@ -59,9 +78,10 @@ class DefaultRootComponent(
 
     private fun childFactory(navigation: Navigation, componentContext: ComponentContext): RootComponent.Child {
         return when (navigation) {
-            Navigation.Splash -> RootComponent.Child.Splash(splashComponent(componentContext))
-            Navigation.Home -> RootComponent.Child.Home(homeComponent(componentContext))
-            Navigation.About -> RootComponent.Child.About(aboutComponent(componentContext))
+            is Navigation.Splash -> RootComponent.Child.Splash(splashComponent(componentContext))
+            is Navigation.Home -> RootComponent.Child.Home(homeComponent(componentContext))
+            is Navigation.About -> RootComponent.Child.About(aboutComponent(componentContext))
+            is Navigation.Article -> RootComponent.Child.Article(articleComponent(componentContext))
         }
     }
 
@@ -76,18 +96,11 @@ class DefaultRootComponent(
     }
 
     private fun getNavigationForPath(path: String): Navigation {
-        log("Root", "getNavigationForPath: $path")
-
-        val pathElement = path.substringAfterLast("/")
-        val navigation = WebPath.entries.find { it.path == pathElement }
-
-        return navigation?.navigation ?: Navigation.Splash
+        return routing.parse(Url(path)) ?: Navigation.Splash
     }
 
     private fun getPathForNavigation(navigation: Navigation): String {
-        log("Root", "getPathForNavigation: $navigation")
-
-        return "/" + (WebPath.entries.find { it.navigation == navigation }?.path ?: "")
+        return "/" + navigation::class.simpleName?.lowercase()
     }
 
     private fun splashComponent(componentContext: ComponentContext): SplashComponent {
@@ -112,8 +125,15 @@ class DefaultRootComponent(
         )
     }
 
+    private fun articleComponent(componentContext: ComponentContext): ArticleComponent {
+        return DefaultArticleComponent(
+            componentContext = componentContext,
+            setThemeConfig = ::setThemeConfig,
+        )
+    }
+
     @Serializable
-    private sealed interface Navigation {
+    sealed interface Navigation {
 
         @Serializable
         data object Splash : Navigation
@@ -123,23 +143,8 @@ class DefaultRootComponent(
 
         @Serializable
         data object About : Navigation
-    }
 
-    private enum class WebPath(
-        val path: String,
-        val navigation: Navigation,
-    ) {
-        SPLASH(
-            path = "",
-            navigation = Navigation.Splash,
-        ),
-        HOME(
-            path = "home",
-            navigation = Navigation.Home,
-        ),
-        ABOUT(
-            path = "about",
-            navigation = Navigation.About,
-        ),
+        @Serializable
+        data class Article(val id: String) : Navigation
     }
 }

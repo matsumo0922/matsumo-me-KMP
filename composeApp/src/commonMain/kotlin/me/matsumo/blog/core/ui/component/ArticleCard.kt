@@ -37,7 +37,7 @@ fun ArticleCard(
         OGPImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(16f / 9),
+                .aspectRatio(2f / 1),
             title = article.title,
         )
 

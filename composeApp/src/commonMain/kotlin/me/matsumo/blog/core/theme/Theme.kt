@@ -54,5 +54,5 @@ internal fun MMTheme(
 val LocalWindowWidthSize = staticCompositionLocalOf<WindowWidthSize> { WindowWidthSize.Compact }
 val LocalThemeConfig = staticCompositionLocalOf { ThemeConfig.System }
 
-val CONTAINER_MAX_WIDTH = 1072.dp
+val CONTAINER_MAX_WIDTH = 1200.dp
 val HEADER_HEIGHT = 104.dp

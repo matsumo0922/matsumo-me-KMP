@@ -7,12 +7,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import me.matsumo.blog.core.model.Article
+import me.matsumo.blog.core.model.ArticleDetail
 import me.matsumo.blog.core.utils.log
 import me.matsumo.blog.core.utils.parse
 
 interface MMRepository {
 
     suspend fun getArticles(): List<Article>
+    suspend fun getArticle(id: String): ArticleDetail
 }
 
 class MMRepositoryImpl(
@@ -22,8 +24,11 @@ class MMRepositoryImpl(
 ) : MMRepository {
 
     override suspend fun getArticles(): List<Article> = withContext(ioDispatcher) {
-        log("MMRepositoryImpl", "getArticles")
         get("articles").parse<List<Article>>()!!
+    }
+
+    override suspend fun getArticle(id: String): ArticleDetail = withContext(ioDispatcher) {
+        get("articles/markdown/$id").parse<ArticleDetail>()!!
     }
 
     private suspend fun get(dir: String, parameters: Map<String, String> = emptyMap()): HttpResponse {
