@@ -16,6 +16,7 @@ import me.matsumo.blog.core.model.WindowWidthSize
 import me.matsumo.blog.core.theme.MMTheme
 import me.matsumo.blog.screen.about.AboutComponent
 import me.matsumo.blog.screen.about.AboutScreen
+import me.matsumo.blog.screen.article.ArticleScreen
 import me.matsumo.blog.screen.home.HomeComponent
 import me.matsumo.blog.screen.home.HomeScreen
 import me.matsumo.blog.screen.root.RootComponent
@@ -42,6 +43,7 @@ internal fun MMApp(
                 is RootComponent.Child.Splash -> SplashScreen(child.component)
                 is RootComponent.Child.Home -> HomeScreen(child.component)
                 is RootComponent.Child.About -> AboutScreen(child.component)
+                is RootComponent.Child.Article -> ArticleScreen(child.component, "")
             }
         }
     }

@@ -2,6 +2,7 @@ package me.matsumo.blog.screen.root
 
 import io.ktor.http.*
 import io.ktor.util.*
+import me.matsumo.blog.core.utils.log
 
 class ClientRouter {
 
@@ -16,6 +17,7 @@ class ClientRouter {
 
     fun parse(url: Url): DefaultRootComponent.Navigation? {
         for (segment in segments) {
+            log("$url, ${segment.key}")
             (parseSegment(url, segment.key) ?: continue).also {
                 return runCatching { segment.value.invoke(it) }.getOrNull()
             }
@@ -24,14 +26,18 @@ class ClientRouter {
         return null
     }
 
-    private fun parseSegment(url: Url, segment: String): Segment? {
-        val pattern = segment.replace(Regex("\\{\\w+\\}")) { "(\\w+)" }.toRegex()
-        val names = Regex("\\{(\\w+)\\}").findAll(segment).map { it.groupValues[1] }.toList()
-        val result = pattern.matchEntire(url.toString()) ?: return null
+    private fun parseSegment(url: Url, patternSegment: String): Segment? {
+        val regexPattern = "^" + patternSegment.replace(Regex("\\{\\w+\\}"), "(\\\\w+)") + "$"
+        val pattern = Regex(regexPattern)
+
+        val names = Regex("\\{(\\w+)\\}").findAll(patternSegment).map { it.groupValues[1] }.toList()
+        val result = pattern.find(url.pathSegments.joinToString("/")) ?: return null
+
+        val pathParameters = names.zip(result.destructured.toList()).toMap()
 
         return Segment(
-            segment = segment,
-            pathParameters = names.zip(result.groupValues.drop(1)).toMap(),
+            segment = patternSegment,
+            pathParameters = pathParameters,
             queryParameters = url.parameters,
         )
     }

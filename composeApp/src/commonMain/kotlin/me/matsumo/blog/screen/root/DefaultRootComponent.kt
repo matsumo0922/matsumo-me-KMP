@@ -100,7 +100,7 @@ class DefaultRootComponent(
     }
 
     private fun getPathForNavigation(navigation: Navigation): String {
-        return "/" + navigation::class.simpleName?.lowercase()
+        return "/" + (WebPath.entries.find { it.navigation == navigation }?.path ?: "")
     }
 
     private fun splashComponent(componentContext: ComponentContext): SplashComponent {
@@ -146,5 +146,23 @@ class DefaultRootComponent(
 
         @Serializable
         data class Article(val id: String) : Navigation
+    }
+
+    private enum class WebPath(
+        val path: String,
+        val navigation: Navigation,
+    ) {
+        SPLASH(
+            path = "",
+            navigation = Navigation.Splash,
+        ),
+        HOME(
+            path = "home",
+            navigation = Navigation.Home,
+        ),
+        ABOUT(
+            path = "about",
+            navigation = Navigation.About,
+        ),
     }
 }
