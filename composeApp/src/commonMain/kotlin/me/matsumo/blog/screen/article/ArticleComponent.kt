@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import matsumo_me.composeapp.generated.resources.Res
 import matsumo_me.composeapp.generated.resources.common_error
 import matsumo_me.composeapp.generated.resources.error_executed
+import matsumo_me.composeapp.generated.resources.error_no_data
 import me.matsumo.blog.core.model.Article
 import me.matsumo.blog.core.model.ArticleDetail
 import me.matsumo.blog.core.model.ScreenState
@@ -31,6 +32,7 @@ interface ArticleComponent {
 
 class DefaultArticleComponent(
     componentContext: ComponentContext,
+    private val articleId: String,
     private val setThemeConfig: (ThemeConfig) -> Unit,
 ) : ArticleComponent, KoinComponent, ComponentContext by componentContext {
 
@@ -42,6 +44,10 @@ class DefaultArticleComponent(
 
     override val screenState: StateFlow<ScreenState<ArticleUiState>> = _screenState.asStateFlow()
 
+    init {
+        fetch(articleId)
+    }
+
     override fun fetch(id: String) {
         scope.launch {
             _screenState.value = ScreenState.Loading
@@ -51,7 +57,7 @@ class DefaultArticleComponent(
                 )
             }.fold(
                 onSuccess = { ScreenState.Idle(it) },
-                onFailure = { ScreenState.Error(Res.string.error_executed) },
+                onFailure = { ScreenState.Error(Res.string.error_no_data) },
             )
         }
     }

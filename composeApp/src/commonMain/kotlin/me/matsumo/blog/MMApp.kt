@@ -43,7 +43,7 @@ internal fun MMApp(
                 is RootComponent.Child.Splash -> SplashScreen(child.component)
                 is RootComponent.Child.Home -> HomeScreen(child.component)
                 is RootComponent.Child.About -> AboutScreen(child.component)
-                is RootComponent.Child.Article -> ArticleScreen(child.component, "")
+                is RootComponent.Child.Article -> ArticleScreen(child.component)
             }
         }
     }

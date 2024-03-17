@@ -11,10 +11,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import matsumo_me.composeapp.generated.resources.*
 import matsumo_me.composeapp.generated.resources.Res
-import matsumo_me.composeapp.generated.resources.common_error
-import matsumo_me.composeapp.generated.resources.common_retry
-import matsumo_me.composeapp.generated.resources.error_executed
 import me.matsumo.blog.core.model.Article
 import me.matsumo.blog.core.model.ScreenState
 import me.matsumo.blog.core.model.ThemeConfig
@@ -31,12 +29,14 @@ interface HomeComponent {
     fun setThemeConfig(themeConfig: ThemeConfig)
 
     fun onNavigateToAbout()
+    fun onNavigateToArticle(articleId: String)
 }
 
 class DefaultHomeComponent(
     componentContext: ComponentContext,
     private val setThemeConfig: (ThemeConfig) -> Unit,
     private val navigateToAbout: () -> Unit,
+    private val navigateToArticle: (String) -> Unit,
 ) : HomeComponent, KoinComponent, ComponentContext by componentContext {
 
     private val mmRepository by inject<MMRepository>()
@@ -56,7 +56,7 @@ class DefaultHomeComponent(
                 )
             }.fold(
                 onSuccess = { ScreenState.Idle(it) },
-                onFailure = { ScreenState.Error(Res.string.error_executed) },
+                onFailure = { ScreenState.Error(Res.string.error_no_data) },
             )
         }
     }
@@ -67,6 +67,10 @@ class DefaultHomeComponent(
 
     override fun onNavigateToAbout() {
         navigateToAbout.invoke()
+    }
+
+    override fun onNavigateToArticle(articleId: String) {
+        navigateToArticle.invoke(articleId)
     }
 }
 

@@ -114,6 +114,7 @@ jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 ksoup = { module = "com.fleeksoft.ksoup:ksoup", version.ref = "ksoup" }
 uuid = { module = "com.benasher44:uuid", version.ref = "uuid" }
 haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
+markdown = { module = "org.jetbrains:markdown", version = "0.6.1" }
 window-size = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "windowSize" }
 placeholder = { module = "com.eygraber:compose-placeholder-material3", version = "1.0.7" }
 libraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "libraries" }

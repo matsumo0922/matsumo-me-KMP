@@ -53,7 +53,7 @@ fun HomeScreen(
             modifier = Modifier.fillMaxSize(),
             articles = it.articles,
             onSetThemeConfig = component::setThemeConfig,
-            onClickArticle = {},
+            onClickArticle = component::onNavigateToArticle,
             onClickTag = {},
             onClickAbout = component::onNavigateToAbout,
         )
@@ -64,7 +64,7 @@ fun HomeScreen(
 fun HomeIdleScreen(
     articles: List<Article>,
     onSetThemeConfig: (ThemeConfig) -> Unit,
-    onClickArticle: (Article) -> Unit,
+    onClickArticle: (String) -> Unit,
     onClickTag: (String) -> Unit,
     onClickAbout: () -> Unit,
     modifier: Modifier = Modifier,
@@ -98,10 +98,10 @@ fun HomeIdleScreen(
             horizontalArrangement = Arrangement.spacedBy(24.dp),
             columns = span,
             itemCount = articles.size,
-        ) {
+        ) { index ->
             ArticleCard(
-                article = articles[it],
-                onClickArticle = onClickArticle,
+                article = articles[index],
+                onClickArticle = { onClickArticle.invoke(it.id.toString()) },
                 onClickTag = onClickTag,
             )
         }
