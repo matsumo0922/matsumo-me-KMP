@@ -6,8 +6,6 @@ import co.touchlab.kermit.Logger
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.client.statement.request
-import me.matsumo.blog.core.model.GhPaging
-import me.matsumo.blog.core.model.getGhPage
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 
@@ -34,17 +32,6 @@ suspend inline fun <reified T> HttpResponse.parse(
     if (status.value == 403) throw RateLimitException()
 
     return if (isOK) formatter.decodeFromString(text) else null
-}
-
-suspend fun <T> HttpResponse.parsePaging(
-    translate: suspend (HttpResponse) -> T,
-): GhPaging<T> {
-    val pagination = headers.getGhPage()
-
-    return GhPaging(
-        data = translate.invoke(this),
-        pagination = pagination,
-    )
 }
 
 class RateLimitException : Exception("Rate limit exceeded")

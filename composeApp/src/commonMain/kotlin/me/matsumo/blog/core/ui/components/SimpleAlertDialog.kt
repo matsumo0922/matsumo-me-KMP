@@ -19,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import me.matsumo.blog.core.ui.extensions.ComponentPreviews
 import me.matsumo.blog.core.ui.theme.MMTheme
 import me.matsumo.blog.core.ui.theme.bold
 
@@ -89,21 +88,5 @@ fun SimpleAlertDialog(
                 }
             }
         }
-    }
-}
-
-@ComponentPreviews
-@Composable
-private fun SimpleAlertDialogPreview() {
-    MMTheme {
-        SimpleAlertDialog(
-            title = "Title",
-            description = "Description",
-            positiveText = "Positive",
-            negativeText = "Negative",
-            onClickPositive = {},
-            onClickNegative = {},
-            isCaution = false,
-        )
     }
 }

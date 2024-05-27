@@ -11,19 +11,22 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import matsumo_me.composeapp.generated.resources.Res
+import matsumo_me.composeapp.generated.resources.common_reload
+import matsumo_me.composeapp.generated.resources.error_executed
 import me.matsumo.blog.core.model.ScreenState
 import me.matsumo.blog.core.ui.theme.bold
 import me.matsumo.blog.core.ui.theme.center
-import me.matsumo.yumemi.codecheck.R
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ErrorView(
-    title: Int,
-    message: Int,
+    title: StringResource,
+    message: StringResource,
     modifier: Modifier = Modifier,
-    retryTitle: Int? = null,
+    retryTitle: StringResource? = null,
     retryAction: (() -> Unit)? = null,
 ) {
     Column(
@@ -56,7 +59,7 @@ fun ErrorView(
                 onClick = { retryAction.invoke() },
             ) {
                 Text(
-                    text = stringResource(retryTitle ?: R.string.common_reload),
+                    text = stringResource(retryTitle ?: Res.string.common_reload),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onPrimary,
                 )
@@ -73,7 +76,7 @@ fun ErrorView(
 ) {
     ErrorView(
         modifier = modifier,
-        title = R.string.error_executed,
+        title = Res.string.error_executed,
         message = errorState.message,
         retryTitle = errorState.retryTitle,
         retryAction = retryAction,

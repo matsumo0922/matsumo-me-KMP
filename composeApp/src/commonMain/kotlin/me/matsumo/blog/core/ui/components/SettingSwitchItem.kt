@@ -14,13 +14,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SettingSwitchItem(
-    title: Int,
-    description: Int?,
+    title: StringResource,
+    description: StringResource?,
     value: Boolean,
     onValueChanged: (Boolean) -> Unit,
     modifier: Modifier = Modifier,

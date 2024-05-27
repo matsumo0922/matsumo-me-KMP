@@ -2,14 +2,15 @@ package me.matsumo.blog.core.model
 
 import androidx.compose.runtime.Stable
 import kotlinx.coroutines.flow.StateFlow
+import org.jetbrains.compose.resources.StringResource
 
 @Stable
 sealed interface ScreenState<out T> {
     data object Loading : ScreenState<Nothing>
 
     data class Error(
-        val message: Int,
-        val retryTitle: Int? = null,
+        val message: StringResource,
+        val retryTitle: StringResource? = null,
     ) : ScreenState<Nothing>
 
     data class Idle<T>(

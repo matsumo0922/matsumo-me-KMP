@@ -8,8 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
-import me.matsumo.blog.core.common.extensions.LocalStateHolder
-import me.matsumo.blog.core.common.extensions.StateHolder
+import androidx.compose.ui.unit.dp
 import me.matsumo.blog.core.model.ThemeColorConfig
 import me.matsumo.blog.core.model.ThemeConfig
 import me.matsumo.blog.core.ui.theme.color.DarkBlueColorScheme
@@ -43,12 +42,11 @@ internal fun MMTheme(
     CompositionLocalProvider(
         LocalWindowWidthSize provides windowWidthSize,
         LocalThemeConfig provides themeConfig,
-        LocalStateHolder provides remember { StateHolder() },
         LocalSnackbarHostState provides remember { SnackbarHostState() },
     ) {
         MaterialTheme(
             colorScheme = colorScheme,
-            typography = MMTypography,
+            typography = createCustomFontTypography(getNotoSansJPFontFamily()),
             shapes = MMShapes,
             content = content,
         )
@@ -64,6 +62,34 @@ fun shouldUseDarkTheme(themeConfig: ThemeConfig): Boolean {
     }
 }
 
+fun calculateWindowWidthSize(width: Int): WindowWidthSizeClass {
+    return when {
+        width < 680 -> WindowWidthSizeClass.Compact
+        width < 960 -> WindowWidthSizeClass.Medium
+        else -> WindowWidthSizeClass.Expanded
+    }
+}
+
+fun WindowWidthSizeClass.isBiggerThan(other: WindowWidthSizeClass): Boolean {
+    return this.getInternalNumber() > other.getInternalNumber()
+}
+
+fun WindowWidthSizeClass.isSmallerThan(other: WindowWidthSizeClass): Boolean {
+    return this.getInternalNumber() < other.getInternalNumber()
+}
+
+private fun WindowWidthSizeClass.getInternalNumber(): Int {
+    return when (this) {
+        WindowWidthSizeClass.Compact -> 1
+        WindowWidthSizeClass.Medium -> 2
+        WindowWidthSizeClass.Expanded -> 3
+        else -> 0
+    }
+}
+
 val LocalWindowWidthSize = staticCompositionLocalOf { WindowWidthSizeClass.Compact }
 val LocalThemeConfig = staticCompositionLocalOf { ThemeConfig.System }
 val LocalSnackbarHostState = staticCompositionLocalOf { SnackbarHostState() }
+
+val CONTAINER_MAX_WIDTH = 1200.dp
+val HEADER_HEIGHT = 104.dp

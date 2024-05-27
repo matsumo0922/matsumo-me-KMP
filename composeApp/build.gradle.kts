@@ -20,6 +20,7 @@ kotlin {
         all {
             languageSettings {
                 optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
+                languageSettings.enableLanguageFeature("ExplicitBackingFields")
             }
         }
 
@@ -27,6 +28,7 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
+            implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
@@ -37,8 +39,7 @@ kotlin {
             api(libs.bundles.ui.common.api)
             api(libs.bundles.koin)
             api(libs.bundles.ktor)
-
-            
+            api(libs.bundles.kstore)
         }
 
         commonTest.dependencies {

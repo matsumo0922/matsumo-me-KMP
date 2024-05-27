@@ -13,8 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -75,9 +76,9 @@ fun SettingTextItem(
 
 @Composable
 fun SettingTextItem(
-    title: Int,
+    title: StringResource,
     modifier: Modifier = Modifier,
-    description: Int? = null,
+    description: StringResource? = null,
     onClick: () -> Unit = {},
     onLongClick: () -> Unit = {},
     isEnabled: Boolean = true,

@@ -24,7 +24,6 @@ package me.matsumo.blog.core.common.extensions
  * SOFTWARE.
  */
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -229,7 +228,6 @@ private fun DrawScope.drawScrollbar(
     )
 }
 
-@SuppressLint("ModifierFactoryUnreferencedReceiver")
 private fun Modifier.drawScrollbar(
     orientation: Orientation,
     reverseScrolling: Boolean,
