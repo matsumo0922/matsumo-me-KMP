@@ -6,6 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import me.matsumo.blog.core.ui.animation.NavigateAnimation
+import me.matsumo.blog.feature.article.articleScreen
+import me.matsumo.blog.feature.article.navigateToArticle
 import me.matsumo.blog.feature.home.HomeRoute
 import me.matsumo.blog.feature.home.homeScreen
 
@@ -18,11 +20,14 @@ fun MMNavHost(
         modifier = modifier,
         navController = navController,
         startDestination = HomeRoute,
-        enterTransition = { NavigateAnimation.Horizontal.enter },
-        exitTransition = { NavigateAnimation.Horizontal.exit },
-        popEnterTransition = { NavigateAnimation.Horizontal.popEnter },
-        popExitTransition = { NavigateAnimation.Horizontal.popExit },
+        enterTransition = { NavigateAnimation.Home.enter },
+        exitTransition = { NavigateAnimation.Home.exit },
     ) {
-        homeScreen()
+        homeScreen(
+            navigateToArticleDetail = navController::navigateToArticle,
+            navigateToTagDetail = {},
+        )
+
+        articleScreen()
     }
 }

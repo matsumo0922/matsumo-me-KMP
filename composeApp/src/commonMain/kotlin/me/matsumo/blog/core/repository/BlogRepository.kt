@@ -1,7 +1,6 @@
 package me.matsumo.blog.core.repository
 
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
 import me.matsumo.blog.core.common.extensions.parse
 import me.matsumo.blog.core.model.Article
@@ -22,6 +21,6 @@ class BlogRepositoryImpl(
     }
 
     override suspend fun getArticle(id: String): ArticleDetail = withContext(dispatcher) {
-        client.get("articles/$id").parse()!!
+        client.get("articles/markdown/$id").parse()!!
     }
 }

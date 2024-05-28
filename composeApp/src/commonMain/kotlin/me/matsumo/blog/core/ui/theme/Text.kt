@@ -1,5 +1,6 @@
 package me.matsumo.blog.core.ui.theme
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
@@ -169,3 +170,10 @@ fun TextStyle.italic() = this.merge(TextStyle(fontStyle = FontStyle.Italic))
 
 // Size
 fun TextStyle.size(size: TextUnit) = this.merge(TextStyle(fontSize = size))
+
+// Color
+@Composable
+fun TextStyle.onSurface() = this.merge(TextStyle(color = MaterialTheme.colorScheme.onSurface))
+
+@Composable
+fun TextStyle.primary() = this.merge(TextStyle(color = MaterialTheme.colorScheme.primary))

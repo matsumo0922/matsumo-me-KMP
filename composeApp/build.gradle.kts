@@ -40,6 +40,9 @@ kotlin {
             api(libs.bundles.koin)
             api(libs.bundles.ktor)
             api(libs.bundles.kstore)
+
+            implementation(libs.markdown)
+            implementation(libs.markdown.render)
         }
 
         commonTest.dependencies {
@@ -54,6 +57,8 @@ kotlin {
         "detektPlugins"(libs.detekt.formatting)
         "detektPlugins"(libs.twitter.compose.rule)
     }
+
+    task("testClasses")
 }
 
 compose.experimental {

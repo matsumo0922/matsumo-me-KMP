@@ -7,30 +7,28 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
+import me.matsumo.blog.core.common.extensions.drawVerticalScrollbar
 import me.matsumo.blog.core.model.Article
 import me.matsumo.blog.core.model.ScreenState
 import me.matsumo.blog.core.model.ThemeConfig
-import me.matsumo.blog.core.model.UserData
 import me.matsumo.blog.core.ui.AsyncLoadContentsWithHeader
 import me.matsumo.blog.core.ui.components.ArticleCard
 import me.matsumo.blog.core.ui.components.FixedWithEdgeSpace
 import me.matsumo.blog.core.ui.components.FooterView
 import me.matsumo.blog.core.ui.components.itemsWithEdgeSpace
 import me.matsumo.blog.core.ui.extensions.rememberArticleEdgeSpace
-import me.matsumo.blog.core.ui.extensions.toDp
-import me.matsumo.blog.core.ui.theme.CONTAINER_MAX_WIDTH
 import me.matsumo.blog.core.ui.theme.HEADER_HEIGHT
 import me.matsumo.blog.core.ui.theme.LocalWindowWidthSize
 import org.koin.compose.viewmodel.koinViewModel
@@ -39,6 +37,8 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 internal fun HomeRoute(
+    navigateToArticleDetail: (String) -> Unit,
+    navigateToTagDetail: (String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = koinViewModel()
 ) {
@@ -58,21 +58,23 @@ internal fun HomeRoute(
     ) {
         HomeScreen(
             modifier = modifier.fillMaxSize(),
-            userData = it.userData,
             articles = it.articles.toImmutableList(),
+            navigateToArticleDetail = navigateToArticleDetail,
+            navigateToTagDetail = navigateToTagDetail,
             setThemeConfig = viewModel::setThemeConfig,
         )
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun HomeScreen(
-    userData: UserData,
     articles: ImmutableList<Article>,
     setThemeConfig: (ThemeConfig) -> Unit,
+    navigateToArticleDetail: (String) -> Unit,
+    navigateToTagDetail: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val state = rememberLazyGridState()
     val windowWidthSizeClass = LocalWindowWidthSize.current
 
     val space by rememberArticleEdgeSpace()
@@ -88,7 +90,8 @@ private fun HomeScreen(
     }
 
     LazyVerticalGrid(
-        modifier = modifier,
+        modifier = modifier.drawVerticalScrollbar(state, span + 2),
+        state = state,
         columns = FixedWithEdgeSpace(
             count = span,
             edgeSpace = space,
@@ -110,15 +113,15 @@ private fun HomeScreen(
                     .padding(8.dp)
                     .fillMaxWidth(),
                 article = it,
-                onClickArticle = {},
-                onClickTag = {},
+                onClickArticle = navigateToArticleDetail,
+                onClickTag = navigateToTagDetail,
             )
         }
 
         item(span = { GridItemSpan(maxLineSpan) }) {
             FooterView(
                 modifier = Modifier
-                    .padding(top = 16.dp)
+                    .padding(top = 80.dp)
                     .fillMaxWidth(),
                 onSetThemeConfig = setThemeConfig,
             )

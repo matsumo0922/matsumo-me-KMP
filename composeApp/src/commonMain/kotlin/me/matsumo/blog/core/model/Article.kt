@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Article(
     @SerialName("id")
-    val id: Int,
+    val id: String,
     @SerialName("title")
     val title: String,
     @SerialName("resource")

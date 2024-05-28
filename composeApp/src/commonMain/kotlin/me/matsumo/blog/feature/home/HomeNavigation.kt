@@ -12,10 +12,15 @@ fun NavController.navigateToHome() {
     this.navigate(HomeRoute)
 }
 
-fun NavGraphBuilder.homeScreen() {
+fun NavGraphBuilder.homeScreen(
+    navigateToArticleDetail: (String) -> Unit,
+    navigateToTagDetail: (String) -> Unit,
+) {
     composable(HomeRoute) {
         HomeRoute(
             modifier = Modifier.fillMaxSize(),
+            navigateToArticleDetail = navigateToArticleDetail,
+            navigateToTagDetail = navigateToTagDetail,
         )
     }
 }

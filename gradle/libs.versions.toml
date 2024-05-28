@@ -64,7 +64,8 @@ kstore = "0.8.0"
 twitterComposeRule = "0.0.26"
 composeWebView = "1.9.8"
 haze = "0.7.1"
-markdown = "0.20.0"
+markdown = "0.7.3"
+markdownRender = "0.20.0"
 windowSize = "0.5.0"
 libraries = "11.1.4"
 
@@ -196,7 +197,8 @@ uuid = { module = "com.benasher44:uuid", version.ref = "uuid" }
 ksoup = { module = "com.fleeksoft.ksoup:ksoup", version.ref = "ksoup" }
 webview-compose = { module = "io.github.kevinnzou:compose-webview-multiplatform", version.ref = "composeWebView" }
 haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
-markdown = { module = "com.mikepenz:multiplatform-markdown-renderer-m3", version.ref = "markdown" }
+markdown = { module = "org.jetbrains:markdown", version.ref = "markdown" }
+markdown-render = { module = "com.mikepenz:multiplatform-markdown-renderer-m3", version.ref = "markdownRender" }
 window-size = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "windowSize" }
 twitter-compose-rule = { module = "com.twitter.compose.rules:detekt", version.ref = "twitterComposeRule" }
 libraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "libraries" }
@@ -224,7 +226,6 @@ ui-common-api = [
     "kmp-navigation-compose",
     "coil3-compose",
     "haze",
-    "markdown",
     "window-size",
 ]
 
