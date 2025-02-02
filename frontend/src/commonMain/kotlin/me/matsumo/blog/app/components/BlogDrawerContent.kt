@@ -9,14 +9,17 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.DrawerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import matsumo_me_kmp.frontend.generated.resources.Res
 import matsumo_me_kmp.frontend.generated.resources.navigation_about
 import matsumo_me_kmp.frontend.generated.resources.navigation_articles
@@ -27,12 +30,15 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun BlogDrawerContent(
+    state: DrawerState,
     onNavigationHomeClicked: () -> Unit,
     onNavigationAboutClicked: () -> Unit,
     onNavigationArticlesClicked: () -> Unit,
     onNavigationGithubClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val scope = rememberCoroutineScope()
+
     ModalDrawerSheet(
         modifier = modifier,
         drawerShape = RoundedCornerShape(
@@ -50,22 +56,42 @@ fun BlogDrawerContent(
         ) {
             DrawerItem(
                 label = stringResource(Res.string.navigation_home),
-                onClick = onNavigationHomeClicked,
+                onClick = {
+                    scope.launch {
+                        state.close()
+                        onNavigationHomeClicked()
+                    }
+                },
             )
 
             DrawerItem(
                 label = stringResource(Res.string.navigation_about),
-                onClick = onNavigationAboutClicked,
+                onClick = {
+                    scope.launch {
+                        state.close()
+                        onNavigationAboutClicked()
+                    }
+                },
             )
 
             DrawerItem(
                 label = stringResource(Res.string.navigation_articles),
-                onClick = onNavigationArticlesClicked,
+                onClick = {
+                    scope.launch {
+                        state.close()
+                        onNavigationArticlesClicked()
+                    }
+                },
             )
 
             DrawerItem(
                 label = stringResource(Res.string.navigation_github),
-                onClick = onNavigationGithubClicked,
+                onClick = {
+                    scope.launch {
+                        state.close()
+                        onNavigationGithubClicked()
+                    }
+                },
             )
         }
     }

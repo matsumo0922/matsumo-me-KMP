@@ -74,6 +74,7 @@ private fun BlogScreen(
         drawerState = drawerState,
         drawerContent = {
             BlogDrawerContent(
+                state = drawerState,
                 onNavigationHomeClicked = { navController.navigateInclusive(Destinations.Home) },
                 onNavigationAboutClicked = { },
                 onNavigationArticlesClicked = { navController.navigateInclusive(Destinations.Articles) },
