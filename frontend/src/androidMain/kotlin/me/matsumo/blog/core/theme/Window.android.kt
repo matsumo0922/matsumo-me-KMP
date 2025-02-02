@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import me.matsumo.blog.BlogApplication
 import me.matsumo.blog.blogApplicationContext
 import me.matsumo.blog.core.domain.Device
@@ -20,4 +21,9 @@ actual fun rememberDeviceState(): State<Device> {
 
 actual fun isSystemInDarkThemeUnSafe(): Boolean {
     return (blogApplicationContext.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+}
+
+@Composable
+actual fun BindToNavigation(navController: NavController) {
+    // do nothing
 }
