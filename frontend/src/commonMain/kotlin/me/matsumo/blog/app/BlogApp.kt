@@ -24,6 +24,7 @@ import me.matsumo.blog.core.theme.BlogTheme
 import me.matsumo.blog.core.theme.openUrl
 import me.matsumo.blog.core.theme.rememberDeviceState
 import me.matsumo.blog.core.ui.ModalNavigationDrawerWrapper
+import me.matsumo.blog.core.ui.utils.navigateInclusive
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -64,9 +65,9 @@ private fun BlogScreen(
         drawerState = drawerState,
         drawerContent = {
             BlogDrawerContent(
-                onNavigationHomeClicked = { },
+                onNavigationHomeClicked = { navController.navigateInclusive(Destinations.Home) },
                 onNavigationAboutClicked = { },
-                onNavigationArticlesClicked = { navController.navigate(Destinations.Articles) },
+                onNavigationArticlesClicked = { navController.navigateInclusive(Destinations.Articles) },
                 onNavigationGithubClicked = { openUrl(StaticUrl.GITHUB) },
             )
         },
@@ -80,10 +81,10 @@ private fun BlogScreen(
                     isDark = isDark,
                     onToggleThemeClicked = onToggleThemeClicked,
                     onOpenDrawerClicked = { scope.launch { drawerState.open() } },
+                    onNavigationHomeClicked = { navController.navigateInclusive(Destinations.Home) },
                     onNavigationAboutClicked = { },
-                    onNavigationArticlesClicked = { navController.navigate(Destinations.Articles) },
+                    onNavigationArticlesClicked = { navController.navigateInclusive(Destinations.Articles) },
                     onNavigationGithubClicked = { openUrl(StaticUrl.GITHUB) },
-                    onNavigationHomeClicked = { },
                 )
             }
         ) {

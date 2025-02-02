@@ -1,6 +1,7 @@
 package me.matsumo.blog.app.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -50,7 +51,13 @@ internal fun BlogTopAppBar(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Image(
-            modifier = Modifier.padding(4.dp),
+            modifier = Modifier
+                .padding(4.dp)
+                .clickable(
+                    interactionSource = null,
+                    indication = null,
+                    onClick = { onNavigationHomeClicked() },
+                ),
             imageVector = vectorResource(Res.drawable.vec_blog_logo),
             contentDescription = "matsumo.me",
         )
