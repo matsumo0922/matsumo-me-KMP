@@ -1,4 +1,4 @@
-package me.matsumo.blog.core.model
+package me.matsumo.blog.core.domain
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable

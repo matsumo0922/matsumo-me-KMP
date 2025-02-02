@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="NightAdjusted.Theme.Blog" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+
+    <style name="PlatformAdjusted.Theme.Blog" parent="NightAdjusted.Theme.Blog">
+        <item name="android:statusBarColor">#000</item>
+    </style>
+
+    <!-- The final theme we use -->
+    <style name="Theme.Blog" parent="PlatformAdjusted.Theme.Blog" />
+
+    <style name="NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+
+    <style name="Theme.Blog.Splash" parent="NightAdjusted.Theme.Splash">
+        <item name="postSplashScreenTheme">@style/Theme.Blog</item>
+    </style>
+
+</resources>

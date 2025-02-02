@@ -1,6 +1,4 @@
-package me.matsumo.blog.core.model
-
-import androidx.compose.ui.unit.Dp
+package me.matsumo.blog.core.domain
 
 sealed interface WindowWidthSize {
     data object Compact : WindowWidthSize

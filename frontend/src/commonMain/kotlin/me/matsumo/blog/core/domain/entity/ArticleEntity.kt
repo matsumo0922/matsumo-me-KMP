@@ -1,19 +1,17 @@
-package me.matsumo.blog.core.model
+package me.matsumo.blog.core.domain.entity
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ArticleDetail(
+data class ArticleEntity(
     @SerialName("id")
-    val id: Int,
-    @SerialName("article_id")
-    val articleId: Int,
+    val id: Long,
     @SerialName("title")
     val title: String,
-    @SerialName("body")
-    val body: String,
+    @SerialName("resource")
+    val resource: String,
     @SerialName("tags")
     val tags: List<String>,
     @SerialName("created_at")

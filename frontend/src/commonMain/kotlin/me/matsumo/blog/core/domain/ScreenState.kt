@@ -1,4 +1,4 @@
-package me.matsumo.blog.core.model
+package me.matsumo.blog.core.domain
 
 import androidx.compose.runtime.Stable
 import kotlinx.coroutines.flow.StateFlow

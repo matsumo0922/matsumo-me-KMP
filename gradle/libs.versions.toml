@@ -3,6 +3,11 @@
 versionName = "0.0.1"
 versionCode = "1"
 
+# SDK
+minSdk = "26"
+targetSdk = "35"
+compileSdk = "35"
+
 # Gradle
 gradle = "8.7.3"
 
@@ -12,8 +17,17 @@ kotlin = "2.1.0"
 # KotlinX
 kotlinxCoroutines = "1.7.3"
 kotlinxDatetime = "0.6.1"
-kotlinxSerializationJson = "1.7.3"
+kotlinxSerializationJson = "1.8.0"
 kotlinxImmutable = "0.3.7"
+
+# AndroidX
+androidxCore = "1.15.0"
+androidxCoreSplash = "1.0.1"
+androidxAppCompat = "1.7.0"
+androidxActivity = "1.10.0"
+androidxFragment = "1.8.5"
+androidxAnnotation = "1.9.1"
+androidxStartup = "1.2.0"
 
 # KMP
 kmpCompose = "1.7.3"
@@ -22,7 +36,7 @@ kmpSwiftKlib = "0.6.3"
 kmpLifecycle = "2.8.4"
 kmpNavigation = "2.8.0-alpha11"
 kmpPaging = "3.3.0-alpha02-0.5.1"
-kmpRoom = "2.7.0-alpha12"
+kmpRoom = "2.7.0-alpha13"
 kmpSqlite = "2.0.1"
 
 # Google
@@ -45,6 +59,9 @@ twitterComposeRule = "0.0.26"
 napier = "2.7.1"
 
 [plugins]
+# Android
+android-application = { id = "com.android.application", version.ref = "gradle" }
+android-library = { id = "com.android.library", version.ref = "gradle" }
 
 # Kotlin
 kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
@@ -66,6 +83,7 @@ ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
 [libraries]
 
 ## Dependency of the include build-logic
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "gradle" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "kmpRoom" }
 build-konfig-gradlePlugin = { group = "com.codingfeline.buildkonfig", name = "buildkonfig-gradle-plugin", version.ref = "buildKonfig" }
@@ -82,6 +100,16 @@ kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxImmutable" }
+
+# AndroidX
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "androidxCoreSplash" }
+androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidxAnnotation" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppCompat" }
+androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidxActivity" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
+androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "androidxFragment" }
+androidx-startup = { module = "androidx.startup:startup-runtime", version.ref = "androidxStartup" }
 
 # KMP
 kmp-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "kmpLifecycle" }
@@ -138,6 +166,17 @@ ui-common = [
     "kmp-lifecycle-runtime-compose",
     "kmp-lifecycle-viewmodel-compose",
     "kmp-navigation-compose",
+]
+
+ui-android = [
+    "androidx-core",
+    "androidx-core-splashscreen",
+    "androidx-annotation",
+    "androidx-appcompat",
+    "androidx-activity",
+    "androidx-activity-compose",
+    "androidx-fragment",
+    "androidx-startup",
 ]
 
 ktor = [
