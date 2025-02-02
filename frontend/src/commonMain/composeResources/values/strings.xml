@@ -47,4 +47,10 @@
     <string name="navigation_articles">Articles</string>
     <string name="navigation_about">About</string>
     <string name="navigation_github">GitHub</string>
+
+    <!-- Home -->
+    <string name="home_greeting1">Hi</string>
+    <string name="home_greeting2">I'm</string>
+    <string name="home_greeting3">Daichi Matsumoto!</string>
+    <string name="home_greeting_description">Software engineer &amp; Android Developer</string>
 </resources>

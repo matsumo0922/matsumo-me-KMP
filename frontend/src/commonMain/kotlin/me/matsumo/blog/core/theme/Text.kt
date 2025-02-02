@@ -164,4 +164,5 @@ fun TextStyle.end() = this.merge(TextStyle(textAlign = TextAlign.End))
 // Style
 fun TextStyle.bold() = this.merge(TextStyle(fontWeight = FontWeight.Bold))
 fun TextStyle.extraBold() = this.merge(TextStyle(fontWeight = FontWeight.ExtraBold))
+fun TextStyle.black() = this.merge(TextStyle(fontWeight = FontWeight.Black))
 fun TextStyle.italic() = this.merge(TextStyle(fontStyle = FontStyle.Italic))
