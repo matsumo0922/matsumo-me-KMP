@@ -4,15 +4,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
+import me.matsumo.blog.app.components.BlogBackground
 import me.matsumo.blog.app.components.BlogDrawerContent
 import me.matsumo.blog.app.components.BlogNavHost
 import me.matsumo.blog.app.components.BlogTopAppBar
@@ -39,12 +42,18 @@ internal fun BlogApp(
         themeConfig = uiState.theme,
         device = device,
     ) {
-        BlogScreen(
+        BlogBackground(
             modifier = modifier.fillMaxSize(),
-            isMobile = device == Device.MOBILE,
-            isDark = uiState.theme.isDark(),
-            onToggleThemeClicked = viewModel::toggleTheme,
-        )
+            pointCount = 200,
+            pointColor = MaterialTheme.colorScheme.primaryContainer,
+        ) {
+            BlogScreen(
+                modifier = modifier.fillMaxSize(),
+                isMobile = device == Device.MOBILE,
+                isDark = uiState.theme.isDark(),
+                onToggleThemeClicked = viewModel::toggleTheme,
+            )
+        }
     }
 }
 
@@ -86,7 +95,8 @@ private fun BlogScreen(
                     onNavigationArticlesClicked = { navController.navigateInclusive(Destinations.Articles) },
                     onNavigationGithubClicked = { openUrl(StaticUrl.GITHUB) },
                 )
-            }
+            },
+            containerColor = Color.Transparent,
         ) {
             BlogNavHost(
                 modifier = Modifier
