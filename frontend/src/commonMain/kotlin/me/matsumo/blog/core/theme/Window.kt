@@ -11,4 +11,6 @@ expect fun rememberDeviceState(): State<Device>
 @Composable
 expect fun BindToNavigation(navController: NavController)
 
+expect fun openUrl(url: String)
+
 expect fun isSystemInDarkThemeUnSafe(): Boolean

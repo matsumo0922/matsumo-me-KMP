@@ -41,3 +41,7 @@ actual fun BindToNavigation(navController: NavController) {
         }
     }
 }
+
+actual fun openUrl(url: String) {
+    window.open(url, "_blank")
+}

@@ -9,8 +9,5 @@ sealed interface Destinations {
     data object Home : Destinations
 
     @Serializable
-    data class Articles(
-        val id: String,
-        val sample: String,
-    ) : Destinations
+    data object Articles : Destinations
 }
