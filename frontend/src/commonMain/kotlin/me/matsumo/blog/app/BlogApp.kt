@@ -44,8 +44,9 @@ internal fun BlogApp(
     ) {
         BlogBackground(
             modifier = modifier.fillMaxSize(),
-            pointCount = 200,
-            pointColor = MaterialTheme.colorScheme.primaryContainer,
+            pointCount = if (device == Device.MOBILE) 100 else 200,
+            pointColor1 = MaterialTheme.colorScheme.primaryContainer,
+            pointColor2 = MaterialTheme.colorScheme.tertiaryContainer,
         ) {
             BlogScreen(
                 modifier = modifier.fillMaxSize(),

@@ -14,7 +14,9 @@ import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.lerp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalDensity
 import kotlinx.datetime.Clock
 import kotlin.math.PI
@@ -42,6 +44,7 @@ private data class PointData(
     var vx: Float,
     var vy: Float,
     val radius: Float,
+    val color: Color,
     var alpha: Float = 1f,          // 初期は完全表示
     var stableTimer: Float = 0f,    // 表示（または非表示）状態が続く時間
     var fadeTimer: Float = 0f,      // フェード中の残り時間
@@ -52,7 +55,8 @@ private data class PointData(
 @Composable
 fun BlogBackground(
     pointCount: Int,
-    pointColor: Color,
+    pointColor1: Color,
+    pointColor2: Color,
     modifier: Modifier = Modifier,
     containerColor: Color = MaterialTheme.colorScheme.background,
     content: @Composable () -> Unit
@@ -71,9 +75,13 @@ fun BlogBackground(
         // recomposition 用
         val frameTick = remember { mutableStateOf(0L) }
 
+        LaunchedEffect(widthPx, heightPx) {
+            points.clear()
+        }
+
         if (points.isEmpty()) {
             repeat(pointCount) {
-                val radius = random.nextFloat() * 4f + 2f
+                val radius = random.nextFloat() * 14f + 2f
 
                 val x = random.nextFloat() * widthPx
                 val y = random.nextFloat() * heightPx
@@ -84,6 +92,7 @@ fun BlogBackground(
                 val vx = cos(angle) * speed
                 val vy = sin(angle) * speed
 
+                val color = lerp(pointColor1, pointColor2, random.nextFloat())
                 val stableTimer = random.nextFloat() * 8f + 2f
 
                 points.add(
@@ -92,6 +101,7 @@ fun BlogBackground(
                         y = y,
                         vx = vx,
                         vy = vy,
+                        color = color,
                         radius = radius,
                         alpha = 1f,
                         stableTimer = stableTimer
@@ -167,7 +177,7 @@ fun BlogBackground(
 
             points.forEach { point ->
                 drawCircle(
-                    color = pointColor.copy(alpha = point.alpha),
+                    color = point.color.copy(alpha = point.alpha),
                     radius = point.radius,
                     center = Offset(point.x, point.y)
                 )

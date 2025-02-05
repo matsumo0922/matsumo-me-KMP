@@ -13,6 +13,7 @@ import androidx.navigation.bindToNavigation
 import kotlinx.browser.window
 import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.ui.utils.toUrlPath
+import org.w3c.dom.PopStateEvent
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -38,6 +39,12 @@ actual fun BindToNavigation(navController: NavController) {
     LaunchedEffect(true) {
         window.bindToNavigation(navController) {
             it.toUrlPath().orEmpty()
+        }
+
+        window.addEventListener("popstate") { event ->
+            if (event is PopStateEvent && event.state == null) {
+                window.location.toString()
+            }
         }
     }
 }
