@@ -8,6 +8,7 @@ pluginManagement {
         gradlePluginPortal()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         maven("https://maven.pkg.jetbrains.space/public/p/ktor/eap")
+        maven("https://packages.jetbrains.team/maven/p/firework/dev")
         maven("https://www.jitpack.io")
     }
 }
@@ -20,6 +21,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         maven("https://maven.pkg.jetbrains.space/public/p/ktor/eap")
+        maven("https://packages.jetbrains.team/maven/p/firework/dev")
         maven("https://www.jitpack.io")
     }
 }

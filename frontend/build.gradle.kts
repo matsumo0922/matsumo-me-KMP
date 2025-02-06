@@ -1,4 +1,4 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 
 plugins {
     id("matsumo.primitive.kmp.common")
@@ -15,6 +15,10 @@ android {
 }
 
 kotlin {
+    composeCompiler {
+        featureFlags.add(ComposeFeatureFlag.OptimizeNonSkippingGroups)
+    }
+
     sourceSets {
         commonMain.dependencies {
             implementation(libs.bundles.infra)
