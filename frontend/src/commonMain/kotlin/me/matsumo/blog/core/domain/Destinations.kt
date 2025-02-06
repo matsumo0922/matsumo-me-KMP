@@ -1,5 +1,6 @@
 package me.matsumo.blog.core.domain
 
+import io.github.aakira.napier.Napier
 import io.ktor.http.Url
 import kotlinx.serialization.Serializable
 
@@ -19,7 +20,42 @@ sealed interface Destinations {
         )
 
         private fun matchRoute(url: Url, routePattern: String): Map<String, String>? {
-            return emptyMap()
+            val pathSegments = url.rawSegments.filter { it.isNotBlank() }
+            val patternSegments = routePattern.split("/").filter { it.isNotBlank() }
+
+            if (pathSegments.size != patternSegments.size) return null
+
+            val params = mutableMapOf<String, String>()
+
+            for ((pathSegment, patternSegment) in pathSegments.zip(patternSegments)) {
+                Napier.d { "Path segment: $pathSegment, pattern segment: $patternSegment" }
+                if (patternSegment.startsWith("{") && patternSegment.endsWith("}")) {
+                    val key = patternSegment.substring(1, patternSegment.length - 1)
+                    params[key] = pathSegment
+                } else {
+                    if (pathSegment != patternSegment) return null
+                }
+            }
+
+            return params
+        }
+
+        fun fromUrl(url: Url): Destinations? {
+            val queryParams = url.parameters.entries().associate { it.key to it.value.firstOrNull().orEmpty() }
+
+            Napier.d("Query params: $queryParams")
+
+            for (route in routes) {
+                val pathParams = matchRoute(url, route.pattern) ?: continue
+                val allParams = queryParams + pathParams
+                val destination = route.parse(allParams)
+
+                if (destination != null) return destination.also {
+                    println("Destination: $it")
+                }
+            }
+
+            return null
         }
     }
 }

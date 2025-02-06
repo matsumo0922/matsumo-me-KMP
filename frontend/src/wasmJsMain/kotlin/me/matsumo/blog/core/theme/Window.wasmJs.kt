@@ -7,10 +7,17 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.core.bundle.Bundle
 import androidx.navigation.ExperimentalBrowserHistoryApi
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.bindToNavigation
+import androidx.navigation.decodeURIComponent
+import androidx.navigation.encodeURIComponent
+import io.github.aakira.napier.Napier
+import io.ktor.http.Url
 import kotlinx.browser.window
+import me.matsumo.blog.core.domain.Destinations
 import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.ui.utils.toUrlPath
 import org.w3c.dom.PopStateEvent
@@ -37,14 +44,16 @@ actual fun isSystemInDarkThemeUnSafe(): Boolean {
 @Composable
 actual fun BindToNavigation(navController: NavController) {
     LaunchedEffect(true) {
-        window.bindToNavigation(navController) {
-            it.toUrlPath().orEmpty()
-        }
+        navigateFromUrl(navController)
 
         window.addEventListener("popstate") { event ->
             if (event is PopStateEvent && event.state == null) {
-                window.location.toString()
+                navigateFromUrl(navController)
             }
+        }
+
+        window.bindToNavigation(navController) {
+            it.getRouteAsUrlFragment()
         }
     }
 }
@@ -52,3 +61,18 @@ actual fun BindToNavigation(navController: NavController) {
 actual fun openUrl(url: String) {
     window.open(url, "_blank")
 }
+
+private fun navigateFromUrl(navController: NavController) {
+    Napier.d("Navigating from url: ${window.location}")
+    val url = Url(window.location.toString())
+    val destinations = Destinations.fromUrl(url)
+
+    if (destinations != null) {
+        navController.navigate(destinations)
+    } else {
+        Napier.e("Failed to navigate from url: $url")
+    }
+}
+
+private fun NavBackStackEntry.getRouteAsUrlFragment() =
+    toUrlPath()?.let { r -> "${encodeURIComponent(r)}" }.orEmpty()

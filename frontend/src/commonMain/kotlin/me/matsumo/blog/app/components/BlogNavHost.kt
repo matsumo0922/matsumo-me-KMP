@@ -12,16 +12,17 @@ import me.matsumo.blog.feature.home.homeScreen
 @Composable
 internal fun BlogNavHost(
     navController: NavHostController,
+    startDestination: Destinations,
     modifier: Modifier = Modifier,
 ) {
-    BindToNavigation(navController)
-
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Destinations.Home,
+        startDestination = startDestination,
     ) {
         homeScreen()
         articlesScreen()
     }
+
+    BindToNavigation(navController)
 }
