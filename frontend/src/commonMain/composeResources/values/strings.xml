@@ -53,4 +53,5 @@
     <string name="home_greeting2">I'm</string>
     <string name="home_greeting3">Daichi Matsumoto!</string>
     <string name="home_greeting_description">Software engineer &amp; Android Developer</string>
+    <string name="home_about_me_description">Hello, I'm Daichi Matsumoto. I'm currently a student at Keio University in Japan and have been working as a Software Engineer &amp; Android Developer for over 3 years at various tech companies. I am proficient in Java and Kotlin, and I am passionate about creating innovative applications with well-designed UI/UX.\n\nI am always eager to tackle new challenges and contribute to meaningful projects that push the boundaries of technological possibilities.</string>
 </resources>

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import me.matsumo.blog.feature.home.components.HomeAboutSection
 import me.matsumo.blog.feature.home.components.HomeHelloSection
 
 @Composable
@@ -22,6 +23,12 @@ internal fun HomeRoute(
                     modifier = Modifier
                         .height(maxHeight)
                         .fillMaxWidth(),
+                )
+            }
+
+            item {
+                HomeAboutSection(
+                    modifier = Modifier.fillMaxWidth(),
                 )
             }
         }

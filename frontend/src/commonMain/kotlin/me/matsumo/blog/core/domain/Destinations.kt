@@ -28,7 +28,6 @@ sealed interface Destinations {
             val params = mutableMapOf<String, String>()
 
             for ((pathSegment, patternSegment) in pathSegments.zip(patternSegments)) {
-                Napier.d { "Path segment: $pathSegment, pattern segment: $patternSegment" }
                 if (patternSegment.startsWith("{") && patternSegment.endsWith("}")) {
                     val key = patternSegment.substring(1, patternSegment.length - 1)
                     params[key] = pathSegment
@@ -43,16 +42,12 @@ sealed interface Destinations {
         fun fromUrl(url: Url): Destinations? {
             val queryParams = url.parameters.entries().associate { it.key to it.value.firstOrNull().orEmpty() }
 
-            Napier.d("Query params: $queryParams")
-
             for (route in routes) {
                 val pathParams = matchRoute(url, route.pattern) ?: continue
                 val allParams = queryParams + pathParams
                 val destination = route.parse(allParams)
 
-                if (destination != null) return destination.also {
-                    println("Destination: $it")
-                }
+                if (destination != null) return destination
             }
 
             return null
