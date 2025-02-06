@@ -12,7 +12,7 @@ compileSdk = "35"
 gradle = "8.7.3"
 
 # Kotlin
-kotlin = "2.1.20-Beta2"
+kotlin = "2.1.10"
 
 # KotlinX
 kotlinxCoroutines = "1.7.3"
@@ -31,7 +31,7 @@ androidxStartup = "1.2.0"
 androidxBrowser = "1.8.0"
 
 # KMP
-kmpCompose = "1.8.0-alpha02"
+kmpCompose = "1.7.3"
 kmpComposeHotReload = "1.0.0-dev.34.8"
 kmpComplete = "1.1.0"
 kmpSwiftKlib = "0.6.3"
@@ -43,14 +43,15 @@ kmpSqlite = "2.0.1"
 
 # Google
 material = "1.12.0"
-ksp = "2.1.20-Beta2-1.0.29"
+ksp = "2.1.10-1.0.29"
 
 # koin
 koin = "4.0.2"
 
 # Others
-ktor = "3.0.1"
+ktor = "3.0.3"
 ksoup = "0.1.2"
+coil3 = "3.0.4"
 detekt = "1.23.7"
 ktorfit = "2.2.0"
 libraries = "11.2.3"
@@ -148,6 +149,11 @@ ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation",
 ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktot-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 
+# Coil
+coil3-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
+coil3-network = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil3" }
+coil3-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil3" }
+
 # Others
 ksoup = { module = "com.fleeksoft.ksoup:ksoup", version.ref = "ksoup" }
 desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.4" }
@@ -195,6 +201,12 @@ koin = [
     "koin-core",
     "koin-compose",
     "koin-compose-viewmodel",
+]
+
+coil = [
+    "coil3-compose",
+    "coil3-network",
+    "coil3-svg",
 ]
 
 database = [

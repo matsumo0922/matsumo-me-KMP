@@ -34,7 +34,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun BlogApp(
     modifier: Modifier = Modifier,
     viewModel: BlogViewModel = koinViewModel(),
-    startDestination: Destinations = Destinations.Home,
+    startDestinations: Destinations = Destinations.Home,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val device by rememberDeviceState()
@@ -51,7 +51,7 @@ internal fun BlogApp(
         ) {
             BlogScreen(
                 modifier = modifier.fillMaxSize(),
-                startDestination = startDestination,
+                startDestinations = startDestinations,
                 isMobile = device == Device.MOBILE,
                 isDark = uiState.theme.isDark(),
                 onToggleThemeClicked = viewModel::toggleTheme,
@@ -62,7 +62,7 @@ internal fun BlogApp(
 
 @Composable
 private fun BlogScreen(
-    startDestination: Destinations,
+    startDestinations: Destinations,
     isMobile: Boolean,
     isDark: Boolean,
     onToggleThemeClicked: () -> Unit,
@@ -108,7 +108,7 @@ private fun BlogScreen(
                     .padding(it)
                     .fillMaxSize(),
                 navController = navController,
-                startDestination = startDestination,
+                startDestination = startDestinations,
             )
         }
     }

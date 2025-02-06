@@ -58,7 +58,7 @@ fun BlogBackground(
     pointColor1: Color,
     pointColor2: Color,
     modifier: Modifier = Modifier,
-    containerColor: Color = MaterialTheme.colorScheme.background,
+    containerColor: Color = MaterialTheme.colorScheme.surface,
     content: @Composable () -> Unit
 ) {
     val density = LocalDensity.current

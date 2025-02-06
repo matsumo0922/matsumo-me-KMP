@@ -25,6 +25,7 @@ kotlin {
             implementation(libs.bundles.ui.common)
             implementation(libs.bundles.ktor)
             implementation(libs.bundles.koin)
+            implementation(libs.bundles.coil)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

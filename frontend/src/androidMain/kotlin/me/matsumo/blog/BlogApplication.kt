@@ -14,8 +14,10 @@ class BlogApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        initKoin()
         Napier.base(DebugAntilog())
+
+        initKoin()
+        setupCoil()
     }
 }
 

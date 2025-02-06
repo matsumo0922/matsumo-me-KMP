@@ -15,7 +15,6 @@ class KmpComposePlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("org.jetbrains.kotlin.plugin.compose")
                 apply("org.jetbrains.compose")
-                apply("org.jetbrains.compose-hot-reload")
             }
         }
     }

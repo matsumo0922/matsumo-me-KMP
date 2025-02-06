@@ -63,8 +63,7 @@ actual fun openUrl(url: String) {
 }
 
 private fun navigateFromUrl(navController: NavController) {
-    Napier.d("Navigating from url: ${window.location}")
-    val url = Url(window.location.toString())
+    val url = Url(window.location.hash.replace("#", ""))
     val destinations = Destinations.fromUrl(url)
 
     if (destinations != null) {
@@ -75,4 +74,4 @@ private fun navigateFromUrl(navController: NavController) {
 }
 
 private fun NavBackStackEntry.getRouteAsUrlFragment() =
-    toUrlPath()?.let { r -> "${encodeURIComponent(r)}" }.orEmpty()
+    toUrlPath()?.let { r -> "#${encodeURIComponent(r)}" }.orEmpty()
