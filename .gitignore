@@ -5,6 +5,7 @@
 *.ap_
 .externalNativeBuild
 .cxx
+*yarn.lock
 
 # files for the dex VM
 *.dex
