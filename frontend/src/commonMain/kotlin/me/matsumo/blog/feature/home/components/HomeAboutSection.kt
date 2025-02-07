@@ -29,6 +29,7 @@ import me.matsumo.blog.core.theme.LocalDevice
 import me.matsumo.blog.core.ui.CodeTitle
 import me.matsumo.blog.core.ui.NonLazyVerticalGrid
 import me.matsumo.blog.core.ui.TagTitle
+import me.matsumo.blog.core.ui.utils.enterAnimation
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -65,12 +66,16 @@ private fun AboutMeItem(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CodeTitle(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .enterAnimation(),
             text = "AboutMe",
         )
 
         NonLazyVerticalGrid(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .enterAnimation(delayMillis = 300),
             columns = if (LocalDevice.current == Device.MOBILE) 1 else 2,
             horizontalSpacing = 56.dp,
             verticalSpacing = 40.dp,
