@@ -62,7 +62,6 @@ fun BlogBackground(
     content: @Composable () -> Unit
 ) {
     val density = LocalDensity.current
-    val points = remember { mutableStateListOf<PointData>() }
     val random = remember { Random(Clock.System.now().epochSeconds) }
 
     BoxWithConstraints(
@@ -75,42 +74,40 @@ fun BlogBackground(
         // recomposition 用
         val frameTick = remember { mutableStateOf(0L) }
 
-        LaunchedEffect(widthPx, heightPx) {
-            points.clear()
-        }
+        val points = remember(widthPx, heightPx, pointCount) {
+            mutableStateListOf<PointData>().apply {
+                repeat(pointCount) {
+                    val radius = random.nextFloat() * 14f + 2f
 
-        if (points.isEmpty()) {
-            repeat(pointCount) {
-                val radius = random.nextFloat() * 14f + 2f
+                    val x = random.nextFloat() * widthPx
+                    val y = random.nextFloat() * heightPx
 
-                val x = random.nextFloat() * widthPx
-                val y = random.nextFloat() * heightPx
+                    val speed = random.nextFloat() * 100f + 50f // px/秒
 
-                val speed = random.nextFloat() * 100f + 50f // px/秒
+                    val angle = random.nextFloat() * 2 * PI.toFloat()
+                    val vx = cos(angle) * speed
+                    val vy = sin(angle) * speed
 
-                val angle = random.nextFloat() * 2 * PI.toFloat()
-                val vx = cos(angle) * speed
-                val vy = sin(angle) * speed
+                    val color = lerp(pointColor1, pointColor2, random.nextFloat())
+                    val stableTimer = random.nextFloat() * 8f + 2f
 
-                val color = lerp(pointColor1, pointColor2, random.nextFloat())
-                val stableTimer = random.nextFloat() * 8f + 2f
-
-                points.add(
-                    PointData(
-                        x = x,
-                        y = y,
-                        vx = vx,
-                        vy = vy,
-                        color = color,
-                        radius = radius,
-                        alpha = 1f,
-                        stableTimer = stableTimer
+                    add(
+                        PointData(
+                            x = x,
+                            y = y,
+                            vx = vx,
+                            vy = vy,
+                            color = color,
+                            radius = radius,
+                            alpha = 1f,
+                            stableTimer = stableTimer
+                        )
                     )
-                )
+                }
             }
         }
 
-        LaunchedEffect(Unit) {
+        LaunchedEffect(widthPx, heightPx, pointCount) {
             var lastTime = withFrameNanos { it }
 
             while (true) {
