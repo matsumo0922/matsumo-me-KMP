@@ -118,7 +118,7 @@ private fun ProjectItem(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
             .border(
-                width = 2.dp,
+                width = 1.dp,
                 color = MaterialTheme.colorScheme.onBackground.copy(0.1f),
                 shape = RoundedCornerShape(12.dp),
             )
@@ -208,7 +208,7 @@ private fun ProjectItem(
                     modifier = Modifier
                         .clip(CircleShape)
                         .border(
-                            width = 2.dp,
+                            width = 1.dp,
                             color = MaterialTheme.colorScheme.onBackground.copy(0.1f),
                             shape = CircleShape,
                         )

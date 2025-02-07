@@ -1,6 +1,7 @@
 package me.matsumo.blog.app.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -44,6 +45,7 @@ internal fun BlogTopAppBar(
 ) {
     Row(
         modifier = modifier
+            .background(MaterialTheme.colorScheme.surface)
             .statusBarsPadding()
             .height(80.dp)
             .padding(16.dp),

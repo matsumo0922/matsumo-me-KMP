@@ -86,7 +86,7 @@ private fun SkillItems(
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(12.dp))
                 .border(
-                    width = 2.dp,
+                    width = 1.dp,
                     color = MaterialTheme.colorScheme.onBackground.copy(0.1f),
                     shape = RoundedCornerShape(12.dp),
                 )
@@ -111,7 +111,7 @@ private fun SkillItem(
         modifier = modifier
             .clip(RoundedCornerShape(8.dp))
             .border(
-                width = 2.dp,
+                width = 1.dp,
                 color = MaterialTheme.colorScheme.onBackground.copy(0.1f),
                 shape = RoundedCornerShape(8.dp),
             )

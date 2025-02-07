@@ -1,9 +1,11 @@
 package me.matsumo.blog.app
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
@@ -89,17 +91,24 @@ private fun BlogScreen(
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             topBar = {
-                BlogTopAppBar(
-                    modifier = Modifier.fillMaxWidth(),
-                    isMobile = isMobile,
-                    isDark = isDark,
-                    onToggleThemeClicked = onToggleThemeClicked,
-                    onOpenDrawerClicked = { scope.launch { drawerState.open() } },
-                    onNavigationHomeClicked = { navController.navigateInclusive(Destinations.Home) },
-                    onNavigationAboutClicked = { },
-                    onNavigationArticlesClicked = { navController.navigateInclusive(Destinations.Articles) },
-                    onNavigationGithubClicked = { openUrl(StaticUrl.GITHUB) },
-                )
+                Column {
+                    BlogTopAppBar(
+                        modifier = Modifier.fillMaxWidth(),
+                        isMobile = isMobile,
+                        isDark = isDark,
+                        onToggleThemeClicked = onToggleThemeClicked,
+                        onOpenDrawerClicked = { scope.launch { drawerState.open() } },
+                        onNavigationHomeClicked = { navController.navigateInclusive(Destinations.Home) },
+                        onNavigationAboutClicked = { },
+                        onNavigationArticlesClicked = { navController.navigateInclusive(Destinations.Articles) },
+                        onNavigationGithubClicked = { openUrl(StaticUrl.GITHUB) },
+                    )
+
+                    HorizontalDivider(
+                        modifier = Modifier.fillMaxWidth(),
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    )
+                }
             },
             containerColor = Color.Transparent,
         ) {

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -50,8 +51,16 @@ import me.matsumo.blog.core.ui.utils.enterAnimation
 import me.matsumo.blog.core.ui.utils.moveFocusOnTab
 import org.jetbrains.compose.resources.stringResource
 
+internal fun LazyListScope.homeContractSection() {
+    item {
+        HomeContactSection(
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+}
+
 @Composable
-internal fun HomeContactSection(
+private fun HomeContactSection(
     modifier: Modifier = Modifier,
 ) {
     val padding = if (LocalDevice.current == Device.MOBILE) 24.dp else 40.dp
@@ -78,7 +87,7 @@ internal fun HomeContactSection(
             .padding(padding)
             .clip(RoundedCornerShape(16.dp))
             .border(
-                width = 2.dp,
+                width = 1.dp,
                 color = MaterialTheme.colorScheme.onBackground.copy(0.1f),
                 shape = RoundedCornerShape(16.dp),
             )

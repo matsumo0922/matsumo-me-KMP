@@ -1,8 +1,6 @@
 import com.android.build.api.variant.ResValue
 import com.codingfeline.buildkonfig.compiler.FieldSpec
 import com.codingfeline.buildkonfig.gradle.TargetConfigDsl
-import org.gradle.declarative.dsl.schema.FqName.Empty.packageName
-import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 import java.util.Properties
 
 plugins {

@@ -48,6 +48,12 @@
     <string name="navigation_about">About</string>
     <string name="navigation_github">GitHub</string>
 
+    <!-- Bottom Bar -->
+    <string name="bottom_bar_google_analytics" translatable="false">This site uses Google Analytics.</string>
+    <string name="bottom_bar_copy_right" translatable="false">©%1$s daichi-matsumoto</string>
+    <string name="bottom_bar_powered_by" translatable="false">This site is powered by Compose Multiplatform.</string>
+    <string name="bottom_bar_store">Android and iOS app versions can be installed from the links below.</string>
+
     <!-- Home -->
     <string name="home_greeting1">Hi</string>
     <string name="home_greeting2">I'm</string>
