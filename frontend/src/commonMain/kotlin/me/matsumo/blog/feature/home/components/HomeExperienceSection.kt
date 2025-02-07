@@ -16,10 +16,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -37,9 +35,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import coil3.compose.AsyncImage
-import coil3.compose.AsyncImagePainter.State.Empty.painter
 import matsumo_me_kmp.frontend.generated.resources.Res
 import matsumo_me_kmp.frontend.generated.resources.home_experience_bone
 import matsumo_me_kmp.frontend.generated.resources.home_experience_bone_description
@@ -51,6 +47,7 @@ import matsumo_me_kmp.frontend.generated.resources.home_experience_ly
 import matsumo_me_kmp.frontend.generated.resources.home_experience_ly_description
 import matsumo_me_kmp.frontend.generated.resources.home_experience_yumemi
 import matsumo_me_kmp.frontend.generated.resources.home_experience_yumemi_description
+import matsumo_me_kmp.frontend.generated.resources.im_blog
 import matsumo_me_kmp.frontend.generated.resources.im_experience_cookpad
 import matsumo_me_kmp.frontend.generated.resources.im_experience_ly
 import me.matsumo.blog.core.domain.Device
@@ -83,7 +80,10 @@ fun LazyListScope.homeExperienceSection(
         Spacer(modifier = Modifier.height(24.dp))
     }
 
-    itemsIndexed(Experience.entries) { index, experience ->
+    itemsIndexed(
+        items = Experience.entries,
+        key = { _, experience -> experience.title.key },
+    ) { index, experience ->
         val isMobile = LocalDevice.current == Device.MOBILE
 
         ExperienceItem(
@@ -104,6 +104,7 @@ private fun ExperienceItem(
     isOdd: Boolean,
     modifier: Modifier = Modifier,
 ) {
+    val topPadding = if (isMobile) 40.dp else 56.dp
     var direction = LocalLayoutDirection.current
 
     if (isOdd && !isMobile) {
@@ -118,7 +119,7 @@ private fun ExperienceItem(
             if (!isMobile) {
                 Text(
                     modifier = Modifier
-                        .padding(top = 56.dp)
+                        .padding(top = topPadding)
                         .weight(1f)
                         .enterAnimation(delayMillis = 200),
                     text = experience.period,
@@ -128,12 +129,13 @@ private fun ExperienceItem(
             }
 
             ExperienceDivider(
-                modifier = Modifier.fillMaxHeight()
+                modifier = Modifier.fillMaxHeight(),
+                topPadding = topPadding,
             )
 
             Column(
                 modifier = Modifier
-                    .padding(top = 56.dp)
+                    .padding(top = topPadding)
                     .weight(1f)
                     .enterAnimation(delayMillis = 200),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -194,6 +196,7 @@ private fun ExperienceItem(
 
 @Composable
 private fun ExperienceDivider(
+    topPadding: Dp,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -208,7 +211,7 @@ private fun ExperienceDivider(
 
         Box(
             modifier = Modifier
-                .padding(top = 66.dp)
+                .padding(top = topPadding + 10.dp)
                 .size(16.dp)
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.primary),

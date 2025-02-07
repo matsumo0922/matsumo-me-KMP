@@ -51,7 +51,7 @@ koin = "4.0.2"
 # Others
 ktor = "3.0.3"
 ksoup = "0.1.2"
-coil3 = "3.0.4"
+coil3 = "3.1.0"
 detekt = "1.23.7"
 ktorfit = "2.2.0"
 libraries = "11.2.3"
