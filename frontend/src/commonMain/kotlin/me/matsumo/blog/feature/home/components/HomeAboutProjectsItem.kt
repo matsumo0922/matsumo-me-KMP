@@ -3,6 +3,7 @@ package me.matsumo.blog.feature.home.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -122,6 +123,7 @@ private fun ProjectItem(
                 shape = RoundedCornerShape(12.dp),
             )
             .background(MaterialTheme.colorScheme.background.copy(0.7f))
+            .clickable { (project.url ?: project.github)?.let(onLinkClicked) }
             .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {

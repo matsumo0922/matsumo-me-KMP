@@ -12,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -25,9 +26,14 @@ import androidx.compose.ui.unit.dp
 fun Modifier.enterAnimation(
     delayMillis: Int = 0,
     durationMillis: Int = 1000,
-    initialOffsetY: Dp = 24.dp
+    initialOffsetY: Dp = 24.dp,
+    atOnce: Boolean = true,
 ): Modifier = composed {
-    var visible by remember { mutableStateOf(false) }
+    var visible by if (atOnce) {
+        rememberSaveable { mutableStateOf(false) }
+    } else {
+        remember { mutableStateOf(false) }
+    }
 
     LaunchedEffect(Unit) {
         visible = true

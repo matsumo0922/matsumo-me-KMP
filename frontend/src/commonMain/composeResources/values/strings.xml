@@ -53,6 +53,7 @@
     <string name="home_greeting2">I'm</string>
     <string name="home_greeting3">Daichi Matsumoto!</string>
     <string name="home_greeting_description">Software engineer &amp; Android Developer</string>
+
     <string name="home_about_me_description">Hello, I'm Daichi Matsumoto. While studying at Keio University, I have been working as a Software Engineer and Android Developer, engaging in development at various companies as well as personal projects. Over the past three years, I have primarily focused on Android app development using Java and Kotlin, while also exploring a wide range of technologies. \n\nI am particularly interested in UI/UX design, emphasizing usability and aesthetics to create intuitive and comfortable applications. Additionally, I enjoy keeping up with new technologies and optimizing systems to ensure efficient and scalable development. \n\nBy leveraging my position as a student while gaining hands-on experience in the industry, I actively take on new challenges and strive to create meaningful and valuable products through technology.</string>
     <string name="home_about_project_kanade">Kanade</string>
     <string name="home_about_project_kanade_description">Experience the thrill and excitement of music with Kanade! Kanade is an Android music player with synchronized lyrics display, Full Compose and compliant with Material3 design.</string>
@@ -63,4 +64,15 @@
     <string name="home_about_project_translator">Android Resource Translator</string>
     <string name="home_about_project_translator_description">A command-line tool that leverages the OpenAI API to automatically translate Android string resource files (strings.xml).</string>
     <string name="home_about_project_see_more">See more projects</string>
+
+    <string name="home_experience_bone">I was born</string>
+    <string name="home_experience_bone_description">Born in 2002/09/22 in Okayama, Japan.</string>
+    <string name="home_experience_keio">Entered Keio University</string>
+    <string name="home_experience_keio_description">I enrolled in the Department of Electrical and Electronic Engineering at Keio University's Faculty of Science and Technology and am currently still studying there.</string>
+    <string name="home_experience_cookpad">Cookpad Inc.（クックパッド株式会社）</string>
+    <string name="home_experience_cookpad_description">I had the opportunity to participate in a summer internship in 2022, which led to a long-term, employment-based internship. I have been with the company for about three years, from 2022 to the present. My primary work involved developing the Android client app for Cookpad.</string>
+    <string name="home_experience_ly">LY Corporation. (LINEヤフー株式会社)</string>
+    <string name="home_experience_ly_description">I participated in the summer internships in 2023 and 2024. Through these experiences, I had the opportunity to continue, and I plan to start a long-term, employment-based internship in 2025. My primary work involved developing the Android client app for LINE, specifically in the chat division.</string>
+    <string name="home_experience_yumemi">Yumemi Inc.（株式会社ゆめみ）</string>
+    <string name="home_experience_yumemi_description">I participated in an internship in 2024, where I learned about application development modeled after real-world development processes.</string>
 </resources>
