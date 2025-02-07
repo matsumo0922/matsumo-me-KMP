@@ -16,6 +16,7 @@ class KmpCommonPlugin : Plugin<Project> {
                 apply("kotlinx-serialization")
                 apply("project-report")
                 apply("com.google.devtools.ksp")
+                apply("com.codingfeline.buildkonfig")
             }
 
             kotlin {

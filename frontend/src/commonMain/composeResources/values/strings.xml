@@ -75,4 +75,14 @@
     <string name="home_experience_ly_description">I participated in the summer internships in 2023 and 2024. Through these experiences, I had the opportunity to continue, and I plan to start a long-term, employment-based internship in 2025. My primary work involved developing the Android client app for LINE, specifically in the chat division.</string>
     <string name="home_experience_yumemi">Yumemi Inc.（株式会社ゆめみ）</string>
     <string name="home_experience_yumemi_description">I participated in an internship in 2024, where I learned about application development modeled after real-world development processes.</string>
+
+    <string name="home_contact_name">Name</string>
+    <string name="home_contact_email">Email</string>
+    <string name="home_contact_message">Message</string>
+    <string name="home_contact_send">Send Message</string>
+    <string name="home_contact_success">Message sent successfully!</string>
+    <string name="home_contact_error">Failed to send message</string>
+    <string name="home_contact_require_name">Please enter your name.</string>
+    <string name="home_contact_require_email">Please enter your email address.</string>
+    <string name="home_contact_require_message">Please enter a message.</string>
 </resources>

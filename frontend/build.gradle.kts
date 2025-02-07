@@ -1,4 +1,7 @@
 import com.android.build.api.variant.ResValue
+import com.codingfeline.buildkonfig.compiler.FieldSpec
+import com.codingfeline.buildkonfig.gradle.TargetConfigDsl
+import org.gradle.declarative.dsl.schema.FqName.Empty.packageName
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 import java.util.Properties
 
@@ -84,6 +87,41 @@ kotlin {
 
         androidMain.dependencies {
             implementation(libs.bundles.ui.android)
+            implementation(libs.ktor.okhttp)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.ktor.darwin)
+        }
+
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.js)
         }
     }
+}
+
+buildkonfig {
+    val localProperties = Properties().apply {
+        load(project.rootDir.resolve("local.properties").inputStream())
+    }
+
+    packageName = "me.matsumo.blog"
+
+    defaultConfigs {
+        putBuildConfig(localProperties, "VERSION_NAME", libs.versions.versionName.get())
+        putBuildConfig(localProperties, "VERSION_CODE", libs.versions.versionCode.get())
+        putBuildConfig(localProperties, "SENDGIRD_API_KEY")
+    }
+}
+
+fun TargetConfigDsl.putBuildConfig(
+    localProperties: Properties,
+    key: String,
+    value: String? = null,
+    defaultValue: String = "",
+) {
+    val property = localProperties.getProperty(key)
+    val env = System.getenv(key)
+
+    buildConfigField(FieldSpec.Type.STRING, key, (value ?: property ?: env ?: defaultValue).replace("\"", ""))
 }

@@ -3,7 +3,6 @@ package me.matsumo.blog.core.ui.utils
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
@@ -18,8 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.isShiftPressed
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
@@ -69,4 +74,18 @@ fun Modifier.focusScale(
     this
         .hoverable(interactionSource)
         .scale(scale)
+}
+
+fun Modifier.moveFocusOnTab() = composed {
+    val focusManager = LocalFocusManager.current
+    onPreviewKeyEvent {
+        if (it.type == KeyEventType.KeyDown && it.key == Key.Tab) {
+            focusManager.moveFocus(
+                if (it.isShiftPressed) FocusDirection.Previous else FocusDirection.Next
+            )
+            true
+        } else {
+            false
+        }
+    }
 }

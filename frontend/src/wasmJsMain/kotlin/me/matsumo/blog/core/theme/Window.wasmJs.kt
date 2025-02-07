@@ -7,12 +7,10 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
-import androidx.core.bundle.Bundle
 import androidx.navigation.ExperimentalBrowserHistoryApi
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.bindToNavigation
-import androidx.navigation.decodeURIComponent
 import androidx.navigation.encodeURIComponent
 import io.github.aakira.napier.Napier
 import io.ktor.http.Url
@@ -58,10 +56,6 @@ actual fun BindToNavigation(navController: NavController) {
     }
 }
 
-actual fun openUrl(url: String) {
-    window.open(url, "_blank")
-}
-
 private fun navigateFromUrl(navController: NavController) {
     val url = Url(window.location.hash.replace("#", ""))
     val destinations = Destinations.fromUrl(url)
@@ -75,3 +69,14 @@ private fun navigateFromUrl(navController: NavController) {
 
 private fun NavBackStackEntry.getRouteAsUrlFragment() =
     toUrlPath()?.let { r -> "#${encodeURIComponent(r)}" }.orEmpty()
+
+actual fun openUrl(url: String) {
+    window.open(url, "_blank")
+}
+
+actual fun mailTo(name: String, address: String, message: String) {
+    val subject = encodeURIComponent("Contact from $name. (matsumo.me)")
+    val body = encodeURIComponent(message)
+
+    openUrl("mailto:$address?subject=$subject&body=$body")
+}

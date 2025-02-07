@@ -12,7 +12,7 @@ class BlogViewModel: ViewModel() {
 
     private val _uiState = MutableStateFlow(
         BlogUiState(
-            theme = ThemeConfig.System,
+            theme = ThemeConfig.Dark,
         )
     )
 
