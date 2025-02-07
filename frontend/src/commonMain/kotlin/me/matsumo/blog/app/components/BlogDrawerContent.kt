@@ -45,7 +45,7 @@ fun BlogDrawerContent(
             topStart = 16.dp,
             bottomStart = 16.dp,
         ),
-        drawerContainerColor = MaterialTheme.colorScheme.background
+        drawerContainerColor = MaterialTheme.colorScheme.background,
     ) {
         Column(
             modifier = Modifier

@@ -45,11 +45,11 @@ private data class PointData(
     var vy: Float,
     val radius: Float,
     val color: Color,
-    var alpha: Float = 1f,          // 初期は完全表示
-    var stableTimer: Float = 0f,    // 表示（または非表示）状態が続く時間
-    var fadeTimer: Float = 0f,      // フェード中の残り時間
-    var fading: Boolean = false,    // フェード中なら true
-    var fadeDirection: Int = 0      // -1: フェードアウト、1: フェードイン、0:安定状態
+    var alpha: Float = 1f, // 初期は完全表示
+    var stableTimer: Float = 0f, // 表示（または非表示）状態が続く時間
+    var fadeTimer: Float = 0f, // フェード中の残り時間
+    var fading: Boolean = false, // フェード中なら true
+    var fadeDirection: Int = 0, // -1: フェードアウト、1: フェードイン、0:安定状態
 )
 
 @Composable
@@ -59,7 +59,7 @@ fun BlogBackground(
     pointColor2: Color,
     modifier: Modifier = Modifier,
     containerColor: Color = MaterialTheme.colorScheme.surface,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val density = LocalDensity.current
     val random = remember { Random(Clock.System.now().epochSeconds) }
@@ -100,8 +100,8 @@ fun BlogBackground(
                             color = color,
                             radius = radius,
                             alpha = 1f,
-                            stableTimer = stableTimer
-                        )
+                            stableTimer = stableTimer,
+                        ),
                     )
                 }
             }
@@ -176,7 +176,7 @@ fun BlogBackground(
                 drawCircle(
                     color = point.color.copy(alpha = point.alpha),
                     radius = point.radius,
-                    center = Offset(point.x, point.y)
+                    center = Offset(point.x, point.y),
                 )
             }
         }

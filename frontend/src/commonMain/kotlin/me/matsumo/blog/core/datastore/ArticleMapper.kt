@@ -16,7 +16,7 @@ class ArticleMapper {
                 createdAt = it.createdAt,
                 publishedAt = it.publishedAt,
                 updatedAt = it.updatedAt,
-                url = it.url
+                url = it.url,
             )
         }
     }
@@ -30,7 +30,7 @@ class ArticleMapper {
             createdAt = articleDetailEntity.createdAt,
             publishedAt = articleDetailEntity.publishedAt,
             updatedAt = articleDetailEntity.updatedAt,
-            url = articleDetailEntity.url
+            url = articleDetailEntity.url,
         )
     }
 }

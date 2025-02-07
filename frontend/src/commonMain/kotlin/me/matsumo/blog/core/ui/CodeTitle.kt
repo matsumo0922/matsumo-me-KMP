@@ -46,11 +46,11 @@ fun CodeTitle(
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(24.dp)
+        horizontalArrangement = Arrangement.spacedBy(24.dp),
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.headlineLarge.extraBold()
+            style = MaterialTheme.typography.headlineLarge.extraBold(),
         )
 
         LinearProgressIndicator(
@@ -60,7 +60,7 @@ fun CodeTitle(
             progress = { progress },
             color = progressColor,
             trackColor = Color.Transparent,
-            drawStopIndicator = { }
+            drawStopIndicator = { },
         )
     }
 

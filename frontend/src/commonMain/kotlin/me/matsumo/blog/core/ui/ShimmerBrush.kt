@@ -17,10 +17,13 @@ import androidx.compose.ui.graphics.LinearGradientShader
 import androidx.compose.ui.graphics.Shader
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.TileMode
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun rememberShimmerBrush(
-    colors: List<Color> = listOf(MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.tertiary),
+    colors: ImmutableList<Color> =
+        persistentListOf(MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.tertiary),
     durationMillis: Int = 3000,
 ): Brush {
     val shimmerEffectTransition = rememberInfiniteTransition(label = "shimmerEffect")
@@ -30,7 +33,7 @@ fun rememberShimmerBrush(
         animationSpec = infiniteRepeatable(
             animation = tween(durationMillis),
             repeatMode = RepeatMode.Reverse,
-        )
+        ),
     )
 
     return remember(shimmerProgressOffset) {
@@ -43,7 +46,7 @@ fun rememberShimmerBrush(
                     colors = colors,
                     from = Offset(widthOffset, heightOffset),
                     to = Offset(widthOffset + size.width, heightOffset + size.height),
-                    tileMode = TileMode.Mirror
+                    tileMode = TileMode.Mirror,
                 )
             }
         }

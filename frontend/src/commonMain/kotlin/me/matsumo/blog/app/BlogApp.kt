@@ -52,7 +52,7 @@ internal fun BlogApp(
             pointColor2 = MaterialTheme.colorScheme.tertiaryContainer,
         ) {
             BlogScreen(
-                modifier = modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
                 startDestinations = startDestinations,
                 isMobile = device == Device.MOBILE,
                 isDark = uiState.theme.isDark(),

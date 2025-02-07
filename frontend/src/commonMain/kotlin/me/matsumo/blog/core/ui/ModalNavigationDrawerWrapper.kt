@@ -14,7 +14,7 @@ fun ModalNavigationDrawerWrapper(
     drawerContent: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     gesturesEnabled: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
         ModalNavigationDrawer(
@@ -30,7 +30,7 @@ fun ModalNavigationDrawerWrapper(
                 CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
                     content()
                 }
-            }
+            },
         )
     }
 }

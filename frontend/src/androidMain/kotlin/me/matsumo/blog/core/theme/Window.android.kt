@@ -10,12 +10,10 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.navigation.NavController
 import io.github.aakira.napier.Napier
-import me.matsumo.blog.BlogApplication
 import me.matsumo.blog.blogApplicationContext
 import me.matsumo.blog.core.domain.Device
 

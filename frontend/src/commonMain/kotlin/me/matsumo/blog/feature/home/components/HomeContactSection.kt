@@ -116,7 +116,7 @@ private fun HomeContactSection(
             keyboardActions = KeyboardActions(
                 onNext = {
                     focusManager.moveFocus(FocusDirection.Down)
-                }
+                },
             ),
             singleLine = true,
             isError = nameError,
@@ -124,7 +124,7 @@ private fun HomeContactSection(
                 unfocusedContainerColor = Color.Transparent,
                 focusedContainerColor = Color.Transparent,
                 errorContainerColor = Color.Transparent,
-            )
+            ),
         )
 
         TextField(
@@ -143,7 +143,7 @@ private fun HomeContactSection(
             keyboardActions = KeyboardActions(
                 onNext = {
                     focusManager.moveFocus(FocusDirection.Down)
-                }
+                },
             ),
             singleLine = true,
             isError = addressError,
@@ -151,7 +151,7 @@ private fun HomeContactSection(
                 unfocusedContainerColor = Color.Transparent,
                 focusedContainerColor = Color.Transparent,
                 errorContainerColor = Color.Transparent,
-            )
+            ),
         )
 
         TextField(
@@ -167,14 +167,14 @@ private fun HomeContactSection(
             keyboardActions = KeyboardActions(
                 onNext = {
                     focusManager.moveFocus(FocusDirection.Down)
-                }
+                },
             ),
             isError = messageError,
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.Transparent,
                 focusedContainerColor = Color.Transparent,
                 errorContainerColor = Color.Transparent,
-            )
+            ),
         )
 
         Button(

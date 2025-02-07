@@ -26,19 +26,15 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import io.github.aakira.napier.Napier
 import matsumo_me_kmp.frontend.generated.resources.Res
 import matsumo_me_kmp.frontend.generated.resources.home_about_project_blog
 import matsumo_me_kmp.frontend.generated.resources.home_about_project_blog_description
@@ -72,7 +68,7 @@ internal fun HomeAboutProjectsItem(
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         CodeTitle(
             modifier = Modifier
@@ -230,7 +226,7 @@ private fun SeeMoreProjectsButton(
 ) {
     TextButton(
         modifier = modifier,
-        onClick = onClick
+        onClick = onClick,
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -292,5 +288,5 @@ private enum class Project(
         url = null,
         github = "https://github.com/matsumo0922/android-string-resource-translator",
         tags = listOf("Kotlin", "Ktor", "Open AI", "ChatGPT"),
-    )
+    ),
 }

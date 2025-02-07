@@ -52,7 +52,7 @@ internal fun HomeHelloSection(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(
             space = 16.dp,
-            alignment = Alignment.CenterVertically
+            alignment = Alignment.CenterVertically,
         ),
     ) {
         Text(

@@ -4,16 +4,15 @@ import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.domain.ThemeConfig
 import me.matsumo.blog.core.theme.isSystemInDarkThemeUnSafe
 
-class BlogViewModel: ViewModel() {
+class BlogViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(
         BlogUiState(
             theme = ThemeConfig.Dark,
-        )
+        ),
     )
 
     val uiState = _uiState.asStateFlow()

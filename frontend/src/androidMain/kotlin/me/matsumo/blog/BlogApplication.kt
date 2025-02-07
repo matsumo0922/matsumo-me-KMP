@@ -23,7 +23,7 @@ class BlogApplication : Application() {
 
 internal object BlogContext
 
-internal class BlogInitializer: Initializer<BlogContext> {
+internal class BlogInitializer : Initializer<BlogContext> {
 
     override fun create(context: Context): BlogContext {
         blogApplicationContext = context

@@ -2,7 +2,6 @@ package me.matsumo.blog.core.datastore.di
 
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.github.aakira.napier.Napier
-import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger

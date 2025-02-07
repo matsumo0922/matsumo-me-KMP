@@ -12,7 +12,7 @@ fun NavGraphBuilder.homeScreen() {
         deepLinks = listOf(
             navDeepLink<Destinations.Home>("http://localhost:8080/home"),
             navDeepLink<Destinations.Home>("https://matsumo.me/home"),
-        )
+        ),
     ) {
         HomeRoute(
             modifier = Modifier.fillMaxSize(),

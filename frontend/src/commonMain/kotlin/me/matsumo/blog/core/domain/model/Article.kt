@@ -1,7 +1,5 @@
 package me.matsumo.blog.core.domain.model
 
-
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -13,5 +11,5 @@ data class Article(
     val createdAt: String,
     val publishedAt: String,
     val updatedAt: String,
-    val url: String
+    val url: String,
 )

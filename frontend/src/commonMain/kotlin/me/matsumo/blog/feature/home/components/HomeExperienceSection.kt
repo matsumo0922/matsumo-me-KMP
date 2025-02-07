@@ -47,7 +47,6 @@ import matsumo_me_kmp.frontend.generated.resources.home_experience_ly
 import matsumo_me_kmp.frontend.generated.resources.home_experience_ly_description
 import matsumo_me_kmp.frontend.generated.resources.home_experience_yumemi
 import matsumo_me_kmp.frontend.generated.resources.home_experience_yumemi_description
-import matsumo_me_kmp.frontend.generated.resources.im_blog
 import matsumo_me_kmp.frontend.generated.resources.im_experience_cookpad
 import matsumo_me_kmp.frontend.generated.resources.im_experience_ly
 import me.matsumo.blog.core.domain.Device
@@ -63,7 +62,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 fun LazyListScope.homeExperienceSection(
-    horizontalPadding: Dp
+    horizontalPadding: Dp,
 ) {
     item {
         CodeTitle(
@@ -138,7 +137,7 @@ private fun ExperienceItem(
                     .padding(top = topPadding)
                     .weight(1f)
                     .enterAnimation(delayMillis = 200),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Text(
                     text = stringResource(experience.title),
@@ -241,13 +240,13 @@ private enum class Experience(
         title = Res.string.home_experience_bone,
         description = Res.string.home_experience_bone_description,
         period = "2002",
-        date = "SEP 2002"
+        date = "SEP 2002",
     ),
     Keio(
         title = Res.string.home_experience_keio,
         description = Res.string.home_experience_keio_description,
         period = "2021",
-        date = "APR 2021 - PRESENT"
+        date = "APR 2021 - PRESENT",
     ),
     Cookpad(
         title = Res.string.home_experience_cookpad,
@@ -256,7 +255,7 @@ private enum class Experience(
         date = "APR 2022 - PRESENT",
         image = Res.drawable.im_experience_cookpad,
         ogImage = "https://cookpad.careers/ogp.png",
-        ogLink = "https://cookpad.careers/"
+        ogLink = "https://cookpad.careers/",
     ),
     Ly(
         title = Res.string.home_experience_ly,
@@ -265,7 +264,7 @@ private enum class Experience(
         date = "AUG 2023 & SEP 2024",
         image = Res.drawable.im_experience_ly,
         ogImage = "https://www.lycorp.co.jp/assets/images/ogp_ly_jp_bk_1200_628.png",
-        ogLink = "https://www.lycorp.co.jp/ja/"
+        ogLink = "https://www.lycorp.co.jp/ja/",
     ),
     Yumemi(
         title = Res.string.home_experience_yumemi,

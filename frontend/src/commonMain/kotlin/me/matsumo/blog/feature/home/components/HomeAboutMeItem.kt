@@ -37,7 +37,7 @@ internal fun HomeAboutMeItem(
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         CodeTitle(
             modifier = Modifier
@@ -126,7 +126,7 @@ private fun SkillItem(
             contentDescription = skill.title,
             onError = {
                 Napier.e(it.result.throwable) { "Failed to load image: ${skill.icon}" }
-            }
+            },
         )
 
         Text(

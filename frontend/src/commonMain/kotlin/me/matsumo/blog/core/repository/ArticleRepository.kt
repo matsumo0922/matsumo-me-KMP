@@ -12,7 +12,7 @@ import me.matsumo.blog.core.ui.utils.IO
 class ArticleRepository(
     private val articleApi: ArticleApi,
     private val articleMapper: ArticleMapper,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
     suspend fun getArticles(): List<Article> = withContext(ioDispatcher) {
         articleApi.getArticles().let(articleMapper::map)

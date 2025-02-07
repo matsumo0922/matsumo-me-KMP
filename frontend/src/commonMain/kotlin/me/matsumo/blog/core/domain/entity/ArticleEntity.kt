@@ -1,6 +1,5 @@
 package me.matsumo.blog.core.domain.entity
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -21,5 +20,5 @@ data class ArticleEntity(
     @SerialName("updated_at")
     val updatedAt: String,
     @SerialName("url")
-    val url: String
+    val url: String,
 )

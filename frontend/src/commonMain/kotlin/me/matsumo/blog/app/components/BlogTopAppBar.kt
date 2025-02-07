@@ -50,7 +50,7 @@ internal fun BlogTopAppBar(
             .height(80.dp)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Image(
             modifier = Modifier
@@ -80,7 +80,7 @@ internal fun BlogTopAppBar(
                 horizontalArrangement = Arrangement.spacedBy(
                     space = 8.dp,
                     alignment = Alignment.CenterHorizontally,
-                )
+                ),
             ) {
                 TextButton(onNavigationHomeClicked) {
                     Text(

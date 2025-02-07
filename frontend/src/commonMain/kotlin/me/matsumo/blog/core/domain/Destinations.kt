@@ -1,6 +1,5 @@
 package me.matsumo.blog.core.domain
 
-import io.github.aakira.napier.Napier
 import io.ktor.http.Url
 import kotlinx.serialization.Serializable
 
@@ -16,7 +15,7 @@ sealed interface Destinations {
     companion object {
         private val routes = listOf(
             Route("home") { Home },
-            Route("articles") { Articles }
+            Route("articles") { Articles },
         )
 
         private fun matchRoute(url: Url, routePattern: String): Map<String, String>? {
@@ -57,5 +56,5 @@ sealed interface Destinations {
 
 private data class Route<T : Destinations>(
     val pattern: String,
-    val parse: (Map<String, String>) -> T?
+    val parse: (Map<String, String>) -> T?,
 )

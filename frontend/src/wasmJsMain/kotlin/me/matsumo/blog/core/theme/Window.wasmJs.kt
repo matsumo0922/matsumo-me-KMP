@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
@@ -31,7 +32,7 @@ actual fun rememberDeviceState(): State<Device> {
         device = Device.fromWidth(with(density) { window.innerWidth.toDp() })
     }
 
-    return derivedStateOf { device }
+    return remember { derivedStateOf { device } }
 }
 
 actual fun isSystemInDarkThemeUnSafe(): Boolean {

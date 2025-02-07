@@ -12,11 +12,11 @@ fun NonLazyVerticalGrid(
     modifier: Modifier = Modifier,
     horizontalSpacing: Dp = 0.dp,
     verticalSpacing: Dp = 0.dp,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Layout(
         content = content,
-        modifier = modifier
+        modifier = modifier,
     ) { measurables, constraints ->
         val horizontalSpacingPx = horizontalSpacing.roundToPx()
         val verticalSpacingPx = verticalSpacing.roundToPx()

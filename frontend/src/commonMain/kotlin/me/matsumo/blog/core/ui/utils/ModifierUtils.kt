@@ -46,12 +46,12 @@ fun Modifier.enterAnimation(
 
     val offsetY by animateDpAsState(
         targetValue = if (visible) 0.dp else initialOffsetY,
-        animationSpec = tween(durationMillis, delayMillis + 200)
+        animationSpec = tween(durationMillis, delayMillis + 200),
     )
 
     val alpha by animateFloatAsState(
         targetValue = if (visible) 1f else 0f,
-        animationSpec = tween(durationMillis, delayMillis + 200)
+        animationSpec = tween(durationMillis, delayMillis + 200),
     )
 
     this
@@ -61,14 +61,14 @@ fun Modifier.enterAnimation(
 
 fun Modifier.focusScale(
     focusedScale: Float = 1.02f,
-    animationDurationMillis: Int = 400
+    animationDurationMillis: Int = 400,
 ): Modifier = composed {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered by interactionSource.collectIsHoveredAsState()
 
     val scale by animateFloatAsState(
         targetValue = if (isHovered) focusedScale else 1f,
-        animationSpec = tween(animationDurationMillis)
+        animationSpec = tween(animationDurationMillis),
     )
 
     this
@@ -81,7 +81,7 @@ fun Modifier.moveFocusOnTab() = composed {
     onPreviewKeyEvent {
         if (it.type == KeyEventType.KeyDown && it.key == Key.Tab) {
             focusManager.moveFocus(
-                if (it.isShiftPressed) FocusDirection.Previous else FocusDirection.Next
+                if (it.isShiftPressed) FocusDirection.Previous else FocusDirection.Next,
             )
             true
         } else {
