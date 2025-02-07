@@ -32,7 +32,7 @@ actual fun rememberDeviceState(): State<Device> {
         device = Device.fromWidth(with(density) { window.innerWidth.toDp() })
     }
 
-    return remember { derivedStateOf { device } }
+    return remember(device) { derivedStateOf { device } }
 }
 
 actual fun isSystemInDarkThemeUnSafe(): Boolean {
