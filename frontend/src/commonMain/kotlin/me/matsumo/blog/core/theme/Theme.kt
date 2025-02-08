@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
 import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.domain.ThemeConfig
 import me.matsumo.blog.core.domain.isDark

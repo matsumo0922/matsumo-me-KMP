@@ -4,7 +4,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,6 +41,7 @@ private enum class NotoSansJP(
     val weight: FontWeight,
 ) {
     Black("NotoSansJP-Black", FontWeight.Black),
+
     // ExtraBold("NotoSansJP-ExtraBold", FontWeight.ExtraBold),
     Bold("NotoSansJP-Bold", FontWeight.Bold),
     SemiBold("NotoSansJP-SemiBold", FontWeight.SemiBold),

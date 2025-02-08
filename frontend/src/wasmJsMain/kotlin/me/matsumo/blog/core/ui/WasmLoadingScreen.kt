@@ -50,7 +50,7 @@ internal fun WasmLoadingScreen(
         LinearProgressIndicator(
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.TopCenter)
+                .align(Alignment.TopCenter),
         )
 
         if (shouldDisplayLoadingContents) {
