@@ -151,12 +151,14 @@ private fun ExperienceItem(
                     color = MaterialTheme.colorScheme.primary,
                 )
 
-                Text(
-                    modifier = Modifier.widthIn(max = 512.dp),
-                    text = stringResource(experience.description),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
+                CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+                    Text(
+                        modifier = Modifier.widthIn(max = 512.dp),
+                        text = stringResource(experience.description),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
 
                 Row(
                     modifier = Modifier.heightIn(max = 128.dp),

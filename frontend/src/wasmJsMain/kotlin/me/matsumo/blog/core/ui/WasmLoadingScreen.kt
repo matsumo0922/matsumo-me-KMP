@@ -39,7 +39,7 @@ internal fun WasmLoadingScreen(
     var shouldDisplayLoadingContents by remember { mutableStateOf(false) }
 
     LaunchedEffect(true) {
-        delay(1500)
+        delay(1000)
         shouldDisplayLoadingContents = true
     }
 
@@ -84,7 +84,6 @@ internal fun WasmLoadingScreen(
             Row(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(bottom = 24.dp)
                     .height(40.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(16.dp),

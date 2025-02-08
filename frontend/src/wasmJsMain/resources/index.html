@@ -1,21 +1,50 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="/favicon.ico" sizes="any">
-        <title>matsumo-me-KMP</title>
-        <style>
-            html,
-            body {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-            }
-        </style>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta property="og:url" content="https://matsumo.me">
+        <meta property="og:title" content="Hi, I'm daichi-matsumoto">
+        <meta property="og:type" content="website">
+        <meta property="og:description" content="matsumo's blog">
+        <link rel="icon" href="favicon.ico" sizes="any"/>
+        <link rel="stylesheet" href="style.css"/>
+        <title>matsumo's blog</title>
+        <link rel="preload" href=".//composeResources/matsumo_me_kmp.frontend.generated.resources/font/NotoSansJP-Black.woff2" as="font" type="font/woff2" crossorigin/>
+        <link rel="preload" href=".//composeResources/matsumo_me_kmp.frontend.generated.resources/font/NotoSansJP-Bold.woff2" as="font" type="font/woff2" crossorigin/>
+        <link rel="preload" href=".//composeResources/matsumo_me_kmp.frontend.generated.resources/font/NotoSansJP-Light.woff2" as="font" type="font/woff2" crossorigin/>
+        <link rel="preload" href=".//composeResources/matsumo_me_kmp.frontend.generated.resources/font/NotoSansJP-Medium.woff2" as="font" type="font/woff2" crossorigin/>
+        <link rel="preload" href=".//composeResources/matsumo_me_kmp.frontend.generated.resources/font/NotoSansJP-Regular.woff2" as="font" type="font/woff2" crossorigin/>
+        <link rel="preload" href=".//composeResources/matsumo_me_kmp.frontend.generated.resources/font/NotoSansJP-Thin.woff2" as="font" type="font/woff2" crossorigin/>
     </head>
-    <body></body>
-    <script src="frontend.js"></script>
+    <body>
+        <div id="htmlLoading">
+            <div class="loading-card">
+                <div class="bouncing-dots-spinner">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <h1>Initializing WebAssembly</h1>
+                <p>
+                    Welcome to daichi-matsumoto's portfolio!<br>
+                    このページは WebAssembly の初期化後に表示されます。<br>
+                </p>
+                <p style="font-size:0.9rem; color:#888;">Powered by Compose Multiplatform.</p>
+            </div>
+            <div class="footer">
+                © 2025 daichi-matsumoto
+            </div>
+        </div>
+
+        <script>
+            window.setTimeout(() => {
+                const loadingEl = document.getElementById("htmlLoading");
+                if (loadingEl) {
+                    loadingEl.style.opacity = 1;
+                }
+            }, 2000);
+        </script>
+    </body>
+    <script type="application/javascript" src="frontend.js"></script>
 </html>

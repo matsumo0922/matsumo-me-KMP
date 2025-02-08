@@ -2,7 +2,9 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,6 +26,7 @@ import kotlinx.coroutines.asDeferred
 import kotlinx.coroutines.await
 import me.matsumo.blog.app.BlogApp
 import me.matsumo.blog.core.theme.BlogTheme
+import me.matsumo.blog.core.theme.color.DarkBlueColorScheme
 import me.matsumo.blog.core.ui.WasmLoadingScreen
 import me.matsumo.blog.initKoin
 import me.matsumo.blog.setupCoil
@@ -39,19 +42,21 @@ private enum class NotoSansJP(
     val weight: FontWeight,
 ) {
     Black("NotoSansJP-Black", FontWeight.Black),
-    ExtraBold("NotoSansJP-ExtraBold", FontWeight.ExtraBold),
+    // ExtraBold("NotoSansJP-ExtraBold", FontWeight.ExtraBold),
     Bold("NotoSansJP-Bold", FontWeight.Bold),
     SemiBold("NotoSansJP-SemiBold", FontWeight.SemiBold),
     Medium("NotoSansJP-Medium", FontWeight.Medium),
     Regular("NotoSansJP-Regular", FontWeight.Normal),
     Light("NotoSansJP-Light", FontWeight.Light),
-    ExtraLight("NotoSansJP-ExtraLight", FontWeight.ExtraLight),
-    Thin("NotoSansJP-Thin", FontWeight.Thin),
+    // ExtraLight("NotoSansJP-ExtraLight", FontWeight.ExtraLight),
+    // Thin("NotoSansJP-Thin", FontWeight.Thin),
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     Napier.base(DebugAntilog())
+
+    removeHtmlLoading()
 
     initKoin()
     setupCoil()
@@ -78,6 +83,7 @@ fun main() {
             }
 
             AnimatedContent(
+                modifier = Modifier.background(DarkBlueColorScheme.surface),
                 targetState = fontsLoaded,
                 transitionSpec = { fadeIn().togetherWith(fadeOut()) },
             ) {
@@ -95,6 +101,19 @@ fun main() {
                 }
             }
         }
+    }
+}
+
+private fun removeHtmlLoading() {
+    val htmlLoading = document.getElementById("htmlLoading")
+
+    htmlLoading?.let { element ->
+        element.setAttribute("style", "opacity: 0;")
+
+        window.setTimeout({
+            element.remove()
+            null
+        }, 500)
     }
 }
 
