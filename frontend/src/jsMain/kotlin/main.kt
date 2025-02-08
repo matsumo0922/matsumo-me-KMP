@@ -6,21 +6,18 @@ import kotlinx.browser.document
 import me.matsumo.blog.app.BlogApp
 import me.matsumo.blog.initKoin
 import me.matsumo.blog.setupCoil
-import org.jetbrains.skiko.wasm.onWasmReady
 import org.koin.compose.KoinContext
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    onWasmReady {
-        Napier.base(DebugAntilog())
+    Napier.base(DebugAntilog())
 
-        initKoin()
-        setupCoil()
+    initKoin()
+    setupCoil()
 
-        ComposeViewport(document.body!!) {
-            KoinContext {
-                BlogApp()
-            }
+    ComposeViewport(document.body!!) {
+        KoinContext {
+            BlogApp()
         }
     }
 }

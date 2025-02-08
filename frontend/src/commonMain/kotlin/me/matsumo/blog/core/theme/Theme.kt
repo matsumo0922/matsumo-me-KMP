@@ -1,6 +1,7 @@
 package me.matsumo.blog.core.theme
 
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -15,7 +16,7 @@ import me.matsumo.blog.core.theme.color.LightBlueColorScheme
 @Composable
 internal fun BlogTheme(
     themeConfig: ThemeConfig = ThemeConfig.System,
-    fonts: FontFamily = getNotoSansJPFontFamily(),
+    fonts: FontFamily? = null,
     device: Device = Device.DESKTOP,
     content: @Composable () -> Unit,
 ) {
@@ -25,7 +26,7 @@ internal fun BlogTheme(
     ) {
         MaterialTheme(
             colorScheme = if (themeConfig.isDark()) DarkBlueColorScheme else LightBlueColorScheme,
-            typography = createCustomFontTypography(fonts),
+            typography = createCustomFontTypography(fonts ?: getNotoSansJPFontFamily()),
             shapes = BlogShapes,
             content = content,
         )

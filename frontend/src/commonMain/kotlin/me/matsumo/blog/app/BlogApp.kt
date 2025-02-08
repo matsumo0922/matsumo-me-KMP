@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
@@ -26,6 +27,7 @@ import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.domain.StaticUrl
 import me.matsumo.blog.core.domain.isDark
 import me.matsumo.blog.core.theme.BlogTheme
+import me.matsumo.blog.core.theme.getNotoSansJPFontFamily
 import me.matsumo.blog.core.theme.openUrl
 import me.matsumo.blog.core.theme.rememberDeviceState
 import me.matsumo.blog.core.ui.ModalNavigationDrawerWrapper
@@ -36,6 +38,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun BlogApp(
     modifier: Modifier = Modifier,
     viewModel: BlogViewModel = koinViewModel(),
+    fontFamily: FontFamily? = null,
     startDestinations: Destinations = Destinations.Home,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -43,6 +46,7 @@ internal fun BlogApp(
 
     BlogTheme(
         themeConfig = uiState.theme,
+        fonts = fontFamily,
         device = device,
     ) {
         BlogBackground(

@@ -15,10 +15,11 @@ gradle = "8.7.3"
 kotlin = "2.1.10"
 
 # KotlinX
-kotlinxCoroutines = "1.7.3"
+kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.1"
 kotlinxSerializationJson = "1.8.0"
 kotlinxImmutable = "0.3.7"
+kotlinxBrowser = "0.3"
 
 # AndroidX
 androidxCore = "1.15.0"
@@ -103,9 +104,11 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 
 # KotlinX
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxImmutable" }
+kotlinx-browser = { group = "org.jetbrains.kotlinx", name = "kotlinx-browser", version.ref = "kotlinxBrowser" }
 
 # AndroidX
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
@@ -171,6 +174,7 @@ twitter-compose-rule = { module = "com.twitter.compose.rules:detekt", version.re
 infra = [
     "kotlin-stdlib",
     "kotlin-reflect",
+    "kotlinx-coroutines-core",
     "kotlinx-datetime",
     "kotlinx-serialization-json",
     "kotlinx-collections-immutable",

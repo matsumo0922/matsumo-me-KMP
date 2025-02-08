@@ -8,18 +8,15 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import matsumo_me_kmp.frontend.generated.resources.CaskaydiaCoveNerdFont_Bold
-import matsumo_me_kmp.frontend.generated.resources.CaskaydiaCoveNerdFont_BoldItalic
-import matsumo_me_kmp.frontend.generated.resources.CaskaydiaCoveNerdFont_Italic
-import matsumo_me_kmp.frontend.generated.resources.CaskaydiaCoveNerdFont_Light
-import matsumo_me_kmp.frontend.generated.resources.CaskaydiaCoveNerdFont_LightItalic
-import matsumo_me_kmp.frontend.generated.resources.CaskaydiaCoveNerdFont_Regular
+import matsumo_me_kmp.frontend.generated.resources.NotoSansJP_Black
 import matsumo_me_kmp.frontend.generated.resources.NotoSansJP_Bold
 import matsumo_me_kmp.frontend.generated.resources.NotoSansJP_ExtraBold
 import matsumo_me_kmp.frontend.generated.resources.NotoSansJP_ExtraLight
 import matsumo_me_kmp.frontend.generated.resources.NotoSansJP_Light
 import matsumo_me_kmp.frontend.generated.resources.NotoSansJP_Medium
 import matsumo_me_kmp.frontend.generated.resources.NotoSansJP_Regular
+import matsumo_me_kmp.frontend.generated.resources.NotoSansJP_SemiBold
+import matsumo_me_kmp.frontend.generated.resources.NotoSansJP_Thin
 import matsumo_me_kmp.frontend.generated.resources.Res
 import org.jetbrains.compose.resources.Font
 
@@ -136,24 +133,15 @@ internal fun createCustomFontTypography(font: FontFamily): Typography {
 
 @Composable
 fun getNotoSansJPFontFamily() = FontFamily(
-    Font(Res.font.NotoSansJP_Bold, FontWeight.Bold),
+    Font(Res.font.NotoSansJP_Black, FontWeight.Black),
     Font(Res.font.NotoSansJP_ExtraBold, FontWeight.ExtraBold),
-    Font(Res.font.NotoSansJP_Light, FontWeight.Light),
-    Font(Res.font.NotoSansJP_ExtraLight, FontWeight.ExtraLight),
+    Font(Res.font.NotoSansJP_Bold, FontWeight.Bold),
+    Font(Res.font.NotoSansJP_SemiBold, FontWeight.SemiBold),
     Font(Res.font.NotoSansJP_Regular, FontWeight.Normal),
     Font(Res.font.NotoSansJP_Medium, FontWeight.Medium),
-)
-
-@Composable
-fun getCaskaydiaCoveNerdFontFamily() = FontFamily(
-    Font(Res.font.CaskaydiaCoveNerdFont_Bold, FontWeight.Bold),
-    Font(Res.font.CaskaydiaCoveNerdFont_BoldItalic, FontWeight.Bold, FontStyle.Italic),
-    Font(Res.font.CaskaydiaCoveNerdFont_Light, FontWeight.Light),
-    Font(Res.font.CaskaydiaCoveNerdFont_LightItalic, FontWeight.Light, FontStyle.Italic),
-    Font(Res.font.CaskaydiaCoveNerdFont_Regular, FontWeight.Normal),
-    Font(Res.font.CaskaydiaCoveNerdFont_Italic, FontWeight.Normal, FontStyle.Italic),
-    Font(Res.font.CaskaydiaCoveNerdFont_Regular, FontWeight.Medium),
-    Font(Res.font.CaskaydiaCoveNerdFont_Italic, FontWeight.Medium, FontStyle.Italic),
+    Font(Res.font.NotoSansJP_Light, FontWeight.Light),
+    Font(Res.font.NotoSansJP_ExtraLight, FontWeight.ExtraLight),
+    Font(Res.font.NotoSansJP_Thin, FontWeight.Thin),
 )
 
 // Align
