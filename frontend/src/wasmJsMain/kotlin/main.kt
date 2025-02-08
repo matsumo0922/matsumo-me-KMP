@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFontFamilyResolver
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.window.ComposeViewport
 import io.github.aakira.napier.DebugAntilog
@@ -36,17 +37,20 @@ import org.w3c.fetch.Response
 import kotlin.wasm.unsafe.UnsafeWasmMemoryApi
 import kotlin.wasm.unsafe.withScopedMemoryAllocator
 
-private val fonts = listOf(
-    "NotoSansJP-Black",
-    "NotoSansJP-Bold",
-    "NotoSansJP-ExtraBold",
-    "NotoSansJP-ExtraLight",
-    "NotoSansJP-Light",
-    "NotoSansJP-Medium",
-    "NotoSansJP-Regular",
-    "NotoSansJP-SemiBold",
-    "NotoSansJP-Thin",
-)
+private enum class NotoSansJP(
+    val fileName: String,
+    val weight: FontWeight,
+) {
+    Black("NotoSansJP-Black", FontWeight.Black),
+    ExtraBold("NotoSansJP-ExtraBold", FontWeight.ExtraBold),
+    Bold("NotoSansJP-Bold", FontWeight.Bold),
+    SemiBold("NotoSansJP-SemiBold", FontWeight.SemiBold),
+    Medium("NotoSansJP-Medium", FontWeight.Medium),
+    Regular("NotoSansJP-Regular", FontWeight.Normal),
+    Light("NotoSansJP-Light", FontWeight.Light),
+    ExtraLight("NotoSansJP-ExtraLight", FontWeight.ExtraLight),
+    Thin("NotoSansJP-Thin", FontWeight.Thin),
+}
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
@@ -63,8 +67,11 @@ fun main() {
 
             LaunchedEffect(true) {
                 runCatching {
-                    val fontsMap = fonts.map { it to loadRes("./composeResources/matsumo_me_kmp.frontend.generated.resources/font/$it.ttf") }
-                    fontFamily = FontFamily(fontsMap.map { Font(it.first, it.second.toByteArray()) })
+                    val fonts = NotoSansJP.entries
+                        .map { it to loadRes("./composeResources/matsumo_me_kmp.frontend.generated.resources/font/${it.fileName}.woff2") }
+                        .map { (font, arrayBuffer) -> Font(font.fileName, arrayBuffer.toByteArray(), font.weight) }
+
+                    fontFamily = FontFamily(fonts)
                     fontFamilyResolver.preload(fontFamily!!)
                 }.onFailure {
                     Napier.e(it) { "Failed to load fonts" }
