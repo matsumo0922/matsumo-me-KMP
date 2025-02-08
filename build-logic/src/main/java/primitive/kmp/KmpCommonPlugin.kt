@@ -22,19 +22,6 @@ class KmpCommonPlugin : Plugin<Project> {
             kotlin {
                 // https://stackoverflow.com/questions/36465824/android-studio-task-testclasses-not-found-in-project
                 task("testClasses")
-
-                sourceSets.configureEach {
-                    languageSettings.enableLanguageFeature("ExplicitBackingFields")
-                }
-            }
-
-            dependencies {
-                listOf(
-                    "kspCommonMainMetadata",
-                    // "kspWasmJs"
-                ).forEach {
-                    add(it, libs.library("kmp-room-compiler"))
-                }
             }
 
             tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink>().configureEach {

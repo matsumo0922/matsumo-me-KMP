@@ -178,13 +178,17 @@ private fun LinkSection(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Image(
-                modifier = Modifier.fillMaxHeight(),
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f, false),
                 painter = painterResource(Res.drawable.im_get_on_apple_store),
                 contentDescription = "App Store",
             )
 
             Image(
-                modifier = Modifier.fillMaxHeight(),
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f, false),
                 painter = painterResource(Res.drawable.im_get_on_google_play),
                 contentDescription = "Google Play",
             )

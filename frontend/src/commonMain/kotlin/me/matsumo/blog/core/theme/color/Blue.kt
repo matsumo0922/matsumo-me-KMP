@@ -68,7 +68,7 @@ private val md_theme_dark_surfaceTint = Color(0xFF7FD0FF)
 private val md_theme_dark_outlineVariant = Color(0xFF41484D)
 private val md_theme_dark_scrim = Color(0xFF000000)
 
-internal val LightBlueColorScheme = lightColorScheme(
+val LightBlueColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
     primaryContainer = md_theme_light_primaryContainer,
@@ -100,7 +100,7 @@ internal val LightBlueColorScheme = lightColorScheme(
     scrim = md_theme_light_scrim,
 )
 
-internal val DarkBlueColorScheme = darkColorScheme(
+val DarkBlueColorScheme = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
     primaryContainer = md_theme_dark_primaryContainer,

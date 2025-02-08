@@ -15,7 +15,7 @@ import me.matsumo.blog.core.theme.color.LightBlueColorScheme
 
 @Composable
 internal fun BlogTheme(
-    themeConfig: ThemeConfig = ThemeConfig.System,
+    themeConfig: ThemeConfig = ThemeConfig.Dark,
     fonts: FontFamily? = null,
     device: Device = Device.DESKTOP,
     content: @Composable () -> Unit,
@@ -26,7 +26,7 @@ internal fun BlogTheme(
     ) {
         MaterialTheme(
             colorScheme = if (themeConfig.isDark()) DarkBlueColorScheme else LightBlueColorScheme,
-            typography = createCustomFontTypography(fonts ?: getNotoSansJPFontFamily()),
+            typography = createCustomFontTypography(fonts),
             shapes = BlogShapes,
             content = content,
         )
@@ -35,6 +35,3 @@ internal fun BlogTheme(
 
 val LocalDevice = staticCompositionLocalOf { Device.DESKTOP }
 val LocalThemeConfig = staticCompositionLocalOf { ThemeConfig.System }
-
-val CONTAINER_MAX_WIDTH = 1200.dp
-val HEADER_HEIGHT = 104.dp

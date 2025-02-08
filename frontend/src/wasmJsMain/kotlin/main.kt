@@ -2,19 +2,14 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFontFamilyResolver
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -28,6 +23,8 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.asDeferred
 import kotlinx.coroutines.await
 import me.matsumo.blog.app.BlogApp
+import me.matsumo.blog.core.theme.BlogTheme
+import me.matsumo.blog.core.ui.WasmLoadingScreen
 import me.matsumo.blog.initKoin
 import me.matsumo.blog.setupCoil
 import org.khronos.webgl.ArrayBuffer
@@ -90,13 +87,10 @@ fun main() {
                         fontFamily = fontFamily,
                     )
                 } else {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color.Cyan),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
+                    BlogTheme {
+                        WasmLoadingScreen(
+                            modifier = Modifier.fillMaxSize(),
+                        )
                     }
                 }
             }

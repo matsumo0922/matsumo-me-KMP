@@ -33,17 +33,13 @@ androidxBrowser = "1.8.0"
 
 # KMP
 kmpCompose = "1.7.3"
-kmpComposeHotReload = "1.0.0-dev.34.8"
 kmpComplete = "1.1.0"
 kmpSwiftKlib = "0.6.3"
 kmpLifecycle = "2.9.0-alpha02"
 kmpNavigation = "2.8.0-alpha12"
-kmpPaging = "3.3.0-alpha02-0.5.1"
 kmpRoom = "2.7.0-alpha13"
-kmpSqlite = "2.0.1"
 
 # Google
-material = "1.12.0"
 ksp = "2.1.10-1.0.29"
 
 # koin
@@ -51,12 +47,9 @@ koin = "4.0.2"
 
 # Others
 ktor = "3.0.3"
-ksoup = "0.1.2"
-ksend = "1.1.2"
 coil3 = "3.1.0"
 detekt = "1.23.7"
 ktorfit = "2.2.0"
-sonner = "0.3.8"
 libraries = "11.2.3"
 buildKonfig = "0.15.1"
 twitterComposeRule = "0.0.26"
@@ -77,10 +70,8 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 # KMP
 kmp = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kmpCompose = { id = "org.jetbrains.compose", version.ref = "kmpCompose" }
-kmpComposeHotReload = { id = "org.jetbrains.compose-hot-reload", version.ref = "kmpComposeHotReload" }
 kmpComplete = { id = "com.louiscad.complete-kotlin", version.ref = "kmpComplete" }
 kmpSwiftKlib = { id = "io.github.ttypic.swiftklib", version.ref = "kmpSwiftKlib" }
-kmpRoom = { id = "androidx.room", version.ref = "kmpRoom" }
 
 # Others
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
@@ -101,7 +92,6 @@ detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-form
 # Kotlin
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
-kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 
 # KotlinX
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
@@ -125,17 +115,9 @@ androidx-browser = { module = "androidx.browser:browser", version.ref = "android
 kmp-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "kmpLifecycle" }
 kmp-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "kmpLifecycle" }
 kmp-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "kmpNavigation" }
-kmp-paging-common = { module = "app.cash.paging:paging-common", version.ref = "kmpPaging" }
-kmp-paging-compose = { module = "app.cash.paging:paging-compose-common", version.ref = "kmpPaging" }
-kmp-room = { module = "androidx.room:room-runtime", version.ref = "kmpRoom" }
-kmp-room-compiler = { module = "androidx.room:room-compiler", version.ref = "kmpRoom" }
-kmp-sqlite = { module = "androidx.sqlite:sqlite-bundled", version.ref = "kmpSqlite" }
 
 # Ktorfit
 ktorfit = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfit" }
-
-# Google
-google-material = { module = "com.google.android.material:material", version.ref = "material" }
 
 # Koin
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
@@ -161,10 +143,7 @@ coil3-network = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = 
 coil3-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil3" }
 
 # Others
-ksoup = { module = "com.fleeksoft.ksoup:ksoup", version.ref = "ksoup" }
-ksend = { module = "io.github.ismai117:KSend", version.ref = "ksend" }
 desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.4" }
-sonner = { module = "io.github.dokar3:sonner", version.ref = "sonner" }
 
 # Debugs
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
@@ -173,7 +152,6 @@ twitter-compose-rule = { module = "com.twitter.compose.rules:detekt", version.re
 [bundles]
 infra = [
     "kotlin-stdlib",
-    "kotlin-reflect",
     "kotlinx-coroutines-core",
     "kotlinx-datetime",
     "kotlinx-serialization-json",
@@ -185,7 +163,6 @@ ui-common = [
     "kmp-lifecycle-runtime-compose",
     "kmp-lifecycle-viewmodel-compose",
     "kmp-navigation-compose",
-    "sonner",
 ]
 
 ui-android = [
@@ -217,9 +194,4 @@ coil = [
     "coil3-compose",
     "coil3-network",
     "coil3-svg",
-]
-
-database = [
-    "kmp-room",
-    "kmp-sqlite",
 ]

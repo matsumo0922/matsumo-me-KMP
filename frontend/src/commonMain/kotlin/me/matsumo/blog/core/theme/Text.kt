@@ -21,7 +21,7 @@ import matsumo_me_kmp.frontend.generated.resources.Res
 import org.jetbrains.compose.resources.Font
 
 @Composable
-internal fun createCustomFontTypography(font: FontFamily): Typography {
+internal fun createCustomFontTypography(font: FontFamily?): Typography {
     return Typography(
         displayLarge = TextStyle(
             fontFamily = font,
