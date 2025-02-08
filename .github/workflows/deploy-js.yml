@@ -1,5 +1,7 @@
-name: Deploy
-on: [push]
+name: JS Deploy
+
+on:
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -31,7 +33,7 @@ jobs:
         run: echo > local.properties
 
       - name: Build
-        run: ./gradlew :frontend:wasmJsBrowserDistribution
+        run: ./gradlew :frontend:jsBrowserDistribution
 
       - name: Deploy
         id: cloudflare_pages_deploy
@@ -40,7 +42,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: 'matsumo-me'
-          directory: 'frontend/build/dist/wasmJs/productionExecutable'
+          directory: 'frontend/build/dist/js/productionExecutable'
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
             
       - name: Add publish URL as commit status

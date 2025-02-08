@@ -92,8 +92,12 @@ kotlin {
             implementation(libs.ktor.darwin)
         }
 
-        wasmJsMain.dependencies {
+        jsMain.dependencies {
             implementation(libs.ktor.js)
+        }
+
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.wasmJs)
         }
     }
 }
