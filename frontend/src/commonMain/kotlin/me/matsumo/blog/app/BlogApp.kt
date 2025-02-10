@@ -86,7 +86,6 @@ private fun BlogScreen(
             BlogDrawerContent(
                 state = drawerState,
                 onNavigationHomeClicked = { navController.navigateInclusive(Destinations.Home) },
-                onNavigationAboutClicked = { },
                 onNavigationArticlesClicked = { navController.navigateInclusive(Destinations.Articles) },
                 onNavigationGithubClicked = { openUrl(StaticUrl.GITHUB) },
             )
@@ -103,7 +102,6 @@ private fun BlogScreen(
                         onToggleThemeClicked = onToggleThemeClicked,
                         onOpenDrawerClicked = { scope.launch { drawerState.open() } },
                         onNavigationHomeClicked = { navController.navigateInclusive(Destinations.Home) },
-                        onNavigationAboutClicked = { },
                         onNavigationArticlesClicked = { navController.navigateInclusive(Destinations.Articles) },
                         onNavigationGithubClicked = { openUrl(StaticUrl.GITHUB) },
                     )

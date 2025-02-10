@@ -119,7 +119,11 @@ private fun ProjectItem(
                 shape = RoundedCornerShape(12.dp),
             )
             .background(MaterialTheme.colorScheme.background.copy(0.7f))
-            .clickable { (project.url ?: project.github)?.let(onLinkClicked) }
+            .clickable(
+                interactionSource = null,
+                indication = null,
+                onClick = { (project.url ?: project.github)?.let(onLinkClicked)  },
+            )
             .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -154,7 +158,7 @@ private fun ProjectItem(
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Text(
                 modifier = Modifier.weight(1f),
@@ -232,17 +236,17 @@ private fun SeeMoreProjectsButton(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Text(
-                text = stringResource(Res.string.home_about_project_see_more),
-                style = MaterialTheme.typography.bodyLarge.bold(),
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-
             AsyncImage(
                 modifier = Modifier.size(24.dp),
                 model = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
                 colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
                 contentDescription = null,
+            )
+
+            Text(
+                text = stringResource(Res.string.home_about_project_see_more),
+                style = MaterialTheme.typography.bodyLarge.bold(),
+                color = MaterialTheme.colorScheme.onSurface,
             )
         }
     }

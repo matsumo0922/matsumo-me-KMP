@@ -38,7 +38,6 @@ internal fun BlogTopAppBar(
     onToggleThemeClicked: () -> Unit,
     onOpenDrawerClicked: () -> Unit,
     onNavigationHomeClicked: () -> Unit,
-    onNavigationAboutClicked: () -> Unit,
     onNavigationArticlesClicked: () -> Unit,
     onNavigationGithubClicked: () -> Unit,
     modifier: Modifier = Modifier,
@@ -85,14 +84,6 @@ internal fun BlogTopAppBar(
                 TextButton(onNavigationHomeClicked) {
                     Text(
                         text = stringResource(Res.string.navigation_home),
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onBackground,
-                    )
-                }
-
-                TextButton(onNavigationAboutClicked) {
-                    Text(
-                        text = stringResource(Res.string.navigation_about),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onBackground,
                     )

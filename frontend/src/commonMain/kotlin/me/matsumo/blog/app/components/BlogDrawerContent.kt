@@ -32,7 +32,6 @@ import org.jetbrains.compose.resources.stringResource
 fun BlogDrawerContent(
     state: DrawerState,
     onNavigationHomeClicked: () -> Unit,
-    onNavigationAboutClicked: () -> Unit,
     onNavigationArticlesClicked: () -> Unit,
     onNavigationGithubClicked: () -> Unit,
     modifier: Modifier = Modifier,
@@ -60,16 +59,6 @@ fun BlogDrawerContent(
                     scope.launch {
                         state.close()
                         onNavigationHomeClicked()
-                    }
-                },
-            )
-
-            DrawerItem(
-                label = stringResource(Res.string.navigation_about),
-                onClick = {
-                    scope.launch {
-                        state.close()
-                        onNavigationAboutClicked()
                     }
                 },
             )

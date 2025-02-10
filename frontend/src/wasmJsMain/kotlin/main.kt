@@ -41,13 +41,12 @@ private enum class NotoSansJP(
     val weight: FontWeight,
 ) {
     Black("NotoSansJP-Black", FontWeight.Black),
-
     // ExtraBold("NotoSansJP-ExtraBold", FontWeight.ExtraBold),
     Bold("NotoSansJP-Bold", FontWeight.Bold),
     SemiBold("NotoSansJP-SemiBold", FontWeight.SemiBold),
     Medium("NotoSansJP-Medium", FontWeight.Medium),
     Regular("NotoSansJP-Regular", FontWeight.Normal),
-    Light("NotoSansJP-Light", FontWeight.Light),
+    // Light("NotoSansJP-Light", FontWeight.Light),
     // ExtraLight("NotoSansJP-ExtraLight", FontWeight.ExtraLight),
     // Thin("NotoSansJP-Thin", FontWeight.Thin),
 }
@@ -113,7 +112,7 @@ private fun removeHtmlLoading() {
         window.setTimeout({
             element.remove()
             null
-        }, 500)
+        }, 600)
     }
 }
 
