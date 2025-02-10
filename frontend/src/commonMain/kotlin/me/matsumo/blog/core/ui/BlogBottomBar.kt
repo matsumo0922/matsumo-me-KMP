@@ -40,7 +40,6 @@ import me.matsumo.blog.core.theme.semiBold
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun BlogBottomBar(
     modifier: Modifier = Modifier,

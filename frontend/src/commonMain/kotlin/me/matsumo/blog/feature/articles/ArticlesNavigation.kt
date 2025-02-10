@@ -1,4 +1,4 @@
-package me.matsumo.blog.feature.article
+package me.matsumo.blog.feature.articles
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier

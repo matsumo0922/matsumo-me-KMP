@@ -7,7 +7,7 @@ import me.matsumo.blog.core.datastore.di.datastoreModule
 import me.matsumo.blog.core.domain.BlogConfig
 import me.matsumo.blog.core.repository.di.repositoryModule
 import me.matsumo.blog.core.ui.utils.IO
-import me.matsumo.blog.feature.article.featureModule
+import me.matsumo.blog.feature.di.featureModule
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module

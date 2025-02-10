@@ -10,6 +10,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.navigation.NavController
@@ -19,8 +20,15 @@ import me.matsumo.blog.core.domain.Device
 
 @Composable
 actual fun rememberDeviceState(): State<Device> {
+    val windowWidth = rememberWindowWidthDp()
+    val device = Device.fromWidth(windowWidth.value)
+    return remember(device) { derivedStateOf { device } }
+}
+
+@Composable
+actual fun rememberWindowWidthDp(): State<Dp> {
     val windowWidth = LocalConfiguration.current.screenWidthDp
-    return remember { derivedStateOf { Device.fromWidth(windowWidth.dp) } }
+    return remember { derivedStateOf { windowWidth.dp } }
 }
 
 actual fun isSystemInDarkThemeUnSafe(): Boolean {

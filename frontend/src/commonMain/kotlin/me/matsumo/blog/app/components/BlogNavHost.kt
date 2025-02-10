@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import me.matsumo.blog.core.domain.Destinations
 import me.matsumo.blog.core.theme.BindToNavigation
-import me.matsumo.blog.feature.article.articlesScreen
+import me.matsumo.blog.feature.articles.articlesScreen
 import me.matsumo.blog.feature.home.homeScreen
 
 @Composable

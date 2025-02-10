@@ -10,12 +10,6 @@ class KmpWasmPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             kotlin {
-                js(IR) {
-                    useEsModules()
-                    browser()
-                    binaries.executable()
-                }
-
                 wasmJs {
                     useEsModules()
                     browser()

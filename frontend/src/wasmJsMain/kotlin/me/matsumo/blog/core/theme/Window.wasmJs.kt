@@ -4,10 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.unit.Dp
 import androidx.navigation.ExperimentalBrowserHistoryApi
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
@@ -21,18 +23,25 @@ import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.ui.utils.toUrlPath
 import org.w3c.dom.PopStateEvent
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 actual fun rememberDeviceState(): State<Device> {
-    val density = LocalDensity.current
-    val windowWidth = with(density) { LocalWindowInfo.current.containerSize.width.toDp() }
-    var device = Device.fromWidth(windowWidth)
-
-    window.addEventListener("resize") {
-        device = Device.fromWidth(with(density) { window.innerWidth.toDp() })
-    }
+    val windowWidth by rememberWindowWidthDp()
+    val device = Device.fromWidth(windowWidth)
 
     return remember(device) { derivedStateOf { device } }
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+actual fun rememberWindowWidthDp(): State<Dp> {
+    val density = LocalDensity.current
+    var windowWidthPx = LocalWindowInfo.current.containerSize.width
+
+    window.addEventListener("resize") {
+        windowWidthPx = window.innerWidth
+    }
+
+    return remember(windowWidthPx) { derivedStateOf { with(density) { windowWidthPx.toDp() } } }
 }
 
 actual fun isSystemInDarkThemeUnSafe(): Boolean {

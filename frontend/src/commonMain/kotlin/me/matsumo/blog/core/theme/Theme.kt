@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
 import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.domain.ThemeConfig
 import me.matsumo.blog.core.domain.isDark
@@ -34,3 +35,5 @@ internal fun BlogTheme(
 
 val LocalDevice = staticCompositionLocalOf { Device.DESKTOP }
 val LocalThemeConfig = staticCompositionLocalOf { ThemeConfig.System }
+
+val CONTAINER_MAX_WIDTH = 1280.dp
