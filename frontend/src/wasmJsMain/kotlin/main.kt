@@ -41,6 +41,7 @@ private enum class NotoSansJP(
     val weight: FontWeight,
 ) {
     Black("NotoSansJP-Black", FontWeight.Black),
+
     // ExtraBold("NotoSansJP-ExtraBold", FontWeight.ExtraBold),
     Bold("NotoSansJP-Bold", FontWeight.Bold),
     SemiBold("NotoSansJP-SemiBold", FontWeight.SemiBold),

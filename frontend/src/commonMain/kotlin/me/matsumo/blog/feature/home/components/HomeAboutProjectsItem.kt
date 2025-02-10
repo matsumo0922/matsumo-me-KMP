@@ -122,7 +122,7 @@ private fun ProjectItem(
             .clickable(
                 interactionSource = null,
                 indication = null,
-                onClick = { (project.url ?: project.github)?.let(onLinkClicked)  },
+                onClick = { (project.url ?: project.github)?.let(onLinkClicked) },
             )
             .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),

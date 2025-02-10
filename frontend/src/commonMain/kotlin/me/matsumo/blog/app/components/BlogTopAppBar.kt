@@ -23,7 +23,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import matsumo_me_kmp.frontend.generated.resources.Res
-import matsumo_me_kmp.frontend.generated.resources.navigation_about
 import matsumo_me_kmp.frontend.generated.resources.navigation_articles
 import matsumo_me_kmp.frontend.generated.resources.navigation_github
 import matsumo_me_kmp.frontend.generated.resources.navigation_home

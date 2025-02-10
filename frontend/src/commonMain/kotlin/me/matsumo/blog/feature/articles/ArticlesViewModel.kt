@@ -29,11 +29,11 @@ class ArticlesViewModel(
             _screenState.value = ScreenState.Loading
             _screenState.value = suspendRunCatching {
                 ArticlesUiState(
-                    articles = articleRepository.getArticles()
+                    articles = articleRepository.getArticles(),
                 )
             }.fold(
                 onSuccess = { ScreenState.Idle(it) },
-                onFailure = { ScreenState.Error(Res.string.error_no_data) }
+                onFailure = { ScreenState.Error(Res.string.error_no_data) },
             )
         }
     }
@@ -41,5 +41,5 @@ class ArticlesViewModel(
 
 @Stable
 data class ArticlesUiState(
-    val articles: List<Article>
+    val articles: List<Article>,
 )

@@ -101,10 +101,10 @@ private fun ArticlesScreen(
         ) {
             item(
                 key = "topSpacer",
-                span = { GridItemSpan(maxLineSpan) }
+                span = { GridItemSpan(maxLineSpan) },
             ) {
                 Spacer(
-                    modifier = Modifier.height(24.dp)
+                    modifier = Modifier.height(24.dp),
                 )
             }
 
@@ -122,16 +122,16 @@ private fun ArticlesScreen(
 
             item(
                 key = "middleSpacer",
-                span = { GridItemSpan(maxLineSpan) }
+                span = { GridItemSpan(maxLineSpan) },
             ) {
                 Spacer(
-                    modifier = Modifier.height(extraSpacerHeight)
+                    modifier = Modifier.height(extraSpacerHeight),
                 )
             }
 
             item(
                 key = "footer",
-                span = { GridItemSpan(maxLineSpan) }
+                span = { GridItemSpan(maxLineSpan) },
             ) {
                 BlogBottomBar(
                     modifier = Modifier
