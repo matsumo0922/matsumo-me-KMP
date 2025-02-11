@@ -24,7 +24,7 @@ object CustomImageTransformer : ImageTransformer {
         return rememberAsyncImagePainter(
             model = ImageRequest.Builder(LocalPlatformContext.current)
                 .data("https://corsproxy.io/?url=$link")
-                .build()
+                .build(),
         ).let {
             ImageData(
                 modifier = Modifier.fillMaxWidth(),

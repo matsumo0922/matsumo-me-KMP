@@ -30,7 +30,7 @@ class ArticleDetailViewModel(
             _screenState.value = ScreenState.Loading
             _screenState.value = suspendRunCatching {
                 ArticleDetailUiState(
-                    article = articleRepository.getArticleDetail(articleId)
+                    article = articleRepository.getArticleDetail(articleId),
                 )
             }.fold(
                 onSuccess = { ScreenState.Idle(it) },

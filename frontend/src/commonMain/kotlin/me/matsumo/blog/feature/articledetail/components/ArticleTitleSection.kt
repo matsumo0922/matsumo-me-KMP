@@ -16,7 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import me.matsumo.blog.core.theme.black
+import kotlinx.collections.immutable.ImmutableList
 import me.matsumo.blog.core.theme.bold
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -24,7 +24,7 @@ import me.matsumo.blog.core.theme.bold
 internal fun ArticleTitleSection(
     title: String,
     publishedAt: String,
-    tags: List<String>,
+    tags: ImmutableList<String>,
     modifier: Modifier = Modifier,
 ) {
     Column(

@@ -11,7 +11,7 @@ fun NavGraphBuilder.articleDetailScreen() {
     composable<Destinations.ArticleDetail> {
         ArticleDetailRoute(
             modifier = Modifier.fillMaxSize(),
-            articleId = it.toRoute<Destinations.ArticleDetail>().id
+            articleId = it.toRoute<Destinations.ArticleDetail>().id,
         )
     }
 }

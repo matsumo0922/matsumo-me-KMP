@@ -4,9 +4,7 @@ import androidx.core.bundle.Bundle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.serialization.decodeArguments
 import io.github.aakira.napier.Napier
-import io.ktor.http.URLBuilder
 import io.ktor.http.Url
-import io.ktor.http.encodedPath
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.serializer
@@ -23,6 +21,36 @@ sealed interface Destinations {
 
     @Serializable
     data class ArticleDetail(val id: Long) : Destinations
+
+    @Suppress("UNCHECKED_CAST")
+    fun toUrlPath(): String {
+        val route = routes.firstOrNull { it.type.isInstance(this) }
+
+        requireNotNull(route) { "Route not found for $this" }
+
+        val buildPath = route.buildPath as (Destinations) -> Map<String, String>
+        val buildQuery = route.buildQuery as (Destinations) -> Map<String, String>
+        val pathParams = buildPath(this)
+        val queryParams = buildQuery(this)
+
+        val path = route.pattern.replace(Regex("\\{([^}]+)}")) { matchResult ->
+            pathParams[matchResult.groupValues[1]] ?: ""
+        }
+
+        return buildString {
+            append("#$path")
+
+            if (queryParams.isNotEmpty()) {
+                append("?")
+            }
+
+            append(
+                queryParams.entries.joinToString("&") { (name, value) ->
+                    "$name=$value"
+                },
+            )
+        }
+    }
 
     companion object {
         private val argPlaceholder = "(?:.*\\.)?([^/]+)".toRegex()
@@ -46,9 +74,8 @@ sealed interface Destinations {
                     ArticleDetail(id)
                 },
                 buildPath = { article -> mapOf("id" to article.id.toString()) },
-            )
+            ),
         )
-
 
         private fun matchRoute(url: Url, routePattern: String): Map<String, String>? {
             val pathSegments = url.rawSegments.filter { it.isNotBlank() }
@@ -103,36 +130,6 @@ sealed interface Destinations {
             return null
         }
     }
-
-    @Suppress("UNCHECKED_CAST")
-    fun toUrlPath(): String {
-        val route = routes.firstOrNull { it.type.isInstance(this) }
-
-        requireNotNull(route) { "Route not found for $this" }
-
-        val buildPath = route.buildPath as (Destinations) -> Map<String, String>
-        val buildQuery = route.buildQuery as (Destinations) -> Map<String, String>
-        val pathParams = buildPath(this)
-        val queryParams = buildQuery(this)
-
-        val path = route.pattern.replace(Regex("\\{([^}]+)}")) { matchResult ->
-            pathParams[matchResult.groupValues[1]] ?: ""
-        }
-
-        return buildString {
-            append("#$path")
-
-            if (queryParams.isNotEmpty()) {
-                append("?")
-            }
-
-            append(
-                queryParams.entries.joinToString("&") { (name, value) ->
-                    "$name=$value"
-                },
-            )
-        }
-    }
 }
 
 private data class Route<T : Destinations>(
@@ -140,5 +137,5 @@ private data class Route<T : Destinations>(
     val type: KClass<T>,
     val parse: (Map<String, String>) -> T?,
     val buildPath: (T) -> Map<String, String> = { emptyMap() },
-    val buildQuery: (T) -> Map<String, String> = { emptyMap() }
+    val buildQuery: (T) -> Map<String, String> = { emptyMap() },
 )

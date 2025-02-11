@@ -12,7 +12,7 @@ val featureModule = module {
     viewModel {
         ArticleDetailViewModel(
             articleId = it.get(),
-            articleRepository = get()
+            articleRepository = get(),
         )
     }
 }

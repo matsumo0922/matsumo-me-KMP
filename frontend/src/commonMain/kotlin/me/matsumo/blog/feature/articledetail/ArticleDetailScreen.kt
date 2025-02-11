@@ -37,7 +37,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mikepenz.markdown.m3.markdownTypography
 import com.mikepenz.markdown.model.markdownDimens
 import com.mikepenz.markdown.model.markdownPadding
-import io.github.aakira.napier.Napier
+import kotlinx.collections.immutable.toImmutableList
 import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.domain.model.ArticleDetail
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
@@ -62,14 +62,14 @@ internal fun ArticleDetailRoute(
     modifier: Modifier = Modifier,
     viewModel: ArticleDetailViewModel = koinViewModel {
         parametersOf(articleId)
-    }
+    },
 ) {
     val screenState by viewModel.screenState.collectAsStateWithLifecycle()
 
     AsyncLoadContents(
         modifier = modifier,
         screenState = screenState,
-        retryAction = viewModel::fetch
+        retryAction = viewModel::fetch,
     ) {
         ArticleDetailScreen(
             modifier = Modifier.fillMaxSize(),
@@ -117,13 +117,15 @@ private fun ArticleDetailScreen(
                 left = 4.dp,
                 top = 2.dp,
                 right = 4.dp,
-                bottom = 2.dp
+                bottom = 2.dp,
             ),
-        )
+        ),
     )
 
     val parseTree = MarkdownParser(markdownSettings.flavour).buildMarkdownTreeFromString(articleDetail.body)
-    val headers = remember(articleDetail.body) { mutableStateListOf(*findHeading(articleDetail.body, parseTree).toTypedArray()) }
+    val headers = remember(articleDetail.body) {
+        mutableStateListOf(*findHeading(articleDetail.body, parseTree).toTypedArray())
+    }
 
     val state = rememberLazyListState()
     var currentHeaderKey by remember { mutableStateOf<String?>(null) }
@@ -145,7 +147,7 @@ private fun ArticleDetailScreen(
                 .align(Alignment.Center)
                 .widthIn(max = CONTAINER_MAX_WIDTH)
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
+                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f)),
         )
 
         LazyColumn(
@@ -163,7 +165,7 @@ private fun ArticleDetailScreen(
                         .padding(horizontal = 24.dp),
                     title = articleDetail.title,
                     publishedAt = articleDetail.publishedAt,
-                    tags = articleDetail.tags,
+                    tags = articleDetail.tags.toImmutableList(),
                 )
             }
 
@@ -190,7 +192,8 @@ private fun ArticleDetailScreen(
                     .width(tableOfContentsWidth - 40.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                val allowedHeaders = listOf(MarkdownHeader.MarkdownHeaderNode.H1, MarkdownHeader.MarkdownHeaderNode.H2, MarkdownHeader.MarkdownHeaderNode.H3)
+                val allowedHeaders =
+                    listOf(MarkdownHeader.MarkdownHeaderNode.H1, MarkdownHeader.MarkdownHeaderNode.H2, MarkdownHeader.MarkdownHeaderNode.H3)
                 val filteredHeaders = headers.filter { allowedHeaders.contains(it.node) }
 
                 Text(

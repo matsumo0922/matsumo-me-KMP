@@ -27,7 +27,6 @@ import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.domain.StaticUrl
 import me.matsumo.blog.core.domain.isDark
 import me.matsumo.blog.core.theme.BlogTheme
-import me.matsumo.blog.core.theme.getNotoSansJPFontFamily
 import me.matsumo.blog.core.theme.openUrl
 import me.matsumo.blog.core.theme.rememberDeviceState
 import me.matsumo.blog.core.ui.ModalNavigationDrawerWrapper
