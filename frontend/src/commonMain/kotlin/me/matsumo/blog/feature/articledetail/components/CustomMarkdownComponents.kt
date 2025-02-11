@@ -17,16 +17,13 @@ import com.mikepenz.markdown.compose.components.MarkdownComponent
 import com.mikepenz.markdown.compose.components.MarkdownComponentModel
 import com.mikepenz.markdown.compose.components.MarkdownComponents
 import com.mikepenz.markdown.compose.components.markdownComponents
-import com.mikepenz.markdown.compose.elements.MarkdownParagraph
 import com.mikepenz.markdown.compose.elements.MarkdownText
 import com.mikepenz.markdown.compose.elements.highlightedCodeBlock
 import com.mikepenz.markdown.compose.elements.highlightedCodeFence
-import io.github.aakira.napier.Napier
-import kotlinx.serialization.json.JsonNull.content
 import me.matsumo.blog.core.theme.bold
 import org.intellij.markdown.ast.getTextInNode
 
-class CustomMarkdownComponents() {
+class CustomMarkdownComponents {
 
     private val heading1: MarkdownComponent = {
         Text(

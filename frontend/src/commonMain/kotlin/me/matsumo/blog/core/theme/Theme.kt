@@ -36,4 +36,4 @@ internal fun BlogTheme(
 val LocalDevice = staticCompositionLocalOf { Device.DESKTOP }
 val LocalThemeConfig = staticCompositionLocalOf { ThemeConfig.System }
 
-val CONTAINER_MAX_WIDTH = 1280.dp
+val CONTAINER_MAX_WIDTH = 1200.dp
