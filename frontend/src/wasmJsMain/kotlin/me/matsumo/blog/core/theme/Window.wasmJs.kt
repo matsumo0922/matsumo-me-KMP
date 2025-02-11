@@ -20,7 +20,6 @@ import io.ktor.http.Url
 import kotlinx.browser.window
 import me.matsumo.blog.core.domain.Destinations
 import me.matsumo.blog.core.domain.Device
-import me.matsumo.blog.core.ui.utils.toUrlPath
 import org.w3c.dom.PopStateEvent
 
 @Composable
@@ -61,7 +60,7 @@ actual fun BindToNavigation(navController: NavController) {
         }
 
         window.bindToNavigation(navController) {
-            it.getRouteAsUrlFragment()
+            it.getRouteAsUrlFragment().orEmpty()
         }
     }
 }
@@ -77,8 +76,7 @@ private fun navigateFromUrl(navController: NavController) {
     }
 }
 
-private fun NavBackStackEntry.getRouteAsUrlFragment() =
-    toUrlPath()?.let { r -> "#${encodeURIComponent(r)}" }.orEmpty()
+private fun NavBackStackEntry.getRouteAsUrlFragment() = Destinations.fromBackStackEntry(this)?.toUrlPath()
 
 actual fun openUrl(url: String) {
     window.open(url, "_blank")

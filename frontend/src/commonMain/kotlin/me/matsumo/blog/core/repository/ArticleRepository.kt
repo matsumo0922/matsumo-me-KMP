@@ -18,7 +18,7 @@ class ArticleRepository(
         articleApi.getArticles().let(articleMapper::map)
     }
 
-    suspend fun getArticleDetail(id: Int): ArticleDetail = withContext(ioDispatcher) {
+    suspend fun getArticleDetail(id: Long): ArticleDetail = withContext(ioDispatcher) {
         articleApi.getArticleDetail(id).let(articleMapper::map)
     }
 }

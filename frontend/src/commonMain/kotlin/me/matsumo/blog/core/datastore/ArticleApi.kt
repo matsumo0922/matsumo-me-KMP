@@ -12,6 +12,6 @@ interface ArticleApi {
 
     @GET("articles/markdown/{id}")
     suspend fun getArticleDetail(
-        @Path("id") id: Int,
+        @Path("id") id: Long,
     ): ArticleDetailEntity
 }

@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
+import me.matsumo.blog.core.domain.Destinations
 import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.domain.model.Article
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
@@ -37,6 +38,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun ArticlesRoute(
+    navigateTo: (Destinations) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ArticlesViewModel = koinViewModel(),
 ) {
@@ -46,11 +48,11 @@ internal fun ArticlesRoute(
         modifier = modifier,
         screenState = screenState,
         retryAction = viewModel::fetch,
-    ) {
+    ) { uiState ->
         ArticlesScreen(
             modifier = Modifier.fillMaxSize(),
-            articles = it.articles.toImmutableList(),
-            onArticleClicked = {},
+            articles = uiState.articles.toImmutableList(),
+            onArticleClicked = { navigateTo(Destinations.ArticleDetail(it)) },
         )
     }
 }
