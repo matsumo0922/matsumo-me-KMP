@@ -69,7 +69,7 @@ private fun ArticlesScreen(
 
     val spanCount = if (isMobile) 1 else 3
     val arrangementSpace = if (isMobile) 24.dp else 32.dp
-    val edgeSpace = (windowWidth - CONTAINER_MAX_WIDTH).coerceAtLeast(0.dp) / 2 + 24.dp
+    val edgeSpace = (windowWidth - CONTAINER_MAX_WIDTH).coerceAtLeast(0.dp) / 2
 
     BoxWithConstraints(modifier) {
         val lazyGridState = rememberLazyGridState()
@@ -106,7 +106,7 @@ private fun ArticlesScreen(
                 span = { GridItemSpan(maxLineSpan) },
             ) {
                 Spacer(
-                    modifier = Modifier.height(24.dp),
+                    modifier = Modifier.height(8.dp),
                 )
             }
 

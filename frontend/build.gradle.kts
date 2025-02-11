@@ -72,6 +72,7 @@ kotlin {
             implementation(libs.bundles.ktor)
             implementation(libs.bundles.koin)
             implementation(libs.bundles.coil)
+            implementation(libs.bundles.markdown)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

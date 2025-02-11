@@ -38,7 +38,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun BlogApp(
     modifier: Modifier = Modifier,
     viewModel: BlogViewModel = koinViewModel(),
-    fontFamily: FontFamily? = getNotoSansJPFontFamily(),
+    fontFamily: FontFamily? = null,
     startDestinations: Destinations = Destinations.Home,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()

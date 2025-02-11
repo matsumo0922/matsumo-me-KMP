@@ -50,6 +50,7 @@ ktor = "3.0.3"
 coil3 = "3.1.0"
 detekt = "1.23.7"
 ktorfit = "2.2.0"
+markdown = "0.31.0-rc01"
 libraries = "11.2.3"
 buildKonfig = "0.15.1"
 twitterComposeRule = "0.0.26"
@@ -142,6 +143,11 @@ coil3-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3
 coil3-network = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil3" }
 coil3-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil3" }
 
+# Markdown
+markdown = { module = "com.mikepenz:multiplatform-markdown-renderer-m3", version.ref = "markdown" }
+marldown-coil3 = { module = "com.mikepenz:multiplatform-markdown-renderer-coil3", version.ref = "markdown" }
+marldown-code = { module = "com.mikepenz:multiplatform-markdown-renderer-code", version.ref = "markdown" }
+
 # Others
 desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.4" }
 
@@ -194,4 +200,10 @@ coil = [
     "coil3-compose",
     "coil3-network",
     "coil3-svg",
+]
+
+markdown = [
+    "markdown",
+    "marldown-coil3",
+    "marldown-code",
 ]

@@ -22,7 +22,7 @@ sealed interface Destinations {
     data object Articles : Destinations
 
     @Serializable
-    data class ArticleDetail(val id: Long, val name: String = "hello") : Destinations
+    data class ArticleDetail(val id: Long) : Destinations
 
     companion object {
         private val argPlaceholder = "(?:.*\\.)?([^/]+)".toRegex()
@@ -46,7 +46,6 @@ sealed interface Destinations {
                     ArticleDetail(id)
                 },
                 buildPath = { article -> mapOf("id" to article.id.toString()) },
-                buildQuery = { article -> mapOf("name" to article.name) }
             )
         )
 
@@ -121,7 +120,7 @@ sealed interface Destinations {
         }
 
         return buildString {
-            append(path)
+            append("#$path")
 
             if (queryParams.isNotEmpty()) {
                 append("?")
