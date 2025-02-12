@@ -26,14 +26,14 @@ internal fun PrivacyPolicyRoute(
     modifier: Modifier = Modifier,
     viewModel: PrivacyPolicyViewModel = koinViewModel {
         parametersOf(appName)
-    }
+    },
 ) {
     val screenState by viewModel.screenState.collectAsStateWithLifecycle()
 
     AsyncLoadContents(
         modifier = modifier,
         screenState = screenState,
-        retryAction = viewModel::fetch
+        retryAction = viewModel::fetch,
     ) {
         PrivacyPolicyScreen(
             modifier = Modifier.fillMaxSize(),
@@ -61,6 +61,6 @@ private fun PrivacyPolicyScreen(
                 title = stringResource(Res.string.app_privacy_policy),
                 description = stringResource(Res.string.app_privacy_policy_description),
             )
-        }
+        },
     )
 }

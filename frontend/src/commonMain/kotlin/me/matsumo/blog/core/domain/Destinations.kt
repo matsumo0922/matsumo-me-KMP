@@ -3,7 +3,6 @@ package me.matsumo.blog.core.domain
 import androidx.core.bundle.Bundle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.serialization.decodeArguments
-import io.github.aakira.napier.Napier
 import io.ktor.http.Url
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable

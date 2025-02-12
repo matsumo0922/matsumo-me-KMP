@@ -36,7 +36,7 @@ class PrivacyPolicyViewModel(
                 )
             }.fold(
                 onSuccess = { ScreenState.Idle(it) },
-                onFailure = { ScreenState.Error(Res.string.error_network) }
+                onFailure = { ScreenState.Error(Res.string.error_network) },
             )
         }
     }

@@ -10,8 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import matsumo_me_kmp.frontend.generated.resources.Res
-import matsumo_me_kmp.frontend.generated.resources.app_privacy_policy
-import matsumo_me_kmp.frontend.generated.resources.app_privacy_policy_description
 import matsumo_me_kmp.frontend.generated.resources.app_terms_of_service
 import matsumo_me_kmp.frontend.generated.resources.app_terms_of_service_description
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
@@ -28,14 +26,14 @@ internal fun TeamOfServiceRoute(
     modifier: Modifier = Modifier,
     viewModel: TeamOfServiceViewModel = koinViewModel {
         parametersOf(appName)
-    }
+    },
 ) {
     val screenState by viewModel.screenState.collectAsStateWithLifecycle()
 
     AsyncLoadContents(
         modifier = modifier,
         screenState = screenState,
-        retryAction = viewModel::fetch
+        retryAction = viewModel::fetch,
     ) {
         TeamOfServiceScreen(
             modifier = Modifier.fillMaxSize(),
@@ -63,6 +61,6 @@ private fun TeamOfServiceScreen(
                 title = stringResource(Res.string.app_terms_of_service),
                 description = stringResource(Res.string.app_terms_of_service_description),
             )
-        }
+        },
     )
 }
