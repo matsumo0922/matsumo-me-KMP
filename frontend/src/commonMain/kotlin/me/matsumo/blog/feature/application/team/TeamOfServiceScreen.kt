@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import matsumo_me_kmp.frontend.generated.resources.Res
-import matsumo_me_kmp.frontend.generated.resources.app_terms_of_service
-import matsumo_me_kmp.frontend.generated.resources.app_terms_of_service_description
+import matsumo_me_kmp.frontend.generated.resources.app_team_of_service
+import matsumo_me_kmp.frontend.generated.resources.app_team_of_service_description
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
 import me.matsumo.blog.core.ui.ArticleView
 import me.matsumo.blog.core.ui.AsyncLoadContents
@@ -58,8 +58,8 @@ private fun TeamOfServiceScreen(
                     .padding(it)
                     .padding(top = 48.dp)
                     .padding(horizontal = 24.dp),
-                title = stringResource(Res.string.app_terms_of_service),
-                description = stringResource(Res.string.app_terms_of_service_description),
+                title = stringResource(Res.string.app_team_of_service),
+                description = stringResource(Res.string.app_team_of_service_description),
             )
         },
     )
