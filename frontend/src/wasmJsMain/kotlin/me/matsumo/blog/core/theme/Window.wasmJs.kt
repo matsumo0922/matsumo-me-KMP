@@ -70,6 +70,7 @@ private fun navigateFromUrl(navController: NavController) {
     val destinations = Destinations.fromUrl(url)
 
     if (destinations != null) {
+        Napier.d("Navigate to $destinations, from url: $url")
         navController.navigate(destinations)
     } else {
         Napier.e("Failed to navigate from url: $url")

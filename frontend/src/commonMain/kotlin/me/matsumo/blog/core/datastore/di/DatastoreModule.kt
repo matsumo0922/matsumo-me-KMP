@@ -2,6 +2,7 @@ package me.matsumo.blog.core.datastore.di
 
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.github.aakira.napier.Napier
+import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
@@ -24,22 +25,26 @@ val formatter = Json {
 
 val datastoreModule = module {
     factory {
-        val ktorfit = Ktorfit.Builder()
-            .baseUrl("https://matsumo-me-api.fly.dev/api/")
-            .httpClient {
-                install(Logging) {
-                    level = LogLevel.INFO
-                    logger = object : Logger {
-                        override fun log(message: String) {
-                            Napier.d(message)
-                        }
+        HttpClient {
+            install(Logging) {
+                level = LogLevel.INFO
+                logger = object : Logger {
+                    override fun log(message: String) {
+                        Napier.d(message)
                     }
                 }
-
-                install(ContentNegotiation) {
-                    json(formatter)
-                }
             }
+
+            install(ContentNegotiation) {
+                json(formatter)
+            }
+        }
+    }
+
+    factory {
+        val ktorfit = Ktorfit.Builder()
+            .baseUrl("https://matsumo-me-api.fly.dev/api/")
+            .httpClient(get<HttpClient>())
             .build()
 
         ktorfit.createArticleApi()

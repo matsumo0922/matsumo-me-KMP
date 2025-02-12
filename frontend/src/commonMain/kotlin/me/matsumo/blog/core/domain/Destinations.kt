@@ -20,7 +20,19 @@ sealed interface Destinations {
     data object Articles : Destinations
 
     @Serializable
-    data class ArticleDetail(val id: Long) : Destinations
+    data class ArticleDetail(
+        val id: Long,
+    ) : Destinations
+
+    @Serializable
+    data class PrivacyPolicy(
+        val appName: String,
+    ) : Destinations
+
+    @Serializable
+    data class TermsOfService(
+        val appName: String,
+    ) : Destinations
 
     @Suppress("UNCHECKED_CAST")
     fun toUrlPath(): String {
@@ -75,10 +87,28 @@ sealed interface Destinations {
                 },
                 buildPath = { article -> mapOf("id" to article.id.toString()) },
             ),
+            Route(
+                pattern = "application/{appName}/privacy_policy",
+                type = PrivacyPolicy::class,
+                parse = { params ->
+                    val appName = params["appName"] ?: return@Route null
+                    PrivacyPolicy(appName)
+                },
+                buildPath = { privacyPolicy -> mapOf("appName" to privacyPolicy.appName) },
+            ),
+            Route(
+                pattern = "application/{appName}/team_of_service",
+                type = TermsOfService::class,
+                parse = { params ->
+                    val appName = params["appName"] ?: return@Route null
+                    TermsOfService(appName)
+                },
+                buildPath = { termsOfService -> mapOf("appName" to termsOfService.appName) },
+            ),
         )
 
         private fun matchRoute(url: Url, routePattern: String): Map<String, String>? {
-            val pathSegments = url.rawSegments.filter { it.isNotBlank() }
+            val pathSegments = url.rawSegments.filter { it.isNotBlank() }.toMutableList()
             val patternSegments = routePattern.split("/").filter { it.isNotBlank() }
 
             if (pathSegments.size != patternSegments.size) return null
@@ -115,8 +145,6 @@ sealed interface Destinations {
         fun fromBackStackEntry(backStackEntry: NavBackStackEntry): Destinations? {
             val routePackage = backStackEntry.destination.route ?: return null
             val currentRoute = argPlaceholder.find(routePackage)?.groupValues?.get(1) ?: routePackage
-
-            Napier.d { "route: $routePackage, currentRoute: $currentRoute" }
 
             val bundle = backStackEntry.arguments ?: Bundle()
             val typeMap = backStackEntry.destination.arguments.mapValues { it.value.type }

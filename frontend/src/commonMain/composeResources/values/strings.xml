@@ -91,4 +91,10 @@
     <string name="home_contact_require_name">Please enter your name.</string>
     <string name="home_contact_require_email">Please enter your email address.</string>
     <string name="home_contact_require_message">Please enter a message.</string>
+
+    <!-- Application -->
+    <string name="app_privacy_policy">Privacy Policy</string>
+    <string name="app_privacy_policy_description">To use the application, you must agree to the following privacy policy.</string>
+    <string name="app_terms_of_service">Terms of Service</string>
+    <string name="app_terms_of_service_description">To use the application, you must agree to the following terms of service.</string>
 </resources>

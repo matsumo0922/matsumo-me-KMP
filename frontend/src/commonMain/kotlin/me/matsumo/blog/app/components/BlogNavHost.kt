@@ -6,6 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import me.matsumo.blog.core.domain.Destinations
 import me.matsumo.blog.core.theme.BindToNavigation
+import me.matsumo.blog.feature.application.privacy.privacyPolicyScreen
+import me.matsumo.blog.feature.application.team.teamOfServiceScreen
 import me.matsumo.blog.feature.articledetail.articleDetailScreen
 import me.matsumo.blog.feature.articles.articlesScreen
 import me.matsumo.blog.feature.home.homeScreen
@@ -28,6 +30,8 @@ internal fun BlogNavHost(
         )
 
         articleDetailScreen()
+        privacyPolicyScreen()
+        teamOfServiceScreen()
     }
 
     BindToNavigation(navController)
