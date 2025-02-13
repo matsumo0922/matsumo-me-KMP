@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.navigation.ExperimentalBrowserHistoryApi
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
-import androidx.navigation.bindToNavigation
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.encodeURIComponent
 import io.github.aakira.napier.Napier
 import io.ktor.http.Url
@@ -47,26 +47,30 @@ actual fun isSystemInDarkThemeUnSafe(): Boolean {
     return window.matchMedia("(prefers-color-scheme: dark)").matches
 }
 
-@OptIn(ExperimentalBrowserHistoryApi::class)
 @Composable
 actual fun BindToNavigation(navController: NavController) {
-    LaunchedEffect(true) {
-        navigateFromUrl(navController)
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val browserUrl by remember {
+        derivedStateOf {
+            currentBackStackEntry?.getRouteAsUrlFragment().orEmpty()
+        }
+    }
 
+    LaunchedEffect(browserUrl) {
+        window.history.pushState(null, "", "${window.location.origin}/$browserUrl")
+    }
+
+    LaunchedEffect(Unit) {
         window.addEventListener("popstate") { event ->
             if (event is PopStateEvent && event.state == null) {
                 navigateFromUrl(navController)
             }
         }
-
-        window.bindToNavigation(navController) {
-            it.getRouteAsUrlFragment().orEmpty()
-        }
     }
 }
 
 private fun navigateFromUrl(navController: NavController) {
-    val url = Url(window.location.hash.replace("#", ""))
+    val url = Url(window.location.toString())
     val destinations = Destinations.fromUrl(url)
 
     if (destinations != null) {

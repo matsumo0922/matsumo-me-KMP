@@ -3,6 +3,7 @@ package me.matsumo.blog.core.domain
 import androidx.core.bundle.Bundle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.serialization.decodeArguments
+import io.github.aakira.napier.Napier
 import io.ktor.http.Url
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
@@ -49,7 +50,7 @@ sealed interface Destinations {
         }
 
         return buildString {
-            append("#$path")
+            append(path)
 
             if (queryParams.isNotEmpty()) {
                 append("?")
@@ -127,6 +128,8 @@ sealed interface Destinations {
         }
 
         fun fromUrl(url: Url): Destinations? {
+            Napier.d { "Destinations: fromUrl: $url" }
+
             val queryParams = url.parameters.entries().associate { it.key to it.value.firstOrNull().orEmpty() }
 
             for (route in routes) {

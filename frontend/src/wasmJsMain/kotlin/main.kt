@@ -18,12 +18,14 @@ import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.window.ComposeViewport
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
+import io.ktor.http.Url
 import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.asDeferred
 import kotlinx.coroutines.await
 import me.matsumo.blog.app.BlogApp
+import me.matsumo.blog.core.domain.Destinations
 import me.matsumo.blog.core.theme.BlogTheme
 import me.matsumo.blog.core.theme.color.DarkBlueColorScheme
 import me.matsumo.blog.core.ui.WasmLoadingScreen
@@ -91,6 +93,7 @@ fun main() {
                     BlogApp(
                         modifier = Modifier.fillMaxSize(),
                         fontFamily = fontFamily,
+                        startDestinations = Destinations.fromUrl(Url(window.location.toString())) ?: Destinations.Home,
                     )
                 } else {
                     BlogTheme {
