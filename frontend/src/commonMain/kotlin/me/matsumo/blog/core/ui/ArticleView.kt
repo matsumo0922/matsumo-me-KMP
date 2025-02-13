@@ -1,13 +1,21 @@
 package me.matsumo.blog.core.ui
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.hoverable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
@@ -21,6 +29,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
@@ -33,9 +42,13 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.mikepenz.markdown.compose.components.CurrentComponentsBridge.text
 import com.mikepenz.markdown.m3.markdownTypography
 import com.mikepenz.markdown.model.markdownDimens
 import com.mikepenz.markdown.model.markdownPadding
+import io.github.aakira.napier.Napier
+import kotlinx.coroutines.launch
 import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
 import me.matsumo.blog.core.theme.LocalDevice
@@ -97,6 +110,7 @@ fun ArticleView(
         mutableStateListOf(*findHeading(content, parseTree).toTypedArray())
     }
 
+    val scope = rememberCoroutineScope()
     val state = rememberLazyListState()
     var currentHeaderKey by remember { mutableStateOf<String?>(null) }
 
@@ -137,6 +151,12 @@ fun ArticleView(
             )
 
             item {
+                Spacer(
+                    modifier = Modifier.height(48.dp),
+                )
+            }
+
+            item {
                 BlogBottomBar(
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -152,8 +172,7 @@ fun ArticleView(
                     .width(tableOfContentsWidth - 40.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                val allowedHeaders =
-                    listOf(MarkdownHeader.MarkdownHeaderNode.H1, MarkdownHeader.MarkdownHeaderNode.H2, MarkdownHeader.MarkdownHeaderNode.H3)
+                val allowedHeaders = listOf(MarkdownHeader.MarkdownHeaderNode.H1, MarkdownHeader.MarkdownHeaderNode.H2, MarkdownHeader.MarkdownHeaderNode.H3)
                 val filteredHeaders = headers.filter { allowedHeaders.contains(it.node) }
 
                 Text(
@@ -163,11 +182,11 @@ fun ArticleView(
                     color = MaterialTheme.colorScheme.onSurface,
                 )
 
-                for (header in filteredHeaders) {
+                for (filteredHeader in filteredHeaders) {
                     val color: Color
                     val weight: FontWeight
 
-                    if (currentHeaderKey == header.key) {
+                    if (currentHeaderKey == filteredHeader.key) {
                         color = MaterialTheme.colorScheme.onSurface
                         weight = FontWeight.ExtraBold
                     } else {
@@ -175,18 +194,40 @@ fun ArticleView(
                         weight = FontWeight.Normal
                     }
 
-                    val indent: Dp = when (header.node) {
+                    val indent: Dp = when (filteredHeader.node) {
                         MarkdownHeader.MarkdownHeaderNode.H1 -> 0.dp
                         MarkdownHeader.MarkdownHeaderNode.H2 -> 16.dp
                         else -> 32.dp
                     }
 
+                    val animateColor by animateColorAsState(color)
+                    val animateWeight by animateIntAsState(weight.weight)
+
+                    val interactionSource = remember { MutableInteractionSource() }
+                    val isHovered by interactionSource.collectIsHoveredAsState()
+
                     Text(
-                        modifier = Modifier.padding(start = indent),
-                        text = header.content.replace("#", ""),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = color,
-                        fontWeight = weight,
+                        modifier = Modifier
+                            .hoverable(interactionSource)
+                            .clickable(
+                                interactionSource = null,
+                                indication = null,
+                                onClick = {
+                                    scope.launch {
+                                        runCatching { state.animateScrollToItem(filteredHeader.index) }.onFailure {
+                                            Napier.e("Failed to scroll to item: ${filteredHeader.index}", it)
+                                        }
+                                    }
+                                },
+                            )
+                            .padding(start = indent),
+                        text = filteredHeader.content.replace("#", ""),
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            textDecoration = if (isHovered) TextDecoration.Underline else TextDecoration.None,
+                        ),
+                        color = animateColor,
+                        fontWeight = FontWeight(animateWeight),
+                        lineHeight = 22.sp,
                     )
                 }
             }

@@ -167,24 +167,31 @@ fun findHeading(
     content: String,
     node: ASTNode,
 ): List<MarkdownHeader> {
-    val text = node.getUnescapedTextInNode(content)
-    val key = "header-${node.hashCode()}"
     val result = mutableListOf<MarkdownHeader>()
 
-    when (node.type) {
-        ATX_1 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H1, key))
-        ATX_2 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H2, key))
-        ATX_3 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H3, key))
-        ATX_4 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H4, key))
-        ATX_5 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H5, key))
-        ATX_6 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H6, key))
-        else -> {
-            // do nothing
+    fun traverse(node: ASTNode, index: Int) {
+        val text = node.getUnescapedTextInNode(content)
+        val key = "header-${node.hashCode()}"
+
+        when (node.type) {
+            ATX_1 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H1, key, index))
+            ATX_2 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H2, key, index))
+            ATX_3 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H3, key, index))
+            ATX_4 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H4, key, index))
+            ATX_5 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H5, key, index))
+            ATX_6 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H6, key, index))
+            else -> {
+                // do nothing
+            }
+        }
+
+        node.children.forEach { child ->
+            traverse(child, index)
         }
     }
 
-    node.children.forEach { child ->
-        result.addAll(findHeading(content, child))
+    node.children.forEachIndexed { index, child ->
+        traverse(child, index)
     }
 
     return result
@@ -225,6 +232,7 @@ data class MarkdownHeader(
     val content: String,
     val node: MarkdownHeaderNode,
     val key: String,
+    val index: Int,
 ) {
     @Stable
     enum class MarkdownHeaderNode {
