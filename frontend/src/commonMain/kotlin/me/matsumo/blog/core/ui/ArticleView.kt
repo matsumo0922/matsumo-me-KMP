@@ -172,7 +172,8 @@ fun ArticleView(
                     .width(tableOfContentsWidth - 40.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                val allowedHeaders = listOf(MarkdownHeader.MarkdownHeaderNode.H1, MarkdownHeader.MarkdownHeaderNode.H2, MarkdownHeader.MarkdownHeaderNode.H3)
+                val allowedHeaders =
+                    listOf(MarkdownHeader.MarkdownHeaderNode.H1, MarkdownHeader.MarkdownHeaderNode.H2, MarkdownHeader.MarkdownHeaderNode.H3)
                 val filteredHeaders = headers.filter { allowedHeaders.contains(it.node) }
 
                 Text(
