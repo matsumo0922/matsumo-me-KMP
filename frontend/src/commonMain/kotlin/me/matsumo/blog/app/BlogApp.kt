@@ -24,13 +24,13 @@ import me.matsumo.blog.app.components.BlogNavHost
 import me.matsumo.blog.app.components.BlogTopAppBar
 import me.matsumo.blog.core.domain.Destinations
 import me.matsumo.blog.core.domain.Device
-import me.matsumo.blog.shared.StaticUrl
 import me.matsumo.blog.core.domain.isDark
 import me.matsumo.blog.core.theme.BlogTheme
 import me.matsumo.blog.core.theme.openUrl
 import me.matsumo.blog.core.theme.rememberDeviceState
 import me.matsumo.blog.core.ui.ModalNavigationDrawerWrapper
 import me.matsumo.blog.core.ui.utils.navigateInclusive
+import me.matsumo.blog.shared.StaticUrl
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

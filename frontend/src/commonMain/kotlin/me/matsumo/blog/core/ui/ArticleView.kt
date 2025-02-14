@@ -106,7 +106,7 @@ fun ArticleView(
         ),
         animations = markdownAnimations(
             animateTextSize = { this },
-        )
+        ),
     )
 
     val parseTree = MarkdownParser(markdownSettings.flavour).buildMarkdownTreeFromString(content)

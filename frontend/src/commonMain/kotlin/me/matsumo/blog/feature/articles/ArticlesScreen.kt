@@ -25,7 +25,6 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import me.matsumo.blog.core.domain.Destinations
 import me.matsumo.blog.core.domain.Device
-import me.matsumo.blog.shared.model.Article
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
 import me.matsumo.blog.core.theme.LocalDevice
 import me.matsumo.blog.core.theme.rememberWindowWidthDp
@@ -34,6 +33,7 @@ import me.matsumo.blog.core.ui.BlogBottomBar
 import me.matsumo.blog.core.ui.FixedWithEdgeSpace
 import me.matsumo.blog.core.ui.itemsWithEdgeSpace
 import me.matsumo.blog.feature.articles.components.ArticleCard
+import me.matsumo.blog.shared.model.Article
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
