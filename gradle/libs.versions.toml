@@ -49,11 +49,10 @@ ktor = "3.0.3"
 coil3 = "3.1.0"
 detekt = "1.23.7"
 ktorfit = "2.2.0"
-exposed = "0.59.0"
-mysql = "8.0.33"
+supabase = "3.1.1"
 markdown = "0.31.0-rc01"
 libraries = "11.2.3"
-buildKonfig = "0.15.1"
+buildKonfig = "0.16.0"
 twitterComposeRule = "0.0.26"
 
 # Debugs
@@ -154,12 +153,8 @@ coil3-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3
 coil3-network = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil3" }
 coil3-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil3" }
 
-# Exposed
-exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
-exposed-dao = { module = "org.jetbrains.exposed:exposed-dao", version.ref = "exposed" }
-exposed-datetime = { module = "org.jetbrains.exposed:exposed-kotlin-datetime", version.ref = "exposed" }
-exposed-jbdc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
-mysql-connector = { module = "mysql:mysql-connector-java", version.ref = "mysql" }
+# Supabase
+supabase-postgrest = { module = "io.github.jan-tennert.supabase:postgrest-kt", version.ref = "supabase" }
 
 # Markdown
 markdown = { module = "com.mikepenz:multiplatform-markdown-renderer-m3", version.ref = "markdown" }
@@ -215,14 +210,6 @@ ktor-server = [
     "ktor-server-config-yaml",
     "ktor-server-content-negotiation",
     "ktor-server-resources",
-]
-
-exposed = [
-    "exposed-core",
-    "exposed-dao",
-    "exposed-datetime",
-    "exposed-jbdc",
-    "mysql-connector",
 ]
 
 koin-client = [

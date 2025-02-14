@@ -5,9 +5,7 @@ import me.matsumo.blog.library
 import me.matsumo.blog.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.dependencies
-import primitive.kmp.kotlin
 
 class BackendPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -20,7 +18,7 @@ class BackendPlugin : Plugin<Project> {
 
             dependencies {
                 "implementation"(libs.bundle("ktor-server"))
-                "implementation"(libs.bundle("exposed"))
+                "implementation"(libs.library("supabase-postgrest"))
             }
         }
     }
