@@ -72,7 +72,7 @@ kotlin {
             implementation(libs.bundles.infra)
             implementation(libs.bundles.ui.common)
             implementation(libs.bundles.ktor.client)
-            implementation(libs.bundles.koin)
+            implementation(libs.bundles.koin.client)
             implementation(libs.bundles.coil)
             implementation(libs.bundles.markdown)
 

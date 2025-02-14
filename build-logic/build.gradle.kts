@@ -20,7 +20,6 @@ kotlin {
 dependencies {
     implementation(libs.android.gradlePlugin)
     implementation(libs.kotlin.gradlePlugin)
-    implementation(libs.room.gradlePlugin)
     implementation(libs.secret.gradlePlugin)
     implementation(libs.detekt.gradlePlugin)
     implementation(libs.build.konfig.gradlePlugin)
@@ -48,6 +47,10 @@ gradlePlugin {
         register("KmpWasmPlugin") {
             id = "matsumo.primitive.kmp.wasm"
             implementationClass = "primitive.kmp.KmpWasmPlugin"
+        }
+        register("KmpJvmPlugin") {
+            id = "matsumo.primitive.kmp.jvm"
+            implementationClass = "primitive.kmp.KmpJvmPlugin"
         }
         register("KmpComposeCompose") {
             id = "matsumo.primitive.kmp.compose"

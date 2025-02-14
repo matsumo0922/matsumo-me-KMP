@@ -1,0 +1,4 @@
+package interfaces
+
+class ArticlesController {
+}

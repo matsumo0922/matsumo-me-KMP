@@ -20,6 +20,7 @@ class BackendPlugin : Plugin<Project> {
 
             dependencies {
                 "implementation"(libs.bundle("ktor-server"))
+                "implementation"(libs.bundle("exposed"))
             }
         }
     }
