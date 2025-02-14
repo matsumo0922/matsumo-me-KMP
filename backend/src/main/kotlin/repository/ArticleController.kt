@@ -1,4 +1,3 @@
 package repository
 
-class ArticleController {
-}
+class ArticleController

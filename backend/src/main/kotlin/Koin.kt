@@ -10,7 +10,7 @@ import org.koin.logger.slf4jLogger
 fun Application.initKoin() {
     val supabaseClient = createSupabaseClient(
         supabaseUrl = environment.config.propertyOrNull("ktor.security.supabaseUrl")?.getString()!!,
-        supabaseKey = environment.config.propertyOrNull("ktor.security.supabaseKey")?.getString()!!
+        supabaseKey = environment.config.propertyOrNull("ktor.security.supabaseKey")?.getString()!!,
     ) {
         install(Postgrest)
     }

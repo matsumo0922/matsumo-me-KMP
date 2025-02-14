@@ -26,7 +26,6 @@ fun Application.module() {
             call.respondText("Hello, world! ${client.supabaseKey}")
         }
         get("/articles") {
-
         }
     }
 }
