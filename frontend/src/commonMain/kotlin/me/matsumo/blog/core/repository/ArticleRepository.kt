@@ -5,8 +5,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.matsumo.blog.core.datastore.ArticleApi
 import me.matsumo.blog.core.datastore.ArticleMapper
-import me.matsumo.blog.core.domain.model.Article
-import me.matsumo.blog.core.domain.model.ArticleDetail
+import me.matsumo.blog.shared.model.Article
+import me.matsumo.blog.shared.model.ArticleDetail
 import me.matsumo.blog.core.ui.utils.IO
 
 class ArticleRepository(

@@ -28,3 +28,5 @@ dependencyResolutionManagement {
 }
 
 include(":frontend")
+include(":backend")
+include(":shared")

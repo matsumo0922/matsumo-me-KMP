@@ -2,8 +2,8 @@ package me.matsumo.blog.core.datastore
 
 import de.jensklingenberg.ktorfit.http.GET
 import de.jensklingenberg.ktorfit.http.Path
-import me.matsumo.blog.core.domain.entity.ArticleDetailEntity
-import me.matsumo.blog.core.domain.entity.ArticleEntity
+import me.matsumo.blog.shared.entity.ArticleDetailEntity
+import me.matsumo.blog.shared.entity.ArticleEntity
 
 interface ArticleApi {
 

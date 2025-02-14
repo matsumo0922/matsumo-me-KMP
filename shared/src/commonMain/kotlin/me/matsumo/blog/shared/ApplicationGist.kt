@@ -1,4 +1,4 @@
-package me.matsumo.blog.core.domain
+package me.matsumo.blog.shared
 
 enum class ApplicationGist(
     val privacyPolicy: String,

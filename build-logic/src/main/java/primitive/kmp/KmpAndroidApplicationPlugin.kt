@@ -19,6 +19,7 @@ class KmpAndroidApplication : Plugin<Project> {
                 apply("kotlin-parcelize")
                 apply("kotlinx-serialization")
                 apply("project-report")
+                apply("com.codingfeline.buildkonfig")
             }
 
             androidApplication {

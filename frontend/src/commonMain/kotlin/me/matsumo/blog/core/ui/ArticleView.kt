@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mikepenz.markdown.compose.components.CurrentComponentsBridge.text
 import com.mikepenz.markdown.m3.markdownTypography
+import com.mikepenz.markdown.model.markdownAnimations
 import com.mikepenz.markdown.model.markdownDimens
 import com.mikepenz.markdown.model.markdownPadding
 import io.github.aakira.napier.Napier
@@ -103,6 +104,9 @@ fun ArticleView(
                 bottom = 2.dp,
             ),
         ),
+        animations = markdownAnimations(
+            animateTextSize = { this },
+        )
     )
 
     val parseTree = MarkdownParser(markdownSettings.flavour).buildMarkdownTreeFromString(content)

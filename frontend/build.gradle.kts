@@ -67,9 +67,11 @@ android {
 kotlin {
     sourceSets {
         commonMain.dependencies {
+            implementation(project(":shared"))
+
             implementation(libs.bundles.infra)
             implementation(libs.bundles.ui.common)
-            implementation(libs.bundles.ktor)
+            implementation(libs.bundles.ktor.client)
             implementation(libs.bundles.koin)
             implementation(libs.bundles.coil)
             implementation(libs.bundles.markdown)

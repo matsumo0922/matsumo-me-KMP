@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import matsumo_me_kmp.frontend.generated.resources.Res
 import matsumo_me_kmp.frontend.generated.resources.error_no_data
 import me.matsumo.blog.core.domain.ScreenState
-import me.matsumo.blog.core.domain.model.Article
+import me.matsumo.blog.shared.model.Article
 import me.matsumo.blog.core.repository.ArticleRepository
 import me.matsumo.blog.core.ui.utils.suspendRunCatching
 

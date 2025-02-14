@@ -6,8 +6,8 @@ import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import me.matsumo.blog.core.domain.ApplicationGist
 import me.matsumo.blog.core.ui.utils.IO
+import me.matsumo.blog.shared.ApplicationGist
 
 class ApplicationRepository(
     private val httpClient: HttpClient,

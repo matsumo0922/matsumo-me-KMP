@@ -70,11 +70,13 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 # KMP
 kmp = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kmpJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kmpCompose = { id = "org.jetbrains.compose", version.ref = "kmpCompose" }
 kmpComplete = { id = "com.louiscad.complete-kotlin", version.ref = "kmpComplete" }
 kmpSwiftKlib = { id = "io.github.ttypic.swiftklib", version.ref = "kmpSwiftKlib" }
 
 # Others
+ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 libraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "libraries" }
 ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
@@ -128,7 +130,7 @@ koin-androidx-startup = { module = "io.insert-koin:koin-androidx-startup", versi
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 
-# Ktor
+# Ktor Client
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
@@ -137,6 +139,12 @@ ktor-wasmJs = { module = "io.ktor:ktor-client-js-wasm-js", version.ref = "ktor" 
 ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktot-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+
+# Ktor Backend
+ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
+ktor-server-jvm = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
+ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
+ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml", version.ref = "ktor" }
 
 # Coil
 coil3-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
@@ -183,11 +191,18 @@ ui-android = [
     "androidx-browser",
 ]
 
-ktor = [
+ktor-client = [
     "ktor-core",
     "ktor-content-negotiation",
     "ktor-serialization-json",
     "ktot-logging",
+]
+
+ktor-server = [
+    "ktor-server-core",
+    "ktor-server-jvm",
+    "ktor-server-netty",
+    "ktor-server-config-yaml",
 ]
 
 koin = [

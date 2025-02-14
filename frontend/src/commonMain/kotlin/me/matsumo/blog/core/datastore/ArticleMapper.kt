@@ -1,9 +1,9 @@
 package me.matsumo.blog.core.datastore
 
-import me.matsumo.blog.core.domain.entity.ArticleDetailEntity
-import me.matsumo.blog.core.domain.entity.ArticleEntity
-import me.matsumo.blog.core.domain.model.Article
-import me.matsumo.blog.core.domain.model.ArticleDetail
+import me.matsumo.blog.shared.entity.ArticleDetailEntity
+import me.matsumo.blog.shared.entity.ArticleEntity
+import me.matsumo.blog.shared.model.Article
+import me.matsumo.blog.shared.model.ArticleDetail
 
 class ArticleMapper {
     fun map(articles: List<ArticleEntity>): List<Article> {

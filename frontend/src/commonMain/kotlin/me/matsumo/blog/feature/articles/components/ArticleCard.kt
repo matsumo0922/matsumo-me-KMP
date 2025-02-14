@@ -28,7 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.unit.dp
-import me.matsumo.blog.core.domain.model.Article
+import me.matsumo.blog.shared.model.Article
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

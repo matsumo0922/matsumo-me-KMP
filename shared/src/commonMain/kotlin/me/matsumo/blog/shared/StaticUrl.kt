@@ -1,4 +1,4 @@
-package me.matsumo.blog.core.domain
+package me.matsumo.blog.shared
 
 object StaticUrl {
     const val GITHUB = "https://github.com/matsumo0922"

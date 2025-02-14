@@ -41,6 +41,10 @@ gradlePlugin {
             id = "matsumo.primitive.kmp.android.application"
             implementationClass = "primitive.kmp.KmpAndroidApplication"
         }
+        register("KmpAndroidLibrary") {
+            id = "matsumo.primitive.kmp.android.library"
+            implementationClass = "primitive.kmp.KmpAndroidLibrary"
+        }
         register("KmpWasmPlugin") {
             id = "matsumo.primitive.kmp.wasm"
             implementationClass = "primitive.kmp.KmpWasmPlugin"
@@ -58,6 +62,10 @@ gradlePlugin {
         register("KtorfitPlugin") {
             id = "matsumo.primitive.ktorfit"
             implementationClass = "primitive.KtrofitPlugin"
+        }
+        register("BackendPlugin") {
+            id = "matsumo.primitive.backend"
+            implementationClass = "primitive.BackendPlugin"
         }
     }
 }

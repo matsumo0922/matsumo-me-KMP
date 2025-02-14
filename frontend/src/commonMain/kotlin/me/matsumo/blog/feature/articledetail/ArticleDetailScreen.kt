@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.collections.immutable.toImmutableList
-import me.matsumo.blog.core.domain.model.ArticleDetail
+import me.matsumo.blog.shared.model.ArticleDetail
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
 import me.matsumo.blog.core.ui.ArticleView
 import me.matsumo.blog.core.ui.AsyncLoadContents
