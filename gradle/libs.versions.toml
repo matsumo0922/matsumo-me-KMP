@@ -51,6 +51,7 @@ detekt = "1.23.7"
 ktorfit = "2.2.0"
 supabase = "3.1.1"
 markdown = "0.31.0-rc01"
+logback = "1.5.16"
 libraries = "11.2.3"
 buildKonfig = "0.16.0"
 twitterComposeRule = "0.0.26"
@@ -129,6 +130,7 @@ koin-androidx-startup = { module = "io.insert-koin:koin-androidx-startup", versi
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
+koin-logger-slf4j = { module = "io.insert-koin:koin-logger-slf4j", version.ref = "koin" }
 
 # Ktor Client
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -147,6 +149,8 @@ ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor"
 ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml", version.ref = "ktor" }
 ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
 ktor-server-resources = { module = "io.ktor:ktor-server-resources", version.ref = "ktor" }
+ktor-sever-call-logging = { module = "io.ktor:ktor-server-call-logging", version.ref = "ktor" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
 # Coil
 coil3-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
@@ -210,6 +214,8 @@ ktor-server = [
     "ktor-server-config-yaml",
     "ktor-server-content-negotiation",
     "ktor-server-resources",
+    "ktor-sever-call-logging",
+    "logback",
 ]
 
 koin-client = [
@@ -221,6 +227,7 @@ koin-client = [
 koin-server = [
     "koin-core",
     "koin-ktor",
+    "koin-logger-slf4j",
 ]
 
 coil = [
