@@ -30,7 +30,7 @@ fun Application.initKoin() {
         modules(
             module {
                 single<SupabaseClient> { supabaseClient }
-            }
+            },
         )
 
         modules(dataSourceModule)

@@ -21,15 +21,15 @@ CREATE TABLE qiita_article_detail
     article_id       INTEGER      NOT NULL,
     source_id        VARCHAR(50)  NOT NULL, -- Qiita 側の記事ID
     source_url       VARCHAR(255) NOT NULL, -- Qiita 記事の URL
-    title   VARCHAR(255) NOT NULL,
-    content TEXT,                           -- Markdown形式の本文（body）
+    title            VARCHAR(255) NOT NULL,
+    content          TEXT,                  -- Markdown形式の本文（body）
     rendered_content TEXT,                  -- レンダリング後の本文（rendered_body）
     is_published     BOOLEAN      NOT NULL DEFAULT TRUE,
     comments_count   INTEGER,
     likes_count      INTEGER,
     reactions_count  INTEGER,
     stocks_count     INTEGER,
-    tags    VARCHAR(50)[],
+    tags             VARCHAR(50)[],
     created_at       TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at       TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_qiita_article
@@ -61,14 +61,14 @@ CREATE TABLE markdown_article_detail
 (
     id               SERIAL PRIMARY KEY,
     article_id       INTEGER      NOT NULL,
-    source_id  VARCHAR(50)  NOT NULL,       -- UUID
-    source_url VARCHAR(255) NOT NULL,       -- MarkdownファイルのURL（例: Gitリポジトリ上やCDN上のURL）
-    title      VARCHAR(255) NOT NULL,
-    content    TEXT,                        -- Markdown形式の本文
+    source_id        VARCHAR(50)  NOT NULL, -- UUID
+    source_url       VARCHAR(255) NOT NULL, -- MarkdownファイルのURL（例: Gitリポジトリ上やCDN上のURL）
+    title            VARCHAR(255) NOT NULL,
+    content          TEXT,                  -- Markdown形式の本文
     rendered_content TEXT,                  -- レンダリング後の本文（未加工の場合は NULL）
     is_published     BOOLEAN      NOT NULL DEFAULT TRUE,
     last_modified    TIMESTAMP,             -- ファイルの最終更新日時
-    tags       VARCHAR(50)[],
+    tags             VARCHAR(50)[],
     created_at       TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at       TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_markdown_article

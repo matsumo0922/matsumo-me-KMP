@@ -41,5 +41,5 @@ data class MarkdownArticleDetailDao(
 
     @SerialName("updated_at")
     @Serializable(with = OffsetDateTimeSerializer::class)
-    val updatedAt: OffsetDateTime
+    val updatedAt: OffsetDateTime,
 )

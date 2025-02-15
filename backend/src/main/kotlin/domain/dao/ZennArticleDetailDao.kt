@@ -46,5 +46,5 @@ data class ZennArticleDetailDao(
 
     @Serializable(with = OffsetDateTimeSerializer::class)
     @SerialName("updated_at")
-    val updatedAt: OffsetDateTime
+    val updatedAt: OffsetDateTime,
 )

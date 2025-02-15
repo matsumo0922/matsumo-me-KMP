@@ -14,7 +14,7 @@ enum class ArticleSource {
     QIITA,
 
     @SerialName("zenn")
-    ZENN
+    ZENN,
 }
 
 @Serializable
@@ -43,5 +43,5 @@ data class ArticleDao(
 
     @Serializable(with = OffsetDateTimeSerializer::class)
     @SerialName("updated_at")
-    val updatedAt: OffsetDateTime
+    val updatedAt: OffsetDateTime,
 )

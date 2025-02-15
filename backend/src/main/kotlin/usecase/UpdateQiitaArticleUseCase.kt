@@ -24,7 +24,7 @@ class UpdateQiitaArticleUseCase(
 
     private fun resolveArticleDetail(
         entity: QiitaArticleEntity,
-        currentDetail: QiitaArticleDetail?
+        currentDetail: QiitaArticleDetail?,
     ): QiitaArticleDetail {
         val baseDetail = entity.toQiitaArticleDetail()
         return currentDetail?.let { baseDetail.copy(id = it.id) } ?: baseDetail
@@ -32,7 +32,7 @@ class UpdateQiitaArticleUseCase(
 
     private fun resolveArticle(
         articleDetail: QiitaArticleDetail,
-        currentArticle: ArticleDao?
+        currentArticle: ArticleDao?,
     ): ArticleDao {
         val baseArticle = articleDetail.toArticle()
         return currentArticle?.let { baseArticle.copy(id = it.id) } ?: baseArticle
@@ -54,7 +54,6 @@ class UpdateQiitaArticleUseCase(
             logger.info("Inserted article: ${insertedArticle.title}")
         }
     }
-
 
     private fun QiitaArticleEntity.toQiitaArticleDetail(): QiitaArticleDetail {
         return QiitaArticleDetail(
