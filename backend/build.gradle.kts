@@ -25,6 +25,7 @@ dependencies {
 
     implementation(libs.bundles.infra)
     implementation(libs.bundles.koin.server)
+    implementation(libs.bundles.ktor.client)
 }
 
 fun Properties.getJvmArg(key: String): String {

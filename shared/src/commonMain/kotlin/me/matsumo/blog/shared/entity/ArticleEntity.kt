@@ -15,8 +15,6 @@ data class ArticleEntity(
     val tags: List<String>,
     @SerialName("created_at")
     val createdAt: String,
-    @SerialName("published_at")
-    val publishedAt: String,
     @SerialName("updated_at")
     val updatedAt: String,
     @SerialName("url")

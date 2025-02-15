@@ -9,7 +9,6 @@ data class ArticleDetail(
     val body: String,
     val tags: List<String>,
     val createdAt: String,
-    val publishedAt: String,
     val updatedAt: String,
     val url: String,
 )

@@ -28,7 +28,6 @@ class ArticleMapper {
             body = articleDetailEntity.body,
             tags = articleDetailEntity.tags,
             createdAt = articleDetailEntity.createdAt,
-            publishedAt = articleDetailEntity.publishedAt,
             updatedAt = articleDetailEntity.updatedAt,
             url = articleDetailEntity.url,
         )
