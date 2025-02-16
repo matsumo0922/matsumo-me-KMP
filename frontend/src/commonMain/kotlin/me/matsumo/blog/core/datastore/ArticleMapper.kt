@@ -14,7 +14,7 @@ class ArticleMapper {
                 resource = it.resource,
                 tags = it.tags,
                 createdAt = it.createdAt,
-                publishedAt = it.publishedAt,
+                publishedAt = it.updatedAt,
                 updatedAt = it.updatedAt,
                 url = it.url,
             )
