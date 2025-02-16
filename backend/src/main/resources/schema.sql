@@ -61,7 +61,7 @@ CREATE TABLE markdown_article_detail
 (
     id               SERIAL PRIMARY KEY,
     article_id       INTEGER      NOT NULL,
-    source_id        VARCHAR(50)  NOT NULL, -- UUID
+    source_id        VARCHAR(50)  NOT NULL, -- Zenn 側の記事ID
     source_url       VARCHAR(255) NOT NULL, -- MarkdownファイルのURL（例: Gitリポジトリ上やCDN上のURL）
     title            VARCHAR(255) NOT NULL,
     content          TEXT,                  -- Markdown形式の本文

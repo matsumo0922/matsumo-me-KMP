@@ -2,6 +2,8 @@ package repository
 
 import datasource.ArticleDatabase
 import domain.QiitaArticleEntity
+import domain.ZennArticleDetailEntity
+import domain.ZennArticleEntity
 import domain.dao.ArticleDao
 import domain.dao.MarkdownArticleDetailDao
 import domain.dao.QiitaArticleDetail
@@ -60,5 +62,13 @@ class ArticleRepository(
 
     suspend fun getQiitaArticlesEntity(): List<QiitaArticleEntity> {
         return httpClient.get("https://qiita.com/api/v2/users/matsumo0922/items?per_page=100").body()
+    }
+
+    suspend fun getZennArticlesEntity(): ZennArticleEntity {
+        return httpClient.get("https://zenn.dev/api/articles?username=matsumo0922&count=100").body()
+    }
+
+    suspend fun getZennArticleDetailEntity(sourceId: String): ZennArticleDetailEntity {
+        return httpClient.get("https://zenn.dev/api/articles/$sourceId").body()
     }
 }

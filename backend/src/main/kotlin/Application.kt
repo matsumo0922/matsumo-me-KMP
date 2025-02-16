@@ -9,6 +9,7 @@ import io.ktor.server.routing.post
 import io.ktor.server.routing.routing
 import org.koin.ktor.ext.inject
 import usecase.UpdateQiitaArticleUseCase
+import usecase.UpdateZennArticleUseCase
 
 fun main(args: Array<String>) {
     EngineMain.main(args)
@@ -24,10 +25,12 @@ fun Application.module() {
 
 fun Application.routes() {
     val updateQiitaArticleUseCase by inject<UpdateQiitaArticleUseCase>()
+    val updateZennArticleUseCase by inject<UpdateZennArticleUseCase>()
 
     routing {
         post("/update_articles") {
             updateQiitaArticleUseCase()
+            updateZennArticleUseCase()
         }
     }
 }
