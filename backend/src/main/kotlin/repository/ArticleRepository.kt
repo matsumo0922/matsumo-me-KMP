@@ -1,6 +1,8 @@
 package repository
 
 import datasource.ArticleDatabase
+import domain.MarkdownArticleDetailEntity
+import domain.MarkdownArticleEntity
 import domain.QiitaArticleEntity
 import domain.ZennArticleDetailEntity
 import domain.ZennArticleEntity
@@ -11,6 +13,14 @@ import domain.dao.ZennArticleDetailDao
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
+import org.commonmark.ext.front.matter.YamlFrontMatterBlock
+import org.commonmark.ext.front.matter.YamlFrontMatterExtension
+import org.commonmark.ext.front.matter.YamlFrontMatterVisitor
+import org.commonmark.parser.Parser
+import org.commonmark.renderer.markdown.MarkdownRenderer
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 class ArticleRepository(
     private val httpClient: HttpClient,
@@ -70,5 +80,45 @@ class ArticleRepository(
 
     suspend fun getZennArticleDetailEntity(sourceId: String): ZennArticleDetailEntity {
         return httpClient.get("https://zenn.dev/api/articles/$sourceId").body()
+    }
+
+    suspend fun getMarkdownArticlesEntity(): List<MarkdownArticleEntity> {
+        return httpClient.get("https://api.github.com/repos/matsumo0922/matsumo-me-KMP/contents/articles").body()
+    }
+
+    suspend fun getMarkdownArticleDetailEntity(path: String, sha: String): MarkdownArticleDetailEntity {
+        val content = httpClient.get("https://raw.githubusercontent.com/matsumo0922/matsumo-me-KMP/refs/heads/master/$path").bodyAsText()
+
+        val renderer = MarkdownRenderer.builder().build()
+        val visitor = YamlFrontMatterVisitor()
+        val parser = Parser.Builder()
+            .extensions(setOf(YamlFrontMatterExtension.create()))
+            .build()
+
+        val document = parser.parse(content)
+
+        document.accept(visitor)
+
+        var node = document.firstChild
+
+        while (node != null) {
+            val next = node.next
+            if (node is YamlFrontMatterBlock) {
+                node.unlink()
+            }
+            node = next
+        }
+
+        return MarkdownArticleDetailEntity(
+            title = (visitor.data["title"] as List<String>).first(),
+            tags = visitor.data["tags"] as List<String>,
+            content = renderer.render(document),
+            sha = sha,
+            path = path,
+            publishedAt = OffsetDateTime.parse(
+                (visitor.data["published_at"] as List<String>).first(),
+                DateTimeFormatter.ISO_LOCAL_DATE_TIME,
+            ),
+        )
     }
 }

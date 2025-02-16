@@ -51,6 +51,7 @@ detekt = "1.23.7"
 ktorfit = "2.2.0"
 supabase = "3.1.1"
 markdown = "0.31.0-rc01"
+commonmark = "0.24.0"
 logback = "1.5.16"
 libraries = "11.2.3"
 buildKonfig = "0.16.0"
@@ -165,6 +166,10 @@ markdown = { module = "com.mikepenz:multiplatform-markdown-renderer-m3", version
 marldown-coil3 = { module = "com.mikepenz:multiplatform-markdown-renderer-coil3", version.ref = "markdown" }
 marldown-code = { module = "com.mikepenz:multiplatform-markdown-renderer-code", version.ref = "markdown" }
 
+# Commonmark
+commonmark = { module = "org.commonmark:commonmark", version.ref = "commonmark" }
+commonmark-front-matter = { module = "org.commonmark:commonmark-ext-yaml-front-matter", version.ref = "commonmark" }
+
 # Others
 desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.4" }
 
@@ -240,4 +245,9 @@ markdown = [
     "markdown",
     "marldown-coil3",
     "marldown-code",
+]
+
+commonmark = [
+    "commonmark",
+    "commonmark-front-matter",
 ]

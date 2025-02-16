@@ -1,6 +1,6 @@
 ---
 title: "【個人開発】pixivFANBOX のクライアントアプリを作って広告してみた話"
-published_at: "2023-12-23T03:55:30.780Z"
+published_at: "2023-12-23T03:55:30"
 tags: [ "android", "pixiv", "FANBOX", "個人開発", "Tech", "google広告" ]
 ---
 

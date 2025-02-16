@@ -13,6 +13,9 @@ data class MarkdownArticleDetailDao(
     @SerialName("article_id")
     val articleId: Int,
 
+    @SerialName("source_id")
+    val sourceId: String,
+
     @SerialName("source_url")
     val sourceUrl: String,
 

@@ -1,6 +1,6 @@
 ---
 title: "ポートフォリオ開発用テスト"
-published_at: "2022-05-15T15:55:30.780Z"
+published_at: "2022-05-15T15:55:30"
 tags: [ "android", "ios" ]
 ---
 
