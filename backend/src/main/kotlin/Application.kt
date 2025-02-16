@@ -8,6 +8,7 @@ import io.ktor.server.plugins.calllogging.CallLogging
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.resources.Resources
 import kotlinx.serialization.Serializable
+import route.articleDetailRoute
 import route.articlesRoute
 import route.updateArticlesRoute
 
@@ -28,6 +29,7 @@ fun Application.module() {
 fun Application.routes() {
     updateArticlesRoute()
     articlesRoute()
+    articleDetailRoute()
 }
 
 @Serializable

@@ -16,6 +16,9 @@ data class ArticleEntity(
     @SerialName("source")
     val source: ArticleSource,
 
+    @SerialName("source_url")
+    val sourceUrl: String,
+
     @SerialName("title")
     val title: String,
 

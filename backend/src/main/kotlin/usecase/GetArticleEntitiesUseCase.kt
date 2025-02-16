@@ -12,10 +12,18 @@ class GetArticleEntitiesUseCase(
         val articles = articleRepository.getArticles()
         val entities = articles?.mapNotNull { it.toArticleEntity() }
             .orEmpty()
-            .distinctBy { it.title.replace(" ", "") }
+            .deduplicateArticles()
             .sortedByDescending { it.createdAt }
 
         return entities
+    }
+
+    private fun List<ArticleEntity>.deduplicateArticles(): List<ArticleEntity> {
+        return this
+            .groupBy { it.title.replace(" ", "") }
+            .map { (_, articlesWithSameTitle) ->
+                articlesWithSameTitle.find { it.source == ArticleSource.MARKDOWN } ?: articlesWithSameTitle.first()
+            }
     }
 
     private fun ArticleDao.toArticleEntity(): ArticleEntity? {
@@ -24,6 +32,7 @@ class GetArticleEntitiesUseCase(
                 id = it,
                 sourceId = sourceId,
                 source = ArticleSource.valueOf(source.name),
+                sourceUrl = sourceUrl,
                 title = title,
                 summary = summary,
                 tags = tags,
