@@ -19,8 +19,8 @@ import org.commonmark.ext.front.matter.YamlFrontMatterExtension
 import org.commonmark.ext.front.matter.YamlFrontMatterVisitor
 import org.commonmark.parser.Parser
 import org.commonmark.renderer.markdown.MarkdownRenderer
+import java.time.LocalDateTime
 import java.time.OffsetDateTime
-import java.time.format.DateTimeFormatter
 
 class ArticleRepository(
     private val httpClient: HttpClient,
@@ -111,14 +111,14 @@ class ArticleRepository(
 
         return MarkdownArticleDetailEntity(
             title = (visitor.data["title"] as List<String>).first(),
-            tags = visitor.data["tags"] as List<String>,
+            tags = (visitor.data["tags"] as List<String>).first().trim('[', ']').split(",").map { it.trim() },
             content = renderer.render(document),
             sha = sha,
             path = path,
-            publishedAt = OffsetDateTime.parse(
-                (visitor.data["published_at"] as List<String>).first(),
-                DateTimeFormatter.ISO_LOCAL_DATE_TIME,
-            ),
+            publishedAt = OffsetDateTime.of(
+                LocalDateTime.parse((visitor.data["published_at"] as List<String>).first()),
+                OffsetDateTime.now().offset
+            )
         )
     }
 }

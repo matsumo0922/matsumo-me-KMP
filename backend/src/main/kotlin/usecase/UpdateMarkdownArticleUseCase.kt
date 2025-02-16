@@ -60,7 +60,7 @@ class UpdateMarkdownArticleUseCase(
         return MarkdownArticleDetailDao(
             id = 0,
             articleId = 0,
-            sourceId = sha,
+            sourceId = sha.take(7),
             sourceUrl = path,
             title = title,
             content = content,
