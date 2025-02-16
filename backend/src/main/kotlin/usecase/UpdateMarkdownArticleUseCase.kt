@@ -65,7 +65,6 @@ class UpdateMarkdownArticleUseCase(
             content = content,
             renderedContent = content,
             isPublished = true,
-            lastModified = null,
             tags = tags,
             createdAt = publishedAt,
             updatedAt = publishedAt,

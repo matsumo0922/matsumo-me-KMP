@@ -1,9 +1,10 @@
 package route
 
+import Route
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
+import io.ktor.server.resources.post
 import io.ktor.server.response.respond
-import io.ktor.server.routing.post
 import io.ktor.server.routing.routing
 import org.koin.ktor.ext.inject
 import usecase.UpdateMarkdownArticleUseCase
@@ -16,7 +17,7 @@ fun Application.updateArticlesRoute() {
     val updateMarkdownArticleUseCase by inject<UpdateMarkdownArticleUseCase>()
 
     routing {
-        post("/update_articles") {
+        post<Route.UpdateArticles> {
             runCatching {
                 updateQiitaArticleUseCase()
                 updateZennArticleUseCase()

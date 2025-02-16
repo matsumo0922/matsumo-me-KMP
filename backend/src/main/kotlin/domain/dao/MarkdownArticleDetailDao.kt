@@ -31,10 +31,6 @@ data class MarkdownArticleDetailDao(
     @SerialName("is_published")
     val isPublished: Boolean,
 
-    @SerialName("last_modified")
-    @Serializable(with = InstantSerializer::class)
-    val lastModified: Instant?,
-
     @SerialName("tags")
     val tags: List<String>,
 
