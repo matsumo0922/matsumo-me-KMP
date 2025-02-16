@@ -1,6 +1,5 @@
 package domain
 
-
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -11,7 +10,7 @@ data class ZennArticleEntity(
     @SerialName("articles")
     val articles: List<Article>,
     @SerialName("next_page")
-    val nextPage: Int?
+    val nextPage: Int?,
 ) {
     @Serializable
     data class Article(

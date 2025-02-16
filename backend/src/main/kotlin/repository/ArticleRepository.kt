@@ -116,7 +116,7 @@ class ArticleRepository(
             content = renderer.render(document),
             sha = sha,
             path = path,
-            publishedAt = LocalDateTime.parse((visitor.data["published_at"] as List<String>).first()).toInstant(TimeZone.of("Asia/Tokyo"))
+            publishedAt = LocalDateTime.parse((visitor.data["published_at"] as List<String>).first()).toInstant(TimeZone.of("Asia/Tokyo")),
         )
     }
 }

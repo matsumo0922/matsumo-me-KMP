@@ -1,6 +1,5 @@
 package domain
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -25,7 +24,7 @@ data class MarkdownArticleEntity(
     @SerialName("type")
     val type: String,
     @SerialName("url")
-    val url: String
+    val url: String,
 ) {
     @Serializable
     data class Links(
@@ -34,6 +33,6 @@ data class MarkdownArticleEntity(
         @SerialName("html")
         val html: String,
         @SerialName("self")
-        val self: String
+        val self: String,
     )
 }

@@ -37,7 +37,7 @@ class GetArticleEntitiesUseCase(
                 summary = summary,
                 tags = tags,
                 createdAt = createdAt,
-                updatedAt = updatedAt
+                updatedAt = updatedAt,
             )
         }
     }

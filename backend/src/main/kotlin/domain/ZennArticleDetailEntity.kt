@@ -1,6 +1,5 @@
 package domain
 
-
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -9,7 +8,7 @@ import me.matsumo.blog.shared.utils.InstantSerializer
 @Serializable
 data class ZennArticleDetailEntity(
     @SerialName("article")
-    val article: Article
+    val article: Article,
 ) {
     @Serializable
     data class Article(
@@ -81,7 +80,7 @@ data class ZennArticleDetailEntity(
             @SerialName("name")
             val name: String,
             @SerialName("taggings_count")
-            val taggingsCount: Int
+            val taggingsCount: Int,
         )
     }
 }
