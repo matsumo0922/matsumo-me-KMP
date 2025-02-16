@@ -7,6 +7,7 @@ CREATE TABLE article
     id         SERIAL PRIMARY KEY,
     source_id  VARCHAR(50)    NOT NULL, -- 各記事ソースのID
     source     article_source NOT NULL,
+    source_url VARCHAR(255) NOT NULL,
     title      VARCHAR(255)   NOT NULL,
     summary    TEXT,
     tags       VARCHAR(50)[],

@@ -31,8 +31,11 @@ data class ArticleDetailEntity(
     @SerialName("tags")
     val tags: List<String>,
 
-    @SerialName("is_pure_markdown")
-    val isPureMarkdown: Boolean,
+    @SerialName("extra_source")
+    val extraSource: ArticleSource?,
+
+    @SerialName("extra_source_url")
+    val extraSourceUrl: String?,
 
     @SerialName("created_at")
     @Serializable(with = InstantSerializer::class)

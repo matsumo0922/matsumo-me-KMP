@@ -2,6 +2,7 @@ package usecase.di
 
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
+import usecase.GetArticleDetailEntityUseCase
 import usecase.GetArticleEntitiesUseCase
 import usecase.UpdateMarkdownArticleUseCase
 import usecase.UpdateQiitaArticleUseCase
@@ -12,4 +13,5 @@ val useCaseModule = module {
     factoryOf(::UpdateZennArticleUseCase)
     factoryOf(::UpdateMarkdownArticleUseCase)
     factoryOf(::GetArticleEntitiesUseCase)
+    factoryOf(::GetArticleDetailEntityUseCase)
 }

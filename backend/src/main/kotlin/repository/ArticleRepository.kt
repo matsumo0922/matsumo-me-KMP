@@ -8,7 +8,7 @@ import domain.ZennArticleDetailEntity
 import domain.ZennArticleEntity
 import domain.dao.ArticleDao
 import domain.dao.MarkdownArticleDetailDao
-import domain.dao.QiitaArticleDetail
+import domain.dao.QiitaArticleDetailDao
 import domain.dao.ZennArticleDetailDao
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -47,7 +47,7 @@ class ArticleRepository(
         return articleDatabase.getArticleDetailFromMarkdown(articleId)
     }
 
-    suspend fun getArticleDetailFromQiita(articleId: Int): QiitaArticleDetail? {
+    suspend fun getArticleDetailFromQiita(articleId: Int): QiitaArticleDetailDao? {
         return articleDatabase.getArticleDetailFromQiita(articleId)
     }
 
@@ -63,7 +63,7 @@ class ArticleRepository(
         return articleDatabase.upsertMarkdownArticleDetail(markdownArticleDetailDao)
     }
 
-    suspend fun upsertQiitaArticleDetail(qiitaArticleDetail: QiitaArticleDetail): QiitaArticleDetail? {
+    suspend fun upsertQiitaArticleDetail(qiitaArticleDetail: QiitaArticleDetailDao): QiitaArticleDetailDao? {
         return articleDatabase.upsertQiitaArticleDetail(qiitaArticleDetail)
     }
 

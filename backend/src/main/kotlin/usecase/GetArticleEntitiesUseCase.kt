@@ -10,7 +10,7 @@ class GetArticleEntitiesUseCase(
 ) {
     suspend operator fun invoke(): List<ArticleEntity> {
         val articles = articleRepository.getArticles()
-        val entities = articles?.map { it.toArticleEntity() }
+        val entities = articles?.mapNotNull { it.toArticleEntity() }
             .orEmpty()
             .distinctBy { it.title.replace(" ", "") }
             .sortedByDescending { it.createdAt }
@@ -18,16 +18,18 @@ class GetArticleEntitiesUseCase(
         return entities
     }
 
-    private fun ArticleDao.toArticleEntity(): ArticleEntity {
-        return ArticleEntity(
-            id = id ?: -1,
-            sourceId = sourceId,
-            source = ArticleSource.valueOf(source.name),
-            title = title,
-            summary = summary,
-            tags = tags,
-            createdAt = createdAt,
-            updatedAt = updatedAt
-        )
+    private fun ArticleDao.toArticleEntity(): ArticleEntity? {
+        return id?.let {
+            ArticleEntity(
+                id = it,
+                sourceId = sourceId,
+                source = ArticleSource.valueOf(source.name),
+                title = title,
+                summary = summary,
+                tags = tags,
+                createdAt = createdAt,
+                updatedAt = updatedAt
+            )
+        }
     }
 }

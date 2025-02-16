@@ -2,7 +2,7 @@ package datasource
 
 import domain.dao.ArticleDao
 import domain.dao.MarkdownArticleDetailDao
-import domain.dao.QiitaArticleDetail
+import domain.dao.QiitaArticleDetailDao
 import domain.dao.ZennArticleDetailDao
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.from
@@ -51,12 +51,12 @@ class ArticleDatabase(
             .decodeSingleOrNull<MarkdownArticleDetailDao>()
     }
 
-    suspend fun getArticleDetailFromQiita(articleId: Int): QiitaArticleDetail? {
+    suspend fun getArticleDetailFromQiita(articleId: Int): QiitaArticleDetailDao? {
         return supabaseClient.from("qiita_article_detail")
             .select {
-                filter { QiitaArticleDetail::articleId eq articleId }
+                filter { QiitaArticleDetailDao::articleId eq articleId }
             }
-            .decodeSingleOrNull<QiitaArticleDetail>()
+            .decodeSingleOrNull<QiitaArticleDetailDao>()
     }
 
     suspend fun getArticleDetailFromZenn(articleId: Int): ZennArticleDetailDao? {
@@ -82,12 +82,12 @@ class ArticleDatabase(
             .decodeSingleOrNull<MarkdownArticleDetailDao>()
     }
 
-    suspend fun upsertQiitaArticleDetail(qiitaArticleDetail: QiitaArticleDetail): QiitaArticleDetail? {
+    suspend fun upsertQiitaArticleDetail(qiitaArticleDetail: QiitaArticleDetailDao): QiitaArticleDetailDao? {
         return supabaseClient.from("qiita_article_detail")
             .upsert(qiitaArticleDetail) {
                 select()
             }
-            .decodeSingleOrNull<QiitaArticleDetail>()
+            .decodeSingleOrNull<QiitaArticleDetailDao>()
     }
 
     suspend fun upsertZennArticleDetail(zennArticleDetail: ZennArticleDetailDao): ZennArticleDetailDao? {

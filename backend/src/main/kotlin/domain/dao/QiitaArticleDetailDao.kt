@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 import me.matsumo.blog.shared.utils.InstantSerializer
 
 @Serializable
-data class QiitaArticleDetail(
+data class QiitaArticleDetailDao(
     @SerialName("id")
     val id: Int? = null,
 

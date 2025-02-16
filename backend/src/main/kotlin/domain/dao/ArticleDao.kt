@@ -3,19 +3,8 @@ package domain.dao
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import me.matsumo.blog.shared.entity.ArticleSource
 import me.matsumo.blog.shared.utils.InstantSerializer
-
-@Serializable
-enum class ArticleSource {
-    @SerialName("markdown")
-    MARKDOWN,
-
-    @SerialName("qiita")
-    QIITA,
-
-    @SerialName("zenn")
-    ZENN,
-}
 
 @Serializable
 data class ArticleDao(
@@ -27,6 +16,9 @@ data class ArticleDao(
 
     @SerialName("source")
     val source: ArticleSource,
+
+    @SerialName("source_url")
+    val sourceUrl: String,
 
     @SerialName("title")
     val title: String,

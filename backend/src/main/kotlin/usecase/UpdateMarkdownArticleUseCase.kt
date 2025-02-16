@@ -3,8 +3,8 @@ package usecase
 import datasource.di.logger
 import domain.MarkdownArticleDetailEntity
 import domain.dao.ArticleDao
-import domain.dao.ArticleSource
 import domain.dao.MarkdownArticleDetailDao
+import me.matsumo.blog.shared.entity.ArticleSource
 import repository.ArticleRepository
 
 class UpdateMarkdownArticleUseCase(
@@ -60,7 +60,7 @@ class UpdateMarkdownArticleUseCase(
         return MarkdownArticleDetailDao(
             articleId = 0,
             sourceId = sha,
-            sourceUrl = path,
+            sourceUrl = "https://github.com/matsumo0922/matsumo-me-KMP/blob/master/$path",
             title = title,
             content = content,
             renderedContent = content,
@@ -75,6 +75,7 @@ class UpdateMarkdownArticleUseCase(
         return ArticleDao(
             sourceId = sourceId,
             source = ArticleSource.MARKDOWN,
+            sourceUrl = sourceUrl,
             title = title,
             summary = content?.take(100),
             tags = tags,

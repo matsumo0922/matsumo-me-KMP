@@ -3,8 +3,8 @@ package usecase
 import datasource.di.logger
 import domain.ZennArticleDetailEntity
 import domain.dao.ArticleDao
-import domain.dao.ArticleSource
 import domain.dao.ZennArticleDetailDao
+import me.matsumo.blog.shared.entity.ArticleSource
 import repository.ArticleRepository
 
 class UpdateZennArticleUseCase(
@@ -60,7 +60,7 @@ class UpdateZennArticleUseCase(
         return ZennArticleDetailDao(
             articleId = 0,
             sourceId = slug,
-            sourceUrl = path,
+            sourceUrl = "https://zenn.dev$path",
             title = title,
             content = bodyHtml,
             renderedContent = bodyHtml,
@@ -77,6 +77,7 @@ class UpdateZennArticleUseCase(
         return ArticleDao(
             sourceId = sourceId,
             source = ArticleSource.ZENN,
+            sourceUrl = sourceUrl,
             title = title,
             summary = content?.take(100),
             tags = tags,
