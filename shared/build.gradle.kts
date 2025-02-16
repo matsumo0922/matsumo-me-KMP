@@ -11,3 +11,11 @@ plugins {
 android {
     namespace = "me.matsumo.blog.shared"
 }
+
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.bundles.infra)
+        }
+    }
+}

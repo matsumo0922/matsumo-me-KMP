@@ -1,6 +1,6 @@
 package domain
 
-import java.time.OffsetDateTime
+import kotlinx.datetime.Instant
 
 data class MarkdownArticleDetailEntity(
     val title: String,
@@ -8,5 +8,5 @@ data class MarkdownArticleDetailEntity(
     val path: String,
     val tags: List<String>,
     val sha: String,
-    val publishedAt: OffsetDateTime,
+    val publishedAt: Instant,
 )

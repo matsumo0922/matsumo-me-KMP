@@ -1,10 +1,10 @@
 package domain
 
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import utils.OffsetDateTimeSerializer
-import java.time.OffsetDateTime
+import me.matsumo.blog.shared.utils.InstantSerializer
 
 @Serializable
 data class ZennArticleDetailEntity(
@@ -20,8 +20,8 @@ data class ZennArticleDetailEntity(
         @SerialName("body_letters_count")
         val bodyLettersCount: Int,
         @SerialName("body_updated_at")
-        @Serializable(with = OffsetDateTimeSerializer::class)
-        val bodyUpdatedAt: OffsetDateTime,
+        @Serializable(with = InstantSerializer::class)
+        val bodyUpdatedAt: Instant,
         @SerialName("bookmarked_count")
         val bookmarkedCount: Int,
         @SerialName("can_send_badge")
@@ -57,8 +57,8 @@ data class ZennArticleDetailEntity(
         @SerialName("post_type")
         val postType: String,
         @SerialName("published_at")
-        @Serializable(with = OffsetDateTimeSerializer::class)
-        val publishedAt: OffsetDateTime,
+        @Serializable(with = InstantSerializer::class)
+        val publishedAt: Instant,
         @SerialName("should_noindex")
         val shouldNoindex: Boolean,
         @SerialName("slug")

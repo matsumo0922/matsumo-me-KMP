@@ -1,9 +1,9 @@
 package domain.dao
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import utils.OffsetDateTimeSerializer
-import java.time.OffsetDateTime
+import me.matsumo.blog.shared.utils.InstantSerializer
 
 @Serializable
 enum class ArticleSource {
@@ -38,10 +38,10 @@ data class ArticleDao(
     val tags: List<String>,
 
     @SerialName("created_at")
-    @Serializable(with = OffsetDateTimeSerializer::class)
-    val createdAt: OffsetDateTime,
+    @Serializable(with = InstantSerializer::class)
+    val createdAt: Instant,
 
-    @Serializable(with = OffsetDateTimeSerializer::class)
+    @Serializable(with = InstantSerializer::class)
     @SerialName("updated_at")
-    val updatedAt: OffsetDateTime,
+    val updatedAt: Instant,
 )

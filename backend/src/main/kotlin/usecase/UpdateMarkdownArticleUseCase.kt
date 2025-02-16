@@ -58,9 +58,8 @@ class UpdateMarkdownArticleUseCase(
 
     private fun MarkdownArticleDetailEntity.toMarkdownArticleDetail(): MarkdownArticleDetailDao {
         return MarkdownArticleDetailDao(
-            id = 0,
             articleId = 0,
-            sourceId = sha.take(7),
+            sourceId = sha,
             sourceUrl = path,
             title = title,
             content = content,

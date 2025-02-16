@@ -1,9 +1,9 @@
 package domain
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import utils.OffsetDateTimeSerializer
-import java.time.OffsetDateTime
+import me.matsumo.blog.shared.utils.InstantSerializer
 
 @Serializable
 data class QiitaArticleEntity(
@@ -14,8 +14,8 @@ data class QiitaArticleEntity(
     @SerialName("comments_count")
     val commentsCount: Int,
     @SerialName("created_at")
-    @Serializable(with = OffsetDateTimeSerializer::class)
-    val createdAt: OffsetDateTime,
+    @Serializable(with = InstantSerializer::class)
+    val createdAt: Instant,
     @SerialName("id")
     val id: String,
     @SerialName("likes_count")
@@ -36,9 +36,9 @@ data class QiitaArticleEntity(
     val tags: List<Tag>,
     @SerialName("title")
     val title: String,
-    @Serializable(with = OffsetDateTimeSerializer::class)
+    @Serializable(with = InstantSerializer::class)
     @SerialName("updated_at")
-    val updatedAt: OffsetDateTime,
+    val updatedAt: Instant,
     @SerialName("url")
     val url: String,
 ) {

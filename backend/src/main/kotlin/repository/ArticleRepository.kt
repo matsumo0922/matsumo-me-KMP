@@ -14,13 +14,14 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import org.commonmark.ext.front.matter.YamlFrontMatterBlock
 import org.commonmark.ext.front.matter.YamlFrontMatterExtension
 import org.commonmark.ext.front.matter.YamlFrontMatterVisitor
 import org.commonmark.parser.Parser
 import org.commonmark.renderer.markdown.MarkdownRenderer
-import java.time.LocalDateTime
-import java.time.OffsetDateTime
 
 class ArticleRepository(
     private val httpClient: HttpClient,
@@ -111,14 +112,11 @@ class ArticleRepository(
 
         return MarkdownArticleDetailEntity(
             title = (visitor.data["title"] as List<String>).first(),
-            tags = (visitor.data["tags"] as List<String>).first().trim('[', ']').split(",").map { it.trim() },
+            tags = (visitor.data["tags"] as List<String>).first().trim('[', ']').split(",").map { it.trim(' ', '"') },
             content = renderer.render(document),
             sha = sha,
             path = path,
-            publishedAt = OffsetDateTime.of(
-                LocalDateTime.parse((visitor.data["published_at"] as List<String>).first()),
-                OffsetDateTime.now().offset
-            )
+            publishedAt = LocalDateTime.parse((visitor.data["published_at"] as List<String>).first()).toInstant(TimeZone.of("Asia/Tokyo"))
         )
     }
 }

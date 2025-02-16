@@ -1,9 +1,9 @@
 package domain.dao
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import utils.OffsetDateTimeSerializer
-import java.time.OffsetDateTime
+import me.matsumo.blog.shared.utils.InstantSerializer
 
 @Serializable
 data class MarkdownArticleDetailDao(
@@ -32,17 +32,17 @@ data class MarkdownArticleDetailDao(
     val isPublished: Boolean,
 
     @SerialName("last_modified")
-    @Serializable(with = OffsetDateTimeSerializer::class)
-    val lastModified: OffsetDateTime?,
+    @Serializable(with = InstantSerializer::class)
+    val lastModified: Instant?,
 
     @SerialName("tags")
     val tags: List<String>,
 
     @SerialName("created_at")
-    @Serializable(with = OffsetDateTimeSerializer::class)
-    val createdAt: OffsetDateTime,
+    @Serializable(with = InstantSerializer::class)
+    val createdAt: Instant,
 
     @SerialName("updated_at")
-    @Serializable(with = OffsetDateTimeSerializer::class)
-    val updatedAt: OffsetDateTime,
+    @Serializable(with = InstantSerializer::class)
+    val updatedAt: Instant,
 )
