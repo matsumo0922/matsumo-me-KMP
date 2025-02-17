@@ -6,5 +6,5 @@ import androidx.compose.runtime.Immutable
 data class BlogConfig(
     val versionCode: Int,
     val versionName: String,
-    val sendGirdApiKey: String,
+    val backendUrl: String,
 )

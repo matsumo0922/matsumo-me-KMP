@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.unit.dp
 import me.matsumo.blog.shared.model.Article
+import me.matsumo.blog.shared.utils.toIsoDateTimeString
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -69,7 +70,7 @@ fun ArticleCard(
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = article.publishedAt,
+                text = article.createdAt.toIsoDateTimeString(),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

@@ -6,6 +6,7 @@ import io.ktor.server.application.install
 import io.ktor.server.netty.EngineMain
 import io.ktor.server.plugins.calllogging.CallLogging
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.plugins.cors.routing.CORS
 import io.ktor.server.resources.Resources
 import kotlinx.serialization.Serializable
 import route.articleDetailRoute
@@ -22,6 +23,16 @@ fun Application.module() {
     }
     install(Resources)
     install(CallLogging)
+    install(CORS) {
+        allowHost("localhost:8080")
+        allowHost("matsumo.me")
+        allowHost("daichi-matsumoto.com")
+        allowHost("*.matsumo.me")
+        allowHost("*.daichi-matsumoto.com")
+
+        allowCredentials = true
+        allowNonSimpleContentTypes = true
+    }
     initKoin()
     routes()
 }

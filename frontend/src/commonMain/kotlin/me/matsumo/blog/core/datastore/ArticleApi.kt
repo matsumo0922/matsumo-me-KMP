@@ -10,7 +10,7 @@ interface ArticleApi {
     @GET("articles")
     suspend fun getArticles(): List<ArticleEntity>
 
-    @GET("articles/markdown/{id}")
+    @GET("articles/{id}")
     suspend fun getArticleDetail(
         @Path("id") id: Long,
     ): ArticleDetailEntity

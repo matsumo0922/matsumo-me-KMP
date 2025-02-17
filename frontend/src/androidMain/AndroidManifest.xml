@@ -10,6 +10,7 @@
         android:allowBackup="true"
         android:enableOnBackInvokedCallback="true"
         android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true"
         android:extractNativeLibs="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.Blog.Splash"

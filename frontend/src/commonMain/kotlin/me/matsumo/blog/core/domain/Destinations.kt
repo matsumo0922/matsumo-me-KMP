@@ -79,7 +79,7 @@ sealed interface Destinations {
                 parse = { _ -> Articles },
             ),
             Route(
-                pattern = "article/{id}",
+                pattern = "articles/{id}",
                 type = ArticleDetail::class,
                 parse = { params ->
                     val id = params["id"]?.toLong() ?: return@Route null

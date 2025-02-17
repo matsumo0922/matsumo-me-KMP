@@ -1,7 +1,8 @@
+
 import com.android.build.api.variant.ResValue
 import com.codingfeline.buildkonfig.compiler.FieldSpec
 import com.codingfeline.buildkonfig.gradle.TargetConfigDsl
-import java.util.Properties
+import java.util.*
 
 plugins {
     id("matsumo.primitive.kmp.common")
@@ -95,10 +96,6 @@ kotlin {
             implementation(libs.ktor.darwin)
         }
 
-        jsMain.dependencies {
-            implementation(libs.ktor.js)
-        }
-
         wasmJsMain.dependencies {
             implementation(libs.kotlinx.browser)
             implementation(libs.ktor.wasmJs)
@@ -116,7 +113,7 @@ buildkonfig {
     defaultConfigs {
         putBuildConfig(localProperties, "VERSION_NAME", libs.versions.versionName.get())
         putBuildConfig(localProperties, "VERSION_CODE", libs.versions.versionCode.get())
-        putBuildConfig(localProperties, "SENDGIRD_API_KEY")
+        putBuildConfig(localProperties, "BACKEND_URL", "http://localhost:9090/")
     }
 }
 

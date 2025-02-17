@@ -11,6 +11,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import me.matsumo.blog.core.datastore.ArticleMapper
 import me.matsumo.blog.core.datastore.createArticleApi
+import me.matsumo.blog.core.domain.BlogConfig
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
@@ -43,7 +44,7 @@ val datastoreModule = module {
 
     factory {
         val ktorfit = Ktorfit.Builder()
-            .baseUrl("https://matsumo-me-api.fly.dev/api/")
+            .baseUrl(get<BlogConfig>().backendUrl)
             .httpClient(get<HttpClient>())
             .build()
 

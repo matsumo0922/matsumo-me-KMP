@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -16,6 +15,7 @@ import me.matsumo.blog.core.ui.ArticleView
 import me.matsumo.blog.core.ui.AsyncLoadContents
 import me.matsumo.blog.feature.articledetail.components.ArticleTitleSection
 import me.matsumo.blog.shared.model.ArticleDetail
+import me.matsumo.blog.shared.utils.toIsoDateTimeString
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -48,7 +48,7 @@ private fun ArticleDetailScreen(
 ) {
     ArticleView(
         modifier = modifier,
-        content = articleDetail.body,
+        content = articleDetail.content,
         header = {
             ArticleTitleSection(
                 modifier = Modifier
@@ -58,7 +58,7 @@ private fun ArticleDetailScreen(
                     .padding(top = 48.dp)
                     .padding(horizontal = 24.dp),
                 title = articleDetail.title,
-                publishedAt = articleDetail.publishedAt,
+                publishedAt = articleDetail.createdAt.toIsoDateTimeString(),
                 tags = articleDetail.tags.toImmutableList(),
             )
         },

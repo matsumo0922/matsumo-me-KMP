@@ -9,27 +9,33 @@ class ArticleMapper {
     fun map(articles: List<ArticleEntity>): List<Article> {
         return articles.map {
             Article(
-                id = it.id,
+                id = it.id.toLong(),
+                sourceId = it.sourceId,
+                source = it.source,
+                sourceUrl = it.sourceUrl,
                 title = it.title,
-                resource = it.resource,
+                summary = it.summary,
                 tags = it.tags,
                 createdAt = it.createdAt,
-                publishedAt = it.updatedAt,
-                updatedAt = it.updatedAt,
-                url = it.url,
+                updatedAt = it.updatedAt
             )
         }
     }
 
     fun map(articleDetailEntity: ArticleDetailEntity): ArticleDetail {
         return ArticleDetail(
-            id = articleDetailEntity.id,
+            id = articleDetailEntity.id.toLong(),
+            source = articleDetailEntity.source,
+            articleId = articleDetailEntity.articleId.toLong(),
+            sourceId = articleDetailEntity.sourceId,
+            sourceUrl = articleDetailEntity.sourceId,
             title = articleDetailEntity.title,
-            body = articleDetailEntity.body,
+            content = articleDetailEntity.content.orEmpty(),
             tags = articleDetailEntity.tags,
+            extraSource = articleDetailEntity.extraSource,
+            extraSourceUrl = articleDetailEntity.extraSourceUrl,
             createdAt = articleDetailEntity.createdAt,
-            updatedAt = articleDetailEntity.updatedAt,
-            url = articleDetailEntity.url,
+            updatedAt = articleDetailEntity.updatedAt
         )
     }
 }

@@ -1,15 +1,21 @@
 package me.matsumo.blog.shared.model
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
+import me.matsumo.blog.shared.entity.ArticleSource
+import me.matsumo.blog.shared.utils.InstantSerializer
 
 @Serializable
 data class Article(
     val id: Long,
+    val sourceId: String,
+    val source: ArticleSource,
+    val sourceUrl: String,
     val title: String,
-    val resource: String,
+    val summary: String?,
     val tags: List<String>,
-    val createdAt: String,
-    val publishedAt: String,
-    val updatedAt: String,
-    val url: String,
+    @Serializable(with = InstantSerializer::class)
+    val createdAt: Instant,
+    @Serializable(with = InstantSerializer::class)
+    val updatedAt: Instant,
 )

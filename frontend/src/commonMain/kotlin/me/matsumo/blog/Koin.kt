@@ -28,7 +28,7 @@ val appModule = module {
         BlogConfig(
             versionCode = BuildKonfig.VERSION_CODE.toInt(),
             versionName = BuildKonfig.VERSION_NAME,
-            sendGirdApiKey = BuildKonfig.SENDGIRD_API_KEY,
+            backendUrl = BuildKonfig.BACKEND_URL,
         )
     }
 
