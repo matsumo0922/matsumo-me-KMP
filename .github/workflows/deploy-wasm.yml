@@ -5,12 +5,12 @@ on:
 
 jobs:
   deploy:
+    name: Deploy to Cloudflare Pages
     runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
       statuses: write
-    name: Deploy to Cloudflare Pages
     steps:
       - uses: actions/checkout@v4
 
