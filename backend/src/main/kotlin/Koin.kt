@@ -1,6 +1,7 @@
 
 import datasource.di.dataSourceModule
 import datasource.di.formatter
+import datasource.di.logger
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
@@ -21,6 +22,8 @@ fun Application.initKoin() {
         defaultSerializer = KotlinXSerializer(formatter)
         install(Postgrest)
     }
+
+    logger.info("Supabase client initialized. url:${supabaseClient.supabaseUrl}, key:${supabaseClient.supabaseKey}")
 
     install(Koin) {
         slf4jLogger()
