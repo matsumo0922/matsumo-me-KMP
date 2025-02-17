@@ -24,11 +24,8 @@ fun Application.module() {
     install(Resources)
     install(CallLogging)
     install(CORS) {
-        allowHost("localhost:8080")
-        allowHost("matsumo.me")
-        allowHost("daichi-matsumoto.com")
-        allowHost("*.matsumo.me")
-        allowHost("*.daichi-matsumoto.com")
+        anyHost()
+        anyMethod()
 
         allowCredentials = true
         allowNonSimpleContentTypes = true
