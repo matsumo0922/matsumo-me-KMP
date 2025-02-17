@@ -113,7 +113,7 @@ buildkonfig {
     defaultConfigs {
         putBuildConfig(localProperties, "VERSION_NAME", libs.versions.versionName.get())
         putBuildConfig(localProperties, "VERSION_CODE", libs.versions.versionCode.get())
-        putBuildConfig(localProperties, "BACKEND_URL", "http://localhost:9090/")
+        putBuildConfig(localProperties, "BACKEND_URL", defaultValue = "http://localhost:9090/")
     }
 }
 
