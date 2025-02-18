@@ -131,9 +131,9 @@ internal fun ArticleTitleSection(
                                 contentDescription = null,
                                 tint = MaterialTheme.colorScheme.onBackground,
                             )
-                        }
-                    )
-                )
+                        },
+                    ),
+                ),
             )
         }
 

@@ -77,7 +77,7 @@ fun LinkCard(
                     text = ogContents?.title.orEmpty(),
                     style = MaterialTheme.typography.titleMedium,
                     overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
+                    maxLines = 1,
                 )
 
                 Text(
@@ -88,7 +88,7 @@ fun LinkCard(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     overflow = TextOverflow.Ellipsis,
-                    maxLines = 2
+                    maxLines = 2,
                 )
 
                 Spacer(modifier = Modifier.weight(1f))

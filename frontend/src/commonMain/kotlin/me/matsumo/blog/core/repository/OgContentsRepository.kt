@@ -11,7 +11,7 @@ import me.matsumo.blog.shared.model.OgContents
 class OgContentsRepository(
     private val ogContentsApi: OgContentsApi,
     private val ogContentsMapper: OgContentsMapper,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
     suspend fun getOgContents(url: String): OgContents = withContext(ioDispatcher) {
         ogContentsApi.getOgContents(url).let(ogContentsMapper::map)

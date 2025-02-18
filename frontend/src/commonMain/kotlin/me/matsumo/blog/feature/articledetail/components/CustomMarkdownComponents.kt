@@ -97,7 +97,7 @@ class CustomMarkdownComponents(
                         Napier.e(error) { "Failed to get OG contents: $text" }
                         isFailedToShowLinkCard = true
                     }.getOrNull()
-                }
+                },
             )
         } else {
             MarkdownText(

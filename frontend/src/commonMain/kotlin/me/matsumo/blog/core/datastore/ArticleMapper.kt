@@ -17,7 +17,7 @@ class ArticleMapper {
                 summary = it.summary,
                 tags = it.tags,
                 createdAt = it.createdAt,
-                updatedAt = it.updatedAt
+                updatedAt = it.updatedAt,
             )
         }
     }
@@ -35,7 +35,7 @@ class ArticleMapper {
             extraSource = articleDetailEntity.extraSource,
             extraSourceUrl = articleDetailEntity.extraSourceUrl,
             createdAt = articleDetailEntity.createdAt,
-            updatedAt = articleDetailEntity.updatedAt
+            updatedAt = articleDetailEntity.updatedAt,
         )
     }
 }

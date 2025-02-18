@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -28,7 +29,8 @@ import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun rememberGradientShimmerBrush(
-    colors: ImmutableList<Color> = persistentListOf(MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.tertiary),
+    colors: ImmutableList<Color> =
+        persistentListOf(MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.tertiary),
     durationMillis: Int = 3000,
 ): Brush {
     val shimmerEffectTransition = rememberInfiniteTransition(label = "shimmerEffect")
@@ -58,13 +60,11 @@ fun rememberGradientShimmerBrush(
     }
 }
 
-
-@Composable
 fun Modifier.shimmer(
     show: Boolean = true,
     roundedClip: Dp = 4.dp,
     durationMillis: Int = 3000,
-): Modifier {
+): Modifier = composed {
     val brush = rememberGradientShimmerBrush(
         colors = persistentListOf(
             Color.Gray.copy(alpha = 0.3f),
@@ -74,7 +74,7 @@ fun Modifier.shimmer(
         durationMillis = durationMillis,
     )
 
-    return this
+    this
         .clip(RoundedCornerShape(roundedClip))
         .background(
             if (show) {
@@ -83,8 +83,8 @@ fun Modifier.shimmer(
                 Brush.linearGradient(
                     colors = listOf(Color.Transparent, Color.Transparent),
                     start = Offset.Zero,
-                    end = Offset.Zero
+                    end = Offset.Zero,
                 )
-            }
+            },
         )
 }
