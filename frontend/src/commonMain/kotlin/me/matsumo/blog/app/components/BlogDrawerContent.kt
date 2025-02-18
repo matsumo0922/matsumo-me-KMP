@@ -1,6 +1,5 @@
 package me.matsumo.blog.app.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,6 +24,7 @@ import matsumo_me_kmp.frontend.generated.resources.navigation_articles
 import matsumo_me_kmp.frontend.generated.resources.navigation_github
 import matsumo_me_kmp.frontend.generated.resources.navigation_home
 import me.matsumo.blog.core.theme.bold
+import me.matsumo.blog.core.ui.utils.clickableWithPointer
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -100,7 +100,7 @@ private fun DrawerItem(
                     bottomStart = 32.dp,
                 ),
             )
-            .clickable { onClick() }
+            .clickableWithPointer { onClick() }
             .padding(24.dp, 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp),

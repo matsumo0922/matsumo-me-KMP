@@ -2,7 +2,6 @@ package me.matsumo.blog.feature.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -55,6 +54,7 @@ import me.matsumo.blog.core.theme.bold
 import me.matsumo.blog.core.theme.end
 import me.matsumo.blog.core.theme.openUrl
 import me.matsumo.blog.core.ui.CodeTitle
+import me.matsumo.blog.core.ui.utils.clickableWithPointer
 import me.matsumo.blog.core.ui.utils.enterAnimation
 import me.matsumo.blog.core.ui.utils.toCrosProxyUrl
 import org.jetbrains.compose.resources.DrawableResource
@@ -184,7 +184,7 @@ private fun ExperienceItem(
                                 .weight(1f, false)
                                 .aspectRatio(16 / 9f)
                                 .clip(RoundedCornerShape(8.dp))
-                                .clickable { openUrl(experience.ogLink) },
+                                .clickableWithPointer { openUrl(experience.ogLink) },
                             model = experience.ogImage.toCrosProxyUrl(),
                             contentScale = ContentScale.Crop,
                             contentDescription = null,

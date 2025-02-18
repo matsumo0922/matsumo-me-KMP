@@ -2,6 +2,7 @@
 import com.android.build.api.variant.ResValue
 import com.codingfeline.buildkonfig.compiler.FieldSpec
 import com.codingfeline.buildkonfig.gradle.TargetConfigDsl
+import java.io.IOException
 import java.util.*
 
 plugins {
@@ -118,6 +119,7 @@ buildkonfig {
         putBuildConfig(localProperties, "VERSION_NAME", libs.versions.versionName.get())
         putBuildConfig(localProperties, "VERSION_CODE", libs.versions.versionCode.get())
         putBuildConfig(localProperties, "BACKEND_URL", defaultValue = "http://localhost:9090/")
+        putBuildConfig(localProperties, "REVISION", defaultValue = "git rev-parse HEAD".runCommand())
     }
 }
 
@@ -132,3 +134,21 @@ fun TargetConfigDsl.putBuildConfig(
 
     buildConfigField(FieldSpec.Type.STRING, key, (value ?: property ?: env ?: defaultValue).replace("\"", ""))
 }
+
+fun String.runCommand(
+    workingDir: File = File("."),
+    timeoutAmount: Long = 60,
+    timeoutUnit: TimeUnit = TimeUnit.SECONDS
+): String = ProcessBuilder(split("\\s(?=(?:[^'\"`]*(['\"`])[^'\"`]*\\1)*[^'\"`]*$)".toRegex()))
+    .directory(workingDir)
+    .redirectOutput(ProcessBuilder.Redirect.PIPE)
+    .redirectError(ProcessBuilder.Redirect.PIPE)
+    .start()
+    .apply { waitFor(timeoutAmount, timeoutUnit) }
+    .run {
+        val error = errorStream.bufferedReader().readText().trim()
+        if (error.isNotEmpty()) {
+            throw IOException(error)
+        }
+        inputStream.bufferedReader().readText().trim()
+    }

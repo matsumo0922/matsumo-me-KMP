@@ -11,6 +11,7 @@ import me.matsumo.blog.feature.application.team.teamOfServiceScreen
 import me.matsumo.blog.feature.articledetail.articleDetailScreen
 import me.matsumo.blog.feature.articles.articlesScreen
 import me.matsumo.blog.feature.home.homeScreen
+import me.matsumo.blog.feature.revision.revisionScreen
 
 @Composable
 internal fun BlogNavHost(
@@ -32,6 +33,7 @@ internal fun BlogNavHost(
         articleDetailScreen()
         privacyPolicyScreen()
         teamOfServiceScreen()
+        revisionScreen()
     }
 
     BindToNavigation(navController)

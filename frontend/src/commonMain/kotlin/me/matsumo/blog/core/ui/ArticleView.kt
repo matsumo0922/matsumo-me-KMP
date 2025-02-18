@@ -3,10 +3,6 @@ package me.matsumo.blog.core.ui
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.hoverable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -212,28 +208,17 @@ fun ArticleView(
                     val animateColor by animateColorAsState(color)
                     val animateWeight by animateIntAsState(weight.weight)
 
-                    val interactionSource = remember { MutableInteractionSource() }
-                    val isHovered by interactionSource.collectIsHoveredAsState()
-
-                    Text(
-                        modifier = Modifier
-                            .hoverable(interactionSource)
-                            .clickable(
-                                interactionSource = null,
-                                indication = null,
-                                onClick = {
-                                    scope.launch {
-                                        runCatching { state.animateScrollToItem(filteredHeader.index) }.onFailure {
-                                            Napier.e("Failed to scroll to item: ${filteredHeader.index}", it)
-                                        }
-                                    }
-                                },
-                            )
-                            .padding(start = indent),
+                    ClickableText(
+                        modifier = Modifier.padding(start = indent),
+                        onClick = {
+                            scope.launch {
+                                runCatching { state.animateScrollToItem(filteredHeader.index) }.onFailure {
+                                    Napier.e("Failed to scroll to item: ${filteredHeader.index}", it)
+                                }
+                            }
+                        },
                         text = filteredHeader.content.replace("#", ""),
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            textDecoration = if (isHovered) TextDecoration.Underline else TextDecoration.None,
-                        ),
+                        style = MaterialTheme.typography.bodyMedium,
                         color = animateColor,
                         fontWeight = FontWeight(animateWeight),
                         lineHeight = 22.sp,

@@ -2,7 +2,6 @@ package me.matsumo.blog.feature.articles.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.unit.dp
+import me.matsumo.blog.core.ui.utils.clickableWithPointer
 import me.matsumo.blog.shared.model.Article
 import me.matsumo.blog.shared.utils.toIsoDateTimeString
 
@@ -41,7 +41,7 @@ fun ArticleCard(
     Card(
         modifier = modifier
             .clip(RoundedCornerShape(8.dp))
-            .clickable { onClickArticle.invoke(article.id) }
+            .clickableWithPointer { onClickArticle.invoke(article.id) }
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.onBackground.copy(0.1f),

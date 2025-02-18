@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import matsumo_me_kmp.frontend.generated.resources.Res
 import matsumo_me_kmp.frontend.generated.resources.common_reload
@@ -55,7 +57,9 @@ fun ErrorView(
 
         if (retryAction != null) {
             Button(
-                modifier = Modifier.padding(top = 24.dp),
+                modifier = Modifier
+                    .pointerHoverIcon(PointerIcon.Hand)
+                    .padding(top = 24.dp),
                 onClick = { retryAction.invoke() },
             ) {
                 Text(

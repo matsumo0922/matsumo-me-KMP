@@ -7,4 +7,5 @@ data class BlogConfig(
     val versionCode: Int,
     val versionName: String,
     val backendUrl: String,
+    val revision: String,
 )

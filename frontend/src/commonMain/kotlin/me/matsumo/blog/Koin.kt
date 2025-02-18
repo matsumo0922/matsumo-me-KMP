@@ -29,6 +29,7 @@ val appModule = module {
             versionCode = BuildKonfig.VERSION_CODE.toInt(),
             versionName = BuildKonfig.VERSION_NAME,
             backendUrl = BuildKonfig.BACKEND_URL,
+            revision = BuildKonfig.REVISION,
         )
     }
 

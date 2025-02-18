@@ -34,6 +34,9 @@ sealed interface Destinations {
         val appName: String,
     ) : Destinations
 
+    @Serializable
+    data object Revision : Destinations
+
     @Suppress("UNCHECKED_CAST")
     fun toUrlPath(): String {
         val route = routes.firstOrNull { it.type.isInstance(this) }
@@ -105,6 +108,11 @@ sealed interface Destinations {
                 },
                 buildPath = { termsOfService -> mapOf("appName" to termsOfService.appName) },
             ),
+            Route(
+                pattern = "revision",
+                type = Revision::class,
+                parse = { _ -> Revision },
+            )
         )
 
         private fun matchRoute(url: Url, routePattern: String): Map<String, String>? {

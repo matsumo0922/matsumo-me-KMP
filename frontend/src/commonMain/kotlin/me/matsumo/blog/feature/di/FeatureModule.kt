@@ -4,11 +4,13 @@ import me.matsumo.blog.feature.application.privacy.PrivacyPolicyViewModel
 import me.matsumo.blog.feature.application.team.TeamOfServiceViewModel
 import me.matsumo.blog.feature.articledetail.ArticleDetailViewModel
 import me.matsumo.blog.feature.articles.ArticlesViewModel
+import me.matsumo.blog.feature.revision.RevisionViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val featureModule = module {
+    viewModelOf(::RevisionViewModel)
     viewModelOf(::ArticlesViewModel)
 
     viewModel {

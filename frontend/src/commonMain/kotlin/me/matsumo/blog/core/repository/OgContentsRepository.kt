@@ -1,5 +1,6 @@
 package me.matsumo.blog.core.repository
 
+import io.ktor.http.Url
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,7 +14,20 @@ class OgContentsRepository(
     private val ogContentsMapper: OgContentsMapper,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
+    private val cache = mutableMapOf<String, OgContents>()
+
     suspend fun getOgContents(url: String): OgContents = withContext(ioDispatcher) {
-        ogContentsApi.getOgContents(url).let(ogContentsMapper::map)
+        require(Url(url).host.lowercase() !in UNSUPPORTED_HOST)
+
+        cache[url] ?: ogContentsApi.getOgContents(url).let(ogContentsMapper::map).also {
+            cache[url] = it
+        }
+    }
+
+    companion object {
+        private val UNSUPPORTED_HOST = listOf(
+            "x.com",
+            "twitter.com"
+        )
     }
 }

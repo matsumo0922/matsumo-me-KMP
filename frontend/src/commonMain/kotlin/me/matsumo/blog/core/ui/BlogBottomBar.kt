@@ -2,10 +2,6 @@ package me.matsumo.blog.core.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.hoverable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,12 +16,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
@@ -114,21 +108,10 @@ private fun InfoSection(
                 "https://github.com/matsumo0922" to "GitHub",
                 "https://zenn.dev/matsumo0922" to "Zenn",
             ).forEach { (url, text) ->
-                val interactionSource = remember { MutableInteractionSource() }
-                val isHovered by interactionSource.collectIsHoveredAsState()
-
-                Text(
-                    modifier = Modifier
-                        .hoverable(interactionSource)
-                        .clickable(
-                            interactionSource = null,
-                            indication = null,
-                            onClick = { openUrl(url) },
-                        ),
+                ClickableText(
+                    onClick = { openUrl(url) },
                     text = text,
-                    style = MaterialTheme.typography.bodyMedium.semiBold().copy(
-                        textDecoration = if (isHovered) TextDecoration.Underline else TextDecoration.None,
-                    ),
+                    style = MaterialTheme.typography.bodyMedium.semiBold(),
                     color = MaterialTheme.colorScheme.onBackground,
                 )
             }

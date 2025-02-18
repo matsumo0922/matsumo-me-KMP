@@ -2,7 +2,6 @@ package me.matsumo.blog.feature.articledetail.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
@@ -42,6 +41,7 @@ import me.matsumo.blog.core.theme.LocalDevice
 import me.matsumo.blog.core.theme.bold
 import me.matsumo.blog.core.theme.openUrl
 import me.matsumo.blog.core.theme.semiBold
+import me.matsumo.blog.core.ui.utils.clickableWithPointer
 import me.matsumo.blog.shared.entity.ArticleSource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -108,8 +108,8 @@ internal fun ArticleTitleSection(
                     .align(if (device == Device.DESKTOP) Alignment.End else Alignment.Start)
                     .padding(top = 4.dp)
                     .hoverable(interactionSource)
-                    .clickable(
-                        interactionSource = null,
+                    .clickableWithPointer(
+                        interactionSource = interactionSource,
                         indication = null,
                         onClick = { openUrl(extraSourceUrl) },
                     ),

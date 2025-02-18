@@ -3,7 +3,6 @@ package me.matsumo.blog.feature.home.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,6 +30,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -54,6 +54,7 @@ import me.matsumo.blog.core.theme.bold
 import me.matsumo.blog.core.theme.openUrl
 import me.matsumo.blog.core.ui.CodeTitle
 import me.matsumo.blog.core.ui.NonLazyVerticalGrid
+import me.matsumo.blog.core.ui.utils.clickableWithPointer
 import me.matsumo.blog.core.ui.utils.enterAnimation
 import me.matsumo.blog.core.ui.utils.focusScale
 import org.jetbrains.compose.resources.DrawableResource
@@ -119,7 +120,7 @@ private fun ProjectItem(
                 shape = RoundedCornerShape(12.dp),
             )
             .background(MaterialTheme.colorScheme.background.copy(0.7f))
-            .clickable(
+            .clickableWithPointer(
                 interactionSource = null,
                 indication = null,
                 onClick = { (project.url ?: project.github)?.let(onLinkClicked) },
@@ -168,7 +169,10 @@ private fun ProjectItem(
             )
 
             if (project.url != null) {
-                IconButton(onClick = { onLinkClicked.invoke(project.url) }) {
+                IconButton(
+                    modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
+                    onClick = { onLinkClicked.invoke(project.url) }
+                ) {
                     Icon(
                         imageVector = Icons.Default.Link,
                         tint = MaterialTheme.colorScheme.onSurface,
@@ -178,7 +182,10 @@ private fun ProjectItem(
             }
 
             if (project.github != null) {
-                IconButton(onClick = { onLinkClicked.invoke(project.github) }) {
+                IconButton(
+                    modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
+                    onClick = { onLinkClicked.invoke(project.github) }
+                ) {
                     AsyncImage(
                         modifier = Modifier.size(24.dp),
                         model = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",

@@ -2,7 +2,6 @@ package me.matsumo.blog.app.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,12 +20,15 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import matsumo_me_kmp.frontend.generated.resources.Res
 import matsumo_me_kmp.frontend.generated.resources.navigation_articles
 import matsumo_me_kmp.frontend.generated.resources.navigation_github
 import matsumo_me_kmp.frontend.generated.resources.navigation_home
 import matsumo_me_kmp.frontend.generated.resources.vec_blog_logo
+import me.matsumo.blog.core.ui.utils.clickableWithPointer
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 
@@ -53,7 +55,7 @@ internal fun BlogTopAppBar(
         Image(
             modifier = Modifier
                 .padding(4.dp)
-                .clickable(
+                .clickableWithPointer(
                     interactionSource = null,
                     indication = null,
                     onClick = { onNavigationHomeClicked() },
@@ -64,7 +66,10 @@ internal fun BlogTopAppBar(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        IconButton(onToggleThemeClicked) {
+        IconButton(
+            modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
+            onClick = onToggleThemeClicked,
+        ) {
             Icon(
                 imageVector = if (isDark) Icons.Filled.DarkMode else Icons.Filled.LightMode,
                 contentDescription = "Theme",
@@ -80,7 +85,10 @@ internal fun BlogTopAppBar(
                     alignment = Alignment.CenterHorizontally,
                 ),
             ) {
-                TextButton(onNavigationHomeClicked) {
+                TextButton(
+                    modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
+                    onClick = onNavigationHomeClicked
+                ) {
                     Text(
                         text = stringResource(Res.string.navigation_home),
                         style = MaterialTheme.typography.titleMedium,
@@ -88,7 +96,10 @@ internal fun BlogTopAppBar(
                     )
                 }
 
-                TextButton(onNavigationArticlesClicked) {
+                TextButton(
+                    modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
+                    onClick = onNavigationArticlesClicked
+                ) {
                     Text(
                         text = stringResource(Res.string.navigation_articles),
                         style = MaterialTheme.typography.titleMedium,
@@ -96,7 +107,10 @@ internal fun BlogTopAppBar(
                     )
                 }
 
-                TextButton(onNavigationGithubClicked) {
+                TextButton(
+                    modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
+                    onClick = onNavigationGithubClicked
+                ) {
                     Text(
                         text = stringResource(Res.string.navigation_github),
                         style = MaterialTheme.typography.titleMedium,

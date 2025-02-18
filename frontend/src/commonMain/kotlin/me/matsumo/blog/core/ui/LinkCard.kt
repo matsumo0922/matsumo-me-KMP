@@ -2,7 +2,6 @@ package me.matsumo.blog.core.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,6 +30,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import me.matsumo.blog.core.theme.openUrl
+import me.matsumo.blog.core.ui.utils.clickableWithPointer
 import me.matsumo.blog.core.ui.utils.toCrosProxyUrl
 import me.matsumo.blog.shared.model.OgContents
 
@@ -52,7 +52,7 @@ fun LinkCard(
         modifier = modifier
             .height(160.dp)
             .clip(RoundedCornerShape(8.dp))
-            .clickable { openUrl(url) }
+            .clickableWithPointer { openUrl(url) }
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.onBackground.copy(0.1f),
@@ -121,7 +121,7 @@ fun LinkCard(
 
             AsyncImage(
                 modifier = Modifier
-                    .widthIn(min = if (ogContents == null) 128.dp else 0.dp)
+                    .widthIn(min = if (ogContents == null) 160.dp else 0.dp)
                     .fillMaxHeight()
                     .shimmer(ogContents == null, 0.dp),
                 model = ogContents?.imageUrl?.toCrosProxyUrl(),
