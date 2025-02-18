@@ -11,6 +11,7 @@ import io.ktor.server.resources.Resources
 import kotlinx.serialization.Serializable
 import route.articleDetailRoute
 import route.articlesRoute
+import route.ogContentsRoute
 import route.updateArticlesRoute
 
 fun main(args: Array<String>) {
@@ -38,6 +39,7 @@ fun Application.routes() {
     updateArticlesRoute()
     articlesRoute()
     articleDetailRoute()
+    ogContentsRoute()
 }
 
 @Serializable
@@ -58,4 +60,8 @@ sealed interface Route {
     @Serializable
     @Resource("/update_articles")
     data object UpdateArticles : Route
+
+    @Serializable
+    @Resource("/og_contents")
+    data class OgContents(val url: String) : Route
 }

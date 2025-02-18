@@ -24,7 +24,7 @@ import com.mikepenz.markdown.utils.getUnescapedTextInNode
 import kotlinx.coroutines.delay
 import me.matsumo.blog.core.theme.bold
 import me.matsumo.blog.core.ui.LinkCard
-import me.matsumo.blog.core.ui.OgContents
+import me.matsumo.blog.shared.model.OgContents
 import org.intellij.markdown.ast.getTextInNode
 import kotlin.time.Duration.Companion.seconds
 

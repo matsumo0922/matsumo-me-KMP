@@ -28,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import me.matsumo.blog.core.theme.openUrl
+import me.matsumo.blog.shared.model.OgContents
 
 @Composable
 fun LinkCard(

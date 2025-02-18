@@ -1,8 +1,8 @@
-package me.matsumo.blog.core.ui
+package me.matsumo.blog.shared.model
 
-import androidx.compose.runtime.Stable
+import kotlinx.serialization.Serializable
 
-@Stable
+@Serializable
 data class OgContents(
     val title: String,
     val description: String,
