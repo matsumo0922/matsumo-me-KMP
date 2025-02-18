@@ -11,16 +11,14 @@ version = "0.0.1"
 
 application {
     val localProperties = Properties().apply {
-        project.rootDir.resolve("local.properties").takeIf { it.exists() }?.also {
-            load(it.inputStream())
-        }
+        load(project.rootDir.resolve("local.properties").inputStream())
     }
 
     mainClass.set("io.ktor.server.netty.EngineMain")
     applicationDefaultJvmArgs = listOfNotNull(
         localProperties.getJvmArg("SUPABASE_URL"),
         localProperties.getJvmArg("SUPABASE_KEY"),
-        localProperties.getJvmArg("BACKEND_PORT"),
+        localProperties.getJvmArg("PORT", "BACKEND_PORT"),
     )
 }
 
@@ -39,6 +37,6 @@ tasks {
     register("stage").dependsOn("installDist")
 }
 
-fun Properties.getJvmArg(key: String): String? {
-    return get(key)?.let { "-D$key=${it}" }
+fun Properties.getJvmArg(key: String, propertyKey: String = key): String? {
+    return get(propertyKey)?.let { "-D$key=${it}" }
 }
