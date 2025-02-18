@@ -97,4 +97,7 @@
     <string name="app_privacy_policy_description">To use the application, you must agree to the following privacy policy.</string>
     <string name="app_team_of_service">Team of Service</string>
     <string name="app_team_of_service_description">To use the application, you must agree to the following team of service.</string>
+
+    <!-- Article Detail -->
+    <string name="article_detail_continue_read">Read on %1$s</string>
 </resources>

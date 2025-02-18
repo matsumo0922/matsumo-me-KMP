@@ -43,7 +43,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mikepenz.markdown.compose.components.CurrentComponentsBridge.text
 import com.mikepenz.markdown.m3.markdownTypography
 import com.mikepenz.markdown.model.markdownAnimations
 import com.mikepenz.markdown.model.markdownDimens
@@ -52,8 +51,8 @@ import io.github.aakira.napier.Napier
 import kotlinx.coroutines.launch
 import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
-import me.matsumo.blog.core.theme.LocalDevice
 import me.matsumo.blog.core.theme.bold
+import me.matsumo.blog.core.theme.rememberWindowWidthDp
 import me.matsumo.blog.feature.articledetail.components.CustomMarkdownComponents
 import me.matsumo.blog.feature.articledetail.components.MarkdownHeader
 import me.matsumo.blog.feature.articledetail.components.MarkdownSettings
@@ -67,7 +66,8 @@ fun ArticleView(
     modifier: Modifier = Modifier,
     header: @Composable (PaddingValues) -> Unit,
 ) {
-    val isMobile = LocalDevice.current == Device.MOBILE
+    val windowWidthDp by rememberWindowWidthDp()
+    val isMobile = Device.fromWidth(windowWidthDp - 120.dp) == Device.MOBILE
     val tableOfContentsWidth = 320.dp
     val contentsContentPadding = PaddingValues(end = if (isMobile) 0.dp else tableOfContentsWidth)
 

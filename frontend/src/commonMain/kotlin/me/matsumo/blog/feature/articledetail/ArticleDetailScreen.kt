@@ -14,6 +14,7 @@ import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
 import me.matsumo.blog.core.ui.ArticleView
 import me.matsumo.blog.core.ui.AsyncLoadContents
 import me.matsumo.blog.feature.articledetail.components.ArticleTitleSection
+import me.matsumo.blog.shared.entity.ArticleSource
 import me.matsumo.blog.shared.model.ArticleDetail
 import me.matsumo.blog.shared.utils.toIsoDateTimeString
 import org.koin.compose.viewmodel.koinViewModel
@@ -46,6 +47,21 @@ private fun ArticleDetailScreen(
     articleDetail: ArticleDetail,
     modifier: Modifier = Modifier,
 ) {
+    val extraSource: ArticleSource?
+    val extraSourceUrl: String?
+
+    when (articleDetail.source) {
+        ArticleSource.MARKDOWN -> {
+            extraSource = articleDetail.extraSource
+            extraSourceUrl = articleDetail.extraSourceUrl
+        }
+
+        else -> {
+            extraSource = articleDetail.source
+            extraSourceUrl = articleDetail.sourceUrl
+        }
+    }
+
     ArticleView(
         modifier = modifier,
         content = articleDetail.content,
@@ -60,6 +76,8 @@ private fun ArticleDetailScreen(
                 title = articleDetail.title,
                 publishedAt = articleDetail.createdAt.toIsoDateTimeString(),
                 tags = articleDetail.tags.toImmutableList(),
+                extraSource = extraSource,
+                extraSourceUrl = extraSourceUrl,
             )
         },
     )
