@@ -112,7 +112,7 @@ sealed interface Destinations {
                 pattern = "revision",
                 type = Revision::class,
                 parse = { _ -> Revision },
-            )
+            ),
         )
 
         private fun matchRoute(url: Url, routePattern: String): Map<String, String>? {

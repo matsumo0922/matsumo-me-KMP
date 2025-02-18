@@ -87,7 +87,7 @@ internal fun BlogTopAppBar(
             ) {
                 TextButton(
                     modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
-                    onClick = onNavigationHomeClicked
+                    onClick = onNavigationHomeClicked,
                 ) {
                     Text(
                         text = stringResource(Res.string.navigation_home),
@@ -98,7 +98,7 @@ internal fun BlogTopAppBar(
 
                 TextButton(
                     modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
-                    onClick = onNavigationArticlesClicked
+                    onClick = onNavigationArticlesClicked,
                 ) {
                     Text(
                         text = stringResource(Res.string.navigation_articles),
@@ -109,7 +109,7 @@ internal fun BlogTopAppBar(
 
                 TextButton(
                     modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
-                    onClick = onNavigationGithubClicked
+                    onClick = onNavigationGithubClicked,
                 ) {
                     Text(
                         text = stringResource(Res.string.navigation_github),

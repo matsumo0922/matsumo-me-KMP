@@ -101,7 +101,7 @@ fun Modifier.clickableWithPointer(
     enabled: Boolean = true,
     onClickLabel: String? = null,
     role: Role? = null,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) = composed {
     this
         .pointerHoverIcon(PointerIcon.Hand)
@@ -119,7 +119,7 @@ fun Modifier.clickableWithPointer(
     enabled: Boolean = true,
     onClickLabel: String? = null,
     role: Role? = null,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) = composed {
     this
         .pointerHoverIcon(PointerIcon.Hand)

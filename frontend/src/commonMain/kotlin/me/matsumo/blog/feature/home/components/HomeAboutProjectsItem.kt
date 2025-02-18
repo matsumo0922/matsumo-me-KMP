@@ -174,7 +174,7 @@ private fun ProjectItem(
             if (project.url != null) {
                 IconButton(
                     modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
-                    onClick = { onLinkClicked.invoke(project.url) }
+                    onClick = { onLinkClicked.invoke(project.url) },
                 ) {
                     Icon(
                         imageVector = Icons.Default.Link,
@@ -187,7 +187,7 @@ private fun ProjectItem(
             if (project.github != null) {
                 IconButton(
                     modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
-                    onClick = { onLinkClicked.invoke(project.github) }
+                    onClick = { onLinkClicked.invoke(project.github) },
                 ) {
                     AsyncImage(
                         modifier = Modifier.size(24.dp),

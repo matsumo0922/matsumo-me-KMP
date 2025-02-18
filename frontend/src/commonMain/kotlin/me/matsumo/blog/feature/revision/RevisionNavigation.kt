@@ -9,7 +9,7 @@ import me.matsumo.blog.core.domain.Destinations
 fun NavGraphBuilder.revisionScreen() {
     composable<Destinations.Revision> {
         RevisionScreen(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
         )
     }
 }

@@ -27,7 +27,7 @@ class OgContentsRepository(
     companion object {
         private val UNSUPPORTED_HOST = listOf(
             "x.com",
-            "twitter.com"
+            "twitter.com",
         )
     }
 }

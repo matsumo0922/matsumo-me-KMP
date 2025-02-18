@@ -13,7 +13,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 internal fun RevisionScreen(
     modifier: Modifier = Modifier,
-    viewModel: RevisionViewModel = koinViewModel()
+    viewModel: RevisionViewModel = koinViewModel(),
 ) {
     Box(
         modifier = modifier,

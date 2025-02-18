@@ -45,5 +45,5 @@ fun Properties.getJvmArg(
     propertyKey: String = key,
     defaultValue: String? = null,
 ): String? {
-    return (get(propertyKey) ?: defaultValue)?.let { "-D$key=${it}" }
+    return (get(propertyKey) ?: defaultValue)?.let { "-D$key=$it" }
 }
