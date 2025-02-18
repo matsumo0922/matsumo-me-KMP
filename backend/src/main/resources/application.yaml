@@ -3,7 +3,7 @@ ktor:
     modules:
       - ApplicationKt.module
   deployment:
-    port: 9090
+    port: $PORT
   security:
     supabaseUrl: $SUPABASE_URL
     supabaseKey: $SUPABASE_KEY

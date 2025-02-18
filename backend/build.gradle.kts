@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.tasks.factory.dependsOn
 import java.util.*
 
 plugins {
@@ -17,6 +18,7 @@ application {
     applicationDefaultJvmArgs = listOf(
         localProperties.getJvmArg("SUPABASE_URL"),
         localProperties.getJvmArg("SUPABASE_KEY"),
+        "-DPORT=9090"
     )
 }
 
@@ -29,6 +31,10 @@ dependencies {
     implementation(libs.bundles.commonmark)
 
     implementation(libs.ksoup)
+}
+
+tasks {
+    register("stage").dependsOn("installDist")
 }
 
 fun Properties.getJvmArg(key: String): String {
