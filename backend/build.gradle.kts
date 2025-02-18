@@ -20,7 +20,7 @@ application {
     applicationDefaultJvmArgs = listOfNotNull(
         localProperties.getJvmArg("SUPABASE_URL"),
         localProperties.getJvmArg("SUPABASE_KEY"),
-        localProperties.getJvmArg("PORT", "BACKEND_PORT", "9090"),
+        localProperties.getJvmArg("PORT", propertyKey = "BACKEND_PORT"),
         localProperties.getJvmArg("REVISION", defaultValue = "UNKNOWN"),
     )
 }
@@ -45,5 +45,8 @@ fun Properties.getJvmArg(
     propertyKey: String = key,
     defaultValue: String? = null,
 ): String? {
-    return (get(propertyKey) ?: defaultValue)?.let { "-D$key=$it" }
+    val value = getProperty(propertyKey)
+    val env = System.getenv(key)
+
+    return (value ?: env ?: defaultValue)?.let { "-D$key=$it" }
 }
