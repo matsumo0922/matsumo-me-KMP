@@ -18,7 +18,9 @@ android {
     namespace = "me.matsumo.blog"
 
     val localProperties = Properties().apply {
-        load(project.rootDir.resolve("local.properties").inputStream())
+        project.rootDir.resolve("local.properties").takeIf { it.exists() }?.also {
+            load(it.inputStream())
+        }
     }
 
     signingConfigs {
@@ -105,7 +107,9 @@ kotlin {
 
 buildkonfig {
     val localProperties = Properties().apply {
-        load(project.rootDir.resolve("local.properties").inputStream())
+        project.rootDir.resolve("local.properties").takeIf { it.exists() }?.also {
+            load(it.inputStream())
+        }
     }
 
     packageName = "me.matsumo.blog"

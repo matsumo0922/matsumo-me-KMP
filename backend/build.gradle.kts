@@ -11,8 +11,8 @@ version = "0.0.1"
 
 application {
     val localProperties = Properties().apply {
-        if (project.rootDir.resolve("local.properties").exists()) {
-            load(project.rootDir.resolve("local.properties").inputStream())
+        project.rootDir.resolve("local.properties").takeIf { it.exists() }?.also {
+            load(it.inputStream())
         }
     }
 
