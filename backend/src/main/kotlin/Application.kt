@@ -12,6 +12,7 @@ import kotlinx.serialization.Serializable
 import route.articleDetailRoute
 import route.articlesRoute
 import route.ogContentsRoute
+import route.revisionRoute
 import route.updateArticlesRoute
 
 fun main(args: Array<String>) {
@@ -40,6 +41,7 @@ fun Application.routes() {
     articlesRoute()
     articleDetailRoute()
     ogContentsRoute()
+    revisionRoute()
 }
 
 @Serializable
@@ -64,4 +66,8 @@ sealed interface Route {
     @Serializable
     @Resource("/og_contents")
     data class OgContents(val url: String) : Route
+
+    @Serializable
+    @Resource("/revision")
+    data object Revision : Route
 }

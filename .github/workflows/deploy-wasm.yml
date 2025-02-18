@@ -36,6 +36,7 @@ jobs:
         run: ./gradlew :frontend:wasmJsBrowserDistribution
         env:
           BACKEND_URL: ${{ secrets.BACKEND_URL }}
+          REVISION: $GITHUB_SHA
 
       - name: Deploy
         id: cloudflare_pages_deploy

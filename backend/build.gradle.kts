@@ -20,7 +20,8 @@ application {
     applicationDefaultJvmArgs = listOfNotNull(
         localProperties.getJvmArg("SUPABASE_URL"),
         localProperties.getJvmArg("SUPABASE_KEY"),
-        localProperties.getJvmArg("PORT", "BACKEND_PORT"),
+        localProperties.getJvmArg("PORT", "BACKEND_PORT", "9090"),
+        localProperties.getJvmArg("REVISION", defaultValue = "UNKNOWN"),
     )
 }
 
@@ -39,6 +40,10 @@ tasks {
     register("stage").dependsOn("installDist")
 }
 
-fun Properties.getJvmArg(key: String, propertyKey: String = key): String? {
-    return get(propertyKey)?.let { "-D$key=${it}" }
+fun Properties.getJvmArg(
+    key: String,
+    propertyKey: String = key,
+    defaultValue: String? = null,
+): String? {
+    return (get(propertyKey) ?: defaultValue)?.let { "-D$key=${it}" }
 }
