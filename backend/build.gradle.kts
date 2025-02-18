@@ -17,10 +17,10 @@ application {
     }
 
     mainClass.set("io.ktor.server.netty.EngineMain")
-    applicationDefaultJvmArgs = listOf(
+    applicationDefaultJvmArgs = listOfNotNull(
         localProperties.getJvmArg("SUPABASE_URL"),
         localProperties.getJvmArg("SUPABASE_KEY"),
-        "-DPORT=9090"
+        localProperties.getJvmArg("BACKEND_PORT"),
     )
 }
 
@@ -39,6 +39,6 @@ tasks {
     register("stage").dependsOn("installDist")
 }
 
-fun Properties.getJvmArg(key: String): String {
-    return "-D$key=${get(key)}"
+fun Properties.getJvmArg(key: String): String? {
+    return get(key)?.let { "-D$key=${it}" }
 }
