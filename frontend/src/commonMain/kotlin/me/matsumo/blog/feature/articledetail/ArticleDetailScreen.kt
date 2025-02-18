@@ -16,6 +16,7 @@ import me.matsumo.blog.core.ui.AsyncLoadContents
 import me.matsumo.blog.feature.articledetail.components.ArticleTitleSection
 import me.matsumo.blog.shared.entity.ArticleSource
 import me.matsumo.blog.shared.model.ArticleDetail
+import me.matsumo.blog.shared.model.OgContents
 import me.matsumo.blog.shared.utils.toIsoDateTimeString
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -38,6 +39,7 @@ internal fun ArticleDetailRoute(
         ArticleDetailScreen(
             modifier = Modifier.fillMaxSize(),
             articleDetail = it.article,
+            onOgContentsRequested = viewModel::fetchOgContents,
         )
     }
 }
@@ -45,6 +47,7 @@ internal fun ArticleDetailRoute(
 @Composable
 private fun ArticleDetailScreen(
     articleDetail: ArticleDetail,
+    onOgContentsRequested: suspend (String) -> OgContents,
     modifier: Modifier = Modifier,
 ) {
     val extraSource: ArticleSource?
@@ -65,6 +68,7 @@ private fun ArticleDetailScreen(
     ArticleView(
         modifier = modifier,
         content = articleDetail.content,
+        onOgContentsRequested = onOgContentsRequested,
         header = {
             ArticleTitleSection(
                 modifier = Modifier

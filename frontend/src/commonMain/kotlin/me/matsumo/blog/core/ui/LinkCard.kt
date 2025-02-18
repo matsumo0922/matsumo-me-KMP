@@ -1,5 +1,6 @@
 package me.matsumo.blog.core.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -25,15 +26,18 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import me.matsumo.blog.core.theme.openUrl
+import me.matsumo.blog.core.ui.utils.toCrosProxyUrl
 import me.matsumo.blog.shared.model.OgContents
 
 @Composable
 fun LinkCard(
     url: String,
-    onOgContentsRequested: suspend (String) -> OgContents,
+    onOgContentsRequested: suspend (String) -> OgContents?,
     modifier: Modifier = Modifier,
 ) {
     var ogContents by rememberSaveable { mutableStateOf<OgContents?>(null) }
@@ -46,7 +50,7 @@ fun LinkCard(
 
     Card(
         modifier = modifier
-            .height(128.dp)
+            .height(160.dp)
             .clip(RoundedCornerShape(8.dp))
             .clickable { openUrl(url) }
             .border(
@@ -72,7 +76,8 @@ fun LinkCard(
                         .shimmer(ogContents == null),
                     text = ogContents?.title.orEmpty(),
                     style = MaterialTheme.typography.titleMedium,
-                    maxLines = 2
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
                 )
 
                 Text(
@@ -82,6 +87,7 @@ fun LinkCard(
                     text = ogContents?.description.orEmpty(),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    overflow = TextOverflow.Ellipsis,
                     maxLines = 2
                 )
 
@@ -94,8 +100,12 @@ fun LinkCard(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     AsyncImage(
-                        modifier = Modifier.size(24.dp),
-                        model = ogContents?.iconUrl,
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(4.dp))
+                            .background(if (ogContents != null) Color.White else Color.Transparent)
+                            .size(20.dp)
+                            .padding(1.dp),
+                        model = ogContents?.iconUrl?.toCrosProxyUrl(),
                         contentDescription = null,
                     )
 
@@ -114,7 +124,7 @@ fun LinkCard(
                     .widthIn(min = if (ogContents == null) 128.dp else 0.dp)
                     .fillMaxHeight()
                     .shimmer(ogContents == null, 0.dp),
-                model = ogContents?.imageUrl,
+                model = ogContents?.imageUrl?.toCrosProxyUrl(),
                 contentDescription = null,
             )
         }

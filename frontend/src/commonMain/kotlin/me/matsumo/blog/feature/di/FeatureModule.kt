@@ -15,6 +15,7 @@ val featureModule = module {
         ArticleDetailViewModel(
             articleId = it.get(),
             articleRepository = get(),
+            ogContentsRepository = get()
         )
     }
 

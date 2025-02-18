@@ -5,6 +5,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
@@ -21,14 +25,16 @@ import com.mikepenz.markdown.compose.elements.MarkdownText
 import com.mikepenz.markdown.compose.elements.highlightedCodeBlock
 import com.mikepenz.markdown.compose.elements.highlightedCodeFence
 import com.mikepenz.markdown.utils.getUnescapedTextInNode
-import kotlinx.coroutines.delay
+import io.github.aakira.napier.Napier
 import me.matsumo.blog.core.theme.bold
 import me.matsumo.blog.core.ui.LinkCard
+import me.matsumo.blog.core.ui.utils.suspendRunCatching
 import me.matsumo.blog.shared.model.OgContents
 import org.intellij.markdown.ast.getTextInNode
-import kotlin.time.Duration.Companion.seconds
 
-class CustomMarkdownComponents {
+class CustomMarkdownComponents(
+    private val onOgContentsRequested: suspend (url: String) -> OgContents,
+) {
 
     private val heading1: MarkdownComponent = {
         Text(
@@ -80,21 +86,17 @@ class CustomMarkdownComponents {
             pop()
         }
         val text = it.node.getUnescapedTextInNode(it.content)
+        var isFailedToShowLinkCard by rememberSaveable { mutableStateOf(false) }
 
-        if (text.startsWith("http")) {
+        if (text.startsWith("http") && !isFailedToShowLinkCard) {
             LinkCard(
                 modifier = Modifier.fillMaxWidth(),
                 url = text,
                 onOgContentsRequested = {
-                    delay(10.seconds)
-
-                    OgContents(
-                        title = "ガラスのぶるーす",
-                        description = "Listent to ガラスのぶるーす on Spotify",
-                        imageUrl = "",
-                        iconUrl = "",
-                        siteName = "spotify"
-                    )
+                    suspendRunCatching { onOgContentsRequested.invoke(it) }.onFailure { error ->
+                        Napier.e(error) { "Failed to get OG contents: $text" }
+                        isFailedToShowLinkCard = true
+                    }.getOrNull()
                 }
             )
         } else {
@@ -123,8 +125,12 @@ class CustomMarkdownComponents {
     companion object {
 
         @Composable
-        fun build(): MarkdownComponents {
-            CustomMarkdownComponents().also {
+        fun build(
+            onOgContentsRequested: suspend (url: String) -> OgContents,
+        ): MarkdownComponents {
+            CustomMarkdownComponents(
+                onOgContentsRequested = onOgContentsRequested,
+            ).also {
                 return markdownComponents(
                     heading1 = it.heading1,
                     heading2 = it.heading2,

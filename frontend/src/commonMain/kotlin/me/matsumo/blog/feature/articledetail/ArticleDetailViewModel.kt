@@ -10,12 +10,15 @@ import matsumo_me_kmp.frontend.generated.resources.Res
 import matsumo_me_kmp.frontend.generated.resources.error_no_data
 import me.matsumo.blog.core.domain.ScreenState
 import me.matsumo.blog.core.repository.ArticleRepository
+import me.matsumo.blog.core.repository.OgContentsRepository
 import me.matsumo.blog.core.ui.utils.suspendRunCatching
 import me.matsumo.blog.shared.model.ArticleDetail
+import me.matsumo.blog.shared.model.OgContents
 
 class ArticleDetailViewModel(
     private val articleId: Long,
     private val articleRepository: ArticleRepository,
+    private val ogContentsRepository: OgContentsRepository,
 ) : ViewModel() {
 
     private val _screenState = MutableStateFlow<ScreenState<ArticleDetailUiState>>(ScreenState.Loading)
@@ -37,6 +40,10 @@ class ArticleDetailViewModel(
                 onFailure = { ScreenState.Error(Res.string.error_no_data) },
             )
         }
+    }
+
+    suspend fun fetchOgContents(url: String): OgContents {
+        return ogContentsRepository.getOgContents(url)
     }
 }
 

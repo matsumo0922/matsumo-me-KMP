@@ -3,7 +3,10 @@ package repository
 import com.fleeksoft.ksoup.Ksoup
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.client.request.url
 import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpHeaders
 import io.ktor.http.URLBuilder
 import io.ktor.http.encodedPath
 import me.matsumo.blog.shared.entity.OgContentsEntity
@@ -12,7 +15,11 @@ class OgContentsRepository(
     private val httpClient: HttpClient,
 ) {
     suspend fun getOgContents(url: String): OgContentsEntity {
-        val html = httpClient.get(url).bodyAsText()
+        val html = httpClient.get {
+            url(url)
+            header(HttpHeaders.Accept, "text/html")
+        }.bodyAsText()
+
         val document = Ksoup.parse(html)
 
         val title = document.head().select("meta[property=og:title]").attr("content")
@@ -25,6 +32,8 @@ class OgContentsRepository(
             parameters.clear()
             fragment = ""
         }.build()
+
+        require(title.isNotBlank()) { "Required property og:title is blank" }
 
         return OgContentsEntity(
             title = title,

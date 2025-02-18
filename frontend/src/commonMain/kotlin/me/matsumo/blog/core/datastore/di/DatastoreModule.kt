@@ -3,6 +3,7 @@ package me.matsumo.blog.core.datastore.di
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.cache.HttpCache
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
@@ -10,7 +11,9 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import me.matsumo.blog.core.datastore.ArticleMapper
+import me.matsumo.blog.core.datastore.OgContentsMapper
 import me.matsumo.blog.core.datastore.createArticleApi
+import me.matsumo.blog.core.datastore.createOgContentsApi
 import me.matsumo.blog.core.domain.BlogConfig
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
@@ -39,17 +42,26 @@ val datastoreModule = module {
             install(ContentNegotiation) {
                 json(formatter)
             }
+
+            install(HttpCache)
         }
     }
 
     factory {
-        val ktorfit = Ktorfit.Builder()
+        Ktorfit.Builder()
             .baseUrl(get<BlogConfig>().backendUrl)
             .httpClient(get<HttpClient>())
             .build()
+    }
 
-        ktorfit.createArticleApi()
+    factory {
+        get<Ktorfit>().createArticleApi()
+    }
+
+    factory {
+        get<Ktorfit>().createOgContentsApi()
     }
 
     factoryOf(::ArticleMapper)
+    factoryOf(::OgContentsMapper)
 }

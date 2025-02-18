@@ -58,12 +58,14 @@ import me.matsumo.blog.feature.articledetail.components.MarkdownHeader
 import me.matsumo.blog.feature.articledetail.components.MarkdownSettings
 import me.matsumo.blog.feature.articledetail.components.findHeading
 import me.matsumo.blog.feature.articledetail.components.markdownItems
+import me.matsumo.blog.shared.model.OgContents
 import org.intellij.markdown.parser.MarkdownParser
 
 @Composable
 fun ArticleView(
     content: String,
     modifier: Modifier = Modifier,
+    onOgContentsRequested: suspend (String) -> OgContents = { error("Not supported on this component.") },
     header: @Composable (PaddingValues) -> Unit,
 ) {
     val windowWidthDp by rememberWindowWidthDp()
@@ -73,7 +75,9 @@ fun ArticleView(
 
     val markdownSettings = MarkdownSettings.default().copy(
         imageTransformer = CustomImageTransformer,
-        components = CustomMarkdownComponents.build(),
+        components = CustomMarkdownComponents.build(
+            onOgContentsRequested = onOgContentsRequested,
+        ),
         typography = markdownTypography(
             textLink = TextLinkStyles(
                 style = TextStyle(color = MaterialTheme.colorScheme.primary).toSpanStyle(),

@@ -16,6 +16,7 @@ import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import com.mikepenz.markdown.model.ImageData
 import com.mikepenz.markdown.model.ImageTransformer
+import me.matsumo.blog.core.ui.utils.toCrosProxyUrl
 
 object CustomImageTransformer : ImageTransformer {
 
@@ -23,7 +24,7 @@ object CustomImageTransformer : ImageTransformer {
     override fun transform(link: String): ImageData {
         return rememberAsyncImagePainter(
             model = ImageRequest.Builder(LocalPlatformContext.current)
-                .data("https://corsproxy.io/?url=$link")
+                .data(link.toCrosProxyUrl())
                 .build(),
         ).let {
             ImageData(
