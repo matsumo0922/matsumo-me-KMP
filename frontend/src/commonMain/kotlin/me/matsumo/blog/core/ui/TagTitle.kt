@@ -3,8 +3,6 @@ package me.matsumo.blog.core.ui
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -16,7 +14,7 @@ fun TagTitle(
     text: String,
     modifier: Modifier = Modifier,
 ) {
-    val shimmerBrush = rememberShimmerBrush()
+    val shimmerBrush = rememberGradientShimmerBrush()
     val title = buildAnnotatedString {
         withStyle(SpanStyle(brush = shimmerBrush)) {
             append("# $text")

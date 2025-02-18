@@ -22,14 +22,14 @@ import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.theme.LocalDevice
 import me.matsumo.blog.core.theme.black
 import me.matsumo.blog.core.theme.center
-import me.matsumo.blog.core.ui.rememberShimmerBrush
+import me.matsumo.blog.core.ui.rememberGradientShimmerBrush
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun HomeHelloSection(
     modifier: Modifier = Modifier,
 ) {
-    val shimmerBrush = rememberShimmerBrush()
+    val shimmerBrush = rememberGradientShimmerBrush()
     val defaultTextColor = MaterialTheme.colorScheme.onBackground
 
     val greetingString = buildAnnotatedString {

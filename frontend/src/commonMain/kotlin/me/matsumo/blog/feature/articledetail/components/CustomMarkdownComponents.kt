@@ -20,8 +20,13 @@ import com.mikepenz.markdown.compose.components.markdownComponents
 import com.mikepenz.markdown.compose.elements.MarkdownText
 import com.mikepenz.markdown.compose.elements.highlightedCodeBlock
 import com.mikepenz.markdown.compose.elements.highlightedCodeFence
+import com.mikepenz.markdown.utils.getUnescapedTextInNode
+import kotlinx.coroutines.delay
 import me.matsumo.blog.core.theme.bold
+import me.matsumo.blog.core.ui.LinkCard
+import me.matsumo.blog.core.ui.OgContents
 import org.intellij.markdown.ast.getTextInNode
+import kotlin.time.Duration.Companion.seconds
 
 class CustomMarkdownComponents {
 
@@ -74,12 +79,31 @@ class CustomMarkdownComponents {
             buildMarkdownAnnotatedString(content = it.content, node = it.node, annotatorSettings = annotatorSettings)
             pop()
         }
+        val text = it.node.getUnescapedTextInNode(it.content)
 
-        MarkdownText(
-            modifier = Modifier.fillMaxWidth(),
-            content = styledText,
-            style = it.typography.paragraph,
-        )
+        if (text.startsWith("http")) {
+            LinkCard(
+                modifier = Modifier.fillMaxWidth(),
+                url = text,
+                onOgContentsRequested = {
+                    delay(10.seconds)
+
+                    OgContents(
+                        title = "ガラスのぶるーす",
+                        description = "Listent to ガラスのぶるーす on Spotify",
+                        imageUrl = "",
+                        iconUrl = "",
+                        siteName = "spotify"
+                    )
+                }
+            )
+        } else {
+            MarkdownText(
+                modifier = Modifier.fillMaxWidth(),
+                content = styledText,
+                style = it.typography.paragraph,
+            )
+        }
     }
 
     @Composable

@@ -28,7 +28,7 @@ fun CodeTitle(
     text: String,
     modifier: Modifier = Modifier,
 ) {
-    val shimmerBrush = rememberShimmerBrush()
+    val shimmerBrush = rememberGradientShimmerBrush()
     val title = buildAnnotatedString {
         withStyle(SpanStyle(brush = shimmerBrush)) {
             append("<$text />")
