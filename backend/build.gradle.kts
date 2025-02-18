@@ -11,7 +11,9 @@ version = "0.0.1"
 
 application {
     val localProperties = Properties().apply {
-        load(project.rootDir.resolve("local.properties").inputStream())
+        project.rootDir.resolve("local.properties").takeIf { it.exists() }?.also {
+            load(project.rootDir.resolve("local.properties").inputStream())
+        }
     }
 
     mainClass.set("io.ktor.server.netty.EngineMain")
