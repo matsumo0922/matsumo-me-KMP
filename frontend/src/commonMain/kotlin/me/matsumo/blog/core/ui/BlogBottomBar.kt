@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -61,19 +62,23 @@ fun BlogBottomBar(
             horizontalSpacing = 24.dp,
             verticalSpacing = 48.dp,
         ) {
-            InfoSection(
-                modifier = Modifier.then(
-                    if (isMobile) Modifier.wrapContentHeight() else Modifier.fillMaxHeight(),
-                ),
-                isMobile = isMobile,
-            )
+            SelectionContainer {
+                InfoSection(
+                    modifier = Modifier.then(
+                        if (isMobile) Modifier.wrapContentHeight() else Modifier.fillMaxHeight(),
+                    ),
+                    isMobile = isMobile,
+                )
+            }
 
-            LinkSection(
-                modifier = Modifier.then(
-                    if (isMobile) Modifier.wrapContentHeight() else Modifier.fillMaxHeight(),
-                ),
-                isMobile = isMobile,
-            )
+            SelectionContainer {
+                LinkSection(
+                    modifier = Modifier.then(
+                        if (isMobile) Modifier.wrapContentHeight() else Modifier.fillMaxHeight(),
+                    ),
+                    isMobile = isMobile,
+                )
+            }
         }
     }
 }

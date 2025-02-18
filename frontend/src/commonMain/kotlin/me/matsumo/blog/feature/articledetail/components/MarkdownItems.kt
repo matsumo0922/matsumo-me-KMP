@@ -81,7 +81,7 @@ fun LazyListScope.markdownItems(
     items(
         items = parsedTree.children,
         key = { node ->
-            findHeading(content, node).firstOrNull()?.key ?: "node-${node.hashCode()}"
+            (findHeading(content, node).firstOrNull()?.key ?: "node-${node.hashCode()}")
         },
     ) { node ->
         CompositionLocalProvider(

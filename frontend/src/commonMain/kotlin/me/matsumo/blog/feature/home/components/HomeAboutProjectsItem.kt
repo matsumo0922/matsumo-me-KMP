@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.Terminal
@@ -87,11 +88,13 @@ internal fun HomeAboutProjectsItem(
             verticalSpacing = 40.dp,
         ) {
             for (project in Project.entries) {
-                ProjectItem(
-                    modifier = Modifier.focusScale(),
-                    project = project,
-                    onLinkClicked = { url -> openUrl(url) },
-                )
+                SelectionContainer {
+                    ProjectItem(
+                        modifier = Modifier.focusScale(),
+                        project = project,
+                        onLinkClicked = { url -> openUrl(url) },
+                    )
+                }
             }
         }
 

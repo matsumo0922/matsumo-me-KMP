@@ -20,6 +20,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
@@ -86,14 +87,16 @@ fun LazyListScope.homeExperienceSection(
     ) { index, experience ->
         val isMobile = LocalDevice.current == Device.MOBILE
 
-        ExperienceItem(
-            modifier = Modifier
-                .padding(horizontal = horizontalPadding)
-                .fillMaxWidth(),
-            experience = experience,
-            isMobile = isMobile,
-            isOdd = index % 2 == 1,
-        )
+        SelectionContainer {
+            ExperienceItem(
+                modifier = Modifier
+                    .padding(horizontal = horizontalPadding)
+                    .fillMaxWidth(),
+                experience = experience,
+                isMobile = isMobile,
+                isOdd = index % 2 == 1,
+            )
+        }
     }
 }
 

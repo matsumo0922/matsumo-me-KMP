@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,6 +57,7 @@ import me.matsumo.blog.feature.articledetail.components.findHeading
 import me.matsumo.blog.feature.articledetail.components.markdownItems
 import me.matsumo.blog.shared.model.OgContents
 import org.intellij.markdown.parser.MarkdownParser
+import kotlin.math.abs
 
 @Composable
 fun ArticleView(
@@ -116,16 +118,11 @@ fun ArticleView(
 
     val scope = rememberCoroutineScope()
     val state = rememberLazyListState()
-    var currentHeaderKey by remember { mutableStateOf<String?>(null) }
+    var currentVisibleIndex by remember { mutableStateOf(0) }
 
     LaunchedEffect(state) {
         snapshotFlow { state.layoutInfo.visibleItemsInfo }.collect { itemInfo ->
-            for (info in itemInfo) {
-                if (info.key.toString().startsWith("header")) {
-                    currentHeaderKey = info.key.toString()
-                    break
-                }
-            }
+            currentVisibleIndex = itemInfo.minOf { it.index }.coerceAtLeast(0)
         }
     }
 
@@ -138,91 +135,98 @@ fun ArticleView(
                 .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f)),
         )
 
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            state = state,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            item {
-                header(contentsContentPadding)
-            }
+        SelectionContainer {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                state = state,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                item {
+                    header(contentsContentPadding)
+                }
 
-            markdownItems(
-                content = content,
-                parsedTree = parseTree,
-                markdownSettings = markdownSettings,
-                contentPadding = contentsContentPadding,
-            )
-
-            item {
-                Spacer(
-                    modifier = Modifier.height(48.dp),
+                markdownItems(
+                    content = content,
+                    parsedTree = parseTree,
+                    markdownSettings = markdownSettings,
+                    contentPadding = contentsContentPadding,
                 )
-            }
 
-            item {
-                BlogBottomBar(
-                    modifier = Modifier.fillMaxWidth(),
-                )
+                item {
+                    Spacer(
+                        modifier = Modifier.height(48.dp),
+                    )
+                }
+
+                item {
+                    BlogBottomBar(
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
             }
         }
 
         if (!isMobile) {
-            Column(
+            SelectionContainer(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(end = (maxWidth - CONTAINER_MAX_WIDTH).coerceAtLeast(0.dp) / 2)
                     .padding(24.dp, 48.dp)
                     .width(tableOfContentsWidth - 40.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                val allowedHeaders =
-                    listOf(MarkdownHeader.MarkdownHeaderNode.H1, MarkdownHeader.MarkdownHeaderNode.H2, MarkdownHeader.MarkdownHeaderNode.H3)
-                val filteredHeaders = headers.filter { allowedHeaders.contains(it.node) }
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                ) {
+                    val allowedHeaders = listOf(MarkdownHeader.MarkdownHeaderNode.H1, MarkdownHeader.MarkdownHeaderNode.H2, MarkdownHeader.MarkdownHeaderNode.H3)
+                    val filteredHeaders = headers.filter { allowedHeaders.contains(it.node) }
+                    val currentHeader = filteredHeaders
+                        .filter { it.index <= currentVisibleIndex + 1 }
+                        .minBy { abs(currentVisibleIndex - it.index) }
 
-                Text(
-                    modifier = Modifier.padding(bottom = 8.dp),
-                    text = "Table of Contents",
-                    style = MaterialTheme.typography.bodyLarge.bold(),
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
-
-                for (filteredHeader in filteredHeaders) {
-                    val color: Color
-                    val weight: FontWeight
-
-                    if (currentHeaderKey == filteredHeader.key) {
-                        color = MaterialTheme.colorScheme.onSurface
-                        weight = FontWeight.ExtraBold
-                    } else {
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                        weight = FontWeight.Normal
-                    }
-
-                    val indent: Dp = when (filteredHeader.node) {
-                        MarkdownHeader.MarkdownHeaderNode.H1 -> 0.dp
-                        MarkdownHeader.MarkdownHeaderNode.H2 -> 16.dp
-                        else -> 32.dp
-                    }
-
-                    val animateColor by animateColorAsState(color)
-                    val animateWeight by animateIntAsState(weight.weight)
-
-                    ClickableText(
-                        modifier = Modifier.padding(start = indent),
-                        onClick = {
-                            scope.launch {
-                                runCatching { state.animateScrollToItem(filteredHeader.index) }.onFailure {
-                                    Napier.e("Failed to scroll to item: ${filteredHeader.index}", it)
-                                }
-                            }
-                        },
-                        text = filteredHeader.content.replace("#", ""),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = animateColor,
-                        fontWeight = FontWeight(animateWeight),
-                        lineHeight = 22.sp,
+                    Text(
+                        modifier = Modifier.padding(bottom = 8.dp),
+                        text = "Table of Contents",
+                        style = MaterialTheme.typography.bodyLarge.bold(),
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
+
+                    for (filteredHeader in filteredHeaders) {
+                        val color: Color
+                        val weight: FontWeight
+
+                        if (currentHeader == filteredHeader) {
+                            color = MaterialTheme.colorScheme.onSurface
+                            weight = FontWeight.ExtraBold
+                        } else {
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            weight = FontWeight.Normal
+                        }
+
+                        val indent: Dp = when (filteredHeader.node) {
+                            MarkdownHeader.MarkdownHeaderNode.H1 -> 0.dp
+                            MarkdownHeader.MarkdownHeaderNode.H2 -> 16.dp
+                            else -> 32.dp
+                        }
+
+                        val animateColor by animateColorAsState(color)
+                        val animateWeight by animateIntAsState(weight.weight)
+
+                        ClickableText(
+                            modifier = Modifier.padding(start = indent),
+                            onClick = {
+                                scope.launch {
+                                    runCatching { state.animateScrollToItem(filteredHeader.index) }.onFailure {
+                                        Napier.e("Failed to scroll to item: ${filteredHeader.index}", it)
+                                    }
+                                }
+                            },
+                            text = filteredHeader.content.replace("#", ""),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = animateColor,
+                            fontWeight = FontWeight(animateWeight),
+                            lineHeight = 22.sp,
+                        )
+                    }
                 }
             }
         }

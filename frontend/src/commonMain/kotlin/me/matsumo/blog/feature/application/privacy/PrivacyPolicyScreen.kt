@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -51,16 +52,18 @@ private fun PrivacyPolicyScreen(
         modifier = modifier,
         content = content,
         header = {
-            ApplicationArticleHeader(
-                modifier = Modifier
-                    .widthIn(max = CONTAINER_MAX_WIDTH)
-                    .fillMaxWidth()
-                    .padding(it)
-                    .padding(top = 48.dp)
-                    .padding(horizontal = 24.dp),
-                title = stringResource(Res.string.app_privacy_policy),
-                description = stringResource(Res.string.app_privacy_policy_description),
-            )
+            SelectionContainer {
+                ApplicationArticleHeader(
+                    modifier = Modifier
+                        .widthIn(max = CONTAINER_MAX_WIDTH)
+                        .fillMaxWidth()
+                        .padding(it)
+                        .padding(top = 48.dp)
+                        .padding(horizontal = 24.dp),
+                    title = stringResource(Res.string.app_privacy_policy),
+                    description = stringResource(Res.string.app_privacy_policy_description),
+                )
+            }
         },
     )
 }

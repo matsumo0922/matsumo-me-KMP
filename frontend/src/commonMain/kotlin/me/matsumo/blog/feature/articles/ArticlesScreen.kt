@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -115,11 +116,13 @@ private fun ArticlesScreen(
                 items = articles,
                 key = { it.id },
             ) {
-                ArticleCard(
-                    modifier = Modifier.fillMaxWidth(),
-                    article = it,
-                    onClickArticle = onArticleClicked,
-                )
+                SelectionContainer {
+                    ArticleCard(
+                        modifier = Modifier.fillMaxWidth(),
+                        article = it,
+                        onClickArticle = onArticleClicked,
+                    )
+                }
             }
 
             item(

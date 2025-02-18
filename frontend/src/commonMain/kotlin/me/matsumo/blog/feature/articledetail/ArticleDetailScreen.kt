@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -70,19 +71,21 @@ private fun ArticleDetailScreen(
         content = articleDetail.content,
         onOgContentsRequested = onOgContentsRequested,
         header = {
-            ArticleTitleSection(
-                modifier = Modifier
-                    .widthIn(max = CONTAINER_MAX_WIDTH)
-                    .fillMaxWidth()
-                    .padding(it)
-                    .padding(top = 48.dp)
-                    .padding(horizontal = 24.dp),
-                title = articleDetail.title,
-                publishedAt = articleDetail.createdAt.toIsoDateTimeString(),
-                tags = articleDetail.tags.toImmutableList(),
-                extraSource = extraSource,
-                extraSourceUrl = extraSourceUrl,
-            )
+            SelectionContainer {
+                ArticleTitleSection(
+                    modifier = Modifier
+                        .widthIn(max = CONTAINER_MAX_WIDTH)
+                        .fillMaxWidth()
+                        .padding(it)
+                        .padding(top = 48.dp)
+                        .padding(horizontal = 24.dp),
+                    title = articleDetail.title,
+                    publishedAt = articleDetail.createdAt.toIsoDateTimeString(),
+                    tags = articleDetail.tags.toImmutableList(),
+                    extraSource = extraSource,
+                    extraSourceUrl = extraSourceUrl,
+                )
+            }
         },
     )
 }
