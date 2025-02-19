@@ -108,6 +108,14 @@ class CustomMarkdownComponents(
         }
     }
 
+    private val table: MarkdownComponent = { model ->
+        CustomTableComponent(
+            content = model.content,
+            node = model.node,
+            style = model.typography.text,
+        )
+    }
+
     @Composable
     private fun getHeadingString(model: MarkdownComponentModel, style: TextStyle): AnnotatedString {
         val text = model.node.getTextInNode(model.content)
@@ -141,6 +149,7 @@ class CustomMarkdownComponents(
                     paragraph = it.paragraph,
                     codeBlock = highlightedCodeBlock,
                     codeFence = highlightedCodeFence,
+                    table = it.table,
                 )
             }
         }

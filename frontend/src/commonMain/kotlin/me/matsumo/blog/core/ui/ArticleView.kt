@@ -40,9 +40,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mikepenz.markdown.compose.extendedspans.ExtendedSpans
+import com.mikepenz.markdown.compose.extendedspans.RoundedCornerSpanPainter
 import com.mikepenz.markdown.m3.markdownTypography
 import com.mikepenz.markdown.model.markdownAnimations
 import com.mikepenz.markdown.model.markdownDimens
+import com.mikepenz.markdown.model.markdownExtendedSpans
 import com.mikepenz.markdown.model.markdownPadding
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.launch
@@ -109,6 +112,18 @@ fun ArticleView(
         animations = markdownAnimations(
             animateTextSize = { this },
         ),
+        extendedSpans = markdownExtendedSpans {
+            remember {
+                ExtendedSpans(
+                    RoundedCornerSpanPainter(
+                        cornerRadius = 4.sp,
+                        padding = RoundedCornerSpanPainter.TextPaddingValues(1.sp, 2.sp),
+                        topMargin = 2.sp,
+                        bottomMargin = 0.sp
+                    )
+                )
+            }
+        }
     )
 
     val parseTree = MarkdownParser(markdownSettings.flavour).buildMarkdownTreeFromString(content)
