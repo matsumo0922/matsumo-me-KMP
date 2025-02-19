@@ -11,7 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.collections.immutable.toImmutableList
+import matsumo_me_kmp.frontend.generated.resources.Res
+import matsumo_me_kmp.frontend.generated.resources.window_title_article_detail
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
+import me.matsumo.blog.core.theme.setWindowTitle
 import me.matsumo.blog.core.ui.ArticleView
 import me.matsumo.blog.core.ui.AsyncLoadContents
 import me.matsumo.blog.feature.articledetail.components.ArticleTitleSection
@@ -19,6 +22,7 @@ import me.matsumo.blog.shared.entity.ArticleSource
 import me.matsumo.blog.shared.model.ArticleDetail
 import me.matsumo.blog.shared.model.OgContents
 import me.matsumo.blog.shared.utils.toIsoDateTimeString
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -37,6 +41,8 @@ internal fun ArticleDetailRoute(
         screenState = screenState,
         retryAction = viewModel::fetch,
     ) {
+        setWindowTitle(stringResource(Res.string.window_title_article_detail, it.article.title))
+
         ArticleDetailScreen(
             modifier = Modifier.fillMaxSize(),
             articleDetail = it.article,

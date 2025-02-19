@@ -24,17 +24,21 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
+import matsumo_me_kmp.frontend.generated.resources.Res
+import matsumo_me_kmp.frontend.generated.resources.window_title_articles
 import me.matsumo.blog.core.domain.Destinations
 import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
 import me.matsumo.blog.core.theme.LocalDevice
 import me.matsumo.blog.core.theme.rememberWindowWidthDp
+import me.matsumo.blog.core.theme.setWindowTitle
 import me.matsumo.blog.core.ui.AsyncLoadContents
 import me.matsumo.blog.core.ui.BlogBottomBar
 import me.matsumo.blog.core.ui.FixedWithEdgeSpace
 import me.matsumo.blog.core.ui.itemsWithEdgeSpace
 import me.matsumo.blog.feature.articles.components.ArticleCard
 import me.matsumo.blog.shared.model.Article
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -44,6 +48,8 @@ internal fun ArticlesRoute(
     viewModel: ArticlesViewModel = koinViewModel(),
 ) {
     val screenState by viewModel.screenState.collectAsStateWithLifecycle()
+
+    setWindowTitle(stringResource(Res.string.window_title_articles))
 
     AsyncLoadContents(
         modifier = modifier,

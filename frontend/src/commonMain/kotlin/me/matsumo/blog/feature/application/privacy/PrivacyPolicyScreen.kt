@@ -13,7 +13,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import matsumo_me_kmp.frontend.generated.resources.Res
 import matsumo_me_kmp.frontend.generated.resources.app_privacy_policy
 import matsumo_me_kmp.frontend.generated.resources.app_privacy_policy_description
+import matsumo_me_kmp.frontend.generated.resources.window_title_privacy_policy
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
+import me.matsumo.blog.core.theme.setWindowTitle
 import me.matsumo.blog.core.ui.ArticleView
 import me.matsumo.blog.core.ui.AsyncLoadContents
 import me.matsumo.blog.feature.application.ApplicationArticleHeader
@@ -30,6 +32,8 @@ internal fun PrivacyPolicyRoute(
     },
 ) {
     val screenState by viewModel.screenState.collectAsStateWithLifecycle()
+
+    setWindowTitle(stringResource(Res.string.window_title_privacy_policy, appName))
 
     AsyncLoadContents(
         modifier = modifier,

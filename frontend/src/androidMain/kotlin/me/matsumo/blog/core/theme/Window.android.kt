@@ -77,3 +77,8 @@ actual fun mailTo(name: String, address: String, message: String) {
         Toast.makeText(blogApplicationContext, "Failed to open mailer.", Toast.LENGTH_SHORT).show()
     }
 }
+
+@Composable
+actual fun setWindowTitle(title: String) {
+    // do nothing
+}

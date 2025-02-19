@@ -42,6 +42,14 @@
     <string name="unit_minute_before">%1$d分前</string>
     <string name="unit_second_before">%1$d秒前</string>
 
+    <!-- Window Title -->
+    <string name="window_title_home">matsumo.me</string>
+    <string name="window_title_articles">Articles | matsumo.me</string>
+    <string name="window_title_article_detail">%1$s | matsumo.me</string>
+    <string name="window_title_revision">Revision | matsumo.me</string>
+    <string name="window_title_privacy_policy">Privacy Policy - %1$s | matsumo.me</string>
+    <string name="window_title_team_of_service">Team of Service - %1$s | matsumo.me</string>
+
     <!-- Navigation -->
     <string name="navigation_home">Home</string>
     <string name="navigation_articles">Articles</string>

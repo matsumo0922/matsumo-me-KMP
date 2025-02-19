@@ -16,6 +16,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.encodeURIComponent
 import io.github.aakira.napier.Napier
 import io.ktor.http.Url
+import kotlinx.browser.document
 import kotlinx.browser.window
 import me.matsumo.blog.core.domain.Destinations
 import me.matsumo.blog.core.domain.Device
@@ -91,4 +92,11 @@ actual fun mailTo(name: String, address: String, message: String) {
     val body = encodeURIComponent(message)
 
     openUrl("mailto:$address?subject=$subject&body=$body")
+}
+
+@Composable
+actual fun setWindowTitle(title: String) {
+    LaunchedEffect(title) {
+        document.title = title
+    }
 }
