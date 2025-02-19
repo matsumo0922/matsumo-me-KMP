@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -30,6 +29,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import me.matsumo.blog.core.theme.openUrl
+import me.matsumo.blog.core.theme.rememberWindowWidthDp
 import me.matsumo.blog.core.ui.utils.clickableWithPointer
 import me.matsumo.blog.core.ui.utils.toCrosProxyUrl
 import me.matsumo.blog.shared.model.OgContents
@@ -40,6 +40,7 @@ fun LinkCard(
     onOgContentsRequested: suspend (String) -> OgContents?,
     modifier: Modifier = Modifier,
 ) {
+    val windowWidthDp by rememberWindowWidthDp()
     var ogContents by rememberSaveable { mutableStateOf<OgContents?>(null) }
 
     LaunchedEffect(url) {
@@ -121,8 +122,12 @@ fun LinkCard(
 
             AsyncImage(
                 modifier = Modifier
-                    .widthIn(min = if (ogContents == null) 160.dp else 0.dp)
-                    .fillMaxHeight()
+                    .widthIn(
+                        min = if (ogContents == null) 160.dp else 0.dp,
+                        max = windowWidthDp / 3,
+                    )
+                    .height(160.dp)
+                    .background(if (ogContents != null) MaterialTheme.colorScheme.surfaceVariant else Color.Transparent)
                     .shimmer(ogContents == null, 0.dp),
                 model = ogContents?.imageUrl?.toCrosProxyUrl(),
                 contentDescription = null,
