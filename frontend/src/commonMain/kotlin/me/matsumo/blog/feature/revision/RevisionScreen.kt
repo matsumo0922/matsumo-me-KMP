@@ -8,8 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import matsumo_me_kmp.frontend.generated.resources.Res
 import matsumo_me_kmp.frontend.generated.resources.window_title_revision
+import me.matsumo.blog.core.theme.SetWindowTitle
 import me.matsumo.blog.core.theme.openUrl
-import me.matsumo.blog.core.theme.setWindowTitle
 import me.matsumo.blog.core.ui.ClickableText
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -19,7 +19,7 @@ internal fun RevisionScreen(
     modifier: Modifier = Modifier,
     viewModel: RevisionViewModel = koinViewModel(),
 ) {
-    setWindowTitle(stringResource(Res.string.window_title_revision))
+    SetWindowTitle(stringResource(Res.string.window_title_revision))
 
     Box(
         modifier = modifier,

@@ -30,8 +30,8 @@ import me.matsumo.blog.core.domain.Destinations
 import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
 import me.matsumo.blog.core.theme.LocalDevice
+import me.matsumo.blog.core.theme.SetWindowTitle
 import me.matsumo.blog.core.theme.rememberWindowWidthDp
-import me.matsumo.blog.core.theme.setWindowTitle
 import me.matsumo.blog.core.ui.AsyncLoadContents
 import me.matsumo.blog.core.ui.BlogBottomBar
 import me.matsumo.blog.core.ui.FixedWithEdgeSpace
@@ -49,7 +49,7 @@ internal fun ArticlesRoute(
 ) {
     val screenState by viewModel.screenState.collectAsStateWithLifecycle()
 
-    setWindowTitle(stringResource(Res.string.window_title_articles))
+    SetWindowTitle(stringResource(Res.string.window_title_articles))
 
     AsyncLoadContents(
         modifier = modifier,

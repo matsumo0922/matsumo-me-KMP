@@ -1,5 +1,6 @@
 package me.matsumo.blog.feature.articledetail.components
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -7,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -21,10 +23,14 @@ import com.mikepenz.markdown.compose.components.MarkdownComponent
 import com.mikepenz.markdown.compose.components.MarkdownComponentModel
 import com.mikepenz.markdown.compose.components.MarkdownComponents
 import com.mikepenz.markdown.compose.components.markdownComponents
+import com.mikepenz.markdown.compose.elements.MarkdownCodeBlock
+import com.mikepenz.markdown.compose.elements.MarkdownCodeFence
+import com.mikepenz.markdown.compose.elements.MarkdownHighlightedCode
 import com.mikepenz.markdown.compose.elements.MarkdownText
-import com.mikepenz.markdown.compose.elements.highlightedCodeBlock
-import com.mikepenz.markdown.compose.elements.highlightedCodeFence
 import com.mikepenz.markdown.utils.getUnescapedTextInNode
+import dev.snipme.highlights.Highlights
+import dev.snipme.highlights.model.SyntaxLanguage
+import dev.snipme.highlights.model.SyntaxThemes
 import io.github.aakira.napier.Napier
 import me.matsumo.blog.core.theme.bold
 import me.matsumo.blog.core.ui.LinkCard
@@ -116,6 +122,42 @@ class CustomMarkdownComponents(
         )
     }
 
+    private val codeBlock: MarkdownComponent = {
+        MarkdownCodeBlock(
+            content = it.content,
+            node = it.node,
+        ) { code, language ->
+            Napier.d { "codeBlock: $language" }
+
+            MarkdownHighlightedCode(
+                code = code,
+                language = language,
+                highlights = Highlights.Builder(
+                    theme = SyntaxThemes.atom(isSystemInDarkTheme()),
+                ),
+            )
+        }
+    }
+
+    private val codeFence: MarkdownComponent = {
+        MarkdownCodeFence(
+            content = it.content,
+            node = it.node,
+        ) { code, language ->
+            val syntaxLanguage = remember(language) { language?.let { SyntaxLanguage.getByName(it) } }
+
+            Napier.d { "codeBlock: $syntaxLanguage" }
+
+            MarkdownHighlightedCode(
+                code = code,
+                language = language,
+                highlights = Highlights.Builder(
+                    theme = SyntaxThemes.atom(isSystemInDarkTheme()),
+                ),
+            )
+        }
+    }
+
     @Composable
     private fun getHeadingString(model: MarkdownComponentModel, style: TextStyle): AnnotatedString {
         val text = model.node.getTextInNode(model.content)
@@ -147,8 +189,8 @@ class CustomMarkdownComponents(
                     heading5 = it.heading5,
                     heading6 = it.heading6,
                     paragraph = it.paragraph,
-                    codeBlock = highlightedCodeBlock,
-                    codeFence = highlightedCodeFence,
+                    codeBlock = it.codeBlock,
+                    codeFence = it.codeFence,
                     table = it.table,
                 )
             }

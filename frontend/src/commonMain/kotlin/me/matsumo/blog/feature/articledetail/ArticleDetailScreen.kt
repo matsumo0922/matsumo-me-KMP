@@ -14,7 +14,7 @@ import kotlinx.collections.immutable.toImmutableList
 import matsumo_me_kmp.frontend.generated.resources.Res
 import matsumo_me_kmp.frontend.generated.resources.window_title_article_detail
 import me.matsumo.blog.core.theme.CONTAINER_MAX_WIDTH
-import me.matsumo.blog.core.theme.setWindowTitle
+import me.matsumo.blog.core.theme.SetWindowTitle
 import me.matsumo.blog.core.ui.ArticleView
 import me.matsumo.blog.core.ui.AsyncLoadContents
 import me.matsumo.blog.feature.articledetail.components.ArticleTitleSection
@@ -41,7 +41,7 @@ internal fun ArticleDetailRoute(
         screenState = screenState,
         retryAction = viewModel::fetch,
     ) {
-        setWindowTitle(stringResource(Res.string.window_title_article_detail, it.article.title))
+        SetWindowTitle(stringResource(Res.string.window_title_article_detail, it.article.title))
 
         ArticleDetailScreen(
             modifier = Modifier.fillMaxSize(),

@@ -12,7 +12,7 @@ import matsumo_me_kmp.frontend.generated.resources.Res
 import matsumo_me_kmp.frontend.generated.resources.window_title_home
 import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.theme.LocalDevice
-import me.matsumo.blog.core.theme.setWindowTitle
+import me.matsumo.blog.core.theme.SetWindowTitle
 import me.matsumo.blog.core.ui.BlogBottomBar
 import me.matsumo.blog.feature.home.components.HomeHelloSection
 import me.matsumo.blog.feature.home.components.homeAboutSection
@@ -26,7 +26,7 @@ internal fun HomeRoute(
 ) {
     val isMobile = LocalDevice.current == Device.MOBILE
 
-    setWindowTitle(stringResource(Res.string.window_title_home))
+    SetWindowTitle(stringResource(Res.string.window_title_home))
 
     BoxWithConstraints(modifier) {
         LazyColumn(

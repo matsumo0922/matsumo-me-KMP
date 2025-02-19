@@ -22,4 +22,4 @@ expect fun mailTo(name: String, address: String, message: String)
 expect fun isSystemInDarkThemeUnSafe(): Boolean
 
 @Composable
-expect fun setWindowTitle(title: String)
+expect fun SetWindowTitle(title: String)

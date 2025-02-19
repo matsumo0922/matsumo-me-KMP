@@ -79,6 +79,6 @@ actual fun mailTo(name: String, address: String, message: String) {
 }
 
 @Composable
-actual fun setWindowTitle(title: String) {
+actual fun SetWindowTitle(title: String) {
     // do nothing
 }

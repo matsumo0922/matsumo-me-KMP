@@ -80,6 +80,7 @@ fun ArticleView(
             onOgContentsRequested = onOgContentsRequested,
         ),
         typography = markdownTypography(
+            code = MaterialTheme.typography.bodyLarge,
             textLink = TextLinkStyles(
                 style = TextStyle(color = MaterialTheme.colorScheme.primary).toSpanStyle(),
                 hoveredStyle = TextStyle(color = MaterialTheme.colorScheme.primary, textDecoration = TextDecoration.Underline).toSpanStyle(),
@@ -119,11 +120,11 @@ fun ArticleView(
                         cornerRadius = 4.sp,
                         padding = RoundedCornerSpanPainter.TextPaddingValues(1.sp, 2.sp),
                         topMargin = 2.sp,
-                        bottomMargin = 0.sp
-                    )
+                        bottomMargin = 0.sp,
+                    ),
                 )
             }
-        }
+        },
     )
 
     val parseTree = MarkdownParser(markdownSettings.flavour).buildMarkdownTreeFromString(content)

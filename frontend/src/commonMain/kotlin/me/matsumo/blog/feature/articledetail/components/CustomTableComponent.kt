@@ -1,3 +1,5 @@
+@file:Suppress("ModifierMissing")
+
 package me.matsumo.blog.feature.articledetail.components
 
 import androidx.compose.foundation.Image
@@ -48,10 +50,10 @@ fun CustomTableComponent(
     Box(
         modifier = Modifier
             .background(backgroundCodeColor, RoundedCornerShape(tableCornerSize))
-            .widthIn(max = tableMaxWidth)
+            .widthIn(max = tableMaxWidth),
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             node.children.forEach {
                 when (it.type) {
@@ -59,7 +61,7 @@ fun CustomTableComponent(
                         MarkdownTableHeader(
                             content = content,
                             header = it,
-                            style = style
+                            style = style,
                         )
                     }
 
@@ -67,7 +69,7 @@ fun CustomTableComponent(
                         MarkdownTableRow(
                             content = content,
                             header = it,
-                            style = style
+                            style = style,
                         )
                     }
 
@@ -130,7 +132,9 @@ fun MarkdownTableRow(
         verticalAlignment = verticalAlignment,
     ) {
         header.children.filter { it.type == CELL }.forEach { cell ->
-            val hasOneImage = cell.children.all { it.type == MarkdownElementTypes.IMAGE }.takeIf { cell.children.size == 1 } ?: false
+            val hasOneImage = cell.children.all {
+                it.type == MarkdownElementTypes.IMAGE
+            }.takeIf { cell.children.size == 1 } ?: false
             val availableLink = cell.children.firstOrNull()?.let { child ->
                 child.findChildOfTypeRecursive(MarkdownElementTypes.LINK_DESTINATION)?.getUnescapedTextInNode(content)
             }
@@ -146,7 +150,7 @@ fun MarkdownTableRow(
                     alignment = imageData.alignment,
                     contentScale = imageData.contentScale,
                     alpha = imageData.alpha,
-                    colorFilter = imageData.colorFilter
+                    colorFilter = imageData.colorFilter,
                 )
             } else {
                 MarkdownText(
