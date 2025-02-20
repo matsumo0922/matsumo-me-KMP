@@ -44,6 +44,10 @@ gradlePlugin {
             id = "matsumo.primitive.kmp.android.library"
             implementationClass = "primitive.kmp.KmpAndroidLibrary"
         }
+        register("KmpIosPlugin") {
+            id = "matsumo.primitive.kmp.ios"
+            implementationClass = "primitive.kmp.KmpIosPlugin"
+        }
         register("KmpWasmPlugin") {
             id = "matsumo.primitive.kmp.wasm"
             implementationClass = "primitive.kmp.KmpWasmPlugin"

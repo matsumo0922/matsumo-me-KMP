@@ -71,13 +71,15 @@ fun BlogBottomBar(
                 )
             }
 
-            SelectionContainer {
-                LinkSection(
-                    modifier = Modifier.then(
-                        if (isMobile) Modifier.wrapContentHeight() else Modifier.fillMaxHeight(),
-                    ),
-                    isMobile = isMobile,
-                )
+            if (!isMobile) {
+                SelectionContainer {
+                    LinkSection(
+                        modifier = Modifier.then(
+                            if (isMobile) Modifier.wrapContentHeight() else Modifier.fillMaxHeight(),
+                        ),
+                        isMobile = isMobile,
+                    )
+                }
             }
         }
     }

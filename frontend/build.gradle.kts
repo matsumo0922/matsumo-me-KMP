@@ -2,13 +2,14 @@
 import com.android.build.api.variant.ResValue
 import com.codingfeline.buildkonfig.compiler.FieldSpec
 import com.codingfeline.buildkonfig.gradle.TargetConfigDsl
-import java.util.*
+import java.util.Properties
 
 plugins {
     id("matsumo.primitive.kmp.common")
     id("matsumo.primitive.kmp.compose")
     id("matsumo.primitive.kmp.android.application")
     id("matsumo.primitive.kmp.android")
+    id("matsumo.primitive.kmp.ios")
     id("matsumo.primitive.kmp.wasm")
     id("matsumo.primitive.ktorfit")
     id("matsumo.primitive.detekt")
