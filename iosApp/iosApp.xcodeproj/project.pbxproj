@@ -21,6 +21,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		ADB963872D674CA500B5ED2D /* ci_scripts */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ci_scripts;
+			sourceTree = "<group>";
+		};
 		ADFBB8362D66D0810000DE8D /* iosApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -45,6 +50,7 @@
 		ADFBB82B2D66D0810000DE8D = {
 			isa = PBXGroup;
 			children = (
+				ADB963872D674CA500B5ED2D /* ci_scripts */,
 				ADFBB8362D66D0810000DE8D /* iosApp */,
 				ADFBB8352D66D0810000DE8D /* Products */,
 			);
@@ -75,6 +81,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				ADB963872D674CA500B5ED2D /* ci_scripts */,
 				ADFBB8362D66D0810000DE8D /* iosApp */,
 			);
 			name = iosApp;
@@ -145,7 +152,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :frontend:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT/..\"\nsource ~/.zshrc\n./gradlew :frontend:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
