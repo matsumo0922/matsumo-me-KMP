@@ -7,11 +7,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import me.matsumo.blog.core.domain.Destinations
 
-fun NavGraphBuilder.articleDetailScreen() {
+fun NavGraphBuilder.articleDetailScreen(
+    terminate: () -> Unit,
+) {
     composable<Destinations.ArticleDetail> {
         ArticleDetailRoute(
             modifier = Modifier.fillMaxSize(),
             articleId = it.toRoute<Destinations.ArticleDetail>().id,
+            terminate = terminate,
         )
     }
 }

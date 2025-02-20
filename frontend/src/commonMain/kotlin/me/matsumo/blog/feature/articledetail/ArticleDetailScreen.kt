@@ -29,6 +29,7 @@ import org.koin.core.parameter.parametersOf
 @Composable
 internal fun ArticleDetailRoute(
     articleId: Long,
+    terminate: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ArticleDetailViewModel = koinViewModel {
         parametersOf(articleId)
@@ -47,6 +48,7 @@ internal fun ArticleDetailRoute(
             modifier = Modifier.fillMaxSize(),
             articleDetail = it.article,
             onOgContentsRequested = viewModel::fetchOgContents,
+            onBackClicked = terminate,
         )
     }
 }
@@ -55,6 +57,7 @@ internal fun ArticleDetailRoute(
 private fun ArticleDetailScreen(
     articleDetail: ArticleDetail,
     onOgContentsRequested: suspend (String) -> OgContents,
+    onBackClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val extraSource: ArticleSource?
@@ -90,6 +93,7 @@ private fun ArticleDetailScreen(
                     tags = articleDetail.tags.toImmutableList(),
                     extraSource = extraSource,
                     extraSourceUrl = extraSourceUrl,
+                    onBackClicked = onBackClicked,
                 )
             }
         },

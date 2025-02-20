@@ -108,4 +108,5 @@
 
     <!-- Article Detail -->
     <string name="article_detail_continue_read">Read on %1$s</string>
+    <string name="article_detail_back_to_list">Back to Articles</string>
 </resources>

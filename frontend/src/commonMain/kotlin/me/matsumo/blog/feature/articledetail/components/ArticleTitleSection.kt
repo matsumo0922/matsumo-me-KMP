@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -32,11 +34,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.collections.immutable.ImmutableList
 import matsumo_me_kmp.frontend.generated.resources.Res
+import matsumo_me_kmp.frontend.generated.resources.article_detail_back_to_list
 import matsumo_me_kmp.frontend.generated.resources.article_detail_continue_read
 import matsumo_me_kmp.frontend.generated.resources.vec_github_icon
 import matsumo_me_kmp.frontend.generated.resources.vec_qiita_icon
 import matsumo_me_kmp.frontend.generated.resources.vec_zenn_icon
 import me.matsumo.blog.core.domain.Device
+import me.matsumo.blog.core.domain.Platform
+import me.matsumo.blog.core.domain.platform
 import me.matsumo.blog.core.theme.LocalDevice
 import me.matsumo.blog.core.theme.bold
 import me.matsumo.blog.core.theme.openUrl
@@ -54,6 +59,7 @@ internal fun ArticleTitleSection(
     tags: ImmutableList<String>,
     extraSource: ArticleSource?,
     extraSourceUrl: String?,
+    onBackClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val device = LocalDevice.current
@@ -62,6 +68,43 @@ internal fun ArticleTitleSection(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
+        if (platform == Platform.IOS) {
+            val iconId = "iconId"
+            val interactionSource = remember { MutableInteractionSource() }
+            val isHovered by interactionSource.collectIsHoveredAsState()
+
+            Text(
+                modifier = Modifier
+                    .hoverable(interactionSource)
+                    .clickableWithPointer(
+                        interactionSource = interactionSource,
+                        indication = null,
+                        onClick = onBackClicked,
+                    ),
+                text = buildAnnotatedString {
+                    appendInlineContent(iconId)
+                    append(stringResource(Res.string.article_detail_back_to_list))
+                },
+                style = MaterialTheme.typography.bodyMedium.semiBold().copy(
+                    textDecoration = if (isHovered) TextDecoration.Underline else TextDecoration.None,
+                ),
+                color = MaterialTheme.colorScheme.onBackground,
+                inlineContent = mapOf(
+                    iconId to InlineTextContent(
+                        placeholder = Placeholder(22.sp, 16.sp, PlaceholderVerticalAlign.TextCenter),
+                        children = {
+                            Icon(
+                                modifier = Modifier.padding(end = 6.dp),
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onBackground,
+                            )
+                        },
+                    ),
+                ),
+            )
+        }
+
         Text(
             modifier = Modifier.padding(bottom = 16.dp),
             text = title,

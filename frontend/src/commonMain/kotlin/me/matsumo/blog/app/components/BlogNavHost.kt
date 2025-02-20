@@ -30,7 +30,9 @@ internal fun BlogNavHost(
             navigateTo = navController::navigate,
         )
 
-        articleDetailScreen()
+        articleDetailScreen(
+            terminate = { navController.popBackStack<Destinations.Articles>(false, saveState = false) }
+        )
         privacyPolicyScreen()
         teamOfServiceScreen()
         revisionScreen()
