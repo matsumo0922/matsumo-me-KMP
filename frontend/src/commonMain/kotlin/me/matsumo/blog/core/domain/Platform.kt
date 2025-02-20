@@ -3,7 +3,7 @@ package me.matsumo.blog.core.domain
 enum class Platform {
     ANDROID,
     IOS,
-    WEB;
+    WEB,
 }
 
 expect val platform: Platform

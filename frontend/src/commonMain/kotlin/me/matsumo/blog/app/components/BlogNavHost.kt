@@ -31,7 +31,7 @@ internal fun BlogNavHost(
         )
 
         articleDetailScreen(
-            terminate = { navController.popBackStack<Destinations.Articles>(false, saveState = false) }
+            terminate = { navController.popBackStack<Destinations.Articles>(false, saveState = false) },
         )
         privacyPolicyScreen()
         teamOfServiceScreen()
