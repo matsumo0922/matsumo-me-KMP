@@ -65,10 +65,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADFBB8432D66D0820000DE8D /* Build configuration list for PBXNativeTarget "iosApp" */;
 			buildPhases = (
+				ADFBB8462D66D1510000DE8D /* Compile Kotlin Framework */,
 				ADFBB8302D66D0810000DE8D /* Sources */,
 				ADFBB8312D66D0810000DE8D /* Frameworks */,
 				ADFBB8322D66D0810000DE8D /* Resources */,
-				ADFBB8462D66D1510000DE8D /* Compile Kotlin Framework */,
 			);
 			buildRules = (
 			);
@@ -306,7 +306,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.matsumo.blog.iosApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -348,7 +348,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.matsumo.blog.iosApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
