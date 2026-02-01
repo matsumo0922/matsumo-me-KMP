@@ -1,5 +1,6 @@
 package me.matsumo.blog.feature.di
 
+import me.matsumo.blog.feature.application.account.AccountDeletionViewModel
 import me.matsumo.blog.feature.application.privacy.PrivacyPolicyViewModel
 import me.matsumo.blog.feature.application.team.TeamOfServiceViewModel
 import me.matsumo.blog.feature.articledetail.ArticleDetailViewModel
@@ -30,6 +31,13 @@ val featureModule = module {
 
     viewModel {
         PrivacyPolicyViewModel(
+            appName = it.get(),
+            applicationRepository = get(),
+        )
+    }
+
+    viewModel {
+        AccountDeletionViewModel(
             appName = it.get(),
             applicationRepository = get(),
         )

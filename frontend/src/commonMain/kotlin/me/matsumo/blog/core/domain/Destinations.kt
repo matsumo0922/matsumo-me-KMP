@@ -35,6 +35,11 @@ sealed interface Destinations {
     ) : Destinations
 
     @Serializable
+    data class AccountDeletion(
+        val appName: String,
+    ) : Destinations
+
+    @Serializable
     data object Revision : Destinations
 
     @Suppress("UNCHECKED_CAST")
@@ -107,6 +112,15 @@ sealed interface Destinations {
                     TermsOfService(appName)
                 },
                 buildPath = { termsOfService -> mapOf("appName" to termsOfService.appName) },
+            ),
+            Route(
+                pattern = "application/{appName}/account_deletion",
+                type = AccountDeletion::class,
+                parse = { params ->
+                    val appName = params["appName"] ?: return@Route null
+                    AccountDeletion(appName)
+                },
+                buildPath = { accountDeletion -> mapOf("appName" to accountDeletion.appName) },
             ),
             Route(
                 pattern = "revision",

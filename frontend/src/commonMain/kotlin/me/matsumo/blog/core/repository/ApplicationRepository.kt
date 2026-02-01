@@ -21,6 +21,10 @@ class ApplicationRepository(
         httpClient.get(gist.teamOfService).bodyAsText()
     }
 
+    suspend fun getAccountDeletion(gist: ApplicationGist) = withContext(ioDispatcher) {
+        gist.accountDeletion?.let { httpClient.get(it).bodyAsText() } ?: ""
+    }
+
     fun getApplicationGist(appName: String) = when (appName.lowercase()) {
         "kanade" -> ApplicationGist.Kanade
         "pixiview" -> ApplicationGist.Fanbox

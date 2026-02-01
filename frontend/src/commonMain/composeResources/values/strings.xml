@@ -49,6 +49,7 @@
     <string name="window_title_revision">Revision | matsumo.me</string>
     <string name="window_title_privacy_policy">Privacy Policy - %1$s | matsumo.me</string>
     <string name="window_title_team_of_service">Team of Service - %1$s | matsumo.me</string>
+    <string name="window_title_account_deletion">Account Deletion - %1$s | matsumo.me</string>
 
     <!-- Navigation -->
     <string name="navigation_home">Home</string>
@@ -105,6 +106,8 @@
     <string name="app_privacy_policy_description">To use the application, you must agree to the following privacy policy.</string>
     <string name="app_team_of_service">Team of Service</string>
     <string name="app_team_of_service_description">To use the application, you must agree to the following team of service.</string>
+    <string name="app_account_deletion">Account Deletion</string>
+    <string name="app_account_deletion_description">To delete your account, please follow the instructions below.</string>
 
     <!-- Article Detail -->
     <string name="article_detail_continue_read">Read on %1$s</string>
