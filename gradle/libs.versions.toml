@@ -15,28 +15,28 @@ gradle = "9.5.0"
 kotlin = "2.4.21"
 
 # KotlinX
-kotlinxCoroutines = "1.10.1"
+kotlinxCoroutines = "1.11.0"
 kotlinxDatetime = "0.8.0"
-kotlinxSerializationJson = "1.8.0"
-kotlinxImmutable = "0.3.8"
-kotlinxBrowser = "0.3"
+kotlinxSerializationJson = "1.12.0"
+kotlinxImmutable = "0.5.2"
+kotlinxBrowser = "0.5.0"
 
 # AndroidX
-androidxCore = "1.15.0"
-androidxCoreSplash = "1.0.1"
-androidxAppCompat = "1.7.0"
-androidxActivity = "1.10.0"
-androidxFragment = "1.8.6"
-androidxAnnotation = "1.9.1"
+androidxCore = "1.19.1"
+androidxCoreSplash = "1.2.0"
+androidxAppCompat = "1.8.0"
+androidxActivity = "1.13.0"
+androidxFragment = "1.9.1"
+androidxAnnotation = "1.11.0"
 androidxStartup = "1.2.0"
-androidxBrowser = "1.8.0"
+androidxBrowser = "1.10.0"
 
 # KMP
 kmpCompose = "1.12.2"
 kmpComposeMaterial3 = "1.9.0"
 kmpComposeMaterialIcons = "1.7.3"
 kmpComplete = "1.1.0"
-kmpSwiftKlib = "0.6.3"
+kmpSwiftKlib = "0.6.4"
 kmpLifecycle = "2.11.0"
 kmpNavigation = "2.10.0"
 
@@ -44,20 +44,20 @@ kmpNavigation = "2.10.0"
 ksp = "2.3.13"
 
 # koin
-koin = "4.0.2"
+koin = "4.2.2"
 
 # Others
-ktor = "3.0.3"
-ksoup = "0.1.2"
-coil3 = "3.1.0"
+ktor = "3.6.1"
+ksoup = "0.2.6"
+coil3 = "3.6.3"
 detekt = "1.23.7"
 ktorfit = "2.7.5"
-supabase = "3.1.1"
+supabase = "3.8.0"
 markdown = "0.31.0-rc01"
-commonmark = "0.24.0"
-logback = "1.5.16"
-libraries = "11.4.0"
-buildKonfig = "0.16.0"
+commonmark = "0.32.0"
+logback = "1.6.6"
+libraries = "15.3.0"
+buildKonfig = "0.23.0"
 twitterComposeRule = "0.0.26"
 
 # Debugs
@@ -185,7 +185,7 @@ commonmark-front-matter = { module = "org.commonmark:commonmark-ext-yaml-front-m
 
 # Others
 ksoup = { module = "com.fleeksoft.ksoup:ksoup", version.ref = "ksoup" }
-desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.4" }
+desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.5" }
 
 # Debugs
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }

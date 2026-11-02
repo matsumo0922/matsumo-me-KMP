@@ -33,7 +33,6 @@ import me.matsumo.blog.initKoin
 import me.matsumo.blog.setupCoil
 import org.khronos.webgl.ArrayBuffer
 import org.khronos.webgl.Int8Array
-import org.koin.compose.KoinContext
 import org.w3c.fetch.Response
 import kotlin.wasm.unsafe.UnsafeWasmMemoryApi
 import kotlin.wasm.unsafe.withScopedMemoryAllocator
@@ -64,43 +63,41 @@ fun main() {
     setupCoil()
 
     ComposeViewport(document.body!!) {
-        KoinContext {
-            val fontFamilyResolver = LocalFontFamilyResolver.current
-            var fontFamily by remember { mutableStateOf<FontFamily?>(null) }
-            var fontsLoaded by remember { mutableStateOf(false) }
+        val fontFamilyResolver = LocalFontFamilyResolver.current
+        var fontFamily by remember { mutableStateOf<FontFamily?>(null) }
+        var fontsLoaded by remember { mutableStateOf(false) }
 
-            LaunchedEffect(true) {
-                runCatching {
-                    val fonts = NotoSansJP.entries
-                        .map { it to loadRes("./composeResources/matsumo_me_kmp.composeapp.generated.resources/font/${it.fileName}.woff2") }
-                        .map { (font, arrayBuffer) -> Font(font.fileName, arrayBuffer.toByteArray(), font.weight) }
+        LaunchedEffect(true) {
+            runCatching {
+                val fonts = NotoSansJP.entries
+                    .map { it to loadRes("./composeResources/matsumo_me_kmp.composeapp.generated.resources/font/${it.fileName}.woff2") }
+                    .map { (font, arrayBuffer) -> Font(font.fileName, arrayBuffer.toByteArray(), font.weight) }
 
-                    fontFamily = FontFamily(fonts)
-                    fontFamilyResolver.preload(fontFamily!!)
-                }.onFailure {
-                    Napier.e(it) { "Failed to load fonts" }
-                }
-
-                fontsLoaded = true
+                fontFamily = FontFamily(fonts)
+                fontFamilyResolver.preload(fontFamily!!)
+            }.onFailure {
+                Napier.e(it) { "Failed to load fonts" }
             }
 
-            AnimatedContent(
-                modifier = Modifier.background(DarkBlueColorScheme.surface),
-                targetState = fontsLoaded,
-                transitionSpec = { fadeIn().togetherWith(fadeOut()) },
-            ) {
-                if (it) {
-                    BlogApp(
+            fontsLoaded = true
+        }
+
+        AnimatedContent(
+            modifier = Modifier.background(DarkBlueColorScheme.surface),
+            targetState = fontsLoaded,
+            transitionSpec = { fadeIn().togetherWith(fadeOut()) },
+        ) {
+            if (it) {
+                BlogApp(
+                    modifier = Modifier.fillMaxSize(),
+                    fontFamily = fontFamily,
+                    startDestinations = Destinations.fromUrl(Url(window.location.toString())) ?: Destinations.Home,
+                )
+            } else {
+                BlogTheme {
+                    WasmLoadingScreen(
                         modifier = Modifier.fillMaxSize(),
-                        fontFamily = fontFamily,
-                        startDestinations = Destinations.fromUrl(Url(window.location.toString())) ?: Destinations.Home,
                     )
-                } else {
-                    BlogTheme {
-                        WasmLoadingScreen(
-                            modifier = Modifier.fillMaxSize(),
-                        )
-                    }
                 }
             }
         }
