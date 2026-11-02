@@ -66,7 +66,7 @@ import me.matsumo.blog.core.theme.openUrl
 import me.matsumo.blog.core.ui.CodeTitle
 import me.matsumo.blog.core.ui.utils.clickableWithPointer
 import me.matsumo.blog.core.ui.utils.enterAnimation
-import me.matsumo.blog.core.ui.utils.toCrosProxyUrl
+import me.matsumo.blog.core.ui.utils.toCorsProxyUrl
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -198,7 +198,7 @@ private fun ExperienceItem(
                                 .aspectRatio(16 / 9f)
                                 .clip(RoundedCornerShape(8.dp))
                                 .clickableWithPointer { openUrl(experience.ogLink) },
-                            model = experience.ogImage.toCrosProxyUrl(),
+                            model = experience.ogImage.toCorsProxyUrl(),
                             contentScale = ContentScale.Crop,
                             contentDescription = null,
                         )
