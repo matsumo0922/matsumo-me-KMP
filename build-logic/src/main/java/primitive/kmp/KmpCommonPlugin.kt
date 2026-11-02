@@ -18,6 +18,10 @@ class KmpCommonPlugin : Plugin<Project> {
                 apply("com.google.devtools.ksp")
             }
 
+            kotlin {
+                jvmToolchain(21)
+            }
+
             tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink>().configureEach {
                 notCompatibleWithConfigurationCache("Configuration chache not supported for a system property read at configuration time")
             }
