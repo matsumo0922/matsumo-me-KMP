@@ -83,13 +83,21 @@
     <string name="home_experience_bone">I was born</string>
     <string name="home_experience_bone_description">Born in 2002/09/22 in Okayama, Japan.</string>
     <string name="home_experience_keio">Entered Keio University</string>
-    <string name="home_experience_keio_description">I enrolled in the Department of Electrical and Electronic Engineering at Keio University's Faculty of Science and Technology and am currently still studying there.</string>
+    <string name="home_experience_keio_description">I enrolled in the Department of Electrical and Electronic Engineering at Keio University's Faculty of Science and Technology, and left the university in September 2025.</string>
+    <string name="home_experience_tsukuba">Transferred to University of Tsukuba</string>
+    <string name="home_experience_tsukuba_description">I transferred to the College of Information Science (coins), School of Informatics, University of Tsukuba.</string>
     <string name="home_experience_cookpad">Cookpad Inc.（クックパッド株式会社）</string>
     <string name="home_experience_cookpad_description">I had the opportunity to participate in a summer internship in 2022, which led to a long-term, employment-based internship. I have been with the company for about three years, from 2022 to the present. My primary work involved developing the Android client app for Cookpad.</string>
     <string name="home_experience_ly">LY Corporation. (LINEヤフー株式会社)</string>
     <string name="home_experience_ly_description">I participated in the summer internships in 2023 and 2024. Through these experiences, I had the opportunity to continue, and I plan to start a long-term, employment-based internship in 2025. My primary work involved developing the Android client app for LINE, specifically in the chat division.</string>
     <string name="home_experience_yumemi">Yumemi Inc.（株式会社ゆめみ）</string>
     <string name="home_experience_yumemi_description">I participated in an internship in 2024, where I learned about application development modeled after real-world development processes.</string>
+    <string name="home_experience_cybozu">Cybozu, Inc.（サイボウズ株式会社）</string>
+    <string name="home_experience_cybozu_description">As an intern, I worked on developing the Android client app for Garoon.</string>
+    <string name="home_experience_sony">Sony Corporation（ソニー株式会社）</string>
+    <string name="home_experience_sony_description">As an intern, I worked on developing the Sound Connect app. I learned about multiplatform development leveraging Kotlin Multiplatform (KMP) and technologies for integrating with hardware.</string>
+    <string name="home_experience_yappli">Yappli, Inc.（株式会社ヤプリ）</string>
+    <string name="home_experience_yappli_description">As an intern, I worked on developing the Android app for Yappli.</string>
 
     <string name="home_contact_name">Name</string>
     <string name="home_contact_email">Email</string>
