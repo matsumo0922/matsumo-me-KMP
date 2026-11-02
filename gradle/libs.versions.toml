@@ -16,7 +16,7 @@ kotlin = "2.4.21"
 
 # KotlinX
 kotlinxCoroutines = "1.10.1"
-kotlinxDatetime = "0.6.1"
+kotlinxDatetime = "0.8.0"
 kotlinxSerializationJson = "1.8.0"
 kotlinxImmutable = "0.3.8"
 kotlinxBrowser = "0.3"
@@ -32,11 +32,13 @@ androidxStartup = "1.2.0"
 androidxBrowser = "1.8.0"
 
 # KMP
-kmpCompose = "1.7.3"
+kmpCompose = "1.12.2"
+kmpComposeMaterial3 = "1.9.0"
+kmpComposeMaterialIcons = "1.7.3"
 kmpComplete = "1.1.0"
 kmpSwiftKlib = "0.6.3"
-kmpLifecycle = "2.9.0-alpha02"
-kmpNavigation = "2.8.0-alpha12"
+kmpLifecycle = "2.11.0"
+kmpNavigation = "2.10.0"
 
 # Google
 ksp = "2.3.13"
@@ -121,7 +123,13 @@ androidx-browser = { module = "androidx.browser:browser", version.ref = "android
 # KMP
 kmp-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "kmpLifecycle" }
 kmp-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "kmpLifecycle" }
+kmp-compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "kmpCompose" }
 kmp-compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "kmpCompose" }
+kmp-compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "kmpCompose" }
+kmp-compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "kmpCompose" }
+kmp-compose-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "kmpCompose" }
+kmp-compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "kmpComposeMaterial3" }
+kmp-compose-material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "kmpComposeMaterialIcons" }
 kmp-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "kmpNavigation" }
 
 # Ktorfit
@@ -191,6 +199,16 @@ infra = [
     "kotlinx-serialization-json",
     "kotlinx-collections-immutable",
     "napier",
+]
+
+ui-compose = [
+    "kmp-compose-runtime",
+    "kmp-compose-foundation",
+    "kmp-compose-ui",
+    "kmp-compose-material3",
+    "kmp-compose-material-icons-extended",
+    "kmp-compose-resources",
+    "kmp-compose-ui-tooling-preview",
 ]
 
 ui-common = [

@@ -18,7 +18,7 @@ import androidx.compose.ui.geometry.lerp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalDensity
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin

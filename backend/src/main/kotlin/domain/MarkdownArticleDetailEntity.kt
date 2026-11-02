@@ -1,6 +1,6 @@
 package domain
 
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 data class MarkdownArticleDetailEntity(
     val title: String,

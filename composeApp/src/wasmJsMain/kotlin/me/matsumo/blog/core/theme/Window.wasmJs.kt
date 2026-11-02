@@ -13,9 +13,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.encodeURIComponent
 import io.github.aakira.napier.Napier
 import io.ktor.http.Url
+import io.ktor.http.encodeURLParameter
 import kotlinx.browser.document
 import kotlinx.browser.window
 import me.matsumo.blog.core.domain.Destinations
@@ -88,8 +88,8 @@ actual fun openUrl(url: String) {
 }
 
 actual fun mailTo(name: String, address: String, message: String) {
-    val subject = encodeURIComponent("Contact from $name. (matsumo.me)")
-    val body = encodeURIComponent(message)
+    val subject = "Contact from $name. (matsumo.me)".encodeURLParameter()
+    val body = message.encodeURLParameter()
 
     openUrl("mailto:$address?subject=$subject&body=$body")
 }
