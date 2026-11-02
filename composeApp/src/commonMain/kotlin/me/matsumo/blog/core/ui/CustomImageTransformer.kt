@@ -17,14 +17,14 @@ import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import com.mikepenz.markdown.model.ImageData
 import com.mikepenz.markdown.model.ImageTransformer
-import me.matsumo.blog.core.ui.utils.toCrosProxyUrl
+import me.matsumo.blog.core.ui.utils.toCorsProxyUrl
 
 object CustomImageTransformer : ImageTransformer {
 
     @Composable
     override fun transform(link: String): ImageData = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalPlatformContext.current)
-            .data(link.toCrosProxyUrl())
+            .data(link.toCorsProxyUrl())
             .build(),
     ).let {
         ImageData(

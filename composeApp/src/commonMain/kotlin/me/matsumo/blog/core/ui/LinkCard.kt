@@ -32,7 +32,7 @@ import coil3.compose.AsyncImage
 import me.matsumo.blog.core.theme.openUrl
 import me.matsumo.blog.core.theme.rememberWindowWidthDp
 import me.matsumo.blog.core.ui.utils.clickableWithPointer
-import me.matsumo.blog.core.ui.utils.toCrosProxyUrl
+import me.matsumo.blog.core.ui.utils.toCorsProxyUrl
 import me.matsumo.blog.shared.model.OgContents
 
 @Composable
@@ -108,7 +108,7 @@ fun LinkCard(
                             .background(if (ogContents != null) Color.White else Color.Transparent)
                             .size(20.dp)
                             .padding(1.dp),
-                        model = ogContents?.iconUrl?.toCrosProxyUrl(),
+                        model = ogContents?.iconUrl?.toCorsProxyUrl(),
                         contentDescription = null,
                     )
 
@@ -131,7 +131,7 @@ fun LinkCard(
                     .height(160.dp)
                     .background(if (ogContents != null) MaterialTheme.colorScheme.surfaceVariant else Color.Transparent)
                     .shimmer(ogContents == null, 0.dp),
-                model = ogContents?.imageUrl?.toCrosProxyUrl(),
+                model = ogContents?.imageUrl?.toCorsProxyUrl(),
                 contentDescription = null,
             )
         }
