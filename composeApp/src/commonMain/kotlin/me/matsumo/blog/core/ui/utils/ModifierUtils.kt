@@ -140,6 +140,16 @@ private class FocusScaleNode(
 
     private val scale = Animatable(1f)
 
+    // 縮小アニメーションの途中で detach されると coroutineScope ごとキャンセルされ、拡大率が途中の値で残る。
+    // LazyColumn などで再利用されたときに拡大したままにならないよう、attach / reset のたびに等倍へ戻す
+    override fun onAttach() {
+        resetScale()
+    }
+
+    override fun onReset() {
+        resetScale()
+    }
+
     override fun onPointerEvent(
         pointerEvent: PointerEvent,
         pass: PointerEventPass,
@@ -168,6 +178,14 @@ private class FocusScaleNode(
                 scaleX = scale.value
                 scaleY = scale.value
             }
+        }
+    }
+
+    private fun resetScale() {
+        if (!isAttached) return
+
+        coroutineScope.launch {
+            scale.snapTo(1f)
         }
     }
 
