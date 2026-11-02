@@ -29,6 +29,9 @@ fun Project.setupAndroid() {
             }
         }
 
+        // Compose Preview は unit test 用に compile した Android resources を使う
+        testOptions.unitTests.isIncludeAndroidResources = true
+
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_21
             targetCompatibility = JavaVersion.VERSION_21
