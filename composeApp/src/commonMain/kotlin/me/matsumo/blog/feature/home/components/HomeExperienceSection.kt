@@ -283,7 +283,7 @@ private enum class Experience(
         title = Res.string.home_experience_ly,
         description = Res.string.home_experience_ly_description,
         period = "2023",
-        date = "AUG 2023 & SEP 2024",
+        date = "AUG 2023 - OCT 2026",
         image = Res.drawable.im_experience_ly,
         ogImage = "https://www.lycorp.co.jp/assets/images/ogp_ly_jp_bk_1200_628.png",
         ogLink = "https://www.lycorp.co.jp/ja/",
