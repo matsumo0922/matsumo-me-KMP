@@ -1,6 +1,6 @@
 package domain
 
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import me.matsumo.blog.shared.utils.InstantSerializer

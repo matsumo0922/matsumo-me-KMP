@@ -1,13 +1,10 @@
 package me.matsumo.blog.core.domain
 
-import androidx.core.bundle.Bundle
 import androidx.navigation.NavBackStackEntry
-import androidx.navigation.serialization.decodeArguments
+import androidx.navigation.toRoute
 import io.github.aakira.napier.Napier
 import io.ktor.http.Url
-import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.serializer
 import kotlin.reflect.KClass
 
 @Serializable
@@ -165,16 +162,12 @@ sealed interface Destinations {
             return null
         }
 
-        @OptIn(InternalSerializationApi::class)
         fun fromBackStackEntry(backStackEntry: NavBackStackEntry): Destinations? {
             val routePackage = backStackEntry.destination.route ?: return null
             val currentRoute = argPlaceholder.find(routePackage)?.groupValues?.get(1) ?: routePackage
 
-            val bundle = backStackEntry.arguments ?: Bundle()
-            val typeMap = backStackEntry.destination.arguments.mapValues { it.value.type }
-
             for (route in routes) {
-                runCatching { route.type.serializer().decodeArguments(bundle, typeMap) }.onSuccess {
+                runCatching { backStackEntry.toRoute<Destinations>(route.type) }.onSuccess {
                     if (it::class.simpleName == currentRoute) return it
                 }
             }

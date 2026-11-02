@@ -22,9 +22,10 @@ kotlin {
             implementation(libs.ktor.core)
             implementation(libs.koin.compose)
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
+            implementation(libs.kmp.compose.runtime)
+            implementation(libs.kmp.compose.foundation)
+            implementation(libs.kmp.compose.ui)
+            implementation(libs.kmp.compose.material3)
         }
     }
 }

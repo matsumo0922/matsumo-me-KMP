@@ -1,6 +1,6 @@
 package me.matsumo.blog.shared.utils
 
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format.FormatStringsInDatetimeFormats
