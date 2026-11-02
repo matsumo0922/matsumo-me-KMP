@@ -60,7 +60,7 @@ class UpdateMarkdownArticleUseCase(
         return MarkdownArticleDetailDao(
             articleId = 0,
             sourceId = sha,
-            sourceUrl = "https://github.com/matsumo0922/matsumo-me-KMP/blob/master/$path",
+            sourceUrl = "https://github.com/matsumo0922/matsumo-me-KMP/blob/main/$path",
             title = title,
             content = content,
             renderedContent = content,

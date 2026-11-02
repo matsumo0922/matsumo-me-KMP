@@ -88,7 +88,7 @@ class ArticleRepository(
     }
 
     suspend fun getMarkdownArticleDetailEntity(path: String, sha: String): MarkdownArticleDetailEntity {
-        val content = httpClient.get("https://raw.githubusercontent.com/matsumo0922/matsumo-me-KMP/refs/heads/master/$path").bodyAsText()
+        val content = httpClient.get("https://raw.githubusercontent.com/matsumo0922/matsumo-me-KMP/refs/heads/main/$path").bodyAsText()
 
         val renderer = MarkdownRenderer.builder().build()
         val visitor = YamlFrontMatterVisitor()
