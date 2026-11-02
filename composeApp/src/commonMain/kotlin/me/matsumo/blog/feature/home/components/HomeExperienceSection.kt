@@ -41,14 +41,23 @@ import matsumo_me_kmp.composeapp.generated.resources.home_experience_bone
 import matsumo_me_kmp.composeapp.generated.resources.home_experience_bone_description
 import matsumo_me_kmp.composeapp.generated.resources.home_experience_cookpad
 import matsumo_me_kmp.composeapp.generated.resources.home_experience_cookpad_description
+import matsumo_me_kmp.composeapp.generated.resources.home_experience_cybozu
+import matsumo_me_kmp.composeapp.generated.resources.home_experience_cybozu_description
 import matsumo_me_kmp.composeapp.generated.resources.home_experience_keio
 import matsumo_me_kmp.composeapp.generated.resources.home_experience_keio_description
 import matsumo_me_kmp.composeapp.generated.resources.home_experience_ly
 import matsumo_me_kmp.composeapp.generated.resources.home_experience_ly_description
+import matsumo_me_kmp.composeapp.generated.resources.home_experience_sony
+import matsumo_me_kmp.composeapp.generated.resources.home_experience_sony_description
+import matsumo_me_kmp.composeapp.generated.resources.home_experience_tsukuba
+import matsumo_me_kmp.composeapp.generated.resources.home_experience_tsukuba_description
+import matsumo_me_kmp.composeapp.generated.resources.home_experience_yappli
+import matsumo_me_kmp.composeapp.generated.resources.home_experience_yappli_description
 import matsumo_me_kmp.composeapp.generated.resources.home_experience_yumemi
 import matsumo_me_kmp.composeapp.generated.resources.home_experience_yumemi_description
 import matsumo_me_kmp.composeapp.generated.resources.im_experience_cookpad
 import matsumo_me_kmp.composeapp.generated.resources.im_experience_ly
+import matsumo_me_kmp.composeapp.generated.resources.im_experience_yappli
 import me.matsumo.blog.core.domain.Device
 import me.matsumo.blog.core.theme.LocalDevice
 import me.matsumo.blog.core.theme.bold
@@ -253,7 +262,13 @@ private enum class Experience(
         title = Res.string.home_experience_keio,
         description = Res.string.home_experience_keio_description,
         period = "2021",
-        date = "APR 2021 - PRESENT",
+        date = "APR 2021 - SEP 2025",
+    ),
+    Tsukuba(
+        title = Res.string.home_experience_tsukuba,
+        description = Res.string.home_experience_tsukuba_description,
+        period = "2026",
+        date = "APR 2026 - PRESENT",
     ),
     Cookpad(
         title = Res.string.home_experience_cookpad,
@@ -280,5 +295,30 @@ private enum class Experience(
         date = "AUG 2024",
         ogImage = "https://www.yumemi.co.jp/ogp.png",
         ogLink = "https://www.yumemi.co.jp/",
+    ),
+    Cybozu(
+        title = Res.string.home_experience_cybozu,
+        description = Res.string.home_experience_cybozu_description,
+        period = "2026",
+        date = "AUG 2026",
+        ogImage = "https://cybozu.co.jp/recruit/ogp.jpg",
+        ogLink = "https://cybozu.co.jp/recruit/",
+    ),
+    Sony(
+        title = Res.string.home_experience_sony,
+        description = Res.string.home_experience_sony_description,
+        period = "2026",
+        date = "SEP 2026",
+        ogImage = "https://www.sony.jp/headphone/special/soundconnect/ogp.jpg",
+        ogLink = "https://www.sony.jp/headphone/special/soundconnect/",
+    ),
+    Yappli(
+        title = Res.string.home_experience_yappli,
+        description = Res.string.home_experience_yappli_description,
+        period = "2026",
+        date = "OCT 2026",
+        image = Res.drawable.im_experience_yappli,
+        ogImage = "https://yappli.co.jp/assets/img/recruit/ogp-work-style.png",
+        ogLink = "https://yappli.co.jp/recruit/",
     ),
 }
