@@ -2,6 +2,7 @@ plugins {
     // Android
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.android.kmp.library) apply false
 
     // Kotlin Multiplatform (KMP)
     alias(libs.plugins.kmp) apply false

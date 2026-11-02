@@ -18,11 +18,6 @@ class KmpCommonPlugin : Plugin<Project> {
                 apply("com.google.devtools.ksp")
             }
 
-            kotlin {
-                // https://stackoverflow.com/questions/36465824/android-studio-task-testclasses-not-found-in-project
-                task("testClasses")
-            }
-
             tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink>().configureEach {
                 notCompatibleWithConfigurationCache("Configuration chache not supported for a system property read at configuration time")
             }
