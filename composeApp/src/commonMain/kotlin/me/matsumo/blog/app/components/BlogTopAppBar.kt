@@ -36,11 +36,11 @@ import org.jetbrains.compose.resources.vectorResource
 internal fun BlogTopAppBar(
     isMobile: Boolean,
     isDark: Boolean,
-    onToggleThemeClicked: () -> Unit,
-    onOpenDrawerClicked: () -> Unit,
-    onNavigationHomeClicked: () -> Unit,
-    onNavigationArticlesClicked: () -> Unit,
-    onNavigationGithubClicked: () -> Unit,
+    onToggleThemeClick: () -> Unit,
+    onOpenDrawerClick: () -> Unit,
+    onNavigationHomeClick: () -> Unit,
+    onNavigationArticlesClick: () -> Unit,
+    onNavigationGithubClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -58,7 +58,7 @@ internal fun BlogTopAppBar(
                 .clickableWithPointer(
                     interactionSource = null,
                     indication = null,
-                    onClick = { onNavigationHomeClicked() },
+                    onClick = { onNavigationHomeClick() },
                 ),
             imageVector = vectorResource(Res.drawable.vec_blog_logo),
             contentDescription = "matsumo.me",
@@ -68,7 +68,7 @@ internal fun BlogTopAppBar(
 
         IconButton(
             modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
-            onClick = onToggleThemeClicked,
+            onClick = onToggleThemeClick,
         ) {
             Icon(
                 imageVector = if (isDark) Icons.Filled.DarkMode else Icons.Filled.LightMode,
@@ -87,7 +87,7 @@ internal fun BlogTopAppBar(
             ) {
                 TextButton(
                     modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
-                    onClick = onNavigationHomeClicked,
+                    onClick = onNavigationHomeClick,
                 ) {
                     Text(
                         text = stringResource(Res.string.navigation_home),
@@ -98,7 +98,7 @@ internal fun BlogTopAppBar(
 
                 TextButton(
                     modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
-                    onClick = onNavigationArticlesClicked,
+                    onClick = onNavigationArticlesClick,
                 ) {
                     Text(
                         text = stringResource(Res.string.navigation_articles),
@@ -109,7 +109,7 @@ internal fun BlogTopAppBar(
 
                 TextButton(
                     modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
-                    onClick = onNavigationGithubClicked,
+                    onClick = onNavigationGithubClick,
                 ) {
                     Text(
                         text = stringResource(Res.string.navigation_github),
@@ -121,7 +121,7 @@ internal fun BlogTopAppBar(
         }
 
         if (isMobile) {
-            IconButton(onOpenDrawerClicked) {
+            IconButton(onOpenDrawerClick) {
                 Icon(
                     imageVector = Icons.Filled.Menu,
                     contentDescription = "Menu",

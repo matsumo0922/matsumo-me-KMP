@@ -6,12 +6,14 @@ import domain.dao.ArticleDao
 import domain.dao.QiitaArticleDetailDao
 import me.matsumo.blog.shared.entity.ArticleSource
 import repository.ArticleRepository
+import repository.ArticleSourceRepository
 
 class UpdateQiitaArticleUseCase(
     private val articleRepository: ArticleRepository,
+    private val articleSourceRepository: ArticleSourceRepository,
 ) {
     suspend operator fun invoke() {
-        articleRepository.getQiitaArticlesEntity().forEach { entity ->
+        articleSourceRepository.getQiitaArticlesEntity().forEach { entity ->
             val currentArticle = articleRepository.getArticle(sourceId = entity.id)
             val currentArticleDetail = currentArticle?.id?.let { articleRepository.getArticleDetailFromQiita(it) }
 

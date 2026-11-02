@@ -30,9 +30,9 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun BlogDrawerContent(
     state: DrawerState,
-    onNavigationHomeClicked: () -> Unit,
-    onNavigationArticlesClicked: () -> Unit,
-    onNavigationGithubClicked: () -> Unit,
+    onNavigationHomeClick: () -> Unit,
+    onNavigationArticlesClick: () -> Unit,
+    onNavigationGithubClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val scope = rememberCoroutineScope()
@@ -57,7 +57,7 @@ fun BlogDrawerContent(
                 onClick = {
                     scope.launch {
                         state.close()
-                        onNavigationHomeClicked()
+                        onNavigationHomeClick()
                     }
                 },
             )
@@ -67,7 +67,7 @@ fun BlogDrawerContent(
                 onClick = {
                     scope.launch {
                         state.close()
-                        onNavigationArticlesClicked()
+                        onNavigationArticlesClick()
                     }
                 },
             )
@@ -77,7 +77,7 @@ fun BlogDrawerContent(
                 onClick = {
                     scope.launch {
                         state.close()
-                        onNavigationGithubClicked()
+                        onNavigationGithubClick()
                     }
                 },
             )

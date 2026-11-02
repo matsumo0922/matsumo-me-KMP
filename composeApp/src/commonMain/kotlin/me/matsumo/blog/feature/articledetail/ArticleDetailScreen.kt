@@ -47,8 +47,8 @@ internal fun ArticleDetailRoute(
         ArticleDetailScreen(
             modifier = Modifier.fillMaxSize(),
             articleDetail = it.article,
-            onOgContentsRequested = viewModel::fetchOgContents,
-            onBackClicked = terminate,
+            onOgContentsRequest = viewModel::fetchOgContents,
+            onBackClick = terminate,
         )
     }
 }
@@ -56,8 +56,8 @@ internal fun ArticleDetailRoute(
 @Composable
 private fun ArticleDetailScreen(
     articleDetail: ArticleDetail,
-    onOgContentsRequested: suspend (String) -> OgContents,
-    onBackClicked: () -> Unit,
+    onOgContentsRequest: suspend (String) -> OgContents,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val extraSource: ArticleSource?
@@ -78,7 +78,7 @@ private fun ArticleDetailScreen(
     ArticleView(
         modifier = modifier,
         content = articleDetail.content,
-        onOgContentsRequested = onOgContentsRequested,
+        onOgContentsRequest = onOgContentsRequest,
         header = {
             SelectionContainer {
                 ArticleTitleSection(
@@ -93,7 +93,7 @@ private fun ArticleDetailScreen(
                     tags = articleDetail.tags.toImmutableList(),
                     extraSource = extraSource,
                     extraSourceUrl = extraSourceUrl,
-                    onBackClicked = onBackClicked,
+                    onBackClick = onBackClick,
                 )
             }
         },

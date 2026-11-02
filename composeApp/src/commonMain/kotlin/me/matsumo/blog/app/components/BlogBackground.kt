@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
@@ -72,7 +72,7 @@ fun BlogBackground(
         val heightPx = with(density) { maxHeight.toPx() }
 
         // recomposition 用
-        val frameTick = remember { mutableStateOf(0L) }
+        val frameTick = remember { mutableLongStateOf(0L) }
 
         val points = remember(widthPx, heightPx, pointCount) {
             mutableStateListOf<PointData>().apply {
@@ -117,55 +117,8 @@ fun BlogBackground(
                 lastTime = frameTime
 
                 points.forEach { point ->
-                    point.x += (point.vx / 5f) * deltaTime
-                    point.y += (point.vy / 5f) * deltaTime
-
-                    if (point.x < 0f) {
-                        point.x = widthPx
-                    } else if (point.x > widthPx) {
-                        point.x = 0f
-                    }
-
-                    if (point.y < 0f) {
-                        point.y = heightPx
-                    } else if (point.y > heightPx) {
-                        point.y = 0f
-                    }
-
-                    if (!point.fading) {
-                        point.stableTimer -= deltaTime
-
-                        if (point.stableTimer <= 0f) {
-                            point.fading = true
-                            point.fadeTimer = 1f
-                            point.fadeDirection = if (point.alpha >= 1f) -1 else if (point.alpha <= 0f) {
-                                1
-                            } else {
-                                0
-                            }
-
-                            if (point.fadeDirection == 0) {
-                                point.fadeDirection = if (point.alpha > 0.5f) -1 else 1
-                            }
-                        }
-                    } else {
-                        point.fadeTimer -= deltaTime
-
-                        val progress = (1f - (point.fadeTimer / 1f)).coerceIn(0f, 1f)
-
-                        if (point.fadeDirection == -1) {
-                            point.alpha = 1f - progress // fadeOut
-                        } else if (point.fadeDirection == 1) {
-                            point.alpha = progress // fadeIn
-                        }
-
-                        if (point.fadeTimer <= 0f) {
-                            point.alpha = if (point.fadeDirection == -1) 0f else 1f
-                            point.fading = false
-                            point.fadeDirection = 0
-                            point.stableTimer = random.nextFloat() * 3f + 2f
-                        }
-                    }
+                    point.move(deltaTime, widthPx, heightPx)
+                    point.updateFade(deltaTime, random)
                 }
 
                 // recompose
@@ -186,5 +139,71 @@ fun BlogBackground(
         }
 
         content.invoke()
+    }
+}
+
+/** 速度に応じて点を移動させ、画面外に出た点を反対側へ回り込ませる */
+private fun PointData.move(
+    deltaTime: Float,
+    widthPx: Float,
+    heightPx: Float,
+) {
+    x += (vx / 5f) * deltaTime
+    y += (vy / 5f) * deltaTime
+
+    if (x < 0f) {
+        x = widthPx
+    } else if (x > widthPx) {
+        x = 0f
+    }
+
+    if (y < 0f) {
+        y = heightPx
+    } else if (y > heightPx) {
+        y = 0f
+    }
+}
+
+/** 安定状態の時間を消化し終えた点をフェードさせる */
+private fun PointData.updateFade(deltaTime: Float, random: Random) {
+    if (fading) {
+        progressFade(deltaTime, random)
+    } else {
+        stableTimer -= deltaTime
+
+        if (stableTimer <= 0f) startFade()
+    }
+}
+
+private fun PointData.startFade() {
+    fading = true
+    fadeTimer = 1f
+    fadeDirection = when {
+        alpha >= 1f -> -1
+        alpha <= 0f -> 1
+        else -> 0
+    }
+
+    if (fadeDirection == 0) {
+        fadeDirection = if (alpha > 0.5f) -1 else 1
+    }
+}
+
+private fun PointData.progressFade(deltaTime: Float, random: Random) {
+    fadeTimer -= deltaTime
+
+    val progress = (1f - (fadeTimer / 1f)).coerceIn(0f, 1f)
+
+    if (fadeDirection == -1) {
+        alpha = 1f - progress // fadeOut
+    } else if (fadeDirection == 1) {
+        alpha = progress // fadeIn
+    }
+
+    if (fadeTimer <= 0f) {
+        alpha = if (fadeDirection == -1) 0f else 1f
+        fading = false
+        fadeDirection = 0
+        stableTimer = random.nextFloat() * 3f + 2f
     }
 }

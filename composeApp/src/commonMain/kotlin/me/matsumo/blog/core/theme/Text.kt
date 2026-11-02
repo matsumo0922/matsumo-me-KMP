@@ -20,7 +20,8 @@ import matsumo_me_kmp.composeapp.generated.resources.NotoSansJP_Thin
 import matsumo_me_kmp.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.Font
 
-@Composable
+// 関数の長さ: Material 3 の 15 種類の TextStyle を宣言として並べているだけのため
+@Suppress("LongMethod")
 internal fun createCustomFontTypography(font: FontFamily?): Typography = Typography(
     displayLarge = TextStyle(
         fontFamily = font,

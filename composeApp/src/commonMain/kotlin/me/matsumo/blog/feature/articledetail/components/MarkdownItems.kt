@@ -103,11 +103,11 @@ fun findHeading(
 ): List<MarkdownHeader> {
     val result = mutableListOf<MarkdownHeader>()
 
-    fun traverse(node: ASTNode, index: Int) {
-        val text = node.getUnescapedTextInNode(content)
-        val key = "header-${node.hashCode()}"
+    fun traverse(current: ASTNode, index: Int) {
+        val text = current.getUnescapedTextInNode(content)
+        val key = "header-${current.hashCode()}"
 
-        when (node.type) {
+        when (current.type) {
             ATX_1 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H1, key, index))
 
             ATX_2 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H2, key, index))
@@ -125,7 +125,7 @@ fun findHeading(
             }
         }
 
-        node.children.forEach { child ->
+        current.children.forEach { child ->
             traverse(child, index)
         }
     }

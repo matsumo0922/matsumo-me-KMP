@@ -59,7 +59,7 @@ internal fun ArticleTitleSection(
     tags: ImmutableList<String>,
     extraSource: ArticleSource?,
     extraSourceUrl: String?,
-    onBackClicked: () -> Unit,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val device = LocalDevice.current
@@ -79,7 +79,7 @@ internal fun ArticleTitleSection(
                     .clickableWithPointer(
                         interactionSource = interactionSource,
                         indication = null,
-                        onClick = onBackClicked,
+                        onClick = onBackClick,
                     ),
                 text = buildAnnotatedString {
                     appendInlineContent(iconId)

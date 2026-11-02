@@ -6,13 +6,15 @@ import domain.dao.ArticleDao
 import domain.dao.ZennArticleDetailDao
 import me.matsumo.blog.shared.entity.ArticleSource
 import repository.ArticleRepository
+import repository.ArticleSourceRepository
 
 class UpdateZennArticleUseCase(
     private val articleRepository: ArticleRepository,
+    private val articleSourceRepository: ArticleSourceRepository,
 ) {
     suspend operator fun invoke() {
-        articleRepository.getZennArticlesEntity().articles.forEach { listEntity ->
-            val entity = articleRepository.getZennArticleDetailEntity(listEntity.slug).article
+        articleSourceRepository.getZennArticlesEntity().articles.forEach { listEntity ->
+            val entity = articleSourceRepository.getZennArticleDetailEntity(listEntity.slug).article
             val currentArticle = articleRepository.getArticle(sourceId = entity.slug)
             val currentArticleDetail = currentArticle?.id?.let { articleRepository.getArticleDetailFromZenn(it) }
 

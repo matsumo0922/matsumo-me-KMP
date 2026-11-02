@@ -22,7 +22,7 @@ class ApplicationRepository(
     }
 
     suspend fun getAccountDeletion(gist: ApplicationGist) = withContext(ioDispatcher) {
-        gist.accountDeletion?.let { httpClient.get(it).bodyAsText() } ?: ""
+        gist.accountDeletion?.let { httpClient.get(it).bodyAsText() }.orEmpty()
     }
 
     fun getApplicationGist(appName: String) = when (appName.lowercase()) {

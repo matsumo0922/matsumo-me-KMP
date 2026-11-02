@@ -92,7 +92,7 @@ internal fun HomeAboutProjectsItem(
                     ProjectItem(
                         modifier = Modifier.focusScale(),
                         project = project,
-                        onLinkClicked = { url -> openUrl(url) },
+                        onLinkClick = { url -> openUrl(url) },
                     )
                 }
             }
@@ -111,7 +111,7 @@ internal fun HomeAboutProjectsItem(
 @Composable
 private fun ProjectItem(
     project: Project,
-    onLinkClicked: (String) -> Unit,
+    onLinkClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -126,7 +126,7 @@ private fun ProjectItem(
             .clickableWithPointer(
                 interactionSource = null,
                 indication = null,
-                onClick = { (project.url ?: project.github)?.let(onLinkClicked) },
+                onClick = { (project.url ?: project.github)?.let(onLinkClick) },
             )
             .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -174,7 +174,7 @@ private fun ProjectItem(
             if (project.url != null) {
                 IconButton(
                     modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
-                    onClick = { onLinkClicked.invoke(project.url) },
+                    onClick = { onLinkClick.invoke(project.url) },
                 ) {
                     Icon(
                         imageVector = Icons.Default.Link,
@@ -187,7 +187,7 @@ private fun ProjectItem(
             if (project.github != null) {
                 IconButton(
                     modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
-                    onClick = { onLinkClicked.invoke(project.github) },
+                    onClick = { onLinkClick.invoke(project.github) },
                 ) {
                     AsyncImage(
                         modifier = Modifier.size(24.dp),
