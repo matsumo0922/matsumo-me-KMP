@@ -5,7 +5,6 @@ pluginManagement {
         google()
         gradlePluginPortal()
         mavenCentral()
-        maven("https://packages.jetbrains.team/maven/p/firework/dev")
     }
 }
 
@@ -14,7 +13,6 @@ dependencyResolutionManagement {
         google()
         gradlePluginPortal()
         mavenCentral()
-        maven("https://packages.jetbrains.team/maven/p/firework/dev")
     }
     versionCatalogs {
         create("libs") {
