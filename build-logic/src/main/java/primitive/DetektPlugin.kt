@@ -10,13 +10,13 @@ import org.gradle.kotlin.dsl.dependencies
 class DetektPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply("io.gitlab.arturbosch.detekt")
+            pluginManager.apply("dev.detekt")
 
             configureDetekt()
 
             dependencies {
-                "detektPlugins"(libs.library("detekt-formatting"))
-                "detektPlugins"(libs.library("twitter-compose-rule"))
+                "detektPlugins"(libs.library("detekt-ktlint-wrapper"))
+                "detektPlugins"(libs.library("compose-rules-detekt"))
             }
         }
     }
