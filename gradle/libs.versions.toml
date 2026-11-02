@@ -50,7 +50,7 @@ koin = "4.2.2"
 ktor = "3.6.1"
 ksoup = "0.2.6"
 coil3 = "3.6.3"
-detekt = "1.23.7"
+detekt = "2.0.0-alpha.6"
 ktorfit = "2.7.5"
 supabase = "3.8.0"
 markdown = "0.46.0"
@@ -58,7 +58,7 @@ commonmark = "0.32.0"
 logback = "1.6.6"
 libraries = "15.3.0"
 buildKonfig = "0.23.0"
-twitterComposeRule = "0.0.26"
+composeRules = "0.6.8"
 
 # Debugs
 napier = "2.7.1"
@@ -83,7 +83,7 @@ kmpSwiftKlib = { id = "io.github.ttypic.swiftklib", version.ref = "kmpSwiftKlib"
 
 # Others
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+detekt = { id = "dev.detekt", version.ref = "detekt" }
 libraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "libraries" }
 ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
 build-konfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
@@ -95,8 +95,8 @@ android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", ver
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 build-konfig-gradlePlugin = { group = "com.codingfeline.buildkonfig", name = "buildkonfig-gradle-plugin", version.ref = "buildKonfig" }
 secret-gradlePlugin = { group = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", name = "secrets-gradle-plugin", version = "2.0.1" }
-detekt-gradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
-detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
+detekt-gradlePlugin = { group = "dev.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
+detekt-ktlint-wrapper = { group = "dev.detekt", name = "detekt-rules-ktlint-wrapper", version.ref = "detekt" }
 
 # Kotlin
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
@@ -189,7 +189,7 @@ desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.5" }
 
 # Debugs
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
-twitter-compose-rule = { module = "com.twitter.compose.rules:detekt", version.ref = "twitterComposeRule" }
+compose-rules-detekt = { module = "io.nlopez.compose.rules:detekt", version.ref = "composeRules" }
 
 [bundles]
 infra = [
