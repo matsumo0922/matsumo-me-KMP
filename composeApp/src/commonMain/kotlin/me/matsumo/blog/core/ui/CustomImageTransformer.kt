@@ -11,14 +11,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.unit.Density
 import coil3.compose.AsyncImagePainter
 import coil3.compose.LocalPlatformContext
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import com.mikepenz.markdown.model.ImageData
 import com.mikepenz.markdown.model.ImageTransformer
-import com.mikepenz.markdown.model.PlaceholderConfig
 import me.matsumo.blog.core.ui.utils.toCrosProxyUrl
 
 object CustomImageTransformer : ImageTransformer {
@@ -47,9 +45,5 @@ object CustomImageTransformer : ImageTransformer {
             intrinsicSize?.also { size = it }
         }
         return size
-    }
-
-    override fun placeholderConfig(density: Density, containerSize: Size, intrinsicImageSize: Size): PlaceholderConfig {
-        return super.placeholderConfig(density, containerSize, intrinsicImageSize).copy(animate = false)
     }
 }

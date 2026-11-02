@@ -109,6 +109,7 @@ class CustomMarkdownComponents(
             MarkdownText(
                 modifier = Modifier.fillMaxWidth(),
                 content = styledText,
+                node = it.node,
                 style = it.typography.paragraph,
             )
         }
@@ -126,13 +127,14 @@ class CustomMarkdownComponents(
         MarkdownCodeBlock(
             content = it.content,
             node = it.node,
-        ) { code, language ->
+        ) { code, language, style ->
             Napier.d { "codeBlock: $language" }
 
             MarkdownHighlightedCode(
                 code = code,
                 language = language,
-                highlights = Highlights.Builder(
+                style = style,
+                highlightsBuilder = Highlights.Builder(
                     theme = SyntaxThemes.atom(isSystemInDarkTheme()),
                 ),
             )
@@ -143,7 +145,7 @@ class CustomMarkdownComponents(
         MarkdownCodeFence(
             content = it.content,
             node = it.node,
-        ) { code, language ->
+        ) { code, language, style ->
             val syntaxLanguage = remember(language) { language?.let { SyntaxLanguage.getByName(it) } }
 
             Napier.d { "codeBlock: $syntaxLanguage" }
@@ -151,7 +153,8 @@ class CustomMarkdownComponents(
             MarkdownHighlightedCode(
                 code = code,
                 language = language,
-                highlights = Highlights.Builder(
+                style = style,
+                highlightsBuilder = Highlights.Builder(
                     theme = SyntaxThemes.atom(isSystemInDarkTheme()),
                 ),
             )

@@ -108,7 +108,7 @@ fun MarkdownTableHeader(
                         ),
                         textAlign = TextAlign.Center,
                         style = style.copy(fontWeight = FontWeight.Bold),
-                        color = LocalMarkdownColors.current.tableText,
+                        color = LocalMarkdownColors.current.text,
                     )
                 }
             }
@@ -162,7 +162,8 @@ fun MarkdownTableRow(
                         style = style,
                         annotatorSettings = annotatorSettings,
                     ),
-                    style = style.copy(color = LocalMarkdownColors.current.tableText),
+                    node = cell,
+                    style = style.copy(color = LocalMarkdownColors.current.text),
                 )
             }
         }
