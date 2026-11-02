@@ -8,4 +8,4 @@
 4. run `/backend/src/resources/schema.sql` in the SQL editor
 5. create `local.properties` in the root directory and add `SUPABASE_URL` and `SUPABASE_KEY` to it
 6. `./gradlew :backend:run`
-7. `./gradlew :frontend:wasmJsBrowserDevelopmentRun`
+7. `./gradlew :webApp:wasmJsBrowserDevelopmentRun`

@@ -33,7 +33,7 @@ jobs:
         run: echo > local.properties
 
       - name: Build
-        run: ./gradlew :frontend:wasmJsBrowserDistribution
+        run: ./gradlew :webApp:wasmJsBrowserDistribution
         env:
           BACKEND_URL: ${{ secrets.BACKEND_URL }}
           REVISION: $GITHUB_SHA
@@ -45,7 +45,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: 'matsumo-me'
-          directory: 'frontend/build/dist/wasmJs/productionExecutable'
+          directory: 'webApp/build/dist/wasmJs/productionExecutable'
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
             
       - name: Add publish URL as commit status
