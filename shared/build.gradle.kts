@@ -10,11 +10,11 @@ plugins {
     id("matsumo.primitive.detekt")
 }
 
-android {
-    namespace = "me.matsumo.blog.shared"
-}
-
 kotlin {
+    android {
+        namespace = "me.matsumo.blog.shared"
+    }
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         useEsModules()

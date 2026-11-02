@@ -1,29 +1,29 @@
 package primitive.kmp
 
-import me.matsumo.blog.android
-import org.gradle.api.JavaVersion
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
+import me.matsumo.blog.libs
+import me.matsumo.blog.version
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 @Suppress("unused")
 class KmpAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            kotlin {
-                androidTarget {
-                    compilations.all {
-                        kotlinOptions {
-                            jvmTarget = JavaVersion.VERSION_17.toString()
-                        }
-                    }
-                }
-            }
+            pluginManager.withPlugin("com.android.kotlin.multiplatform.library") {
+                kotlin {
+                    targets.withType(KotlinMultiplatformAndroidLibraryTarget::class.java).configureEach {
+                        compileSdk = libs.version("compileSdk").toInt()
+                        minSdk = libs.version("minSdk").toInt()
 
-            android {
-                sourceSets {
-                    getByName("main") {
-                        manifest.srcFile("src/androidMain/AndroidManifest.xml")
-                        res.srcDirs("src/androidMain/res")
+                        androidResources {
+                            enable = true
+                        }
+
+                        compilerOptions {
+                            jvmTarget.set(JvmTarget.JVM_17)
+                        }
                     }
                 }
             }

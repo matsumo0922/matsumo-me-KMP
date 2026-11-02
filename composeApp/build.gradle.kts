@@ -15,11 +15,11 @@ plugins {
     alias(libs.plugins.build.konfig)
 }
 
-android {
-    namespace = "me.matsumo.blog.composeapp"
-}
-
 kotlin {
+    android {
+        namespace = "me.matsumo.blog.composeapp"
+    }
+
     sourceSets {
         commonMain.dependencies {
             implementation(project(":shared"))

@@ -41,6 +41,10 @@ android {
         }
     }
 
+    packaging {
+        jniLibs.useLegacyPackaging = true
+    }
+
     androidComponents {
         onVariants {
             val appName = when (it.buildType) {
