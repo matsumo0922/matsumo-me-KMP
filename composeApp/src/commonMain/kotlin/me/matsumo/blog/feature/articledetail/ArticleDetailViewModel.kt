@@ -42,9 +42,7 @@ class ArticleDetailViewModel(
         }
     }
 
-    suspend fun fetchOgContents(url: String): OgContents {
-        return ogContentsRepository.getOgContents(url)
-    }
+    suspend fun fetchOgContents(url: String): OgContents = ogContentsRepository.getOgContents(url)
 }
 
 @Stable

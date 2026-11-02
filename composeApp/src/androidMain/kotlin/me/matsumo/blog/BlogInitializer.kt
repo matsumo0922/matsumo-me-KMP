@@ -15,7 +15,5 @@ internal class BlogInitializer : Initializer<BlogContext> {
         return BlogContext
     }
 
-    override fun dependencies(): MutableList<Class<out Initializer<*>>> {
-        return mutableListOf()
-    }
+    override fun dependencies(): MutableList<Class<out Initializer<*>>> = mutableListOf()
 }

@@ -37,11 +37,13 @@ fun <T> AsyncLoadContents(
             is ScreenState.Idle -> {
                 content.invoke(state.data)
             }
+
             is ScreenState.Loading -> {
                 LoadingView(
                     modifier = otherModifier.fillMaxWidth(),
                 )
             }
+
             is ScreenState.Error -> {
                 ErrorView(
                     modifier = otherModifier.fillMaxWidth(),

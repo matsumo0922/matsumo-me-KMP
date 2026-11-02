@@ -22,13 +22,13 @@ fun DependencyHandlerScope.implementation(
 }
 
 fun DependencyHandlerScope.implementation(
-    artifact: ExternalModuleDependencyBundle
+    artifact: ExternalModuleDependencyBundle,
 ) {
     add("implementation", artifact)
 }
 
 fun DependencyHandlerScope.implementation(
-    provider: Provider<ExternalModuleDependencyBundle>
+    provider: Provider<ExternalModuleDependencyBundle>,
 ) {
     add("implementation", provider)
 }

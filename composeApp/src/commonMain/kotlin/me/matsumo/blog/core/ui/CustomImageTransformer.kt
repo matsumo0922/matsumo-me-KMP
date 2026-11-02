@@ -22,18 +22,16 @@ import me.matsumo.blog.core.ui.utils.toCrosProxyUrl
 object CustomImageTransformer : ImageTransformer {
 
     @Composable
-    override fun transform(link: String): ImageData {
-        return rememberAsyncImagePainter(
-            model = ImageRequest.Builder(LocalPlatformContext.current)
-                .data(link.toCrosProxyUrl())
-                .build(),
-        ).let {
-            ImageData(
-                modifier = Modifier.fillMaxWidth(),
-                painter = it,
-                alignment = Alignment.Center,
-            )
-        }
+    override fun transform(link: String): ImageData = rememberAsyncImagePainter(
+        model = ImageRequest.Builder(LocalPlatformContext.current)
+            .data(link.toCrosProxyUrl())
+            .build(),
+    ).let {
+        ImageData(
+            modifier = Modifier.fillMaxWidth(),
+            painter = it,
+            alignment = Alignment.Center,
+        )
     }
 
     @Composable

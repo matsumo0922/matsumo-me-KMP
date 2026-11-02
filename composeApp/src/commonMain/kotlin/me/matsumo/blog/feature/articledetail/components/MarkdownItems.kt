@@ -109,11 +109,17 @@ fun findHeading(
 
         when (node.type) {
             ATX_1 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H1, key, index))
+
             ATX_2 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H2, key, index))
+
             ATX_3 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H3, key, index))
+
             ATX_4 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H4, key, index))
+
             ATX_5 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H5, key, index))
+
             ATX_6 -> result.add(MarkdownHeader(text, MarkdownHeader.MarkdownHeaderNode.H6, key, index))
+
             else -> {
                 // do nothing
             }

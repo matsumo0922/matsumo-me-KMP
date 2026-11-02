@@ -27,65 +27,35 @@ class ArticleRepository(
     private val httpClient: HttpClient,
     private val articleDatabase: ArticleDatabase,
 ) {
-    suspend fun removeAll(): Boolean {
-        return articleDatabase.removeAll()
-    }
+    suspend fun removeAll(): Boolean = articleDatabase.removeAll()
 
-    suspend fun getArticle(articleId: Int): ArticleDao? {
-        return articleDatabase.getArticle(articleId)
-    }
+    suspend fun getArticle(articleId: Int): ArticleDao? = articleDatabase.getArticle(articleId)
 
-    suspend fun getArticle(sourceId: String): ArticleDao? {
-        return articleDatabase.getArticle(sourceId)
-    }
+    suspend fun getArticle(sourceId: String): ArticleDao? = articleDatabase.getArticle(sourceId)
 
-    suspend fun getArticles(tagId: Int? = null): List<ArticleDao>? {
-        return articleDatabase.getArticles(tagId)
-    }
+    suspend fun getArticles(tagId: Int? = null): List<ArticleDao>? = articleDatabase.getArticles(tagId)
 
-    suspend fun getArticleDetailFromMarkdown(articleId: Int): MarkdownArticleDetailDao? {
-        return articleDatabase.getArticleDetailFromMarkdown(articleId)
-    }
+    suspend fun getArticleDetailFromMarkdown(articleId: Int): MarkdownArticleDetailDao? = articleDatabase.getArticleDetailFromMarkdown(articleId)
 
-    suspend fun getArticleDetailFromQiita(articleId: Int): QiitaArticleDetailDao? {
-        return articleDatabase.getArticleDetailFromQiita(articleId)
-    }
+    suspend fun getArticleDetailFromQiita(articleId: Int): QiitaArticleDetailDao? = articleDatabase.getArticleDetailFromQiita(articleId)
 
-    suspend fun getArticleDetailFromZenn(articleId: Int): ZennArticleDetailDao? {
-        return articleDatabase.getArticleDetailFromZenn(articleId)
-    }
+    suspend fun getArticleDetailFromZenn(articleId: Int): ZennArticleDetailDao? = articleDatabase.getArticleDetailFromZenn(articleId)
 
-    suspend fun upsertArticle(articleDao: ArticleDao): ArticleDao? {
-        return articleDatabase.upsertArticle(articleDao)
-    }
+    suspend fun upsertArticle(articleDao: ArticleDao): ArticleDao? = articleDatabase.upsertArticle(articleDao)
 
-    suspend fun upsertMarkdownArticleDetail(markdownArticleDetailDao: MarkdownArticleDetailDao): MarkdownArticleDetailDao? {
-        return articleDatabase.upsertMarkdownArticleDetail(markdownArticleDetailDao)
-    }
+    suspend fun upsertMarkdownArticleDetail(markdownArticleDetailDao: MarkdownArticleDetailDao): MarkdownArticleDetailDao? = articleDatabase.upsertMarkdownArticleDetail(markdownArticleDetailDao)
 
-    suspend fun upsertQiitaArticleDetail(qiitaArticleDetail: QiitaArticleDetailDao): QiitaArticleDetailDao? {
-        return articleDatabase.upsertQiitaArticleDetail(qiitaArticleDetail)
-    }
+    suspend fun upsertQiitaArticleDetail(qiitaArticleDetail: QiitaArticleDetailDao): QiitaArticleDetailDao? = articleDatabase.upsertQiitaArticleDetail(qiitaArticleDetail)
 
-    suspend fun upsertZennArticleDetail(zennArticleDetailDao: ZennArticleDetailDao): ZennArticleDetailDao? {
-        return articleDatabase.upsertZennArticleDetail(zennArticleDetailDao)
-    }
+    suspend fun upsertZennArticleDetail(zennArticleDetailDao: ZennArticleDetailDao): ZennArticleDetailDao? = articleDatabase.upsertZennArticleDetail(zennArticleDetailDao)
 
-    suspend fun getQiitaArticlesEntity(): List<QiitaArticleEntity> {
-        return httpClient.get("https://qiita.com/api/v2/users/matsumo0922/items?per_page=100").body()
-    }
+    suspend fun getQiitaArticlesEntity(): List<QiitaArticleEntity> = httpClient.get("https://qiita.com/api/v2/users/matsumo0922/items?per_page=100").body()
 
-    suspend fun getZennArticlesEntity(): ZennArticleEntity {
-        return httpClient.get("https://zenn.dev/api/articles?username=matsumo0922&count=100").body()
-    }
+    suspend fun getZennArticlesEntity(): ZennArticleEntity = httpClient.get("https://zenn.dev/api/articles?username=matsumo0922&count=100").body()
 
-    suspend fun getZennArticleDetailEntity(sourceId: String): ZennArticleDetailEntity {
-        return httpClient.get("https://zenn.dev/api/articles/$sourceId").body()
-    }
+    suspend fun getZennArticleDetailEntity(sourceId: String): ZennArticleDetailEntity = httpClient.get("https://zenn.dev/api/articles/$sourceId").body()
 
-    suspend fun getMarkdownArticlesEntity(): List<MarkdownArticleEntity> {
-        return httpClient.get("https://api.github.com/repos/matsumo0922/matsumo-me-KMP/contents/articles").body()
-    }
+    suspend fun getMarkdownArticlesEntity(): List<MarkdownArticleEntity> = httpClient.get("https://api.github.com/repos/matsumo0922/matsumo-me-KMP/contents/articles").body()
 
     suspend fun getMarkdownArticleDetailEntity(path: String, sha: String): MarkdownArticleDetailEntity {
         val content = httpClient.get("https://raw.githubusercontent.com/matsumo0922/matsumo-me-KMP/refs/heads/main/$path").bodyAsText()

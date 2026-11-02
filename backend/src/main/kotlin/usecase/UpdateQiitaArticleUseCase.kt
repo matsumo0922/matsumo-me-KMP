@@ -55,35 +55,31 @@ class UpdateQiitaArticleUseCase(
         }
     }
 
-    private fun QiitaArticleEntity.toQiitaArticleDetail(): QiitaArticleDetailDao {
-        return QiitaArticleDetailDao(
-            articleId = 0,
-            sourceId = id,
-            sourceUrl = url,
-            title = title,
-            content = body,
-            renderedContent = renderedBody,
-            isPublished = !isPrivate,
-            commentsCount = commentsCount,
-            likesCount = likesCount,
-            reactionsCount = reactionsCount,
-            stocksCount = stocksCount,
-            tags = tags.map { it.name },
-            createdAt = createdAt,
-            updatedAt = updatedAt,
-        )
-    }
+    private fun QiitaArticleEntity.toQiitaArticleDetail(): QiitaArticleDetailDao = QiitaArticleDetailDao(
+        articleId = 0,
+        sourceId = id,
+        sourceUrl = url,
+        title = title,
+        content = body,
+        renderedContent = renderedBody,
+        isPublished = !isPrivate,
+        commentsCount = commentsCount,
+        likesCount = likesCount,
+        reactionsCount = reactionsCount,
+        stocksCount = stocksCount,
+        tags = tags.map { it.name },
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+    )
 
-    private fun QiitaArticleDetailDao.toArticle(): ArticleDao {
-        return ArticleDao(
-            sourceId = sourceId,
-            source = ArticleSource.QIITA,
-            sourceUrl = sourceUrl,
-            title = title,
-            summary = content?.take(100),
-            tags = tags,
-            createdAt = createdAt,
-            updatedAt = updatedAt,
-        )
-    }
+    private fun QiitaArticleDetailDao.toArticle(): ArticleDao = ArticleDao(
+        sourceId = sourceId,
+        source = ArticleSource.QIITA,
+        sourceUrl = sourceUrl,
+        title = title,
+        summary = content?.take(100),
+        tags = tags,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+    )
 }

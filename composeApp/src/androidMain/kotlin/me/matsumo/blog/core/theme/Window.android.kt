@@ -31,9 +31,7 @@ actual fun rememberWindowWidthDp(): State<Dp> {
     return remember { derivedStateOf { windowWidth.dp } }
 }
 
-actual fun isSystemInDarkThemeUnSafe(): Boolean {
-    return (blogApplicationContext.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
-}
+actual fun isSystemInDarkThemeUnSafe(): Boolean = (blogApplicationContext.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 
 @Composable
 actual fun BindToNavigation(navController: NavController) {
@@ -60,7 +58,11 @@ actual fun openUrl(url: String) {
     }
 }
 
-actual fun mailTo(name: String, address: String, message: String) {
+actual fun mailTo(
+    name: String,
+    address: String,
+    message: String,
+) {
     runCatching {
         val intent = Intent(Intent.ACTION_SENDTO).apply {
             data = Uri.parse("mailto:")

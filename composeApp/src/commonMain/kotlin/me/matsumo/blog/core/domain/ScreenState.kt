@@ -18,10 +18,6 @@ sealed class ScreenState<out T> {
     ) : ScreenState<T>()
 }
 
-fun <T> ScreenState<T>.updateWhenIdle(action: (T) -> T): ScreenState<T> {
-    return if (this is ScreenState.Idle) ScreenState.Idle(action(data)) else this
-}
+fun <T> ScreenState<T>.updateWhenIdle(action: (T) -> T): ScreenState<T> = if (this is ScreenState.Idle) ScreenState.Idle(action(data)) else this
 
-fun <T> StateFlow<ScreenState<T>>.updateWhenIdle(action: (T) -> T): ScreenState<T> {
-    return this.value.updateWhenIdle(action)
-}
+fun <T> StateFlow<ScreenState<T>>.updateWhenIdle(action: (T) -> T): ScreenState<T> = this.value.updateWhenIdle(action)

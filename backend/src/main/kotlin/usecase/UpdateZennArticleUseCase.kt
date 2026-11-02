@@ -56,33 +56,29 @@ class UpdateZennArticleUseCase(
         }
     }
 
-    private fun ZennArticleDetailEntity.Article.toZennArticleDetail(): ZennArticleDetailDao {
-        return ZennArticleDetailDao(
-            articleId = 0,
-            sourceId = slug,
-            sourceUrl = "https://zenn.dev$path",
-            title = title,
-            content = bodyHtml,
-            renderedContent = bodyHtml,
-            isPublished = true,
-            emoji = emoji,
-            articleType = postType,
-            tags = topics.map { it.name },
-            createdAt = publishedAt,
-            updatedAt = bodyUpdatedAt,
-        )
-    }
+    private fun ZennArticleDetailEntity.Article.toZennArticleDetail(): ZennArticleDetailDao = ZennArticleDetailDao(
+        articleId = 0,
+        sourceId = slug,
+        sourceUrl = "https://zenn.dev$path",
+        title = title,
+        content = bodyHtml,
+        renderedContent = bodyHtml,
+        isPublished = true,
+        emoji = emoji,
+        articleType = postType,
+        tags = topics.map { it.name },
+        createdAt = publishedAt,
+        updatedAt = bodyUpdatedAt,
+    )
 
-    private fun ZennArticleDetailDao.toArticle(): ArticleDao {
-        return ArticleDao(
-            sourceId = sourceId,
-            source = ArticleSource.ZENN,
-            sourceUrl = sourceUrl,
-            title = title,
-            summary = content?.take(100),
-            tags = tags,
-            createdAt = createdAt,
-            updatedAt = updatedAt,
-        )
-    }
+    private fun ZennArticleDetailDao.toArticle(): ArticleDao = ArticleDao(
+        sourceId = sourceId,
+        source = ArticleSource.ZENN,
+        sourceUrl = sourceUrl,
+        title = title,
+        summary = content?.take(100),
+        tags = tags,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+    )
 }

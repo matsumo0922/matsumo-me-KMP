@@ -20,13 +20,11 @@ internal class OffsetDateTimeSerializer : KSerializer<OffsetDateTime> {
         encoder.encodeString(value.toString())
     }
 
-    override fun deserialize(decoder: Decoder): OffsetDateTime {
-        return runCatching {
-            OffsetDateTime.parse(decoder.decodeString())
-        }.recoverCatching {
-            OffsetDateTime.parse(decoder.decodeString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-        }.getOrElse {
-            OffsetDateTime.now()
-        }
+    override fun deserialize(decoder: Decoder): OffsetDateTime = runCatching {
+        OffsetDateTime.parse(decoder.decodeString())
+    }.recoverCatching {
+        OffsetDateTime.parse(decoder.decodeString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+    }.getOrElse {
+        OffsetDateTime.now()
     }
 }

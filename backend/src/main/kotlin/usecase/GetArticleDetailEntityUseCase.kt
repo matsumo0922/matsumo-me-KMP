@@ -25,59 +25,53 @@ class GetArticleDetailEntityUseCase(
     private fun MarkdownArticleDetailDao.toArticleDetailEntity(
         extraSource: ArticleSource? = null,
         extraSourceUrl: String? = null,
-    ): ArticleDetailEntity? {
-        return id?.let {
-            ArticleDetailEntity(
-                id = it,
-                source = ArticleSource.MARKDOWN,
-                articleId = articleId,
-                sourceId = sourceId,
-                sourceUrl = sourceUrl,
-                title = title,
-                content = content,
-                extraSource = extraSource,
-                extraSourceUrl = extraSourceUrl,
-                tags = tags,
-                createdAt = createdAt,
-                updatedAt = updatedAt,
-            )
-        }
+    ): ArticleDetailEntity? = id?.let {
+        ArticleDetailEntity(
+            id = it,
+            source = ArticleSource.MARKDOWN,
+            articleId = articleId,
+            sourceId = sourceId,
+            sourceUrl = sourceUrl,
+            title = title,
+            content = content,
+            extraSource = extraSource,
+            extraSourceUrl = extraSourceUrl,
+            tags = tags,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+        )
     }
 
-    private fun QiitaArticleDetailDao.toArticleDetailEntity(): ArticleDetailEntity? {
-        return id?.let {
-            ArticleDetailEntity(
-                id = it,
-                source = ArticleSource.QIITA,
-                articleId = articleId,
-                sourceId = sourceId,
-                sourceUrl = sourceUrl,
-                title = title,
-                content = content,
-                extraSource = null,
-                extraSourceUrl = null,
-                tags = tags,
-                createdAt = createdAt,
-                updatedAt = updatedAt,
-            )
-        }
+    private fun QiitaArticleDetailDao.toArticleDetailEntity(): ArticleDetailEntity? = id?.let {
+        ArticleDetailEntity(
+            id = it,
+            source = ArticleSource.QIITA,
+            articleId = articleId,
+            sourceId = sourceId,
+            sourceUrl = sourceUrl,
+            title = title,
+            content = content,
+            extraSource = null,
+            extraSourceUrl = null,
+            tags = tags,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+        )
     }
 
-    private fun ZennArticleDetailDao.toArticleDetailEntity(): ArticleDetailEntity? {
-        return id?.let {
-            ArticleDetailEntity(
-                id = it, ArticleSource.ZENN,
-                articleId = articleId,
-                sourceId = sourceId,
-                sourceUrl = sourceUrl,
-                title = title,
-                content = content,
-                extraSource = null,
-                extraSourceUrl = null,
-                tags = tags,
-                createdAt = createdAt,
-                updatedAt = updatedAt,
-            )
-        }
+    private fun ZennArticleDetailDao.toArticleDetailEntity(): ArticleDetailEntity? = id?.let {
+        ArticleDetailEntity(
+            id = it, ArticleSource.ZENN,
+            articleId = articleId,
+            sourceId = sourceId,
+            sourceUrl = sourceUrl,
+            title = title,
+            content = content,
+            extraSource = null,
+            extraSourceUrl = null,
+            tags = tags,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+        )
     }
 }

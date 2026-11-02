@@ -11,8 +11,6 @@ enum class Device {
     companion object {
         private const val MOBILE_SCREEN_WIDTH_THRESHOLD = 840
 
-        fun fromWidth(width: Dp): Device {
-            return if (width < MOBILE_SCREEN_WIDTH_THRESHOLD.dp) MOBILE else DESKTOP
-        }
+        fun fromWidth(width: Dp): Device = if (width < MOBILE_SCREEN_WIDTH_THRESHOLD.dp) MOBILE else DESKTOP
     }
 }
