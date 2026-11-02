@@ -35,6 +35,7 @@ import org.khronos.webgl.ArrayBuffer
 import org.khronos.webgl.Int8Array
 import org.w3c.fetch.Response
 import kotlin.wasm.unsafe.UnsafeWasmMemoryApi
+import kotlin.wasm.unsafe.wasmMemory
 import kotlin.wasm.unsafe.withScopedMemoryAllocator
 
 private enum class NotoSansJP(
@@ -126,7 +127,12 @@ fun ArrayBuffer.toByteArray(): ByteArray {
     return jsInt8ArrayToKotlinByteArray(source)
 }
 
-private fun wasmExportsMemoryBuffer(): ArrayBuffer = js("wasmExports.memory.buffer")
+@OptIn(ExperimentalWasmJsInterop::class)
+private fun wasmMemoryBuffer(): ArrayBuffer = memoryBuffer(wasmMemory)
+
+// UnusedParameter: 引数は js() の JavaScript コードから参照する
+@Suppress("UnusedParameter")
+private fun memoryBuffer(memory: JsAny): ArrayBuffer = js("memory.buffer")
 private fun jsExportInt8ArrayToWasm(
     destination: ArrayBuffer,
     src: Int8Array,
@@ -144,7 +150,7 @@ internal fun jsInt8ArrayToKotlinByteArray(x: Int8Array): ByteArray {
     return withScopedMemoryAllocator { allocator ->
         val memBuffer = allocator.allocate(size)
         val dstAddress = memBuffer.address.toInt()
-        jsExportInt8ArrayToWasm(wasmExportsMemoryBuffer(), x, size, dstAddress)
+        jsExportInt8ArrayToWasm(wasmMemoryBuffer(), x, size, dstAddress)
         ByteArray(size) { i -> (memBuffer + i).loadByte() }
     }
 }
