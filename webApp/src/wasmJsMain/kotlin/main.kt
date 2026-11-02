@@ -4,15 +4,16 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.produceState
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFontFamilyResolver
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontFamily.Resolver
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.window.ComposeViewport
@@ -21,14 +22,15 @@ import io.github.aakira.napier.Napier
 import io.ktor.http.Url
 import kotlinx.browser.document
 import kotlinx.browser.window
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.asDeferred
 import kotlinx.coroutines.await
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import me.matsumo.blog.app.BlogApp
 import me.matsumo.blog.core.domain.Destinations
 import me.matsumo.blog.core.theme.BlogTheme
 import me.matsumo.blog.core.theme.color.DarkBlueColorScheme
 import me.matsumo.blog.core.ui.WasmLoadingScreen
+import me.matsumo.blog.core.ui.utils.suspendRunCatching
 import me.matsumo.blog.initKoin
 import me.matsumo.blog.setupCoil
 import org.khronos.webgl.ArrayBuffer
@@ -54,6 +56,16 @@ private enum class NotoSansJP(
     // Thin("NotoSansJP-Thin", FontWeight.Thin),
 }
 
+/** Web 版で使う NotoSansJP の読み込み状態 */
+private sealed interface FontLoadState {
+    /** 初回表示に使うフォントを読み込み中 */
+    data object Loading : FontLoadState
+
+    /** 表示できる状態。[fontFamily] が null の場合はデフォルトのフォントで表示する */
+    @Immutable
+    data class Loaded(val fontFamily: FontFamily?) : FontLoadState
+}
+
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     Napier.base(DebugAntilog())
@@ -63,36 +75,29 @@ fun main() {
     initKoin()
     setupCoil()
 
+    // フォントの差し替えで再コンポーズしても、遷移後の URL から開始画面を作り直さないよう起動時に決める
+    val startDestinations = Destinations.fromUrl(
+        url = Url(window.location.toString()),
+    ) ?: Destinations.Home
+
     ComposeViewport(document.body!!) {
         val fontFamilyResolver = LocalFontFamilyResolver.current
-        var fontFamily by remember { mutableStateOf<FontFamily?>(null) }
-        var fontsLoaded by remember { mutableStateOf(false) }
-
-        LaunchedEffect(true) {
-            runCatching {
-                val fonts = NotoSansJP.entries
-                    .map { it to loadRes("./composeResources/matsumo_me_kmp.composeapp.generated.resources/font/${it.fileName}.woff2") }
-                    .map { (font, arrayBuffer) -> Font(font.fileName, arrayBuffer.toByteArray(), font.weight) }
-
-                fontFamily = FontFamily(fonts)
-                fontFamilyResolver.preload(fontFamily!!)
-            }.onFailure {
-                Napier.e(it) { "Failed to load fonts" }
-            }
-
-            fontsLoaded = true
+        val fontLoadState by produceState<FontLoadState>(
+            initialValue = FontLoadState.Loading,
+        ) {
+            fontFamilyResolver.loadNotoSansJP().collect { value = FontLoadState.Loaded(it) }
         }
 
         AnimatedContent(
             modifier = Modifier.background(DarkBlueColorScheme.surface),
-            targetState = fontsLoaded,
+            targetState = fontLoadState is FontLoadState.Loaded,
             transitionSpec = { fadeIn().togetherWith(fadeOut()) },
         ) {
             if (it) {
                 BlogApp(
                     modifier = Modifier.fillMaxSize(),
-                    fontFamily = fontFamily,
-                    startDestinations = Destinations.fromUrl(Url(window.location.toString())) ?: Destinations.Home,
+                    fontFamily = (fontLoadState as? FontLoadState.Loaded)?.fontFamily,
+                    startDestinations = startDestinations,
                 )
             } else {
                 BlogTheme {
@@ -104,6 +109,62 @@ fun main() {
         }
     }
 }
+
+/**
+ * 初回表示を早めるため、Regular だけの FontFamily を先に流し、初回表示のあとで残りのウェイトをそろえた FontFamily を流す。
+ * Regular を読み込めなかった場合は null だけを流す。
+ */
+private fun Resolver.loadNotoSansJP(): Flow<FontFamily?> = flow {
+    val regularFont = loadFont(NotoSansJP.Regular)
+
+    emit(
+        value = regularFont?.let { preloadOrNull(it) },
+    )
+
+    if (regularFont != null) {
+        // 1 フレーム目で初回表示を組み立て、2 フレーム目で描画済みになってから残りのウェイトを読み込む
+        repeat(2) { withFrameNanos {} }
+        loadAllWeights(regularFont)?.let { emit(it) }
+    }
+}
+
+/**
+ * [regularFont] に残りのウェイトを加えた FontFamily を返す。追加できたウェイトがない場合は null を返す。
+ * 記事や画像の取得との帯域の競合を抑えるため、残りのウェイトは 1 つずつ読み込む。
+ */
+private suspend fun Resolver.loadAllWeights(regularFont: Font): FontFamily? {
+    val otherFonts = NotoSansJP.entries
+        .filter { it != NotoSansJP.Regular }
+        .mapNotNull { loadFont(it) }
+
+    if (otherFonts.isEmpty()) return null
+
+    val fonts = listOf(regularFont) + otherFonts
+
+    return preloadOrNull(fonts)
+}
+
+private suspend fun loadFont(font: NotoSansJP): Font? = suspendRunCatching {
+    val buffer = fetchFontBuffer("./composeResources/matsumo_me_kmp.composeapp.generated.resources/font/${font.fileName}.woff2")
+
+    Font(
+        identity = font.fileName,
+        data = buffer.toByteArray(),
+        weight = font.weight,
+    )
+}
+    .onFailure { Napier.e(it) { "Failed to load font: ${font.fileName}" } }
+    .getOrNull()
+
+private suspend fun Resolver.preloadOrNull(font: Font): FontFamily? = preloadOrNull(
+    fonts = listOf(font),
+)
+
+private suspend fun Resolver.preloadOrNull(fonts: List<Font>): FontFamily? = suspendRunCatching {
+    FontFamily(fonts).also { preload(it) }
+}
+    .onFailure { Napier.e(it) { "Failed to preload fonts" } }
+    .getOrNull()
 
 private fun removeHtmlLoading() {
     val htmlLoading = document.getElementById("htmlLoading")
@@ -118,9 +179,15 @@ private fun removeHtmlLoading() {
     }
 }
 
-private suspend fun loadResAsync(url: String): Deferred<ArrayBuffer> = window.fetch(url).await<Response>().arrayBuffer().asDeferred()
+private suspend fun fetchFontBuffer(url: String): ArrayBuffer {
+    val response = window.fetch(url).await<Response>()
+    val contentType = response.headers.get("Content-Type").orEmpty()
 
-suspend fun loadRes(url: String): ArrayBuffer = loadResAsync(url).await()
+    // 配信先は存在しないパスにも index.html を 200 で返すため、Content-Type でもフォントか確かめる
+    check(response.ok && contentType.startsWith("font/")) { "Failed to fetch font: $url (${response.status} $contentType)" }
+
+    return response.arrayBuffer().await()
+}
 
 fun ArrayBuffer.toByteArray(): ByteArray {
     val source = Int8Array(this, 0, byteLength)
