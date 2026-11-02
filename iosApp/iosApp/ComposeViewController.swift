@@ -1,6 +1,6 @@
 import UIKit
 import SwiftUI
-import Frontend
+import ComposeApp
 
 struct ComposeViewController: UIViewControllerRepresentable {
     private let topSafeArea: Float

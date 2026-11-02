@@ -83,6 +83,7 @@ ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 libraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "libraries" }
 ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
+build-konfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 
 [libraries]
 
@@ -119,6 +120,7 @@ androidx-browser = { module = "androidx.browser:browser", version.ref = "android
 # KMP
 kmp-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "kmpLifecycle" }
 kmp-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "kmpLifecycle" }
+kmp-compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "kmpCompose" }
 kmp-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "kmpNavigation" }
 
 # Ktorfit

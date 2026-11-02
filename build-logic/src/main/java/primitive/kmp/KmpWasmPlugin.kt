@@ -13,7 +13,6 @@ class KmpWasmPlugin : Plugin<Project> {
                 wasmJs {
                     useEsModules()
                     browser()
-                    binaries.executable()
                 }
             }
         }

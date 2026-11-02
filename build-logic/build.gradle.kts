@@ -36,10 +36,6 @@ gradlePlugin {
             id = "matsumo.primitive.kmp.android"
             implementationClass = "primitive.kmp.KmpAndroidPlugin"
         }
-        register("KmpAndroidApplication") {
-            id = "matsumo.primitive.kmp.android.application"
-            implementationClass = "primitive.kmp.KmpAndroidApplication"
-        }
         register("KmpAndroidLibrary") {
             id = "matsumo.primitive.kmp.android.library"
             implementationClass = "primitive.kmp.KmpAndroidLibrary"
@@ -59,6 +55,12 @@ gradlePlugin {
         register("KmpComposeCompose") {
             id = "matsumo.primitive.kmp.compose"
             implementationClass = "primitive.kmp.KmpComposePlugin"
+        }
+
+        // Android
+        register("AndroidApplicationPlugin") {
+            id = "matsumo.primitive.android.application"
+            implementationClass = "primitive.AndroidApplicationPlugin"
         }
 
         // Libraries
