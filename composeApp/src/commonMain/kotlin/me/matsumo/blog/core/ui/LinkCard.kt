@@ -21,6 +21,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,15 +38,16 @@ import me.matsumo.blog.shared.model.OgContents
 @Composable
 fun LinkCard(
     url: String,
-    onOgContentsRequested: suspend (String) -> OgContents?,
+    onOgContentsRequest: suspend (String) -> OgContents?,
     modifier: Modifier = Modifier,
 ) {
     val windowWidthDp by rememberWindowWidthDp()
     var ogContents by remember { mutableStateOf<OgContents?>(null) }
+    val currentOnOgContentsRequest by rememberUpdatedState(onOgContentsRequest)
 
     LaunchedEffect(url) {
         if (ogContents == null) {
-            ogContents = onOgContentsRequested(url)
+            ogContents = currentOnOgContentsRequest(url)
         }
     }
 

@@ -59,7 +59,7 @@ fun BlogApp(
                 startDestinations = startDestinations,
                 isMobile = device == Device.MOBILE,
                 isDark = uiState.theme.isDark(),
-                onToggleThemeClicked = viewModel::toggleTheme,
+                onToggleThemeClick = viewModel::toggleTheme,
             )
         }
     }
@@ -70,7 +70,7 @@ private fun BlogScreen(
     startDestinations: Destinations,
     isMobile: Boolean,
     isDark: Boolean,
-    onToggleThemeClicked: () -> Unit,
+    onToggleThemeClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val scope = rememberCoroutineScope()
@@ -84,9 +84,9 @@ private fun BlogScreen(
         drawerContent = {
             BlogDrawerContent(
                 state = drawerState,
-                onNavigationHomeClicked = { navController.navigateInclusive(Destinations.Home) },
-                onNavigationArticlesClicked = { navController.navigateInclusive(Destinations.Articles) },
-                onNavigationGithubClicked = { openUrl(StaticUrl.GITHUB) },
+                onNavigationHomeClick = { navController.navigateInclusive(Destinations.Home) },
+                onNavigationArticlesClick = { navController.navigateInclusive(Destinations.Articles) },
+                onNavigationGithubClick = { openUrl(StaticUrl.GITHUB) },
             )
         },
     ) {
@@ -98,11 +98,11 @@ private fun BlogScreen(
                         modifier = Modifier.fillMaxWidth(),
                         isMobile = isMobile,
                         isDark = isDark,
-                        onToggleThemeClicked = onToggleThemeClicked,
-                        onOpenDrawerClicked = { scope.launch { drawerState.open() } },
-                        onNavigationHomeClicked = { navController.navigateInclusive(Destinations.Home) },
-                        onNavigationArticlesClicked = { navController.navigateInclusive(Destinations.Articles) },
-                        onNavigationGithubClicked = { openUrl(StaticUrl.GITHUB) },
+                        onToggleThemeClick = onToggleThemeClick,
+                        onOpenDrawerClick = { scope.launch { drawerState.open() } },
+                        onNavigationHomeClick = { navController.navigateInclusive(Destinations.Home) },
+                        onNavigationArticlesClick = { navController.navigateInclusive(Destinations.Articles) },
+                        onNavigationGithubClick = { openUrl(StaticUrl.GITHUB) },
                     )
 
                     HorizontalDivider(

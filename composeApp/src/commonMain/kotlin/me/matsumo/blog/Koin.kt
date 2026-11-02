@@ -33,6 +33,8 @@ val appModule = module {
         )
     }
 
+    // InjectDispatcher: DI で注入する Dispatcher をここで生成する
+    @Suppress("InjectDispatcher")
     single<CoroutineDispatcher> {
         Dispatchers.IO.limitedParallelism(24)
     }

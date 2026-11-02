@@ -6,5 +6,5 @@ enum class ThemeColorConfig {
     Brown,
     Green,
     Pink,
-    Purple
+    Purple,
 }

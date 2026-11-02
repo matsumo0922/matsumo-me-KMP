@@ -59,7 +59,7 @@ internal fun ArticlesRoute(
         ArticlesScreen(
             modifier = Modifier.fillMaxSize(),
             articles = uiState.articles.toImmutableList(),
-            onArticleClicked = { navigateTo(Destinations.ArticleDetail(it)) },
+            onArticleClick = { navigateTo(Destinations.ArticleDetail(it)) },
         )
     }
 }
@@ -67,7 +67,7 @@ internal fun ArticlesRoute(
 @Composable
 private fun ArticlesScreen(
     articles: ImmutableList<Article>,
-    onArticleClicked: (Long) -> Unit,
+    onArticleClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val density = LocalDensity.current
@@ -126,7 +126,7 @@ private fun ArticlesScreen(
                     ArticleCard(
                         modifier = Modifier.fillMaxWidth(),
                         article = it,
-                        onClickArticle = onArticleClicked,
+                        onClickArticle = onArticleClick,
                     )
                 }
             }

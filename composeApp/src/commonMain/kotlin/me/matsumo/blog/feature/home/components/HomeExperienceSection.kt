@@ -108,10 +108,11 @@ private fun ExperienceItem(
     modifier: Modifier = Modifier,
 ) {
     val topPadding = if (isMobile) 40.dp else 56.dp
-    var direction = LocalLayoutDirection.current
-
-    if (isOdd && !isMobile) {
-        direction = if (direction == LayoutDirection.Ltr) LayoutDirection.Rtl else LayoutDirection.Ltr
+    val currentDirection = LocalLayoutDirection.current
+    val direction = when {
+        !isOdd || isMobile -> currentDirection
+        currentDirection == LayoutDirection.Ltr -> LayoutDirection.Rtl
+        else -> LayoutDirection.Ltr
     }
 
     CompositionLocalProvider(LocalLayoutDirection provides direction) {

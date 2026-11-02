@@ -39,7 +39,7 @@ import me.matsumo.blog.shared.model.OgContents
 import org.intellij.markdown.ast.getTextInNode
 
 class CustomMarkdownComponents(
-    private val onOgContentsRequested: suspend (url: String) -> OgContents,
+    private val onOgContentsRequest: suspend (url: String) -> OgContents,
 ) {
 
     private val heading1: MarkdownComponent = {
@@ -98,8 +98,8 @@ class CustomMarkdownComponents(
             LinkCard(
                 modifier = Modifier.fillMaxWidth(),
                 url = text,
-                onOgContentsRequested = {
-                    suspendRunCatching { onOgContentsRequested.invoke(it) }.onFailure { error ->
+                onOgContentsRequest = { url ->
+                    suspendRunCatching { onOgContentsRequest.invoke(url) }.onFailure { error ->
                         Napier.e(error) { "Failed to get OG contents: $text" }
                         isFailedToShowLinkCard = true
                     }.getOrNull()
@@ -177,12 +177,11 @@ class CustomMarkdownComponents(
 
     companion object {
 
-        @Composable
         fun build(
-            onOgContentsRequested: suspend (url: String) -> OgContents,
+            onOgContentsRequest: suspend (url: String) -> OgContents,
         ): MarkdownComponents {
             CustomMarkdownComponents(
-                onOgContentsRequested = onOgContentsRequested,
+                onOgContentsRequest = onOgContentsRequest,
             ).also {
                 return markdownComponents(
                     heading1 = it.heading1,

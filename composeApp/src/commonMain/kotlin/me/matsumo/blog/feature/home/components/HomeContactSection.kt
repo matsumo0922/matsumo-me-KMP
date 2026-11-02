@@ -21,7 +21,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -78,7 +77,7 @@ private fun HomeContactSection(
 
     val focusManager = LocalFocusManager.current
 
-    LaunchedEffect(name, address, message) {
+    fun resetErrors() {
         nameError = false
         addressError = false
         messageError = false
@@ -111,7 +110,10 @@ private fun HomeContactSection(
                 .fillMaxWidth()
                 .enterAnimation(100),
             value = name,
-            onValueChange = { name = it },
+            onValueChange = {
+                name = it
+                resetErrors()
+            },
             placeholder = { Text(stringResource(Res.string.home_contact_name)) },
             supportingText = { Text(stringResource(Res.string.home_contact_require_name).takeIf { nameError }.orEmpty()) },
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
@@ -135,7 +137,10 @@ private fun HomeContactSection(
                 .fillMaxWidth()
                 .enterAnimation(200),
             value = address,
-            onValueChange = { address = it },
+            onValueChange = {
+                address = it
+                resetErrors()
+            },
             placeholder = { Text(stringResource(Res.string.home_contact_email)) },
             supportingText = { Text(stringResource(Res.string.home_contact_require_email).takeIf { addressError }.orEmpty()) },
             keyboardOptions = KeyboardOptions(
@@ -162,7 +167,10 @@ private fun HomeContactSection(
                 .fillMaxWidth()
                 .enterAnimation(300),
             value = message,
-            onValueChange = { message = it },
+            onValueChange = {
+                message = it
+                resetErrors()
+            },
             placeholder = { Text(stringResource(Res.string.home_contact_message)) },
             supportingText = { Text(stringResource(Res.string.home_contact_require_message).takeIf { messageError }.orEmpty()) },
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),

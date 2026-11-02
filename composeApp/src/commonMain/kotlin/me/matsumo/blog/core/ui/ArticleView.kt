@@ -23,8 +23,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -66,7 +66,7 @@ import kotlin.math.abs
 fun ArticleView(
     content: String,
     modifier: Modifier = Modifier,
-    onOgContentsRequested: suspend (String) -> OgContents = { error("Not supported on this component.") },
+    onOgContentsRequest: suspend (String) -> OgContents = { error("Not supported on this component.") },
     header: @Composable (PaddingValues) -> Unit,
 ) {
     val windowWidthDp by rememberWindowWidthDp()
@@ -77,7 +77,7 @@ fun ArticleView(
     val markdownSettings = MarkdownSettings.default().copy(
         imageTransformer = CustomImageTransformer,
         components = CustomMarkdownComponents.build(
-            onOgContentsRequested = onOgContentsRequested,
+            onOgContentsRequest = onOgContentsRequest,
         ),
         typography = markdownTypography(
             code = MaterialTheme.typography.bodyLarge,
@@ -134,7 +134,7 @@ fun ArticleView(
 
     val scope = rememberCoroutineScope()
     val state = rememberLazyListState()
-    var currentVisibleIndex by remember { mutableStateOf(0) }
+    var currentVisibleIndex by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(state) {
         snapshotFlow { state.layoutInfo.visibleItemsInfo }.collect { itemInfo ->

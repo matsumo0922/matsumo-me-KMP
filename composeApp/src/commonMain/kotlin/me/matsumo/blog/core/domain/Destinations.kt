@@ -51,7 +51,7 @@ sealed interface Destinations {
         val queryParams = buildQuery(this)
 
         val path = route.pattern.replace(Regex("\\{([^}]+)}")) { matchResult ->
-            pathParams[matchResult.groupValues[1]] ?: ""
+            pathParams[matchResult.groupValues[1]].orEmpty()
         }
 
         return buildString {

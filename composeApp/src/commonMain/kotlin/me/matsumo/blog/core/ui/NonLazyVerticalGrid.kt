@@ -29,18 +29,7 @@ fun NonLazyVerticalGrid(
             measurable.measure(itemConstraints)
         }
 
-        val rows = mutableListOf<List<androidx.compose.ui.layout.Placeable>>()
-        var currentRow = mutableListOf<androidx.compose.ui.layout.Placeable>()
-        for (placeable in placeables) {
-            if (currentRow.size == columns) {
-                rows.add(currentRow)
-                currentRow = mutableListOf()
-            }
-            currentRow.add(placeable)
-        }
-        if (currentRow.isNotEmpty()) {
-            rows.add(currentRow)
-        }
+        val rows = placeables.chunked(columns)
 
         val totalHeight = rows.sumOf { row -> row.maxOf { it.height } } + verticalSpacingPx * (rows.size - 1)
 

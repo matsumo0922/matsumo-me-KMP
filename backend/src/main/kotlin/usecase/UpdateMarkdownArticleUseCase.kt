@@ -6,13 +6,15 @@ import domain.dao.ArticleDao
 import domain.dao.MarkdownArticleDetailDao
 import me.matsumo.blog.shared.entity.ArticleSource
 import repository.ArticleRepository
+import repository.ArticleSourceRepository
 
 class UpdateMarkdownArticleUseCase(
     private val articleRepository: ArticleRepository,
+    private val articleSourceRepository: ArticleSourceRepository,
 ) {
     suspend operator fun invoke() {
-        articleRepository.getMarkdownArticlesEntity().forEach { listEntity ->
-            val entity = articleRepository.getMarkdownArticleDetailEntity(listEntity.path, listEntity.sha)
+        articleSourceRepository.getMarkdownArticlesEntity().forEach { listEntity ->
+            val entity = articleSourceRepository.getMarkdownArticleDetailEntity(listEntity.path, listEntity.sha)
             val currentArticle = articleRepository.getArticle(sourceId = entity.sha)
             val currentArticleDetail = currentArticle?.id?.let { articleRepository.getArticleDetailFromMarkdown(it) }
 
