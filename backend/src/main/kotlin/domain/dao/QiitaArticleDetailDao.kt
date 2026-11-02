@@ -1,9 +1,9 @@
 package domain.dao
 
-import kotlin.time.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import me.matsumo.blog.shared.utils.InstantSerializer
+import kotlin.time.Instant
 
 @Serializable
 data class QiitaArticleDetailDao(

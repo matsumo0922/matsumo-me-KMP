@@ -43,9 +43,7 @@ actual fun rememberWindowWidthDp(): State<Dp> {
     return remember(windowWidthPx) { derivedStateOf { with(density) { windowWidthPx.toDp() } } }
 }
 
-actual fun isSystemInDarkThemeUnSafe(): Boolean {
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-}
+actual fun isSystemInDarkThemeUnSafe(): Boolean = window.matchMedia("(prefers-color-scheme: dark)").matches
 
 @Composable
 actual fun BindToNavigation(navController: NavController) {
@@ -87,7 +85,11 @@ actual fun openUrl(url: String) {
     window.open(url, "_blank")
 }
 
-actual fun mailTo(name: String, address: String, message: String) {
+actual fun mailTo(
+    name: String,
+    address: String,
+    message: String,
+) {
     val subject = "Contact from $name. (matsumo.me)".encodeURLParameter()
     val body = message.encodeURLParameter()
 

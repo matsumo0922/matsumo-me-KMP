@@ -18,11 +18,11 @@ import androidx.compose.ui.geometry.lerp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalDensity
-import kotlin.time.Clock
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
+import kotlin.time.Clock
 
 /**
  * 各点の状態を保持するクラス
@@ -138,7 +138,11 @@ fun BlogBackground(
                         if (point.stableTimer <= 0f) {
                             point.fading = true
                             point.fadeTimer = 1f
-                            point.fadeDirection = if (point.alpha >= 1f) -1 else if (point.alpha <= 0f) 1 else 0
+                            point.fadeDirection = if (point.alpha >= 1f) -1 else if (point.alpha <= 0f) {
+                                1
+                            } else {
+                                0
+                            }
 
                             if (point.fadeDirection == 0) {
                                 point.fadeDirection = if (point.alpha > 0.5f) -1 else 1

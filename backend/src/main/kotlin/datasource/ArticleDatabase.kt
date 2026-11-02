@@ -17,84 +17,64 @@ class ArticleDatabase(
         supabaseClient.from("zenn_article_detail").delete()
     }.isSuccess
 
-    suspend fun getArticle(articleId: Int): ArticleDao? {
-        return supabaseClient.from("article")
-            .select {
-                filter { ArticleDao::id eq articleId }
-            }
-            .decodeSingleOrNull<ArticleDao>()
-    }
+    suspend fun getArticle(articleId: Int): ArticleDao? = supabaseClient.from("article")
+        .select {
+            filter { ArticleDao::id eq articleId }
+        }
+        .decodeSingleOrNull<ArticleDao>()
 
-    suspend fun getArticle(sourceId: String): ArticleDao? {
-        return supabaseClient.from("article")
-            .select {
-                filter { ArticleDao::sourceId eq sourceId }
-            }
-            .decodeSingleOrNull<ArticleDao>()
-    }
+    suspend fun getArticle(sourceId: String): ArticleDao? = supabaseClient.from("article")
+        .select {
+            filter { ArticleDao::sourceId eq sourceId }
+        }
+        .decodeSingleOrNull<ArticleDao>()
 
-    suspend fun getArticles(tagId: Int? = null): List<ArticleDao>? {
-        return supabaseClient.from("article")
-            .select {
-                if (tagId != null) {
-                    filter { ArticleDao::tags contains listOf(tagId) }
-                }
+    suspend fun getArticles(tagId: Int? = null): List<ArticleDao>? = supabaseClient.from("article")
+        .select {
+            if (tagId != null) {
+                filter { ArticleDao::tags contains listOf(tagId) }
             }
-            .decodeAsOrNull<List<ArticleDao>>()
-    }
+        }
+        .decodeAsOrNull<List<ArticleDao>>()
 
-    suspend fun getArticleDetailFromMarkdown(articleId: Int): MarkdownArticleDetailDao? {
-        return supabaseClient.from("markdown_article_detail")
-            .select {
-                filter { MarkdownArticleDetailDao::articleId eq articleId }
-            }
-            .decodeSingleOrNull<MarkdownArticleDetailDao>()
-    }
+    suspend fun getArticleDetailFromMarkdown(articleId: Int): MarkdownArticleDetailDao? = supabaseClient.from("markdown_article_detail")
+        .select {
+            filter { MarkdownArticleDetailDao::articleId eq articleId }
+        }
+        .decodeSingleOrNull<MarkdownArticleDetailDao>()
 
-    suspend fun getArticleDetailFromQiita(articleId: Int): QiitaArticleDetailDao? {
-        return supabaseClient.from("qiita_article_detail")
-            .select {
-                filter { QiitaArticleDetailDao::articleId eq articleId }
-            }
-            .decodeSingleOrNull<QiitaArticleDetailDao>()
-    }
+    suspend fun getArticleDetailFromQiita(articleId: Int): QiitaArticleDetailDao? = supabaseClient.from("qiita_article_detail")
+        .select {
+            filter { QiitaArticleDetailDao::articleId eq articleId }
+        }
+        .decodeSingleOrNull<QiitaArticleDetailDao>()
 
-    suspend fun getArticleDetailFromZenn(articleId: Int): ZennArticleDetailDao? {
-        return supabaseClient.from("zenn_article_detail")
-            .select {
-                filter { ZennArticleDetailDao::articleId eq articleId }
-            }
-            .decodeSingleOrNull<ZennArticleDetailDao>()
-    }
+    suspend fun getArticleDetailFromZenn(articleId: Int): ZennArticleDetailDao? = supabaseClient.from("zenn_article_detail")
+        .select {
+            filter { ZennArticleDetailDao::articleId eq articleId }
+        }
+        .decodeSingleOrNull<ZennArticleDetailDao>()
 
-    suspend fun upsertArticle(article: ArticleDao): ArticleDao? {
-        return supabaseClient.from("article")
-            .upsert(article) {
-                select()
-            }.decodeSingleOrNull<ArticleDao>()
-    }
+    suspend fun upsertArticle(article: ArticleDao): ArticleDao? = supabaseClient.from("article")
+        .upsert(article) {
+            select()
+        }.decodeSingleOrNull<ArticleDao>()
 
-    suspend fun upsertMarkdownArticleDetail(markdownArticleDetail: MarkdownArticleDetailDao): MarkdownArticleDetailDao? {
-        return supabaseClient.from("markdown_article_detail")
-            .upsert(markdownArticleDetail) {
-                select()
-            }
-            .decodeSingleOrNull<MarkdownArticleDetailDao>()
-    }
+    suspend fun upsertMarkdownArticleDetail(markdownArticleDetail: MarkdownArticleDetailDao): MarkdownArticleDetailDao? = supabaseClient.from("markdown_article_detail")
+        .upsert(markdownArticleDetail) {
+            select()
+        }
+        .decodeSingleOrNull<MarkdownArticleDetailDao>()
 
-    suspend fun upsertQiitaArticleDetail(qiitaArticleDetail: QiitaArticleDetailDao): QiitaArticleDetailDao? {
-        return supabaseClient.from("qiita_article_detail")
-            .upsert(qiitaArticleDetail) {
-                select()
-            }
-            .decodeSingleOrNull<QiitaArticleDetailDao>()
-    }
+    suspend fun upsertQiitaArticleDetail(qiitaArticleDetail: QiitaArticleDetailDao): QiitaArticleDetailDao? = supabaseClient.from("qiita_article_detail")
+        .upsert(qiitaArticleDetail) {
+            select()
+        }
+        .decodeSingleOrNull<QiitaArticleDetailDao>()
 
-    suspend fun upsertZennArticleDetail(zennArticleDetail: ZennArticleDetailDao): ZennArticleDetailDao? {
-        return supabaseClient.from("zenn_article_detail")
-            .upsert(zennArticleDetail) {
-                select()
-            }
-            .decodeSingleOrNull<ZennArticleDetailDao>()
-    }
+    suspend fun upsertZennArticleDetail(zennArticleDetail: ZennArticleDetailDao): ZennArticleDetailDao? = supabaseClient.from("zenn_article_detail")
+        .upsert(zennArticleDetail) {
+            select()
+        }
+        .decodeSingleOrNull<ZennArticleDetailDao>()
 }

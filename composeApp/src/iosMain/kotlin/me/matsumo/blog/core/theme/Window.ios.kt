@@ -30,9 +30,7 @@ actual fun rememberWindowWidthDp(): State<Dp> {
     return remember(width) { derivedStateOf { with(density) { width.toDp() } } }
 }
 
-actual fun isSystemInDarkThemeUnSafe(): Boolean {
-    return true
-}
+actual fun isSystemInDarkThemeUnSafe(): Boolean = true
 
 @Composable
 actual fun BindToNavigation(navController: NavController) {
@@ -45,7 +43,11 @@ actual fun openUrl(url: String) {
     }
 }
 
-actual fun mailTo(name: String, address: String, message: String) {
+actual fun mailTo(
+    name: String,
+    address: String,
+    message: String,
+) {
     val subject = "Contact from $name. (matsumo.me)"
     openUrl("mailto:$address?subject=$subject&body=$message")
 }

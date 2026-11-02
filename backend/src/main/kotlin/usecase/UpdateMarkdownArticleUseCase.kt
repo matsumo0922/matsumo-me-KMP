@@ -56,31 +56,27 @@ class UpdateMarkdownArticleUseCase(
         }
     }
 
-    private fun MarkdownArticleDetailEntity.toMarkdownArticleDetail(): MarkdownArticleDetailDao {
-        return MarkdownArticleDetailDao(
-            articleId = 0,
-            sourceId = sha,
-            sourceUrl = "https://github.com/matsumo0922/matsumo-me-KMP/blob/main/$path",
-            title = title,
-            content = content,
-            renderedContent = content,
-            isPublished = true,
-            tags = tags,
-            createdAt = publishedAt,
-            updatedAt = publishedAt,
-        )
-    }
+    private fun MarkdownArticleDetailEntity.toMarkdownArticleDetail(): MarkdownArticleDetailDao = MarkdownArticleDetailDao(
+        articleId = 0,
+        sourceId = sha,
+        sourceUrl = "https://github.com/matsumo0922/matsumo-me-KMP/blob/main/$path",
+        title = title,
+        content = content,
+        renderedContent = content,
+        isPublished = true,
+        tags = tags,
+        createdAt = publishedAt,
+        updatedAt = publishedAt,
+    )
 
-    private fun MarkdownArticleDetailDao.toArticle(): ArticleDao {
-        return ArticleDao(
-            sourceId = sourceId,
-            source = ArticleSource.MARKDOWN,
-            sourceUrl = sourceUrl,
-            title = title,
-            summary = content?.take(100),
-            tags = tags,
-            createdAt = createdAt,
-            updatedAt = updatedAt,
-        )
-    }
+    private fun MarkdownArticleDetailDao.toArticle(): ArticleDao = ArticleDao(
+        sourceId = sourceId,
+        source = ArticleSource.MARKDOWN,
+        sourceUrl = sourceUrl,
+        title = title,
+        summary = content?.take(100),
+        tags = tags,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+    )
 }

@@ -117,13 +117,9 @@ private fun removeHtmlLoading() {
     }
 }
 
-private suspend fun loadResAsync(url: String): Deferred<ArrayBuffer> {
-    return window.fetch(url).await<Response>().arrayBuffer().asDeferred()
-}
+private suspend fun loadResAsync(url: String): Deferred<ArrayBuffer> = window.fetch(url).await<Response>().arrayBuffer().asDeferred()
 
-suspend fun loadRes(url: String): ArrayBuffer {
-    return loadResAsync(url).await()
-}
+suspend fun loadRes(url: String): ArrayBuffer = loadResAsync(url).await()
 
 fun ArrayBuffer.toByteArray(): ByteArray {
     val source = Int8Array(this, 0, byteLength)
@@ -131,7 +127,12 @@ fun ArrayBuffer.toByteArray(): ByteArray {
 }
 
 private fun wasmExportsMemoryBuffer(): ArrayBuffer = js("wasmExports.memory.buffer")
-private fun jsExportInt8ArrayToWasm(destination: ArrayBuffer, src: Int8Array, size: Int, dstAddr: Int) {
+private fun jsExportInt8ArrayToWasm(
+    destination: ArrayBuffer,
+    src: Int8Array,
+    size: Int,
+    dstAddr: Int,
+) {
     val mem8 = Int8Array(destination, dstAddr, size)
     mem8.set(src)
 }

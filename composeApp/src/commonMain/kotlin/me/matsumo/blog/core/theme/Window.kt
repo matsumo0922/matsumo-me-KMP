@@ -17,7 +17,11 @@ expect fun BindToNavigation(navController: NavController)
 
 expect fun openUrl(url: String)
 
-expect fun mailTo(name: String, address: String, message: String)
+expect fun mailTo(
+    name: String,
+    address: String,
+    message: String,
+)
 
 expect fun isSystemInDarkThemeUnSafe(): Boolean
 

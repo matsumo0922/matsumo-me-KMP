@@ -1,9 +1,9 @@
 package me.matsumo.blog.shared.model
 
-import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 import me.matsumo.blog.shared.entity.ArticleSource
 import me.matsumo.blog.shared.utils.InstantSerializer
+import kotlin.time.Instant
 
 @Serializable
 data class Article(

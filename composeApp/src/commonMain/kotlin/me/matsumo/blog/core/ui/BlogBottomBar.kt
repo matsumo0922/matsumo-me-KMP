@@ -22,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import kotlin.time.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import matsumo_me_kmp.composeapp.generated.resources.Res
@@ -38,6 +37,7 @@ import me.matsumo.blog.core.theme.openUrl
 import me.matsumo.blog.core.theme.semiBold
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import kotlin.time.Clock
 
 @Composable
 fun BlogBottomBar(
