@@ -17,7 +17,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import me.matsumo.blog.app.BlogApp
 import me.matsumo.blog.app.BlogViewModel
 import me.matsumo.blog.core.domain.isDark
-import org.koin.compose.KoinContext
 
 class MainActivity : FragmentActivity() {
 
@@ -29,27 +28,25 @@ class MainActivity : FragmentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            KoinContext {
-                val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-                val isDark = uiState.theme.isDark()
+            val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+            val isDark = uiState.theme.isDark()
 
-                val lightScrim = Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
-                val darkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
+            val lightScrim = Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
+            val darkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
 
-                DisposableEffect(isDark) {
-                    enableEdgeToEdge(
-                        statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { isDark },
-                        navigationBarStyle = SystemBarStyle.auto(lightScrim, darkScrim) { isDark },
-                    )
-
-                    onDispose {}
-                }
-
-                BlogApp(
-                    modifier = Modifier.fillMaxSize(),
-                    viewModel = viewModel,
+            DisposableEffect(isDark) {
+                enableEdgeToEdge(
+                    statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { isDark },
+                    navigationBarStyle = SystemBarStyle.auto(lightScrim, darkScrim) { isDark },
                 )
+
+                onDispose {}
             }
+
+            BlogApp(
+                modifier = Modifier.fillMaxSize(),
+                viewModel = viewModel,
+            )
         }
 
         splashScreen.setKeepOnScreenCondition { false }
